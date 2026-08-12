@@ -213509,6 +213509,1510 @@
       }
     ]
   },
+  "desktop/click": {
+    "hash": "3408b9d857f361644ddc92c9524641d6ea7930328ad28aab39a68e452e6c7e7b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Click",
+    "description": "Move the mouse to (x, y) on a desktop VM and click a button.",
+    "website": "https://www.flomation.co",
+    "icon": "hand",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "x",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "y",
+        "type": "integer",
+        "value": null,
+        "label": "Y",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "button",
+        "type": "string",
+        "value": null,
+        "label": "Button",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          },
+          {
+            "name": "Middle",
+            "value": "middle"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/key": {
+    "hash": "58ef3e8fc586af93e7516c6687eefebef2b30df5fe7eda5b0ca6927a83712b69",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Press Key",
+    "description": "Press a key or chord on a desktop VM (e.g. Return, ctrl+c / ^c).",
+    "website": "https://www.flomation.co",
+    "icon": "i-cursor",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "keys",
+        "type": "string",
+        "value": null,
+        "label": "Key(s)",
+        "placeholder": "Linux: Return, ctrl+c · Windows: {ENTER}, ^c",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/move": {
+    "hash": "703cfad40b4085c8235b90a21064468a09780b03c3bb7339f8cead6a03d72a6a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Move Mouse",
+    "description": "Move the mouse pointer to (x, y) on a desktop VM without clicking.",
+    "website": "https://www.flomation.co",
+    "icon": "hand",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "x",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "y",
+        "type": "integer",
+        "value": null,
+        "label": "Y",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/open_url": {
+    "hash": "f4086616443ef5b88d1c4a088f4d30d599f7404fb9f8f6eb684925689e11fe9e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Open URL",
+    "description": "Open a URL in the default browser on a desktop VM.",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://www.flomation.co",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/record_start": {
+    "hash": "3c5d9129a8b36d2db37ac1c5ea94d640688495e39262636452ecdf43a3db837c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Start Recording",
+    "description": "Start recording the screen of a desktop VM (ffmpeg). Stop with Desktop Stop Recording.",
+    "website": "https://www.flomation.co",
+    "icon": "video",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "fps",
+        "type": "integer",
+        "value": null,
+        "label": "Frame Rate",
+        "placeholder": "15"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/record_stop": {
+    "hash": "e7fe3d2c1fdf3c7e14651aeaae3e51cdd5dfdf6001385b0c6cb025d5858a15bc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Stop Recording",
+    "description": "Stop a desktop VM screen recording and return the video file.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-stop",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Recording (file reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/screenshot": {
+    "hash": "325ae1f9ffdda7cc41a16b01b7fd37c856c9ed4acb875de923e685e0483764f1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Screenshot",
+    "description": "Capture the screen of a desktop VM over SSH and return the image.",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Screenshot (image reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/scroll": {
+    "hash": "11719596e8dc64c71aa26a9c57e08d5b919dfdca083630ae50e41e1d7487a76d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Scroll",
+    "description": "Scroll the mouse wheel up or down on a desktop VM.",
+    "website": "https://www.flomation.co",
+    "icon": "arrows-up-down",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "direction",
+        "type": "string",
+        "value": null,
+        "label": "Direction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Down",
+            "value": "down"
+          },
+          {
+            "name": "Up",
+            "value": "up"
+          }
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "integer",
+        "value": null,
+        "label": "Notches",
+        "placeholder": "3"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "desktop/type_text": {
+    "hash": "35eca88cf8ecb33d0f32dd1d6b77da081c04d1aec20a7d817c6e40dbbde83b72",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Type Text",
+    "description": "Type literal text into the focused window on a desktop VM.",
+    "website": "https://www.flomation.co",
+    "icon": "i-cursor",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Text",
+        "placeholder": "Text to type into the focused field",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "devops/azuredevops/branch_get_all": {
     "hash": "ca58edeeb9ccc482eceb44a244926d1b1d68b4e7dbda57e947e96e39c7711b5a",
     "author": "Dave McElin",
@@ -251321,7 +252825,7 @@
     ]
   },
   "heygen/translation/create": {
-    "hash": "2bac512786e39c5c514d1549b43c954b4d2ac9a2d4d7f6b378864f71caac39d7",
+    "hash": "fe5e3ff64535a1564e3ab716c8799d46114b6b2d698b017a23525149019e8d26",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Translate Video",
@@ -251530,7 +253034,7 @@
     ]
   },
   "heygen/translation/list_languages": {
-    "hash": "7371c97cc6a42b9ba265c1e98a475537017fc4a6ba1f86332f5979e31f7523c3",
+    "hash": "f3691fdd492f37bbb2c74f10331f73634915f162f0f359d0d3030ff5a22851e8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Translation Languages",
@@ -252046,7 +253550,7 @@
     ]
   },
   "heygen/videos/generate_from_image": {
-    "hash": "d5b4ea47775a3c026bd2fa8b97b20fd64dfbf72204e9349a6dae88467d6263b4",
+    "hash": "a568889a94ac642e1354011e9ac952e1e9f713ac364c7fa598f9c9d0efbe6f97",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Talking Photo",
