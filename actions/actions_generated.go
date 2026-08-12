@@ -1611,8 +1611,12 @@ import (
 	heygen_templates_generate "flomation.app/automate/executor/actions/heygen/templates/generate"
 	heygen_templates_get_template "flomation.app/automate/executor/actions/heygen/templates/get_template"
 	heygen_templates_list_templates "flomation.app/automate/executor/actions/heygen/templates/list_templates"
+	heygen_translation_create "flomation.app/automate/executor/actions/heygen/translation/create"
+	heygen_translation_get "flomation.app/automate/executor/actions/heygen/translation/get"
+	heygen_translation_list_languages "flomation.app/automate/executor/actions/heygen/translation/list_languages"
 	heygen_videos_generate_avatar_video "flomation.app/automate/executor/actions/heygen/videos/generate_avatar_video"
 	heygen_videos_generate_cinematic "flomation.app/automate/executor/actions/heygen/videos/generate_cinematic"
+	heygen_videos_generate_from_image "flomation.app/automate/executor/actions/heygen/videos/generate_from_image"
 	heygen_videos_get_video "flomation.app/automate/executor/actions/heygen/videos/get_video"
 	heygen_voices_list_voices "flomation.app/automate/executor/actions/heygen/voices/list_voices"
 	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
@@ -3358,6 +3362,7 @@ import (
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
 	trigger_google_drive "flomation.app/automate/executor/actions/trigger/google_drive"
+	trigger_heygen_webhook "flomation.app/automate/executor/actions/trigger/heygen_webhook"
 	trigger_hubspot_webhook "flomation.app/automate/executor/actions/trigger/hubspot_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_intercom_webhook "flomation.app/automate/executor/actions/trigger/intercom_webhook"
@@ -5159,8 +5164,12 @@ var Actions = map[string]core.Action{
 	"heygen/templates/generate":                                                       heygen_templates_generate.Execute,
 	"heygen/templates/get_template":                                                   heygen_templates_get_template.Execute,
 	"heygen/templates/list_templates":                                                 heygen_templates_list_templates.Execute,
+	"heygen/translation/create":                                                       heygen_translation_create.Execute,
+	"heygen/translation/get":                                                          heygen_translation_get.Execute,
+	"heygen/translation/list_languages":                                               heygen_translation_list_languages.Execute,
 	"heygen/videos/generate_avatar_video":                                             heygen_videos_generate_avatar_video.Execute,
 	"heygen/videos/generate_cinematic":                                                heygen_videos_generate_cinematic.Execute,
+	"heygen/videos/generate_from_image":                                               heygen_videos_generate_from_image.Execute,
 	"heygen/videos/get_video":                                                         heygen_videos_get_video.Execute,
 	"heygen/voices/list_voices":                                                       heygen_voices_list_voices.Execute,
 	"hubspot/associate":                                                               hubspot_associate.Execute,
@@ -6906,6 +6915,7 @@ var Actions = map[string]core.Action{
 	"trigger/github_webhook":                                                          trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":                                                          trigger_gitlab_webhook.Execute,
 	"trigger/google_drive":                                                            trigger_google_drive.Execute,
+	"trigger/heygen_webhook":                                                          trigger_heygen_webhook.Execute,
 	"trigger/hubspot_webhook":                                                         trigger_hubspot_webhook.Execute,
 	"trigger/image":                                                                   trigger_image.Execute,
 	"trigger/intercom_webhook":                                                        trigger_intercom_webhook.Execute,
