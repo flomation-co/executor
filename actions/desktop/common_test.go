@@ -66,16 +66,22 @@ func TestOpenURLCmd(t *testing.T) {
 func TestRecordCmds(t *testing.T) {
 	RegisterTestingT(t)
 	start := RecordStartCmd(OSLinux, ":0", 20)
-	Expect(start).To(ContainSubstring("ffmpeg -y -f x11grab -framerate 20"))
+	Expect(start).To(ContainSubstring("ffmpeg -y -f x11grab -draw_mouse 1 -framerate 20"))
 	Expect(start).To(ContainSubstring("setsid nohup"))
 	Expect(start).To(ContainSubstring(linuxRecPID))
+	// Even-dimension pad guards against libx264/yuv420p corruption on odd sizes.
+	Expect(start).To(ContainSubstring("-vf " + evenPadFilter))
+	Expect(start).To(ContainSubstring("+faststart"))
 	Expect(RecordStartCmd(OSLinux, ":0", 0)).To(ContainSubstring("-framerate 15")) // default fps
 
 	stop := RecordStopCmd(OSLinux)
 	Expect(stop).To(ContainSubstring("kill -INT"))
 	Expect(stop).To(ContainSubstring(linuxRecPID))
 
-	Expect(RecordStartCmd(OSWindows, "", 30)).To(ContainSubstring("gdigrab"))
+	win := RecordStartCmd(OSWindows, "", 30)
+	Expect(win).To(ContainSubstring("gdigrab"))
+	Expect(win).To(ContainSubstring(evenPadFilter))
+	Expect(win).To(ContainSubstring("+faststart"))
 	Expect(RecordStopCmd(OSWindows)).To(ContainSubstring("Stop-Process"))
 }
 

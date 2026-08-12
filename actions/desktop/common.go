@@ -285,20 +285,31 @@ func RecordStartCmd(os OS, display string, fps int64) string {
 		fps = 15
 	}
 	if os == OSWindows {
-		// Start ffmpeg hidden and detached; persist its PID.
+		// Start ffmpeg hidden and detached; persist its PID. evenPadFilter keeps
+		// the frame dimensions divisible by 2 (libx264 + yuv420p rejects odd
+		// dimensions, a common cause of a corrupt/unplayable recording).
 		return ps(fmt.Sprintf(
 			`$p=Start-Process ffmpeg -WindowStyle Hidden -PassThru -ArgumentList `+
-				`'-y','-f','gdigrab','-framerate','%d','-i','desktop','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p','%s';`+
-				`$p.Id | Out-File -Encoding ascii '%s'`, fps, winRecPath, winRecPID))
+				`'-y','-f','gdigrab','-draw_mouse','1','-framerate','%d','-i','desktop',`+
+				`'-vf','%s','-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p','-movflags','+faststart','%s';`+
+				`$p.Id | Out-File -Encoding ascii '%s'`, fps, evenPadFilter, winRecPath, winRecPID))
 	}
 	// setsid+nohup fully detaches ffmpeg so it survives the SSH session close;
 	// std streams go to a log so nothing blocks. INT (Ctrl-C) later finalises
-	// the moov atom cleanly.
+	// the moov atom cleanly. -draw_mouse 1 keeps the cursor visible; the even-pad
+	// filter guards against odd capture dimensions (libx264/yuv420p corruption);
+	// +faststart moves the moov atom to the front for clean streamed playback.
 	return fmt.Sprintf(
-		`DISPLAY=%s setsid nohup ffmpeg -y -f x11grab -framerate %d -i %s `+
-			`-c:v libx264 -preset ultrafast -pix_fmt yuv420p %s >%s 2>&1 & echo $! > %s`,
-		shArg(display), fps, shArg(display), linuxRecPath, linuxRecLog, linuxRecPID)
+		`DISPLAY=%s setsid nohup ffmpeg -y -f x11grab -draw_mouse 1 -framerate %d -i %s `+
+			`-vf %s -c:v libx264 -preset ultrafast -pix_fmt yuv420p -movflags +faststart %s >%s 2>&1 & echo $! > %s`,
+		shArg(display), fps, shArg(display), evenPadFilter, linuxRecPath, linuxRecLog, linuxRecPID)
 }
+
+// evenPadFilter pads the captured frame up to the next even width/height. A
+// screen grab whose dimensions are odd makes libx264 with yuv420p fail or emit
+// a corrupt stream; padding (rather than scaling) keeps every source pixel
+// crisp and only ever adds at most one black row/column.
+const evenPadFilter = "pad=ceil(iw/2)*2:ceil(ih/2)*2"
 
 // RecordStopCmd signals the recorder to stop and waits for it to finalise the
 // file before returning.
