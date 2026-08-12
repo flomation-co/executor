@@ -19,9 +19,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime"
 	"mime/multipart"
 	"net/http"
 	"net/url"
+	"path"
+	"strings"
 
 	core "flomation.app/automate/executor"
 )
@@ -74,22 +77,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	fileB64 := str("file_base64", inputs)
 	content := str("content", inputs)
 
-	contentBytes, err := resolveFileBytes(flow, fileBlob, fileB64, content)
+	contentBytes, mimeType, err := resolveFileBytes(flow, fileBlob, fileB64, content)
 	if err != nil {
 		return fail(err.Error())
 	}
 
-	filename := str("filename", inputs)
-	if filename == "" {
-		// Pick a sane default that reflects whichever input we used.
-		// Slack uses the extension to choose a preview renderer.
-		switch {
-		case fileBlob != "" || fileB64 != "":
-			filename = "file.bin"
-		default:
-			filename = "file.txt"
-		}
-	}
+	// Slack picks a preview renderer from the filename extension, so a screenshot
+	// that arrives with no name (or the historical "file.bin" default) shows as an
+	// unpreviewable octet-stream. deriveFilename respects a caller-supplied,
+	// well-extensioned name but otherwise derives the extension from the resolved
+	// MIME type (a flo:blob: token carries type=image/png; a flo:file: ref carries
+	// its path extension) with a byte-sniff fallback.
+	filename := deriveFilename(str("filename", inputs), content != "", mimeType, contentBytes)
 	title := str("title", inputs)
 	if title == "" {
 		title = filename
@@ -221,38 +220,104 @@ func str(name string, inputs []*core.Connection) string {
 // outside the loop), fetch the bytes from the blob store directly.
 // Otherwise the string already IS the raw bytes (DetokeniseInputs
 // resolved on the way in; Go strings carry arbitrary bytes fine).
-func resolveFileBytes(flow *core.Flow, fileBlob, fileBase64, content string) ([]byte, error) {
+func resolveFileBytes(flow *core.Flow, fileBlob, fileBase64, content string) ([]byte, string, error) {
 	if fileBlob != "" {
-		if core.IsFileRef(fileBlob) {
-			// A workspace file reference (e.g. a large media action output).
-			data, _, err := flow.ResolveToBytes(fileBlob)
+		// flo:file: and flo:blob: both resolve via ResolveToBytes, which also
+		// hands back the MIME type (the workspace file's detected type, or the
+		// blob token's type= hint) — used to name the upload correctly.
+		if core.IsFileRef(fileBlob) || core.IsBlobToken(fileBlob) {
+			data, mimeType, err := flow.ResolveToBytes(fileBlob)
 			if err != nil {
-				return nil, fmt.Errorf("resolve file_blob (workspace file): %w", err)
+				return nil, "", fmt.Errorf("resolve file_blob: %w", err)
 			}
-			return data, nil
+			return data, mimeType, nil
 		}
-		if core.IsBlobToken(fileBlob) {
-			data, err := flow.Blobs().Get(fileBlob)
-			if err != nil {
-				return nil, fmt.Errorf("resolve file_blob: %w", err)
-			}
-			return data, nil
-		}
-		return []byte(fileBlob), nil
+		// Already-resolved raw bytes (DetokeniseInputs ran on the way in).
+		return []byte(fileBlob), "", nil
 	}
 	if fileBase64 != "" {
 		data, err := base64.StdEncoding.DecodeString(fileBase64)
 		if err == nil {
-			return data, nil
+			return data, "", nil
 		}
 		data, err = base64.URLEncoding.DecodeString(fileBase64)
 		if err != nil {
-			return nil, fmt.Errorf("decode file_base64: %w", err)
+			return nil, "", fmt.Errorf("decode file_base64: %w", err)
 		}
-		return data, nil
+		return data, "", nil
 	}
 	if content != "" {
-		return []byte(content), nil
+		return []byte(content), "text/plain", nil
 	}
-	return nil, fmt.Errorf("one of file_blob, file_base64, or content is required")
+	return nil, "", fmt.Errorf("one of file_blob, file_base64, or content is required")
+}
+
+// deriveFilename returns a Slack upload filename with an extension Slack can use
+// to choose a preview renderer. It keeps a caller-supplied name that already has
+// a usable, specific extension (the AI often knows "report.csv"), but when the
+// name is missing or generic — empty, no extension, or the historical
+// "file.bin"/"file.txt" default — it derives the extension from the resolved
+// MIME type, falling back to sniffing the bytes. isText nudges an unknown
+// payload towards .txt rather than .bin.
+func deriveFilename(name string, isText bool, mimeType string, data []byte) string {
+	name = strings.TrimSpace(name)
+	if ext := path.Ext(name); ext != "" && !strings.EqualFold(ext, ".bin") {
+		return name // caller gave a usable, specific name
+	}
+	base := strings.TrimSuffix(name, path.Ext(name))
+	if base == "" || strings.EqualFold(base, "file") {
+		base = "file"
+	}
+	return base + extensionForContent(isText, mimeType, data)
+}
+
+// extensionForContent maps a MIME type (or, failing that, sniffed bytes) to a
+// file extension, including the leading dot.
+func extensionForContent(isText bool, mimeType string, data []byte) string {
+	mt := strings.TrimSpace(mimeType)
+	if mt == "" {
+		mt = http.DetectContentType(data) // e.g. image/png, video/mp4, application/pdf
+	}
+	if i := strings.IndexByte(mt, ';'); i >= 0 { // drop "; charset=..."
+		mt = strings.TrimSpace(mt[:i])
+	}
+	switch strings.ToLower(mt) {
+	case "image/png":
+		return ".png"
+	case "image/jpeg":
+		return ".jpg"
+	case "image/gif":
+		return ".gif"
+	case "image/webp":
+		return ".webp"
+	case "image/svg+xml":
+		return ".svg"
+	case "video/mp4":
+		return ".mp4"
+	case "video/webm":
+		return ".webm"
+	case "video/quicktime":
+		return ".mov"
+	case "audio/mpeg":
+		return ".mp3"
+	case "audio/wav", "audio/x-wav":
+		return ".wav"
+	case "application/pdf":
+		return ".pdf"
+	case "text/csv":
+		return ".csv"
+	case "application/json":
+		return ".json"
+	case "application/zip":
+		return ".zip"
+	case "text/plain":
+		return ".txt"
+	}
+	if exts, _ := mime.ExtensionsByType(mt); len(exts) > 0 {
+		return exts[0]
+	}
+	if isText {
+		return ".txt"
+	}
+	return ".bin"
 }

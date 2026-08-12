@@ -17,7 +17,7 @@ func TestResolveFileBytes_TextContentFallback(t *testing.T) {
 	// Pre-M5 behaviour: a flow that wires only `content` (text) keeps
 	// working unchanged. This is the backwards-compatibility check.
 	RegisterTestingT(t)
-	got, err := resolveFileBytes(nil, "", "", "hello CSV row 1\nrow 2")
+	got, _, err := resolveFileBytes(nil, "", "", "hello CSV row 1\nrow 2")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(string(got)).To(Equal("hello CSV row 1\nrow 2"))
 }
@@ -25,7 +25,7 @@ func TestResolveFileBytes_TextContentFallback(t *testing.T) {
 func TestResolveFileBytes_Base64Standard(t *testing.T) {
 	RegisterTestingT(t)
 	original := []byte("file contents")
-	got, err := resolveFileBytes(nil, "", base64.StdEncoding.EncodeToString(original), "")
+	got, _, err := resolveFileBytes(nil, "", base64.StdEncoding.EncodeToString(original), "")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(got).To(Equal(original))
 }
@@ -33,7 +33,7 @@ func TestResolveFileBytes_Base64Standard(t *testing.T) {
 func TestResolveFileBytes_Base64URLSafe(t *testing.T) {
 	RegisterTestingT(t)
 	original := []byte{0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A} // PNG magic bytes
-	got, err := resolveFileBytes(nil, "", base64.URLEncoding.EncodeToString(original), "")
+	got, _, err := resolveFileBytes(nil, "", base64.URLEncoding.EncodeToString(original), "")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(got).To(Equal(original))
 }
@@ -45,7 +45,7 @@ func TestResolveFileBytes_FileBlobAsRawBytes(t *testing.T) {
 	// content. The helper must pass it through verbatim.
 	RegisterTestingT(t)
 	rawBytes := []byte("raw image bytes \x89PNG\r\n")
-	got, err := resolveFileBytes(nil, string(rawBytes), "", "")
+	got, _, err := resolveFileBytes(nil, string(rawBytes), "", "")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(got).To(Equal(rawBytes))
 }
@@ -55,7 +55,7 @@ func TestResolveFileBytes_FileBlobWinsOverBase64(t *testing.T) {
 	winner := []byte("from file_blob path")
 	loser := base64.StdEncoding.EncodeToString([]byte("from file_base64 path"))
 
-	got, err := resolveFileBytes(nil, string(winner), loser, "")
+	got, _, err := resolveFileBytes(nil, string(winner), loser, "")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(got).To(Equal(winner))
 }
@@ -66,20 +66,20 @@ func TestResolveFileBytes_FileBase64WinsOverContent(t *testing.T) {
 	// matching the priority order in the package doc.
 	RegisterTestingT(t)
 	winner := []byte{0x01, 0x02, 0x03}
-	got, err := resolveFileBytes(nil, "", base64.StdEncoding.EncodeToString(winner), "should be ignored")
+	got, _, err := resolveFileBytes(nil, "", base64.StdEncoding.EncodeToString(winner), "should be ignored")
 	Expect(err).NotTo(HaveOccurred())
 	Expect(got).To(Equal(winner))
 }
 
 func TestResolveFileBytes_AllEmpty_Errors(t *testing.T) {
 	RegisterTestingT(t)
-	_, err := resolveFileBytes(nil, "", "", "")
+	_, _, err := resolveFileBytes(nil, "", "", "")
 	Expect(err).To(HaveOccurred())
 	Expect(err.Error()).To(ContainSubstring("one of file_blob"))
 }
 
 func TestResolveFileBytes_InvalidBase64_Errors(t *testing.T) {
 	RegisterTestingT(t)
-	_, err := resolveFileBytes(nil, "", "###definitely-not-base64###", "")
+	_, _, err := resolveFileBytes(nil, "", "###definitely-not-base64###", "")
 	Expect(err).To(MatchError(ContainSubstring("decode file_base64")))
 }
