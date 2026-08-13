@@ -40,6 +40,29 @@ func ParseFileRef(s string) (relPath string, ok bool) {
 	return filepath.FromSlash(strings.TrimPrefix(s, FileRefPrefix)), true
 }
 
+// ImageRefMime returns the image/* MIME type of a media reference — a flo:blob:
+// token (whose type= hint is read) or a flo:file: workspace ref (whose MIME is
+// inferred from its path extension) — or "" if the value is not a reference or
+// is not an image. It is a cheap classifier (no bytes are read): the AI tool
+// loop uses it to decide whether a tool output should be handed to the model as
+// a vision block.
+func ImageRefMime(ref string) string {
+	ref = strings.TrimSpace(ref)
+	switch {
+	case IsBlobToken(ref):
+		if _, _, mime, ok := ParseBlobToken(ref); ok && strings.HasPrefix(mime, "image/") {
+			return mime
+		}
+	case IsFileRef(ref):
+		if rel, ok := ParseFileRef(ref); ok {
+			if mime := mimeOfFile(rel); strings.HasPrefix(mime, "image/") {
+				return mime
+			}
+		}
+	}
+	return ""
+}
+
 // workspaceDir returns the per-execution working directory. The runner sets it as
 // the executor process's cwd, and git/clone plus the shell actions rely on it —
 // it is the shared scratch space for a single execution.

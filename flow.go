@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -259,10 +260,59 @@ type ToolRequest struct {
 }
 
 // ToolResult carries the output of a tool execution back to the AI.
+//
+// Images holds any image references (flo:blob:/flo:file: with an image/* MIME)
+// found in the tool's outputs — e.g. a Desktop Screenshot. Vision-capable
+// providers resolve these to bytes and attach them as image blocks so the model
+// can actually SEE the result and decide the next action, rather than being
+// handed an opaque reference string it can only quote back.
 type ToolResult struct {
-	ToolUseID string `json:"tool_use_id"`
-	Content   string `json:"content"`
-	IsError   bool   `json:"is_error,omitempty"`
+	ToolUseID string   `json:"tool_use_id"`
+	Content   string   `json:"content"`
+	IsError   bool     `json:"is_error,omitempty"`
+	Images    []string `json:"images,omitempty"`
+}
+
+// maxToolResultImages bounds how many images a single tool result may attach,
+// so a pathological tool returning dozens of image outputs can't blow the
+// model's context budget in one round.
+const maxToolResultImages = 4
+
+// collectImageRefs scans a tool's output map for image references so the engine
+// can hand them back to the AI as vision blocks. Only a WHOLE value that is
+// itself an image ref counts (a Desktop Screenshot's `image` output) — never
+// free text that merely mentions a ref. Output keys are visited in sorted order
+// for deterministic results, duplicates are dropped, and the count is capped.
+func collectImageRefs(outputs map[string]interface{}) []string {
+	if len(outputs) == 0 {
+		return nil
+	}
+	keys := make([]string, 0, len(outputs))
+	for k := range outputs {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
+	seen := make(map[string]bool)
+	var refs []string
+	for _, k := range keys {
+		s, ok := outputs[k].(string)
+		if !ok {
+			continue
+		}
+		s = strings.TrimSpace(s)
+		if s == "" || seen[s] {
+			continue
+		}
+		if ImageRefMime(s) != "" {
+			seen[s] = true
+			refs = append(refs, s)
+			if len(refs) >= maxToolResultImages {
+				break
+			}
+		}
+	}
+	return refs
 }
 
 var (
@@ -2891,10 +2941,21 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						}
 					}
 
+					// Surface any image outputs (e.g. a Desktop Screenshot)
+					// so vision-capable providers can attach them as blocks
+					// the model can actually see — not just a ref string.
+					var toolImages []string
+					if !toolErr && matchedTool != nil {
+						if r, exists := f.nodeResults[matchedTool.ID]; exists && r != nil {
+							toolImages = collectImageRefs(r)
+						}
+					}
+
 					results = append(results, ToolResult{
 						ToolUseID: req.ID,
 						Content:   toolOutput,
 						IsError:   toolErr,
+						Images:    toolImages,
 					})
 				}
 

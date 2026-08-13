@@ -401,6 +401,38 @@ func BuildAnthropicUserContent(prompt string, fetcher BlobFetcher) interface{} {
 	return blocks
 }
 
+// BuildAnthropicToolResultContent assembles the `content` value for an
+// Anthropic tool_result block. With no images it returns the plain text string
+// (backwards-compatible with every existing tool result); with images it
+// returns an array of image blocks followed by the text block, so the model
+// SEES a screenshot/chart the tool produced rather than an opaque ref string.
+//
+// The caller is responsible for resolving refs to VisionBlobs (only the caller
+// has the flow's resolver); this builder just formats them.
+func BuildAnthropicToolResultContent(text string, images []VisionBlob) interface{} {
+	if len(images) == 0 {
+		return text
+	}
+	blocks := make([]map[string]interface{}, 0, len(images)+1)
+	for _, img := range images {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "image",
+			"source": map[string]interface{}{
+				"type":       "base64",
+				"media_type": img.Mime,
+				"data":       base64.StdEncoding.EncodeToString(img.Bytes),
+			},
+		})
+	}
+	if strings.TrimSpace(text) != "" {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "text",
+			"text": text,
+		})
+	}
+	return blocks
+}
+
 // BuildOpenAIUserContent does the same for OpenAI's vision API.
 //
 // OpenAI's image block shape uses a data: URL:

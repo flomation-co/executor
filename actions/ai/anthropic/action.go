@@ -250,11 +250,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 							"truncated_to":   perResultChars,
 						}).Info("truncated tool result to fit context budget")
 					}
+					// Resolve any image outputs (e.g. a Desktop Screenshot)
+					// to bytes so the model can SEE the result and choose
+					// its next action, instead of only reading a ref string.
+					// Text is still included; images are added as blocks.
+					var toolImages []ai_common.VisionBlob
+					for _, ref := range r.Images {
+						b, mime, err := flow.ResolveToBytes(ref)
+						if err == nil && len(b) > 0 && strings.HasPrefix(mime, "image/") {
+							toolImages = append(toolImages, ai_common.VisionBlob{Mime: mime, Bytes: b})
+						}
+					}
+
 					content := []map[string]interface{}{
 						{
 							"type":        "tool_result",
 							"tool_use_id": r.ToolUseID,
-							"content":     resultContent,
+							"content":     ai_common.BuildAnthropicToolResultContent(resultContent, toolImages),
 						},
 					}
 					if r.IsError {
