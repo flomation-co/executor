@@ -78,7 +78,14 @@ func TestScrollCmd(t *testing.T) {
 
 func TestOpenURLCmd(t *testing.T) {
 	RegisterTestingT(t)
-	Expect(OpenURLCmd(OSLinux, ":0", "https://x/y")).To(Equal("DISPLAY=':0' xdg-open 'https://x/y'"))
+	linux := OpenURLCmd(OSLinux, ":0", "https://x/y")
+	// Detached so it can never hang the action; tries real browsers then xdg-open.
+	Expect(linux).To(HavePrefix("DISPLAY=':0' setsid nohup sh -c"))
+	Expect(linux).To(HaveSuffix("&"))
+	Expect(linux).To(ContainSubstring("google-chrome"))
+	Expect(linux).To(ContainSubstring("--no-sandbox"))
+	Expect(linux).To(ContainSubstring("exec xdg-open"))
+	Expect(linux).To(ContainSubstring("'https://x/y'")) // URL passed as a quoted positional arg
 	Expect(OpenURLCmd(OSWindows, "", "https://x/y")).To(ContainSubstring("Start-Process 'https://x/y'"))
 }
 
