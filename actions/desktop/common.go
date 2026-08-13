@@ -314,6 +314,21 @@ func ScrollCmd(os OS, display, direction string, amount int64) string {
 	return fmt.Sprintf("DISPLAY=%s xdotool click --repeat %d %d", shArg(display), amount, button)
 }
 
+// RunCommandCmd runs an arbitrary shell command on the VM. On Linux it exports
+// DISPLAY first (when set) so GUI commands — and every command in an
+// &&-chained sequence — target the desktop session; it is harmless for non-GUI
+// commands. The command is passed to the VM's shell verbatim (this IS a
+// run-arbitrary-command tool, so the caller owns the command).
+func RunCommandCmd(os OS, display, command string) string {
+	if os == OSWindows {
+		return command
+	}
+	if strings.TrimSpace(display) == "" {
+		return command
+	}
+	return fmt.Sprintf("export DISPLAY=%s; %s", shArg(display), command)
+}
+
 // OpenURLCmd opens a URL in a browser on the VM.
 //
 // The Linux path is deliberately robust: `xdg-open` HANGS when no working

@@ -1299,6 +1299,7 @@ import (
 	desktop_open_url "flomation.app/automate/executor/actions/desktop/open_url"
 	desktop_record_start "flomation.app/automate/executor/actions/desktop/record_start"
 	desktop_record_stop "flomation.app/automate/executor/actions/desktop/record_stop"
+	desktop_run_command "flomation.app/automate/executor/actions/desktop/run_command"
 	desktop_screenshot "flomation.app/automate/executor/actions/desktop/screenshot"
 	desktop_scroll "flomation.app/automate/executor/actions/desktop/scroll"
 	desktop_type_text "flomation.app/automate/executor/actions/desktop/type_text"
@@ -4862,6 +4863,7 @@ var Actions = map[string]core.Action{
 	"desktop/open_url":                                                                desktop_open_url.Execute,
 	"desktop/record_start":                                                            desktop_record_start.Execute,
 	"desktop/record_stop":                                                             desktop_record_stop.Execute,
+	"desktop/run_command":                                                             desktop_run_command.Execute,
 	"desktop/screenshot":                                                              desktop_screenshot.Execute,
 	"desktop/scroll":                                                                  desktop_scroll.Execute,
 	"desktop/type_text":                                                               desktop_type_text.Execute,

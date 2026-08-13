@@ -89,6 +89,18 @@ func TestOpenURLCmd(t *testing.T) {
 	Expect(OpenURLCmd(OSWindows, "", "https://x/y")).To(ContainSubstring("Start-Process 'https://x/y'"))
 }
 
+func TestRunCommandCmd(t *testing.T) {
+	RegisterTestingT(t)
+	// Linux with a display: DISPLAY exported so GUI + &&-chained commands target
+	// the session; the command itself is passed verbatim.
+	Expect(RunCommandCmd(OSLinux, ":0", "wget -qO /tmp/b.png http://x && echo done")).
+		To(Equal("export DISPLAY=':0'; wget -qO /tmp/b.png http://x && echo done"))
+	// No display: run verbatim.
+	Expect(RunCommandCmd(OSLinux, "", "ls -la")).To(Equal("ls -la"))
+	// Windows: verbatim.
+	Expect(RunCommandCmd(OSWindows, "", "Get-Process")).To(Equal("Get-Process"))
+}
+
 func TestRecordCmds(t *testing.T) {
 	RegisterTestingT(t)
 	start := RecordStartCmd(OSLinux, ":0", 20)
@@ -126,6 +138,7 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 	cmds := map[string]string{
 		"screenshot":   ScreenshotCmd(OSLinux, ":0", "/tmp/s.png"),
 		"focus_window": FocusWindowCmd(OSLinux, ":0", "a & (b) window"),
+		"run_command":  RunCommandCmd(OSLinux, ":0", "wget -qO /tmp/b.png 'http://x/(y)' && echo done"),
 		"click":        ClickCmd(OSLinux, ":0", 10, 20, "left", 1),
 		"double_click": ClickCmd(OSLinux, ":0", 10, 20, "left", 2),
 		"move":         MoveCmd(OSLinux, ":0", 10, 20),
