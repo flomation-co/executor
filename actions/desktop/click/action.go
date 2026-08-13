@@ -33,6 +33,7 @@ var Inputs = [...]core.Connection{
 	{Name: "x", Type: core.ConnectionTypeInteger, Label: "X", Required: true},
 	{Name: "y", Type: core.ConnectionTypeInteger, Label: "Y", Required: true},
 	{Name: "button", Type: core.ConnectionTypeString, Label: "Button", Options: []core.ConnectionOption{{Name: "Left", Value: "left"}, {Name: "Right", Value: "right"}, {Name: "Middle", Value: "middle"}}},
+	{Name: "clicks", Type: core.ConnectionTypeInteger, Label: "Clicks (1 = single, 2 = double)", Placeholder: "1"},
 }
 
 var Outputs = [...]core.Connection{
@@ -52,11 +53,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if button == "" {
 		button = "left"
 	}
+	clicks := desktop.Int("clicks", inputs, 1)
+	if clicks < 1 {
+		clicks = 1
+	}
 
-	if _, stderr, exit, rerr := conn.Run(desktop.ClickCmd(conn.OS, conn.Display, x, y, button)); rerr != nil {
+	if _, stderr, exit, rerr := conn.Run(desktop.ClickCmd(conn.OS, conn.Display, x, y, button, clicks)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	} else if exit != 0 {
 		return desktop.ErrResult("click failed: " + stderr), nil
 	}
-	return desktop.OkResult(fmt.Sprintf("%s-clicked at (%d, %d)", button, x, y), nil), nil
+
+	summary := fmt.Sprintf("%s-clicked at (%d, %d)", button, x, y)
+	switch {
+	case clicks == 2:
+		summary = fmt.Sprintf("%s double-clicked at (%d, %d)", button, x, y)
+	case clicks > 2:
+		summary = fmt.Sprintf("%s-clicked %d times at (%d, %d)", button, clicks, x, y)
+	}
+	return desktop.OkResult(summary, nil), nil
 }
