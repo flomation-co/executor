@@ -57,6 +57,16 @@ func TestKeyCmd(t *testing.T) {
 	Expect(KeyCmd(OSWindows, "", "^c")).To(ContainSubstring("SendKeys"))
 }
 
+func TestFocusWindowCmd(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(FocusWindowCmd(OSLinux, ":0", "Google Chrome")).
+		To(Equal("DISPLAY=':0' xdotool search --limit 1 --name 'Google Chrome' windowactivate --sync"))
+	// Title is shell-quoted, so spaces/metacharacters (incl. parens) are safe.
+	Expect(FocusWindowCmd(OSLinux, ":0", "a & (b)")).To(ContainSubstring("--name 'a & (b)'"))
+	win := FocusWindowCmd(OSWindows, "", "Chrome")
+	Expect(win).To(ContainSubstring("AppActivate('Chrome')"))
+}
+
 func TestScrollCmd(t *testing.T) {
 	RegisterTestingT(t)
 	Expect(ScrollCmd(OSLinux, ":0", "down", 3)).To(Equal("DISPLAY=':0' xdotool click --repeat 3 5"))
@@ -108,6 +118,7 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 	}
 	cmds := map[string]string{
 		"screenshot":   ScreenshotCmd(OSLinux, ":0", "/tmp/s.png"),
+		"focus_window": FocusWindowCmd(OSLinux, ":0", "a & (b) window"),
 		"click":        ClickCmd(OSLinux, ":0", 10, 20, "left", 1),
 		"double_click": ClickCmd(OSLinux, ":0", 10, 20, "left", 2),
 		"move":         MoveCmd(OSLinux, ":0", 10, 20),

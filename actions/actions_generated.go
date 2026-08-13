@@ -1293,6 +1293,7 @@ import (
 	databricks_run_sql "flomation.app/automate/executor/actions/databricks/run_sql"
 	databricks_upload_file "flomation.app/automate/executor/actions/databricks/upload_file"
 	desktop_click "flomation.app/automate/executor/actions/desktop/click"
+	desktop_focus_window "flomation.app/automate/executor/actions/desktop/focus_window"
 	desktop_key "flomation.app/automate/executor/actions/desktop/key"
 	desktop_move "flomation.app/automate/executor/actions/desktop/move"
 	desktop_open_url "flomation.app/automate/executor/actions/desktop/open_url"
@@ -4855,6 +4856,7 @@ var Actions = map[string]core.Action{
 	"databricks/run_sql":                                                              databricks_run_sql.Execute,
 	"databricks/upload_file":                                                          databricks_upload_file.Execute,
 	"desktop/click":                                                                   desktop_click.Execute,
+	"desktop/focus_window":                                                            desktop_focus_window.Execute,
 	"desktop/key":                                                                     desktop_key.Execute,
 	"desktop/move":                                                                    desktop_move.Execute,
 	"desktop/open_url":                                                                desktop_open_url.Execute,

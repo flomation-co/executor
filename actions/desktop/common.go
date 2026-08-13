@@ -233,6 +233,32 @@ func ClickCmd(os OS, display string, x, y int64, button string, clicks int64) st
 		shArg(display), x, y, clicks, xdoButton(button))
 }
 
+// FocusWindowCmd raises and gives input focus to the first window whose title
+// contains `title`. Run before a click/type so the intended window sits on top
+// and receives the input, rather than whatever happened to be focused or
+// overlapping (e.g. a leftover terminal intercepting clicks). Linux uses
+// xdotool windowactivate (needs an EWMH window manager — Xfwm4 etc.); Windows
+// uses WScript.Shell.AppActivate (matches on the title). A non-match exits
+// non-zero, which callers treat as best-effort.
+func FocusWindowCmd(os OS, display, title string) string {
+	if os == OSWindows {
+		return ps(fmt.Sprintf(`$ok=(New-Object -ComObject WScript.Shell).AppActivate('%s'); if(-not $ok){ exit 1 }`, psLiteral(title)))
+	}
+	return fmt.Sprintf("DISPLAY=%s xdotool search --limit 1 --name %s windowactivate --sync", shArg(display), shArg(title))
+}
+
+// FocusWindowIfRequested reads an optional "window" input and, when set, raises
+// and focuses that window (best-effort) so the input action that follows lands
+// on it. A non-match is NOT fatal — the caller proceeds regardless, matching the
+// pre-existing behaviour when no window is requested.
+func (c *Conn) FocusWindowIfRequested(inputs []*core.Connection) {
+	window := OptionalString("window", inputs)
+	if window == "" {
+		return
+	}
+	_, _, _, _ = c.Run(FocusWindowCmd(c.OS, c.Display, window))
+}
+
 // MoveCmd moves the pointer without clicking.
 func MoveCmd(os OS, display string, x, y int64) string {
 	if os == OSWindows {
