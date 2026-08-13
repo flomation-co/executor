@@ -214454,7 +214454,7 @@
     ]
   },
   "desktop/record_start": {
-    "hash": "3c5d9129a8b36d2db37ac1c5ea94d640688495e39262636452ecdf43a3db837c",
+    "hash": "e7379d61cd2fbe8ab3c1f9513a1a9fd39c7d27a3a3e8090b350b61d5bd760e1e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Start Recording",
@@ -214597,6 +214597,13 @@
         "placeholder": ""
       },
       {
+        "name": "recording_id",
+        "type": "string",
+        "value": null,
+        "label": "Recording ID — pass this to Desktop Stop Recording",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -214613,7 +214620,7 @@
     ]
   },
   "desktop/record_stop": {
-    "hash": "e7fe3d2c1fdf3c7e14651aeaae3e51cdd5dfdf6001385b0c6cb025d5858a15bc",
+    "hash": "e099bc2e5be63becb8c6eddd03d5cb2153ee6df4d4caf5e83ed4288d70ffa010",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Stop Recording",
@@ -214738,6 +214745,14 @@
         "value": null,
         "label": "Host Key Fingerprint",
         "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "recording_id",
+        "type": "string",
+        "value": null,
+        "label": "Recording ID — the id returned by Desktop Start Recording.",
+        "placeholder": "${recording_id}",
+        "required": true
       }
     ],
     "outputs": [

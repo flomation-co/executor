@@ -36,6 +36,7 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
+	{Name: "recording_id", Type: core.ConnectionTypeString, Label: "Recording ID — pass this to Desktop Stop Recording"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
@@ -47,7 +48,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	fps := desktop.Int("fps", inputs, 15)
 
-	stdout, stderr, exit, rerr := conn.Run(desktop.RecordStartCmd(conn.OS, conn.Display, fps))
+	// A unique id per recording gives each recorder its own pidfile + output
+	// file, so multiple recordings can run at once without clobbering each
+	// other, and Stop Recording can target exactly this one.
+	recordingID := desktop.NewRecordingID()
+
+	stdout, stderr, exit, rerr := conn.Run(desktop.RecordStartCmd(conn.OS, conn.Display, fps, recordingID))
 	if rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	}
@@ -55,8 +61,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return desktop.ErrResult("failed to start recording: " + stderr), nil
 	}
 	return desktop.OkResult(
-		fmt.Sprintf("Recording started at %d fps (pid %s). Stop it with Desktop Stop Recording to retrieve the video.", fps, trim(stdout)),
-		nil,
+		fmt.Sprintf("Recording %s started at %d fps (pid %s). Stop it with Desktop Stop Recording (pass recording_id=%s) to retrieve the video.", recordingID, fps, trim(stdout), recordingID),
+		map[string]interface{}{"recording_id": recordingID},
 	), nil
 }
 
