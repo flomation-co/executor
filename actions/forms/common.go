@@ -93,12 +93,28 @@ func RequiredString(name string, inputs []*core.Connection) (string, error) {
 
 // --- result shapers (mirror the stripe / ukgov contract; tool_result FIRST) ---
 
+// summaryWithData embeds the JSON payload in tool_result because the engine's
+// tool-result fallback chain (tool_result -> result -> response -> output ->
+// JSON of all outputs) never falls through a non-empty tool_result: an AI
+// caller would otherwise get the human summary but not the data. The engine
+// truncates large payloads downstream, so embedding the full data here is safe.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ObjectResult wraps a single object result. The object is provided as a plain
 // map so downstream nodes can reach ${input.result.<field>}.
 func ObjectResult(obj map[string]interface{}, summary string) map[string]interface{} {
 	id, _ := obj["id"].(string)
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"id":          id,
 		"result":      obj,
 		"success":     true,
@@ -109,7 +125,7 @@ func ObjectResult(obj map[string]interface{}, summary string) map[string]interfa
 // ListResult wraps a list of objects.
 func ListResult(items []map[string]interface{}, summary string) map[string]interface{} {
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"results":     items,
 		"count":       len(items),
 		"success":     true,

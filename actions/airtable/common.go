@@ -577,6 +577,23 @@ func GetBaseSchema(token, baseID string) (map[string]interface{}, error) {
 // Result shaping
 // ---------------------------------------------------------------------------
 
+// summaryWithData embeds the JSON payload in tool_result so an AI caller
+// actually receives the data. The engine's tool-result fallback chain uses
+// tool_result verbatim when non-empty and never falls through to the data
+// outputs, so a bare summary meant gets/lists/reports reached the model with
+// none of the actual data. The engine applies token-budget-aware truncation
+// downstream, so large payloads degrade gracefully.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // RecordResult shapes a single-record response (create/get/update) into the
 // standard action output: id, fields, the full record, plus summary and flags.
 func RecordResult(rec map[string]interface{}, summary string) map[string]interface{} {
@@ -585,7 +602,7 @@ func RecordResult(rec map[string]interface{}, summary string) map[string]interfa
 		"id":          id,
 		"fields":      rec["fields"],
 		"record":      rec,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, rec),
 		"success":     true,
 		"error":       "",
 	}
@@ -599,7 +616,7 @@ func ListResult(records []interface{}, offset string, raw map[string]interface{}
 		"count":       len(records),
 		"offset":      offset,
 		"result":      raw,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, records),
 		"success":     true,
 		"error":       "",
 	}

@@ -149,7 +149,10 @@ func TestObjectResult(t *testing.T) {
 	Expect(out["id"]).To(Equal("501"))
 	Expect(out["success"]).To(Equal(true))
 	Expect(out["error"]).To(Equal(""))
-	Expect(out["tool_result"]).To(Equal("Created contact 501"))
+	// tool_result now carries the summary PLUS the embedded record JSON so
+	// AI callers (which read tool_result verbatim) also receive the data.
+	Expect(out["tool_result"]).To(ContainSubstring("Created contact 501"))
+	Expect(out["tool_result"]).To(ContainSubstring("jane@example.com"))
 	Expect(out["properties"]).To(Equal(map[string]interface{}{"email": "jane@example.com"}))
 }
 

@@ -314,6 +314,22 @@ func ClampLimit(limit int, set bool) int {
 // Result shaping
 // ---------------------------------------------------------------------------
 
+// summaryWithData embeds the JSON-marshalled data into the AI tool_result so
+// AI callers receive the actual object/items, not just the human summary. The
+// engine's tool-result fallback chain uses tool_result VERBATIM when non-empty
+// and never falls through to the separate data output, so the data must be
+// folded in here. Mirrors the xero success helper.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 func ErrorResult(msg string) map[string]interface{} {
 	return map[string]interface{}{
 		"tool_result": msg,
@@ -332,7 +348,7 @@ func ResourceResult(obj map[string]interface{}, summary string) map[string]inter
 	return map[string]interface{}{
 		"id":          Stringify(obj["id"]),
 		"result":      obj,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"success":     true,
 		"error":       "",
 	}
@@ -346,7 +362,7 @@ func SuccessResult(id string, result map[string]interface{}, summary string) map
 	return map[string]interface{}{
 		"id":          id,
 		"result":      result,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, result),
 		"success":     true,
 		"error":       "",
 	}
@@ -361,7 +377,7 @@ func ListResult(items []interface{}, summary string) map[string]interface{} {
 		"results":     items,
 		"count":       len(items),
 		"total":       len(items),
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"success":     true,
 		"error":       "",
 	}

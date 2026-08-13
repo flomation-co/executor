@@ -396,6 +396,21 @@ func parseJSONInto(name, raw string, dst map[string]interface{}) error {
 	return nil
 }
 
+// summaryWithData appends the JSON-marshalled data to the human summary so the
+// AI tool-result (used verbatim by the engine's tool_result fallback chain when
+// non-empty) carries BOTH the readable summary AND the structured payload —
+// otherwise AI callers only ever see the bare summary and never the data.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ErrorResult returns the standard error output map for a graceful failure.
 func ErrorResult(msg string) map[string]interface{} {
 	return map[string]interface{}{
@@ -431,7 +446,7 @@ func ListResult(items []interface{}, total int, raw map[string]interface{}, summ
 		"count":       len(items),
 		"total_items": total,
 		"result":      raw,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"success":     true,
 		"error":       "",
 	}
@@ -444,7 +459,7 @@ func ObjectResult(obj map[string]interface{}, summary string) map[string]interfa
 	return map[string]interface{}{
 		"id":          id,
 		"result":      obj,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"success":     true,
 		"error":       "",
 	}

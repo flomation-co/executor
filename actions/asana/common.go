@@ -493,6 +493,21 @@ func ErrorResult(msg string) map[string]interface{} {
 	}
 }
 
+// summaryWithData embeds the JSON payload in tool_result so an AI caller
+// actually receives the data. The engine's tool-result fallback chain uses
+// tool_result verbatim when non-empty and never falls through to the data
+// outputs. The engine truncates large payloads downstream (budget-aware).
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ResourceResult shapes a single-resource response (create/get/update) into the
 // standard action output. The id output reads the resource's "gid".
 func ResourceResult(obj map[string]interface{}, summary string) map[string]interface{} {
@@ -502,7 +517,7 @@ func ResourceResult(obj map[string]interface{}, summary string) map[string]inter
 	return map[string]interface{}{
 		"id":          stringifyID(obj["gid"]),
 		"result":      obj,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"success":     true,
 		"error":       "",
 	}
@@ -517,7 +532,7 @@ func SuccessResult(id string, result map[string]interface{}, summary string) map
 	return map[string]interface{}{
 		"id":          id,
 		"result":      result,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, result),
 		"success":     true,
 		"error":       "",
 	}
@@ -532,7 +547,7 @@ func ListResult(items []interface{}, summary string) map[string]interface{} {
 		"results":     items,
 		"count":       len(items),
 		"total":       len(items),
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"success":     true,
 		"error":       "",
 	}
