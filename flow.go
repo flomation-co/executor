@@ -4168,10 +4168,10 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 	// runner's stdout scanner buffer; the runner then stops draining the pipe
 	// and the executor blocks forever on the write, hanging the execution.
 	if len(inputs) > 0 && inputs[0] != nil {
-		evt["inputs"] = truncateEventValues(inputs[0])
+		evt["inputs"] = capEventField(truncateEventValues(inputs[0]))
 	}
 	if len(inputs) > 1 && inputs[1] != nil {
-		evt["outputs"] = truncateEventValues(inputs[1])
+		evt["outputs"] = capEventField(truncateEventValues(inputs[1]))
 	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
@@ -4183,25 +4183,69 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 // live editor view.
 const maxEventStringBytes = 4096
 
-// truncateEventValues returns a shallow copy of m in which any string value
-// longer than maxEventStringBytes is truncated (on a valid UTF-8 boundary)
-// with a marker noting the original size. The input map is never mutated, so
-// callers' downstream copies of the data are unaffected. Non-string values are
-// passed through unchanged.
+// maxEventFieldBytes caps the WHOLE serialised size of a single event field
+// (inputs or outputs). Per-string truncation alone doesn't help a field made of
+// MANY small strings — e.g. an AI node's inputs carry the full tool-definition
+// set (dozens of tool schemas), re-emitted every round, which ballooned stored
+// execution logs to tens of MB. When a field exceeds this, it is replaced by a
+// compact summary; the full data still lives in nodeResults / the final result.
+const maxEventFieldBytes = 24 * 1024
+
+// truncateEventValues deep-copies m, truncating any string value longer than
+// maxEventStringBytes (on a valid UTF-8 boundary) at ANY nesting depth. The
+// shallow version missed strings nested inside arrays/maps (e.g. base64 image
+// blocks, tool_result content), which then bloated the __NODE__ line and the
+// stored logs. The input is never mutated.
 func truncateEventValues(m map[string]interface{}) map[string]interface{} {
 	if m == nil {
 		return nil
 	}
 	out := make(map[string]interface{}, len(m))
 	for k, v := range m {
-		if s, ok := v.(string); ok && len(s) > maxEventStringBytes {
-			cut := strings.ToValidUTF8(s[:maxEventStringBytes], "")
-			out[k] = fmt.Sprintf("%s… [truncated, %d bytes total]", cut, len(s))
-			continue
-		}
-		out[k] = v
+		out[k] = truncateEventValue(v)
 	}
 	return out
+}
+
+// truncateEventValue recurses through maps, slices and strings, truncating
+// oversized strings wherever they occur.
+func truncateEventValue(v interface{}) interface{} {
+	switch t := v.(type) {
+	case string:
+		if len(t) > maxEventStringBytes {
+			cut := strings.ToValidUTF8(t[:maxEventStringBytes], "")
+			return fmt.Sprintf("%s… [truncated, %d bytes total]", cut, len(t))
+		}
+		return t
+	case map[string]interface{}:
+		out := make(map[string]interface{}, len(t))
+		for k, val := range t {
+			out[k] = truncateEventValue(val)
+		}
+		return out
+	case []interface{}:
+		out := make([]interface{}, len(t))
+		for i, val := range t {
+			out[i] = truncateEventValue(val)
+		}
+		return out
+	default:
+		return v
+	}
+}
+
+// capEventField replaces a field whose serialised size exceeds maxEventFieldBytes
+// with a compact summary, so a field composed of many small values (the tool
+// schema set) can't bloat the event. Returns the value unchanged when it fits.
+func capEventField(v interface{}) interface{} {
+	if v == nil {
+		return nil
+	}
+	b, err := json.Marshal(v)
+	if err != nil || len(b) <= maxEventFieldBytes {
+		return v
+	}
+	return fmt.Sprintf("[omitted: %d bytes — see node results]", len(b))
 }
 
 // buildObfuscatedInputMap creates an input map with secret values masked.
