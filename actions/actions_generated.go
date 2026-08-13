@@ -1296,6 +1296,7 @@ import (
 	desktop_click "flomation.app/automate/executor/actions/desktop/click"
 	desktop_focus_window "flomation.app/automate/executor/actions/desktop/focus_window"
 	desktop_key "flomation.app/automate/executor/actions/desktop/key"
+	desktop_list_recordings "flomation.app/automate/executor/actions/desktop/list_recordings"
 	desktop_move "flomation.app/automate/executor/actions/desktop/move"
 	desktop_open_url "flomation.app/automate/executor/actions/desktop/open_url"
 	desktop_record_start "flomation.app/automate/executor/actions/desktop/record_start"
@@ -4861,6 +4862,7 @@ var Actions = map[string]core.Action{
 	"desktop/click":                                                                   desktop_click.Execute,
 	"desktop/focus_window":                                                            desktop_focus_window.Execute,
 	"desktop/key":                                                                     desktop_key.Execute,
+	"desktop/list_recordings":                                                         desktop_list_recordings.Execute,
 	"desktop/move":                                                                    desktop_move.Execute,
 	"desktop/open_url":                                                                desktop_open_url.Execute,
 	"desktop/record_start":                                                            desktop_record_start.Execute,
