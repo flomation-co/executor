@@ -40,15 +40,23 @@ func TestTypeCmd_IsInjectionSafe(t *testing.T) {
 	// A hostile string must NOT appear literally in the command — it is passed
 	// base64-encoded and decoded on the VM into a single argument.
 	evil := `"; rm -rf / #`
-	cmd := TypeCmd(OSLinux, ":0", evil)
+	cmd := TypeCmd(OSLinux, ":0", evil, false)
 	Expect(cmd).ToNot(ContainSubstring("rm -rf"))
 	Expect(cmd).To(ContainSubstring(base64.StdEncoding.EncodeToString([]byte(evil))))
 	Expect(cmd).To(ContainSubstring("base64 -d"))
 	Expect(cmd).To(ContainSubstring("xdotool type --clearmodifiers"))
+	// Without submit, no Return keypress.
+	Expect(cmd).ToNot(ContainSubstring("key --clearmodifiers Return"))
 
-	win := TypeCmd(OSWindows, "", "hi")
+	// submit=true appends a Return in the same command.
+	withEnter := TypeCmd(OSLinux, ":0", "ls -la", true)
+	Expect(withEnter).To(ContainSubstring("xdotool type --clearmodifiers"))
+	Expect(withEnter).To(ContainSubstring("xdotool key --clearmodifiers Return"))
+
+	win := TypeCmd(OSWindows, "", "hi", false)
 	Expect(win).To(ContainSubstring(base64.StdEncoding.EncodeToString([]byte("hi"))))
 	Expect(win).To(ContainSubstring("SendKeys"))
+	Expect(TypeCmd(OSWindows, "", "hi", true)).To(ContainSubstring("{ENTER}"))
 }
 
 func TestKeyCmd(t *testing.T) {
@@ -156,7 +164,8 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 		"click":        ClickCmd(OSLinux, ":0", 10, 20, "left", 1),
 		"double_click": ClickCmd(OSLinux, ":0", 10, 20, "left", 2),
 		"move":         MoveCmd(OSLinux, ":0", 10, 20),
-		"type":         TypeCmd(OSLinux, ":0", `weird "'()$ text`),
+		"type":         TypeCmd(OSLinux, ":0", `weird "'()$ text`, false),
+		"type_submit":  TypeCmd(OSLinux, ":0", `echo hi && ls`, true),
 		"key":          KeyCmd(OSLinux, ":0", "ctrl+shift+t"),
 		"scroll":       ScrollCmd(OSLinux, ":0", "down", 3),
 		"open_url":     OpenURLCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)"),

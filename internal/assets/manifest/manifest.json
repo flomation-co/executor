@@ -215317,7 +215317,7 @@
     ]
   },
   "desktop/type_text": {
-    "hash": "2ca94cccf56faf1adec4ace2cd08a8a1a599bbaad5a7632f8756297122deb433",
+    "hash": "bca0aae5d2e8a8cedfe0b5ed45a1ff229f1824a3938962bf530752f15d0d48ab",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Type Text",
@@ -215457,6 +215457,13 @@
         "value": null,
         "label": "Focus Window First (title substring, optional)",
         "placeholder": "Google Chrome"
+      },
+      {
+        "name": "submit",
+        "type": "boolean",
+        "value": null,
+        "label": "Press Enter after typing (e.g. to run a typed command)",
+        "placeholder": ""
       }
     ],
     "outputs": [
