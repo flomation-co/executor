@@ -214692,6 +214692,187 @@
       }
     ]
   },
+  "desktop/run_command": {
+    "hash": "945e9ee9b8630f5e97d48a28d46c51b3c44b6b3db6df5b79e52eb8d3bfab4440",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Run Command",
+    "description": "Run a shell command on a desktop VM (targets the desktop session) and return its output.",
+    "website": "https://www.flomation.co",
+    "icon": "terminal",
+    "date": "13/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      },
+      {
+        "name": "command",
+        "type": "text",
+        "value": null,
+        "label": "Command",
+        "placeholder": "wget -qO /tmp/bg.png https://… \u0026\u0026 xfconf-query -c xfce4-desktop -p …",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "string",
+        "value": null,
+        "label": "Standard Output",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "string",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "desktop/screenshot": {
     "hash": "325ae1f9ffdda7cc41a16b01b7fd37c856c9ed4acb875de923e685e0483764f1",
     "author": "Andy Esser",

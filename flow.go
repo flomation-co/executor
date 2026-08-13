@@ -220,8 +220,11 @@ const (
 	// downstream nodes.
 	DeliveryHandle = "delivery"
 
-	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
-	MaxToolRoundsDefault = 25
+	// MaxToolRoundsDefault is the safety backstop on tool-calling rounds — a
+	// guard against a runaway loop, NOT a working limit. It was 25, which cut
+	// off legitimate long agent sessions (e.g. driving a desktop). Raised to a
+	// high value; an AI node can override it via a max_tool_rounds output.
+	MaxToolRoundsDefault = 250
 
 	// StreamSentencesKey flags that the AI action is streaming. The
 	// actual channel is stored as a flow variable (not in outputs)
@@ -2618,6 +2621,11 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			children = nonToolChildren
 		} else {
 			maxRounds := MaxToolRoundsDefault
+			// An AI node may raise/lower the backstop via a max_tool_rounds
+			// output (e.g. an agent that legitimately needs a very long loop).
+			if mr, ok := outputs["max_tool_rounds"].(int64); ok && mr > 0 {
+				maxRounds = int(mr)
+			}
 
 			// Resolve Response handle children once for intermediate messages.
 			// These are the nodes wired to the "output" (Response) handle —
