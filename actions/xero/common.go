@@ -253,7 +253,7 @@ func ObjectResult(id string, obj map[string]interface{}, summary string) map[str
 		obj = map[string]interface{}{}
 	}
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"id":          id,
 		"result":      obj,
 		"success":     true,
@@ -264,12 +264,30 @@ func ObjectResult(id string, obj map[string]interface{}, summary string) map[str
 // ListResult wraps a slice of Xero objects.
 func ListResult(items []map[string]interface{}, summary string) map[string]interface{} {
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"results":     items,
 		"count":       len(items),
 		"success":     true,
 		"error":       "",
 	}
+}
+
+// summaryWithData embeds the JSON payload in tool_result so an AI caller
+// actually receives the data. The engine's tool-result fallback chain uses
+// tool_result verbatim whenever it is non-empty and never falls through to the
+// `result`/`results` outputs — so a bare summary meant reports, gets and lists
+// reached the model as "Fetched … report" with none of the actual figures.
+// The engine applies token-budget-aware truncation downstream, so large
+// payloads (e.g. Profit and Loss) degrade gracefully rather than being dropped.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
 }
 
 // ErrorResult is a graceful failure — success=false, not a node error.
