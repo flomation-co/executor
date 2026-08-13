@@ -562,8 +562,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// directed at this agent in a multi-user channel). The AI signals
 	// this by including [NO_RESPONSE] in its output.
 	shouldRespond := true
-	trimmed := strings.TrimSpace(content)
-	if trimmed == "[NO_RESPONSE]" || strings.Contains(trimmed, "[NO_RESPONSE]") {
+	if ai_common.SuppressResponse(content) {
 		shouldRespond = false
 		content = "" // Don't record or send empty responses
 	}
