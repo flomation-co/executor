@@ -1057,6 +1057,92 @@
       }
     ]
   },
+  "agent/search_conversation": {
+    "hash": "fe0b2eaf4b0adc6bae2778149ccc22440efae61b1e42a7a1e71ba1300bb32d32",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Conversation History",
+    "description": "Full-text search your entire message history with this user (all channels) to recall something outside your current context. Provide a search query.",
+    "website": "https://www.flomation.co",
+    "icon": "comments+magnifying-glass",
+    "date": "13/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search query — words or a phrase to find in past messages.",
+        "placeholder": "the demo wallpaper image",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Max results",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Matching messages",
+        "placeholder": ""
+      },
+      {
+        "name": "match_count",
+        "type": "integer",
+        "value": null,
+        "label": "Match Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/send_message": {
     "hash": "60479644fcf11801f7b1effe10997816cd695940e7bb5a7195d074cba8c11f3d",
     "author": "Andy Esser",
@@ -1189,7 +1275,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "f6797be21c328549fe75b51cc4adb64184979a1324023cba95f853a06062b78b",
+    "hash": "9cce69f040fb0738572812a9eed7d17a0d571d1e46df2fa142907dfc55f2197c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1366,7 +1452,7 @@
     ]
   },
   "ai/azure_openai": {
-    "hash": "846e2d4a0a5609b0ea1b25bc0bfa3cee30db0250eb3fa29afff05d432bbf5f58",
+    "hash": "c3e5539f078fd5c4375c4b75266c97469347b831c2db7140326dbd0ff413729a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure OpenAI Prompt",
@@ -1845,7 +1931,7 @@
     ]
   },
   "ai/gemini": {
-    "hash": "16dca28f30a97bc84fe09994688de718004950aee0375059ee7150221af684f9",
+    "hash": "de8b7809819cf1b398516f64e3b00d46bd37832d1c9f47d69b7d842c2506bb36",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Prompt",
@@ -2450,7 +2536,7 @@
     ]
   },
   "ai/groq": {
-    "hash": "a6b3b670ac04185174d478ab6905618f2f3558bc09f85aa9efb2d929b57e4bab",
+    "hash": "9b25c0c906b7337b77b1fd506dc1e33c5661762dc7f16759693b7c53264a9176",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Groq Prompt",
@@ -2632,7 +2718,7 @@
     ]
   },
   "ai/ollama": {
-    "hash": "f2fdf7311c2debadca7e4d4c237734cf63b9d2a579b28695dfc8062b3962248e",
+    "hash": "7a2c6e0cda12582d2f4f4d123efda3a6e78b8e9e98bb82f0be6b6d5ddc5397c5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Ollama Prompt",
@@ -3151,7 +3237,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "98040ba4858146f7affeb0b240056a303c53cee913e4b5b6b0f3b314884fff35",
+    "hash": "496dab3ef704b5c124e6bdc97c9f1166f156e9bc371916188e8983e6b943b3c4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3341,7 +3427,7 @@
     ]
   },
   "ai/openrouter": {
-    "hash": "01e6389b87c434e60b5b3fe2a4797ca98728a9ca672c1d15507cb5f8e1a9c8a0",
+    "hash": "87beea2de9110f3befce4168d8b13213ebf5e6a27f51243fd648889926b98c68",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OpenRouter Prompt",
@@ -3591,7 +3677,7 @@
     ]
   },
   "ai/openwebui": {
-    "hash": "657cdaa46866bb3d25756e49432bafb0ca065db079de87f9c90d532df976c522",
+    "hash": "c8132fb776067b9243821e6017ebaf60b4d38dfa9218ebf634256f202209aee2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",
