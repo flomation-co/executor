@@ -401,6 +401,18 @@ func BuildAnthropicUserContent(prompt string, fetcher BlobFetcher) interface{} {
 	return blocks
 }
 
+// SuppressResponse reports whether an AI action's final text should NOT be
+// delivered. Two cases: an EMPTY/whitespace response — e.g. a tool loop that
+// exited at its round cap with the model still mid-tool-call and no final text,
+// which previously posted a blank message to the channel — or a response the
+// model explicitly tagged [NO_RESPONSE] (message not directed at this agent).
+// Callers set should_respond=false and blank the content so the agent never
+// sends an empty message.
+func SuppressResponse(content string) bool {
+	trimmed := strings.TrimSpace(content)
+	return trimmed == "" || strings.Contains(trimmed, "[NO_RESPONSE]")
+}
+
 // BuildAnthropicToolResultContent assembles the `content` value for an
 // Anthropic tool_result block. With no images it returns the plain text string
 // (backwards-compatible with every existing tool result); with images it

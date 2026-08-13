@@ -788,8 +788,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	content := result.Message.Content
 
 	shouldRespond := true
-	trimmed := strings.TrimSpace(content)
-	if trimmed == "[NO_RESPONSE]" || strings.Contains(trimmed, "[NO_RESPONSE]") {
+	if ai_common.SuppressResponse(content) {
 		shouldRespond = false
 		content = ""
 	}
