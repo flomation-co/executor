@@ -34,6 +34,7 @@ var Inputs = [...]core.Connection{
 	{Name: "y", Type: core.ConnectionTypeInteger, Label: "Y", Required: true},
 	{Name: "button", Type: core.ConnectionTypeString, Label: "Button", Options: []core.ConnectionOption{{Name: "Left", Value: "left"}, {Name: "Right", Value: "right"}, {Name: "Middle", Value: "middle"}}},
 	{Name: "clicks", Type: core.ConnectionTypeInteger, Label: "Clicks (1 = single, 2 = double)", Placeholder: "1"},
+	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
 }
 
 var Outputs = [...]core.Connection{
@@ -57,6 +58,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if clicks < 1 {
 		clicks = 1
 	}
+	// Optionally raise+focus a target window first, so the click lands on it
+	// rather than whatever is on top (e.g. a leftover terminal).
+	conn.FocusWindowIfRequested(inputs)
 
 	if _, stderr, exit, rerr := conn.Run(desktop.ClickCmd(conn.OS, conn.Display, x, y, button, clicks)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil

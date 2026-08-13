@@ -29,6 +29,7 @@ var Inputs = [...]core.Connection{
 	{Name: "password", Type: core.ConnectionTypeSecret, Label: "Password", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"password"}}},
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
 	{Name: "text", Type: core.ConnectionTypeText, Label: "Text", Placeholder: "Text to type into the focused field", Required: true},
+	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
 }
 
 var Outputs = [...]core.Connection{
@@ -46,6 +47,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if text == "" {
 		return desktop.ErrResult("text is required"), nil
 	}
+	// Optionally focus a target window first so the text lands in it.
+	conn.FocusWindowIfRequested(inputs)
 	if _, stderr, exit, rerr := conn.Run(desktop.TypeCmd(conn.OS, conn.Display, text)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	} else if exit != 0 {
