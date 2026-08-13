@@ -32,6 +32,7 @@ var Inputs = [...]core.Connection{
 	{Name: "passphrase", Type: core.ConnectionTypeSecret, Label: "Key Passphrase", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"key"}}},
 	{Name: "password", Type: core.ConnectionTypeSecret, Label: "Password", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"password"}}},
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
+	{Name: "recording_id", Type: core.ConnectionTypeString, Label: "Recording ID — the id returned by Desktop Start Recording.", Placeholder: "${recording_id}", Required: true},
 }
 
 var Outputs = [...]core.Connection{
@@ -48,14 +49,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return desktop.ErrResult(err.Error()), nil
 	}
 
-	// Signal ffmpeg to stop and wait for it to finalise the file.
-	if _, stderr, exit, rerr := conn.Run(desktop.RecordStopCmd(conn.OS)); rerr != nil {
+	recordingID := desktop.SafeRecordingID(desktop.OptionalString("recording_id", inputs))
+	if recordingID == "" {
+		return desktop.ErrResult("recording_id is required — wire it from Desktop Start Recording's Recording ID output"), nil
+	}
+
+	// Signal this recording's ffmpeg to stop and wait for it to finalise the file.
+	if _, stderr, exit, rerr := conn.Run(desktop.RecordStopCmd(conn.OS, recordingID)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	} else if exit != 0 {
 		return desktop.ErrResult("failed to stop recording: " + stderr), nil
 	}
 
-	video, err := conn.ReadFileBytes(desktop.RecordPath(conn.OS))
+	video, err := conn.ReadFileBytes(desktop.RecordPath(conn.OS, recordingID))
 	if err != nil {
 		return desktop.ErrResult("retrieving recording: " + err.Error()), nil
 	}

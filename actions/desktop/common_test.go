@@ -103,26 +103,40 @@ func TestRunCommandCmd(t *testing.T) {
 
 func TestRecordCmds(t *testing.T) {
 	RegisterTestingT(t)
-	start := RecordStartCmd(OSLinux, ":0", 20)
+	const id = "abc123"
+	_, pid, _ := recLinuxPaths(id)
+
+	start := RecordStartCmd(OSLinux, ":0", 20, id)
 	Expect(start).To(ContainSubstring("ffmpeg -y -f x11grab -draw_mouse 1 -framerate 20"))
 	Expect(start).To(ContainSubstring("setsid nohup"))
-	Expect(start).To(ContainSubstring(linuxRecPID))
-	// Even-dimension pad guards against libx264/yuv420p corruption on odd sizes.
-	// The filter contains parentheses, so it MUST be shell-quoted or bash errors
-	// with "syntax error near unexpected token `('".
+	Expect(start).To(ContainSubstring(pid))
+	// The recording id is in the path, so concurrent recorders don't clobber.
+	Expect(start).To(ContainSubstring("flo_desktop_rec_" + id))
 	Expect(start).To(ContainSubstring("-vf " + shArg(evenPadFilter)))
 	Expect(start).To(ContainSubstring("+faststart"))
-	Expect(RecordStartCmd(OSLinux, ":0", 0)).To(ContainSubstring("-framerate 15")) // default fps
+	Expect(RecordStartCmd(OSLinux, ":0", 0, id)).To(ContainSubstring("-framerate 15")) // default fps
+	// Distinct ids → distinct commands (isolated files).
+	Expect(RecordStartCmd(OSLinux, ":0", 15, "id1")).ToNot(Equal(RecordStartCmd(OSLinux, ":0", 15, "id2")))
 
-	stop := RecordStopCmd(OSLinux)
+	stop := RecordStopCmd(OSLinux, id)
 	Expect(stop).To(ContainSubstring("kill -INT"))
-	Expect(stop).To(ContainSubstring(linuxRecPID))
+	Expect(stop).To(ContainSubstring(pid))
 
-	win := RecordStartCmd(OSWindows, "", 30)
+	win := RecordStartCmd(OSWindows, "", 30, id)
 	Expect(win).To(ContainSubstring("gdigrab"))
 	Expect(win).To(ContainSubstring(evenPadFilter))
 	Expect(win).To(ContainSubstring("+faststart"))
-	Expect(RecordStopCmd(OSWindows)).To(ContainSubstring("Stop-Process"))
+	Expect(RecordStopCmd(OSWindows, id)).To(ContainSubstring("Stop-Process"))
+}
+
+func TestRecordingID(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(NewRecordingID()).ToNot(Equal(NewRecordingID())) // unique
+	Expect(NewRecordingID()).To(MatchRegexp("^[0-9a-f]+$"))
+	Expect(SafeRecordingID("abc-123_XY")).To(Equal("abc-123_XY"))
+	Expect(SafeRecordingID("  ok  ")).To(Equal("ok"))
+	Expect(SafeRecordingID("bad; rm -rf /")).To(Equal("")) // shell metachars rejected
+	Expect(SafeRecordingID("")).To(Equal(""))
 }
 
 // TestLinuxCommandsAreValidShell parses every generated Linux command with
@@ -146,8 +160,8 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 		"key":          KeyCmd(OSLinux, ":0", "ctrl+shift+t"),
 		"scroll":       ScrollCmd(OSLinux, ":0", "down", 3),
 		"open_url":     OpenURLCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)"),
-		"record_start": RecordStartCmd(OSLinux, ":0", 15),
-		"record_stop":  RecordStopCmd(OSLinux),
+		"record_start": RecordStartCmd(OSLinux, ":0", 15, "t1"),
+		"record_stop":  RecordStopCmd(OSLinux, "t1"),
 	}
 	for name, c := range cmds {
 		out, err := exec.Command(bash, "-n", "-c", c).CombinedOutput()
