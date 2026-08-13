@@ -30,6 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
 	{Name: "text", Type: core.ConnectionTypeText, Label: "Text", Placeholder: "Text to type into the focused field", Required: true},
 	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
+	{Name: "submit", Type: core.ConnectionTypeBoolean, Label: "Press Enter after typing (e.g. to run a typed command)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -47,12 +48,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if text == "" {
 		return desktop.ErrResult("text is required"), nil
 	}
+	submit := desktop.OptionalBool("submit", inputs)
 	// Optionally focus a target window first so the text lands in it.
 	conn.FocusWindowIfRequested(inputs)
-	if _, stderr, exit, rerr := conn.Run(desktop.TypeCmd(conn.OS, conn.Display, text)); rerr != nil {
+	if _, stderr, exit, rerr := conn.Run(desktop.TypeCmd(conn.OS, conn.Display, text, submit)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	} else if exit != 0 {
 		return desktop.ErrResult("type failed: " + stderr), nil
 	}
-	return desktop.OkResult("Typed text into the focused window", nil), nil
+	summary := "Typed text into the focused window"
+	if submit {
+		summary = "Typed text and pressed Enter"
+	}
+	return desktop.OkResult(summary, nil), nil
 }

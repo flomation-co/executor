@@ -282,20 +282,30 @@ func MoveCmd(os OS, display string, x, y int64) string {
 
 // TypeCmd types literal text. The text is base64-encoded and decoded on the VM
 // so it is passed as a single argument — no shell/SendKeys metacharacter can be
-// injected from the text content.
-func TypeCmd(os OS, display, text string) string {
+// injected from the text content. When submit is true it presses Return
+// afterwards IN THE SAME command, so "type a command and run it" is one atomic
+// action rather than a type + a separate key-press the agent can forget.
+func TypeCmd(os OS, display, text string, submit bool) string {
 	b := base64.StdEncoding.EncodeToString([]byte(text))
 	if os == OSWindows {
+		enter := ""
+		if submit {
+			enter = `;[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')`
+		}
 		return ps(`Add-Type -AssemblyName System.Windows.Forms;` +
 			`$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('` + b + `'));` +
 			// Escape SendKeys metacharacters {}()+^%~[] by wrapping each in {}.
 			`$t=[regex]::Replace($t,'[+^%~(){}\[\]]','{$0}');` +
-			`[System.Windows.Forms.SendKeys]::SendWait($t)`)
+			`[System.Windows.Forms.SendKeys]::SendWait($t)` + enter)
 	}
 	// "$(...)" command substitution is not word-split or re-evaluated, and the
 	// base64 alphabet is shell-safe, so the decoded text reaches xdotool as one
 	// argument with no injection surface.
-	return fmt.Sprintf(`DISPLAY=%s xdotool type --clearmodifiers -- "$(printf %%s '%s' | base64 -d)"`, shArg(display), b)
+	cmd := fmt.Sprintf(`DISPLAY=%s xdotool type --clearmodifiers -- "$(printf %%s '%s' | base64 -d)"`, shArg(display), b)
+	if submit {
+		cmd += fmt.Sprintf(`; DISPLAY=%s xdotool key --clearmodifiers Return`, shArg(display))
+	}
+	return cmd
 }
 
 // KeyCmd presses a key or chord. Linux uses xdotool key syntax ("ctrl+c",
@@ -511,6 +521,23 @@ func Int(name string, inputs []*core.Connection, def int64) int64 {
 		return *n
 	}
 	return def
+}
+
+// OptionalBool reads a boolean input, defaulting to false when absent. It also
+// accepts the string "true" (after ${...} substitution a bool input can arrive
+// as a string), so a wired variable resolves correctly.
+func OptionalBool(name string, inputs []*core.Connection) bool {
+	c := core.FindConnection(name, inputs)
+	if c == nil {
+		return false
+	}
+	if b := c.Boolean(); b != nil {
+		return *b
+	}
+	if s := c.String(); s != nil {
+		return strings.EqualFold(strings.TrimSpace(*s), "true")
+	}
+	return false
 }
 
 // buildAuth mirrors ssh/run: key (with optional passphrase) or password.
