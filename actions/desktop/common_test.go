@@ -147,6 +147,25 @@ func TestRecordingID(t *testing.T) {
 	Expect(SafeRecordingID("")).To(Equal(""))
 }
 
+func TestRecordingResolveCmds(t *testing.T) {
+	RegisterTestingT(t)
+	// Both resolve/list commands scan the per-id pidfiles and only report a
+	// recorder whose PID is still alive.
+	newest := NewestRecordingIDCmd(OSLinux)
+	Expect(newest).To(ContainSubstring("/tmp/flo_desktop_rec_*.pid"))
+	Expect(newest).To(ContainSubstring("kill -0"))
+	Expect(newest).To(ContainSubstring("flo_desktop_rec_")) // strips the prefix to get the id
+	Expect(newest).To(ContainSubstring("break"))            // stops at the first (newest) alive one
+
+	list := ListRecordingIDsCmd(OSLinux)
+	Expect(list).To(ContainSubstring("/tmp/flo_desktop_rec_*.pid"))
+	Expect(list).To(ContainSubstring("kill -0"))
+	Expect(list).ToNot(ContainSubstring("break")) // lists ALL, not just the newest
+
+	Expect(NewestRecordingIDCmd(OSWindows)).To(ContainSubstring("Get-ChildItem"))
+	Expect(ListRecordingIDsCmd(OSWindows)).To(ContainSubstring("Get-ChildItem"))
+}
+
 // TestLinuxCommandsAreValidShell parses every generated Linux command with
 // `bash -n` (syntax check, no execution). This is the regression guard for
 // shell-quoting bugs — e.g. an unquoted ffmpeg `-vf pad=ceil(iw/2)*2:...`
@@ -161,6 +180,8 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 		"screenshot":   ScreenshotCmd(OSLinux, ":0", "/tmp/s.png"),
 		"focus_window": FocusWindowCmd(OSLinux, ":0", "a & (b) window"),
 		"run_command":  RunCommandCmd(OSLinux, ":0", "wget -qO /tmp/b.png 'http://x/(y)' && echo done"),
+		"newest_rec":   NewestRecordingIDCmd(OSLinux),
+		"list_rec":     ListRecordingIDsCmd(OSLinux),
 		"click":        ClickCmd(OSLinux, ":0", 10, 20, "left", 1),
 		"double_click": ClickCmd(OSLinux, ":0", 10, 20, "left", 2),
 		"move":         MoveCmd(OSLinux, ":0", 10, 20),

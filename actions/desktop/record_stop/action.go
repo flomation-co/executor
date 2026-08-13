@@ -32,12 +32,13 @@ var Inputs = [...]core.Connection{
 	{Name: "passphrase", Type: core.ConnectionTypeSecret, Label: "Key Passphrase", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"key"}}},
 	{Name: "password", Type: core.ConnectionTypeSecret, Label: "Password", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"password"}}},
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
-	{Name: "recording_id", Type: core.ConnectionTypeString, Label: "Recording ID — the id returned by Desktop Start Recording.", Placeholder: "${recording_id}", Required: true},
+	{Name: "recording_id", Type: core.ConnectionTypeString, Label: "Recording ID — the id from Desktop Start Recording. Leave blank to stop the most recent recording.", Placeholder: "${recording_id}"},
 }
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
 	{Name: "video", Type: core.ConnectionTypeString, Label: "Recording (file reference)"},
+	{Name: "recording_id", Type: core.ConnectionTypeString, Label: "Recording ID that was stopped"},
 	{Name: "size_bytes", Type: core.ConnectionTypeInteger, Label: "Size (bytes)"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -51,7 +52,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	recordingID := desktop.SafeRecordingID(desktop.OptionalString("recording_id", inputs))
 	if recordingID == "" {
-		return desktop.ErrResult("recording_id is required — wire it from Desktop Start Recording's Recording ID output"), nil
+		// No id supplied (e.g. it was lost when the agent's conversation was
+		// compacted) — fall back to the most-recently-started running recorder,
+		// so a recording is always stoppable.
+		out, _, _, rerr := conn.Run(desktop.NewestRecordingIDCmd(conn.OS))
+		if rerr != nil {
+			return desktop.ErrResult(rerr.Error()), nil
+		}
+		recordingID = desktop.SafeRecordingID(out)
+		if recordingID == "" {
+			return desktop.ErrResult("no active recording found to stop"), nil
+		}
 	}
 
 	// Signal this recording's ffmpeg to stop and wait for it to finalise the file.
@@ -82,7 +93,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return desktop.OkResult(
-		fmt.Sprintf("Recording stopped (%d bytes). Pass this to an upload/Push-to-S3 action's file input: %s", len(video), ref),
-		map[string]interface{}{"video": ref, "size_bytes": int64(len(video))},
+		fmt.Sprintf("Recording %s stopped (%d bytes). Pass this to an upload/Push-to-S3 action's file input: %s", recordingID, len(video), ref),
+		map[string]interface{}{"video": ref, "size_bytes": int64(len(video)), "recording_id": recordingID},
 	), nil
 }

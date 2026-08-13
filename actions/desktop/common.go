@@ -456,6 +456,37 @@ func RecordPath(os OS, id string) string {
 	return mp4
 }
 
+// NewestRecordingIDCmd prints the id of the most-recently-started recorder that
+// is still running, or nothing if none. Used as a fallback by Stop Recording
+// when no recording_id is supplied (e.g. the id was lost when the agent's
+// conversation was compacted) so a recording is always stoppable.
+func NewestRecordingIDCmd(os OS) string {
+	if os == OSWindows {
+		return ps(`Get-ChildItem "$env:TEMP\flo_desktop_rec_*.pid" -ErrorAction SilentlyContinue | ` +
+			`Sort-Object LastWriteTime -Descending | ForEach-Object { ` +
+			`$rp=Get-Content $_ -ErrorAction SilentlyContinue; ` +
+			`if($rp -and (Get-Process -Id $rp -ErrorAction SilentlyContinue)){ ($_.BaseName -replace '^flo_desktop_rec_',''); return } }`)
+	}
+	// ls -t = newest first; print the first whose PID is still alive.
+	return `for f in $(ls -t /tmp/flo_desktop_rec_*.pid 2>/dev/null); do ` +
+		`p=$(cat "$f" 2>/dev/null); ` +
+		`if kill -0 "$p" 2>/dev/null; then n=$(basename "$f" .pid); echo "${n#flo_desktop_rec_}"; break; fi; done`
+}
+
+// ListRecordingIDsCmd prints the id of every still-running recorder, one per
+// line (newest first on Linux).
+func ListRecordingIDsCmd(os OS) string {
+	if os == OSWindows {
+		return ps(`Get-ChildItem "$env:TEMP\flo_desktop_rec_*.pid" -ErrorAction SilentlyContinue | ` +
+			`Sort-Object LastWriteTime -Descending | ForEach-Object { ` +
+			`$rp=Get-Content $_ -ErrorAction SilentlyContinue; ` +
+			`if($rp -and (Get-Process -Id $rp -ErrorAction SilentlyContinue)){ ($_.BaseName -replace '^flo_desktop_rec_','') } }`)
+	}
+	return `for f in $(ls -t /tmp/flo_desktop_rec_*.pid 2>/dev/null); do ` +
+		`p=$(cat "$f" 2>/dev/null); ` +
+		`if kill -0 "$p" 2>/dev/null; then n=$(basename "$f" .pid); echo "${n#flo_desktop_rec_}"; fi; done`
+}
+
 // NewRecordingID returns a short, filename/shell-safe unique id for a recording.
 func NewRecordingID() string {
 	var b [8]byte

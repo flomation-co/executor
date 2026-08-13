@@ -214125,6 +214125,172 @@
       }
     ]
   },
+  "desktop/list_recordings": {
+    "hash": "0604528e409c6ff05ef143d605baa75f28c2cf75a338e985c95f441491ace133",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop List Recordings",
+    "description": "List the ids of screen recordings currently running on a desktop VM.",
+    "website": "https://www.flomation.co",
+    "icon": "film",
+    "date": "13/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "recordings",
+        "type": "object",
+        "value": null,
+        "label": "Active recording ids (newest first)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "desktop/move": {
     "hash": "703cfad40b4085c8235b90a21064468a09780b03c3bb7339f8cead6a03d72a6a",
     "author": "Andy Esser",
@@ -214620,7 +214786,7 @@
     ]
   },
   "desktop/record_stop": {
-    "hash": "e099bc2e5be63becb8c6eddd03d5cb2153ee6df4d4caf5e83ed4288d70ffa010",
+    "hash": "e1a28243bbdcc25f91318dd2da452f4b30739f50086afae2fee21a36b4a47169",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Stop Recording",
@@ -214750,9 +214916,8 @@
         "name": "recording_id",
         "type": "string",
         "value": null,
-        "label": "Recording ID — the id returned by Desktop Start Recording.",
-        "placeholder": "${recording_id}",
-        "required": true
+        "label": "Recording ID — the id from Desktop Start Recording. Leave blank to stop the most recent recording.",
+        "placeholder": "${recording_id}"
       }
     ],
     "outputs": [
@@ -214768,6 +214933,13 @@
         "type": "string",
         "value": null,
         "label": "Recording (file reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "recording_id",
+        "type": "string",
+        "value": null,
+        "label": "Recording ID that was stopped",
         "placeholder": ""
       },
       {
