@@ -1189,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "0321179de6830c709d31c7e2f9b0383da971bd869a7b30afc7d9f3ecaa471123",
+    "hash": "f6797be21c328549fe75b51cc4adb64184979a1324023cba95f853a06062b78b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -213510,7 +213510,7 @@
     ]
   },
   "desktop/click": {
-    "hash": "3408b9d857f361644ddc92c9524641d6ea7930328ad28aab39a68e452e6c7e7b",
+    "hash": "7bfc2cced330cc53fcf2fc747af53638d40c9843a5d402a362b5bf85d0bb9ae1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Click",
@@ -213672,6 +213672,13 @@
             "value": "middle"
           }
         ]
+      },
+      {
+        "name": "clicks",
+        "type": "integer",
+        "value": null,
+        "label": "Clicks (1 = single, 2 = double)",
+        "placeholder": "1"
       }
     ],
     "outputs": [
@@ -532359,7 +532366,7 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "23fe0edcb5034c2a5ea4ff80f12bdb9f8d24f9079a17210a18f06995266ea7c3",
+    "hash": "5bad2a3a63c6bc697c2a602306e3578badc10a3b5a0964ab9d0282f4103364b8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",

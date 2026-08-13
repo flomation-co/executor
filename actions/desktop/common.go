@@ -206,13 +206,31 @@ func ScreenshotCmd(os OS, display, path string) string {
 }
 
 // ClickCmd moves the pointer to (x,y) and clicks the given button
-// (left/right/middle).
-func ClickCmd(os OS, display string, x, y int64, button string) string {
-	if os == OSWindows {
-		return ps(winMouseType() +
-			fmt.Sprintf(`[FloMouse]::Click(%d,%d,'%s')`, x, y, winButton(button)))
+// (left/right/middle) clicks times. clicks<=1 is a single click; clicks==2 is a
+// double-click. All clicks happen in ONE command (one SSH round-trip) so they
+// land within the OS double-click threshold — calling this action twice would
+// not, as two SSH exec round-trips are too far apart to register as a double.
+func ClickCmd(os OS, display string, x, y int64, button string, clicks int64) string {
+	if clicks < 1 {
+		clicks = 1
 	}
-	return fmt.Sprintf("DISPLAY=%s xdotool mousemove %d %d click %d", shArg(display), x, y, xdoButton(button))
+	if os == OSWindows {
+		if clicks <= 1 {
+			return ps(winMouseType() +
+				fmt.Sprintf(`[FloMouse]::Click(%d,%d,'%s')`, x, y, winButton(button)))
+		}
+		return ps(winMouseType() +
+			fmt.Sprintf(`1..%d | ForEach-Object { [FloMouse]::Click(%d,%d,'%s'); Start-Sleep -Milliseconds 40 }`,
+				clicks, x, y, winButton(button)))
+	}
+	if clicks <= 1 {
+		return fmt.Sprintf("DISPLAY=%s xdotool mousemove %d %d click %d", shArg(display), x, y, xdoButton(button))
+	}
+	// xdotool --repeat N issues N clicks in one command; --delay is the ms gap
+	// between them (90ms is comfortably inside the default 500ms double-click
+	// window while remaining two distinct presses).
+	return fmt.Sprintf("DISPLAY=%s xdotool mousemove %d %d click --repeat %d --delay 90 %d",
+		shArg(display), x, y, clicks, xdoButton(button))
 }
 
 // MoveCmd moves the pointer without clicking.
@@ -299,10 +317,13 @@ func RecordStartCmd(os OS, display string, fps int64) string {
 	// the moov atom cleanly. -draw_mouse 1 keeps the cursor visible; the even-pad
 	// filter guards against odd capture dimensions (libx264/yuv420p corruption);
 	// +faststart moves the moov atom to the front for clean streamed playback.
+	// The pad filter MUST be shell-quoted: it contains parentheses, which bash
+	// treats as syntax (a subshell) and otherwise errors on with
+	// "syntax error near unexpected token `('".
 	return fmt.Sprintf(
 		`DISPLAY=%s setsid nohup ffmpeg -y -f x11grab -draw_mouse 1 -framerate %d -i %s `+
 			`-vf %s -c:v libx264 -preset ultrafast -pix_fmt yuv420p -movflags +faststart %s >%s 2>&1 & echo $! > %s`,
-		shArg(display), fps, shArg(display), evenPadFilter, linuxRecPath, linuxRecLog, linuxRecPID)
+		shArg(display), fps, shArg(display), shArg(evenPadFilter), linuxRecPath, linuxRecLog, linuxRecPID)
 }
 
 // evenPadFilter pads the captured frame up to the next even width/height. A

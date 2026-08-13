@@ -2,6 +2,7 @@ package desktop_common
 
 import (
 	"encoding/base64"
+	"os/exec"
 	"testing"
 
 	. "github.com/onsi/gomega"
@@ -17,13 +18,21 @@ func TestScreenshotCmd(t *testing.T) {
 
 func TestClickAndMoveCmd(t *testing.T) {
 	RegisterTestingT(t)
-	Expect(ClickCmd(OSLinux, ":0", 100, 200, "left")).To(Equal("DISPLAY=':0' xdotool mousemove 100 200 click 1"))
-	Expect(ClickCmd(OSLinux, ":0", 5, 6, "right")).To(ContainSubstring("click 3"))
-	Expect(ClickCmd(OSLinux, ":0", 5, 6, "middle")).To(ContainSubstring("click 2"))
+	Expect(ClickCmd(OSLinux, ":0", 100, 200, "left", 1)).To(Equal("DISPLAY=':0' xdotool mousemove 100 200 click 1"))
+	Expect(ClickCmd(OSLinux, ":0", 5, 6, "right", 1)).To(ContainSubstring("click 3"))
+	Expect(ClickCmd(OSLinux, ":0", 5, 6, "middle", 1)).To(ContainSubstring("click 2"))
+	// clicks < 1 is treated as a single click.
+	Expect(ClickCmd(OSLinux, ":0", 1, 2, "left", 0)).To(Equal("DISPLAY=':0' xdotool mousemove 1 2 click 1"))
+	// Double-click: both presses in one command, within the OS threshold.
+	dbl := ClickCmd(OSLinux, ":0", 7, 8, "left", 2)
+	Expect(dbl).To(ContainSubstring("mousemove 7 8 click --repeat 2 --delay 90 1"))
 	Expect(MoveCmd(OSLinux, ":0", 10, 20)).To(Equal("DISPLAY=':0' xdotool mousemove 10 20"))
 
-	win := ClickCmd(OSWindows, "", 10, 20, "right")
+	win := ClickCmd(OSWindows, "", 10, 20, "right", 1)
 	Expect(win).To(ContainSubstring("[FloMouse]::Click(10,20,'right')"))
+	winDbl := ClickCmd(OSWindows, "", 10, 20, "left", 2)
+	Expect(winDbl).To(ContainSubstring("1..2 | ForEach-Object"))
+	Expect(winDbl).To(ContainSubstring("[FloMouse]::Click(10,20,'left')"))
 }
 
 func TestTypeCmd_IsInjectionSafe(t *testing.T) {
@@ -70,7 +79,9 @@ func TestRecordCmds(t *testing.T) {
 	Expect(start).To(ContainSubstring("setsid nohup"))
 	Expect(start).To(ContainSubstring(linuxRecPID))
 	// Even-dimension pad guards against libx264/yuv420p corruption on odd sizes.
-	Expect(start).To(ContainSubstring("-vf " + evenPadFilter))
+	// The filter contains parentheses, so it MUST be shell-quoted or bash errors
+	// with "syntax error near unexpected token `('".
+	Expect(start).To(ContainSubstring("-vf " + shArg(evenPadFilter)))
 	Expect(start).To(ContainSubstring("+faststart"))
 	Expect(RecordStartCmd(OSLinux, ":0", 0)).To(ContainSubstring("-framerate 15")) // default fps
 
@@ -83,6 +94,34 @@ func TestRecordCmds(t *testing.T) {
 	Expect(win).To(ContainSubstring(evenPadFilter))
 	Expect(win).To(ContainSubstring("+faststart"))
 	Expect(RecordStopCmd(OSWindows)).To(ContainSubstring("Stop-Process"))
+}
+
+// TestLinuxCommandsAreValidShell parses every generated Linux command with
+// `bash -n` (syntax check, no execution). This is the regression guard for
+// shell-quoting bugs — e.g. an unquoted ffmpeg `-vf pad=ceil(iw/2)*2:...`
+// filter whose parentheses bash reads as a subshell and rejects.
+func TestLinuxCommandsAreValidShell(t *testing.T) {
+	RegisterTestingT(t)
+	bash, err := exec.LookPath("bash")
+	if err != nil {
+		t.Skip("bash not available")
+	}
+	cmds := map[string]string{
+		"screenshot":   ScreenshotCmd(OSLinux, ":0", "/tmp/s.png"),
+		"click":        ClickCmd(OSLinux, ":0", 10, 20, "left", 1),
+		"double_click": ClickCmd(OSLinux, ":0", 10, 20, "left", 2),
+		"move":         MoveCmd(OSLinux, ":0", 10, 20),
+		"type":         TypeCmd(OSLinux, ":0", `weird "'()$ text`),
+		"key":          KeyCmd(OSLinux, ":0", "ctrl+shift+t"),
+		"scroll":       ScrollCmd(OSLinux, ":0", "down", 3),
+		"open_url":     OpenURLCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)"),
+		"record_start": RecordStartCmd(OSLinux, ":0", 15),
+		"record_stop":  RecordStopCmd(OSLinux),
+	}
+	for name, c := range cmds {
+		out, err := exec.Command(bash, "-n", "-c", c).CombinedOutput()
+		Expect(err).To(BeNil(), "%s is not valid shell:\n  cmd: %s\n  err: %s", name, c, string(out))
+	}
 }
 
 func TestReadFileB64Cmd(t *testing.T) {
