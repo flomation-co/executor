@@ -18,7 +18,11 @@ func TestObjectResult(t *testing.T) {
 	Expect(res["success"]).To(BeTrue())
 	Expect(res["error"]).To(Equal(""))
 	Expect(res["id"]).To(Equal("cus_123"))
-	Expect(res["tool_result"]).To(Equal("Created customer cus_123"))
+	// tool_result now embeds the object's JSON data after the summary so AI
+	// callers (which read tool_result verbatim) get both the summary and data.
+	Expect(res["tool_result"]).To(ContainSubstring("Created customer cus_123"))
+	Expect(res["tool_result"]).To(ContainSubstring("cus_123"))
+	Expect(res["tool_result"]).To(ContainSubstring("a@b.com"))
 
 	// result is the JSON round-tripped object, reachable as ${input.result.<field>}
 	m, ok := res["result"].(map[string]interface{})

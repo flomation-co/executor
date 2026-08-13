@@ -476,6 +476,22 @@ func ToInterfaceList(items []string) []interface{} {
 // Result shaping
 // ---------------------------------------------------------------------------
 
+// summaryWithData appends a JSON encoding of data to a human summary so the
+// AI tool-result fallback chain (tool_result -> result -> ...) delivers BOTH
+// the readable summary AND the actual record data. The chain uses tool_result
+// verbatim when non-empty and never falls through, so a bare summary would
+// otherwise starve the AI of the data that lives in the separate output keys.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ObjectResult shapes a single-record API response (create/get/update) into
 // the standard action output map: id, properties, the full result object,
 // plus a human summary and success flags.
@@ -485,7 +501,7 @@ func ObjectResult(obj map[string]interface{}, summary string) map[string]interfa
 		"id":          id,
 		"properties":  obj["properties"],
 		"result":      obj,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"success":     true,
 		"error":       "",
 	}
@@ -506,7 +522,7 @@ func ListResult(resp map[string]interface{}, summary string) map[string]interfac
 		"count":       len(results),
 		"after":       after,
 		"result":      resp,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, results),
 		"success":     true,
 		"error":       "",
 	}

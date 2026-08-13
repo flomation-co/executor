@@ -501,6 +501,23 @@ func ClampLimit(limit int, set bool) int {
 // Result shaping
 // ---------------------------------------------------------------------------
 
+// summaryWithData folds the structured payload into the tool_result string so an
+// AI caller gets both the human summary and the underlying data. The engine's
+// tool-result fallback chain uses tool_result VERBATIM when non-empty and never
+// falls through to result/results, so a bare summary would starve the AI of the
+// actual object/list. Marshalling failures (or a null/empty payload) degrade to
+// the summary alone.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ErrorResult is the standard soft-failure output map (returned with a nil error
 // so the engine records it as data on the error port).
 func ErrorResult(msg string) map[string]interface{} {
@@ -525,7 +542,7 @@ func ResourceResult(obj map[string]interface{}, summary string) map[string]inter
 	return map[string]interface{}{
 		"id":          id,
 		"result":      obj,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"success":     true,
 		"error":       "",
 	}
@@ -540,7 +557,7 @@ func SuccessResult(id string, result map[string]interface{}, summary string) map
 	return map[string]interface{}{
 		"id":          id,
 		"result":      result,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, result),
 		"success":     true,
 		"error":       "",
 	}
@@ -555,7 +572,7 @@ func ListResult(items []interface{}, total int, summary string) map[string]inter
 		"results":     items,
 		"count":       len(items),
 		"total":       total,
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"success":     true,
 		"error":       "",
 	}

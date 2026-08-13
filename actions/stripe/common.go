@@ -182,13 +182,32 @@ func MoneyToMinorUnits(name, currency string, inputs []*core.Connection) (*int64
 
 // --- result shapers (mirror the hubspot integration's contract) ---
 
+// summaryWithData embeds the structured payload into the tool_result string.
+//
+// The engine's tool-result fallback chain (tool_result -> result -> response ->
+// output -> JSON of all outputs) uses tool_result VERBATIM when it is non-empty
+// and never falls through. If tool_result were only a bare summary, an AI caller
+// would receive the human-readable summary but NONE of the underlying data. By
+// appending the JSON-marshalled payload we give the AI both the summary and the
+// data it needs to reason about the result.
+func summaryWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" {
+		return summary
+	}
+	if summary == "" {
+		return string(b)
+	}
+	return summary + "\n" + string(b)
+}
+
 // ObjectResult wraps a single Stripe object result. The object is JSON round-
 // tripped to a plain map so downstream nodes can reach ${input.result.<field>}.
 func ObjectResult(obj interface{}, summary string) map[string]interface{} {
 	m := toMap(obj)
 	id, _ := m["id"].(string)
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, obj),
 		"id":          id,
 		"result":      m,
 		"success":     true,
@@ -199,7 +218,7 @@ func ObjectResult(obj interface{}, summary string) map[string]interface{} {
 // ListResult wraps a list of Stripe objects.
 func ListResult(items []map[string]interface{}, hasMore bool, summary string) map[string]interface{} {
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": summaryWithData(summary, items),
 		"results":     items,
 		"count":       len(items),
 		"has_more":    hasMore,
