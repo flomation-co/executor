@@ -314,12 +314,26 @@ func ScrollCmd(os OS, display, direction string, amount int64) string {
 	return fmt.Sprintf("DISPLAY=%s xdotool click --repeat %d %d", shArg(display), amount, button)
 }
 
-// OpenURLCmd opens a URL in the VM's default browser.
+// OpenURLCmd opens a URL in a browser on the VM.
+//
+// The Linux path is deliberately robust: `xdg-open` HANGS when no working
+// default handler is configured (a common headless state), which used to time
+// the action out. So we (1) launch fully detached — setsid+nohup+& — so a
+// blocking browser can never hold the SSH exec open, and (2) prefer a real
+// browser binary, falling back to xdg-open only if none is found. Chrome/Chromium
+// get --no-sandbox because they refuse to start under the typical
+// root/no-user-namespace VM profile otherwise. The URL is passed as a positional
+// arg ("$1"), so it is never re-parsed by the shell.
 func OpenURLCmd(os OS, display, url string) string {
 	if os == OSWindows {
 		return ps(`Start-Process '` + psLiteral(url) + `'`)
 	}
-	return fmt.Sprintf("DISPLAY=%s xdg-open %s", shArg(display), shArg(url))
+	const launch = `for b in google-chrome google-chrome-stable chromium chromium-browser; do ` +
+		`command -v "$b" >/dev/null 2>&1 && exec "$b" --no-sandbox --no-first-run "$1"; done; ` +
+		`command -v firefox >/dev/null 2>&1 && exec firefox "$1"; ` +
+		`exec xdg-open "$1"`
+	return fmt.Sprintf(`DISPLAY=%s setsid nohup sh -c %s _ %s >/dev/null 2>&1 &`,
+		shArg(display), shArg(launch), shArg(url))
 }
 
 // RecordStartCmd starts a detached ffmpeg screen recorder and writes its PID to
