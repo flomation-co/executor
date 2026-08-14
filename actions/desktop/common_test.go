@@ -3,6 +3,7 @@ package desktop_common
 import (
 	"encoding/base64"
 	"os/exec"
+	"strings"
 	"testing"
 
 	. "github.com/onsi/gomega"
@@ -77,11 +78,58 @@ func TestFocusWindowCmd(t *testing.T) {
 
 func TestScrollCmd(t *testing.T) {
 	RegisterTestingT(t)
-	Expect(ScrollCmd(OSLinux, ":0", "down", 3)).To(Equal("DISPLAY=':0' xdotool click --repeat 3 5"))
-	Expect(ScrollCmd(OSLinux, ":0", "up", 2)).To(ContainSubstring("--repeat 2 4"))
-	Expect(ScrollCmd(OSLinux, ":0", "down", 0)).To(ContainSubstring("--repeat 3 5")) // default amount
-	Expect(ScrollCmd(OSWindows, "", "up", 1)).To(ContainSubstring("Wheel(120)"))
-	Expect(ScrollCmd(OSWindows, "", "down", 1)).To(ContainSubstring("Wheel(-120)"))
+	Expect(ScrollCmd(OSLinux, ":0", "down", 3, nil)).To(Equal("DISPLAY=':0' xdotool click --repeat 3 5"))
+	Expect(ScrollCmd(OSLinux, ":0", "up", 2, nil)).To(ContainSubstring("--repeat 2 4"))
+	Expect(ScrollCmd(OSLinux, ":0", "down", 0, nil)).To(ContainSubstring("--repeat 3 5")) // default amount
+	Expect(ScrollCmd(OSWindows, "", "up", 1, nil)).To(ContainSubstring("Wheel(120)"))
+	Expect(ScrollCmd(OSWindows, "", "down", 1, nil)).To(ContainSubstring("Wheel(-120)"))
+}
+
+// A wheel event goes to whatever is under the POINTER, so a scroll that does
+// not position first silently scrolls whatever the last click left it over —
+// the reason a scrollable modal appears frozen while the page behind it moves.
+func TestScrollCmd_PositionsPointerFirst(t *testing.T) {
+	RegisterTestingT(t)
+
+	linux := ScrollCmd(OSLinux, ":0", "down", 4, &Point{X: 640, Y: 400})
+	Expect(linux).To(Equal("DISPLAY=':0' xdotool mousemove 640 400 click --repeat 4 5"))
+	// The move must precede the wheel clicks, not follow them.
+	Expect(strings.Index(linux, "mousemove")).To(BeNumerically("<", strings.Index(linux, "click")))
+
+	// Anchor on the INVOCATIONS ("[FloMouse]::…"), not the method names — the
+	// prepended Add-Type block declares both Move and Wheel, so a bare name
+	// matches the declaration and says nothing about call order.
+	win := ScrollCmd(OSWindows, "", "up", 1, &Point{X: 12, Y: 34})
+	Expect(win).To(ContainSubstring("::Move(12,34)"))
+	Expect(strings.Index(win, "::Move(12,34)")).To(BeNumerically("<", strings.Index(win, "::Wheel(")))
+}
+
+func TestScreenInfoCmd(t *testing.T) {
+	RegisterTestingT(t)
+	linux := ScreenInfoCmd(OSLinux, ":0")
+	Expect(linux).To(ContainSubstring("getdisplaygeometry"))
+	Expect(linux).To(ContainSubstring("getactivewindow getwindowname"))
+	// A bare desktop with nothing focused is informational, not a failure.
+	Expect(linux).To(ContainSubstring("|| true"))
+	Expect(ScreenInfoCmd(OSWindows, "")).To(ContainSubstring("VirtualScreen"))
+	Expect(ScreenInfoCmd(OSWindows, "")).To(ContainSubstring("ActiveTitle"))
+}
+
+// NavigateCmd drives the address bar so a journey stays in one tab, rather than
+// handing the URL to the running browser as a new one.
+func TestNavigateCmd(t *testing.T) {
+	RegisterTestingT(t)
+
+	linux := NavigateCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)")
+	Expect(linux).To(HavePrefix("DISPLAY=':0' xdotool key --clearmodifiers ctrl+l"))
+	Expect(linux).To(ContainSubstring("base64 -d")) // URL never reaches the shell verbatim
+	Expect(linux).NotTo(ContainSubstring("example.com"))
+	Expect(linux).To(ContainSubstring("key --clearmodifiers Return")) // submits
+
+	win := NavigateCmd(OSWindows, "", "https://example.com")
+	Expect(win).To(ContainSubstring("SendWait('^l')"))
+	Expect(win).To(ContainSubstring("{ENTER}"))
+	Expect(win).To(ContainSubstring("FromBase64String"))
 }
 
 func TestOpenURLCmd(t *testing.T) {
@@ -188,7 +236,10 @@ func TestLinuxCommandsAreValidShell(t *testing.T) {
 		"type":         TypeCmd(OSLinux, ":0", `weird "'()$ text`, false),
 		"type_submit":  TypeCmd(OSLinux, ":0", `echo hi && ls`, true),
 		"key":          KeyCmd(OSLinux, ":0", "ctrl+shift+t"),
-		"scroll":       ScrollCmd(OSLinux, ":0", "down", 3),
+		"scroll":       ScrollCmd(OSLinux, ":0", "down", 3, nil),
+		"scroll_at":    ScrollCmd(OSLinux, ":0", "down", 3, &Point{X: 10, Y: 20}),
+		"screen_info":  ScreenInfoCmd(OSLinux, ":0"),
+		"navigate":     NavigateCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)"),
 		"open_url":     OpenURLCmd(OSLinux, ":0", "https://example.com/a?b=c&d=(e)"),
 		"record_start": RecordStartCmd(OSLinux, ":0", 15, "t1"),
 		"record_stop":  RecordStopCmd(OSLinux, "t1"),

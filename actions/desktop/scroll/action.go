@@ -32,6 +32,10 @@ var Inputs = [...]core.Connection{
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
 	{Name: "direction", Type: core.ConnectionTypeString, Label: "Direction", Options: []core.ConnectionOption{{Name: "Down", Value: "down"}, {Name: "Up", Value: "up"}}},
 	{Name: "amount", Type: core.ConnectionTypeInteger, Label: "Notches", Placeholder: "3"},
+	{Name: "x", Type: core.ConnectionTypeInteger, Label: "X (point at the area to scroll)"},
+	{Name: "y", Type: core.ConnectionTypeInteger, Label: "Y (point at the area to scroll)"},
+	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
+	{Name: "settle_ms", Type: core.ConnectionTypeInteger, Label: "Settle After (ms)", Placeholder: "300"},
 }
 
 var Outputs = [...]core.Connection{
@@ -50,10 +54,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		direction = "down"
 	}
 	amount := desktop.Int("amount", inputs, 3)
-	if _, stderr, exit, rerr := conn.Run(desktop.ScrollCmd(conn.OS, conn.Display, direction, amount)); rerr != nil {
+	at := desktop.PointFrom(inputs, "x", "y")
+
+	conn.FocusWindowIfRequested(inputs)
+
+	if _, stderr, exit, rerr := conn.Run(desktop.ScrollCmd(conn.OS, conn.Display, direction, amount, at)); rerr != nil {
 		return desktop.ErrResult(rerr.Error()), nil
 	} else if exit != 0 {
 		return desktop.ErrResult("scroll failed: " + stderr), nil
 	}
-	return desktop.OkResult(fmt.Sprintf("Scrolled %s by %d", direction, amount), nil), nil
+	desktop.SettleAfter(inputs)
+
+	where := "at the current pointer position"
+	if at != nil {
+		where = fmt.Sprintf("at (%d, %d)", at.X, at.Y)
+	}
+	return desktop.OkResult(fmt.Sprintf("Scrolled %s by %d %s", direction, amount, where), nil), nil
 }

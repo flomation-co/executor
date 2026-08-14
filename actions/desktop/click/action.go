@@ -35,6 +35,7 @@ var Inputs = [...]core.Connection{
 	{Name: "button", Type: core.ConnectionTypeString, Label: "Button", Options: []core.ConnectionOption{{Name: "Left", Value: "left"}, {Name: "Right", Value: "right"}, {Name: "Middle", Value: "middle"}}},
 	{Name: "clicks", Type: core.ConnectionTypeInteger, Label: "Clicks (1 = single, 2 = double)", Placeholder: "1"},
 	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
+	{Name: "settle_ms", Type: core.ConnectionTypeInteger, Label: "Settle After (ms)", Placeholder: "300"},
 }
 
 var Outputs = [...]core.Connection{
@@ -67,6 +68,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	} else if exit != 0 {
 		return desktop.ErrResult("click failed: " + stderr), nil
 	}
+	desktop.SettleAfter(inputs)
 
 	summary := fmt.Sprintf("%s-clicked at (%d, %d)", button, x, y)
 	switch {
