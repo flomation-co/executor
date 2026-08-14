@@ -72,6 +72,7 @@ const runTimeout = 120 * time.Second
 type Conn struct {
 	addr    string
 	config  *ssh.ClientConfig
+	poolKey string // connection identity; see pool.go
 	OS      OS
 	Display string // X display for Linux (e.g. ":0"); ignored on Windows
 }
@@ -117,14 +118,26 @@ func ResolveConn(inputs []*core.Connection) (*Conn, error) {
 		display = ":0"
 	}
 
+	addr := net.JoinHostPort(host, fmt.Sprintf("%d", port))
+
+	// The pool key covers everything that decides *which* connection this is:
+	// the target, the identity, the credential, and the host-key policy. The
+	// credential is hashed inside poolKeyFor, never stored.
+	authMethod := str("auth_method", inputs)
+	if authMethod == "" {
+		authMethod = "key"
+	}
+	secret := str("private_key", inputs) + "\x00" + str("passphrase", inputs) + "\x00" + str("password", inputs)
+
 	return &Conn{
-		addr: net.JoinHostPort(host, fmt.Sprintf("%d", port)),
+		addr: addr,
 		config: &ssh.ClientConfig{
 			User:            user,
 			Auth:            []ssh.AuthMethod{auth},
 			HostKeyCallback: hostKey,
 			Timeout:         30 * time.Second,
 		},
+		poolKey: poolKeyFor(addr, user, authMethod, secret, strings.TrimSpace(str("host_fingerprint", inputs))),
 		OS:      osKind,
 		Display: display,
 	}, nil
@@ -136,19 +149,40 @@ func HostKeyUnverified(inputs []*core.Connection) bool {
 	return strings.TrimSpace(str("host_fingerprint", inputs)) == ""
 }
 
-// Run opens a session, runs command under a deadline, and returns
-// stdout/stderr/exit. A non-zero exit is returned via exit (not err), like a
-// shell; err is reserved for connection/transport failures.
+// Run opens a session on a pooled connection, runs command under a deadline,
+// and returns stdout/stderr/exit. A non-zero exit is returned via exit (not
+// err), like a shell; err is reserved for connection/transport failures.
+//
+// The connection is reused across actions (see pool.go). A pooled connection
+// can die between uses — the VM reboots, sshd restarts, a NAT drops the socket
+// — so a transport failure on a *reused* connection is retried exactly once on
+// a freshly dialled one. A first-attempt failure on a fresh connection is a
+// real failure and is returned as-is.
 func (c *Conn) Run(command string) (stdout, stderr string, exit int64, err error) {
-	client, err := ssh.Dial("tcp", c.addr, c.config)
-	if err != nil {
-		return "", "", 0, fmt.Errorf("failed to connect to %s: %w", c.addr, err)
+	stdout, stderr, exit, err, retryable := c.runOnce(command)
+	if err != nil && retryable {
+		stdout, stderr, exit, err, _ = c.runOnce(command)
 	}
-	defer func() { _ = client.Close() }()
+	return stdout, stderr, exit, err
+}
 
-	session, err := client.NewSession()
-	if err != nil {
-		return "", "", 0, fmt.Errorf("failed to open SSH session: %w", err)
+// runOnce is a single attempt. retryable reports that the failure was a
+// transport error on a connection taken from the pool, so retrying on a fresh
+// dial is worthwhile.
+func (c *Conn) runOnce(command string) (stdout, stderr string, exit int64, err error, retryable bool) {
+	entry := entryFor(c.poolKey)
+	client, reused, dialErr := entry.connect(c.addr, c.config)
+	if dialErr != nil {
+		return "", "", 0, fmt.Errorf("failed to connect to %s: %w", c.addr, dialErr), false
+	}
+
+	session, sessErr := client.NewSession()
+	if sessErr != nil {
+		// Opening a channel failed: the connection is unhealthy (or has hit the
+		// server's MaxSessions). Drop it so the retry — or the next action —
+		// dials fresh.
+		entry.discard(client)
+		return "", "", 0, fmt.Errorf("failed to open SSH session: %w", sessErr), reused
 	}
 	defer func() { _ = session.Close() }()
 
@@ -165,14 +199,19 @@ func (c *Conn) Run(command string) (stdout, stderr string, exit int64, err error
 	case runErr := <-done:
 		if runErr != nil {
 			if exitErr, ok := runErr.(*ssh.ExitError); ok {
-				return out.String(), errb.String(), int64(exitErr.ExitStatus()), nil
+				// The command ran and exited non-zero: the connection is fine.
+				return out.String(), errb.String(), int64(exitErr.ExitStatus()), nil, false
 			}
-			return out.String(), errb.String(), 0, fmt.Errorf("run command on %s: %w", c.addr, runErr)
+			entry.discard(client)
+			return out.String(), errb.String(), 0, fmt.Errorf("run command on %s: %w", c.addr, runErr), reused
 		}
-		return out.String(), errb.String(), 0, nil
+		return out.String(), errb.String(), 0, nil, false
 	case <-timer.C:
+		// A timeout is a real result about the command, not the connection —
+		// retrying would just burn another runTimeout. Kill the session and
+		// keep the connection for the next action.
 		_ = session.Signal(ssh.SIGKILL)
-		return "", "", 0, fmt.Errorf("command timed out on %s after %s", c.addr, runTimeout)
+		return "", "", 0, fmt.Errorf("command timed out on %s after %s", c.addr, runTimeout), false
 	}
 }
 
@@ -272,6 +311,58 @@ func (c *Conn) FocusWindowIfRequested(inputs []*core.Connection) {
 	_, _, _, _ = c.Run(FocusWindowCmd(c.OS, c.Display, window))
 }
 
+// Point is a pointer position. A nil *Point means "wherever the pointer
+// already is".
+type Point struct{ X, Y int64 }
+
+// ScreenInfoCmd reports the desktop geometry and the active window title, one
+// per line: "<width> <height>" then the title.
+//
+// This exists because the agent's only view of the VM is a screenshot, and a
+// screenshot carries no statement of its own scale. Vision models downscale
+// images above 1568px on the long edge, so on a large display the coordinates
+// an agent reads off a screenshot are silently in a different space from the
+// ones ClickCmd feeds to xdotool — every click lands short and the agent has no
+// way to see why. Reporting the true geometry makes that checkable in one call.
+func ScreenInfoCmd(os OS, display string) string {
+	if os == OSWindows {
+		return ps(winWindowType() +
+			`Add-Type -AssemblyName System.Windows.Forms;` +
+			`$b=[System.Windows.Forms.SystemInformation]::VirtualScreen;` +
+			`Write-Output ("{0} {1}" -f $b.Width,$b.Height);` +
+			`Write-Output ([FloWin]::ActiveTitle())`)
+	}
+	// `|| true` keeps the exit status clean when no window is active (a bare
+	// desktop), which is informational here rather than a failure.
+	return fmt.Sprintf("DISPLAY=%s xdotool getdisplaygeometry; DISPLAY=%s xdotool getactivewindow getwindowname 2>/dev/null || true",
+		shArg(display), shArg(display))
+}
+
+// NavigateCmd drives the already-open browser to a URL in its CURRENT tab, via
+// the address bar (Ctrl+L, type, Enter).
+//
+// OpenURLCmd shells out to the browser binary, which — when the browser is
+// already running — hands the URL to the existing instance as a NEW TAB. That
+// makes it useless for "go to the next page in this journey": the tab count
+// climbs, the previous page stays live behind it, and any attempt to act on
+// "the page" becomes ambiguous. This is the same-tab counterpart.
+func NavigateCmd(os OS, display, url string) string {
+	if os == OSWindows {
+		b := base64.StdEncoding.EncodeToString([]byte(url))
+		return ps(`Add-Type -AssemblyName System.Windows.Forms;` +
+			`[System.Windows.Forms.SendKeys]::SendWait('^l');Start-Sleep -Milliseconds 200;` +
+			`$t=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('` + b + `'));` +
+			`$t=[regex]::Replace($t,'[+^%~(){}\[\]]','{$0}');` +
+			`[System.Windows.Forms.SendKeys]::SendWait($t);` +
+			`[System.Windows.Forms.SendKeys]::SendWait('{ENTER}')`)
+	}
+	// Focus the address bar, give the browser a moment to select its contents,
+	// then type over it. The URL goes through the same base64 path as TypeCmd,
+	// so nothing in it can reach the shell.
+	return fmt.Sprintf(`DISPLAY=%s xdotool key --clearmodifiers ctrl+l; sleep 0.2; %s`,
+		shArg(display), TypeCmd(OSLinux, display, url, true))
+}
+
 // MoveCmd moves the pointer without clicking.
 func MoveCmd(os OS, display string, x, y int64) string {
 	if os == OSWindows {
@@ -318,8 +409,17 @@ func KeyCmd(os OS, display, keys string) string {
 	return fmt.Sprintf("DISPLAY=%s xdotool key --clearmodifiers %s", shArg(display), shArg(keys))
 }
 
-// ScrollCmd scrolls up or down by amount notches.
-func ScrollCmd(os OS, display, direction string, amount int64) string {
+// ScrollCmd scrolls up or down by amount notches, optionally moving the pointer
+// to `at` first.
+//
+// Moving the pointer matters more than it looks. A wheel event is delivered to
+// whatever sits UNDER THE POINTER, not to whatever has keyboard focus — so
+// scrolling without positioning first scrolls whatever the last click happened
+// to leave the pointer over. The common failure is a scrollable dialog (a
+// licence agreement, a long modal) that refuses to move because the pointer is
+// still parked on the page behind it, which reads as "scrolling is broken"
+// rather than "scrolling is going somewhere else".
+func ScrollCmd(os OS, display, direction string, amount int64, at *Point) string {
 	if amount <= 0 {
 		amount = 3
 	}
@@ -328,11 +428,19 @@ func ScrollCmd(os OS, display, direction string, amount int64) string {
 		if strings.EqualFold(direction, "up") {
 			delta = 120 * amount
 		}
-		return ps(winMouseType() + fmt.Sprintf(`[FloMouse]::Wheel(%d)`, delta))
+		move := ""
+		if at != nil {
+			move = fmt.Sprintf(`[FloMouse]::Move(%d,%d);`, at.X, at.Y)
+		}
+		return ps(winMouseType() + move + fmt.Sprintf(`[FloMouse]::Wheel(%d)`, delta))
 	}
 	button := 5 // down
 	if strings.EqualFold(direction, "up") {
 		button = 4
+	}
+	if at != nil {
+		return fmt.Sprintf("DISPLAY=%s xdotool mousemove %d %d click --repeat %d %d",
+			shArg(display), at.X, at.Y, amount, button)
 	}
 	return fmt.Sprintf("DISPLAY=%s xdotool click --repeat %d %d", shArg(display), amount, button)
 }
@@ -652,6 +760,65 @@ func winButton(button string) string {
 	default:
 		return "left"
 	}
+}
+
+// maxSettle caps the post-action settle. A settle is a convenience, not a
+// scheduling primitive — capping it means a mistyped input (30000 meaning
+// "30 seconds" but read as milliseconds, or the reverse) cannot stall a flow.
+const maxSettle = 10 * time.Second
+
+// Settle pauses after an interaction so the UI can finish reacting before the
+// next action — most usefully before the screenshot that the agent will judge
+// the result by.
+//
+// Without it, the screenshot after a click routinely catches the page mid
+// animation: a menu part-way open, a page mid scroll, a spinner still up. The
+// agent then reasons about a transient frame as though it were the settled
+// result, concludes the click did nothing, and retries — which is how one
+// mis-timed screenshot turns into a loop of them.
+func Settle(ms int64) {
+	if ms <= 0 {
+		return
+	}
+	d := time.Duration(ms) * time.Millisecond
+	if d > maxSettle {
+		d = maxSettle
+	}
+	time.Sleep(d)
+}
+
+// SettleAfter reads the optional settle_ms input and applies it.
+func SettleAfter(inputs []*core.Connection) {
+	Settle(Int("settle_ms", inputs, 0))
+}
+
+// PointFrom reads optional x/y inputs, returning nil when neither is set so the
+// caller can distinguish "scroll at (0,0)" from "scroll where the pointer is".
+func PointFrom(inputs []*core.Connection, xName, yName string) *Point {
+	xc := core.FindConnection(xName, inputs)
+	yc := core.FindConnection(yName, inputs)
+	if xc == nil && yc == nil {
+		return nil
+	}
+	// A field left blank in the editor arrives as a present-but-empty
+	// connection, which must read as "unset" rather than as zero.
+	xs, ys := OptionalString(xName, inputs), OptionalString(yName, inputs)
+	if xs == "" && ys == "" {
+		return nil
+	}
+	return &Point{X: Int(xName, inputs, 0), Y: Int(yName, inputs, 0)}
+}
+
+// winWindowType is a PowerShell Add-Type block defining [FloWin::ActiveTitle].
+func winWindowType() string {
+	return `Add-Type @'
+using System;using System.Text;using System.Runtime.InteropServices;
+public class FloWin{
+ [DllImport("user32.dll")] static extern IntPtr GetForegroundWindow();
+ [DllImport("user32.dll",CharSet=CharSet.Unicode)] static extern int GetWindowText(IntPtr h,StringBuilder s,int n);
+ public static string ActiveTitle(){var sb=new StringBuilder(512);GetWindowText(GetForegroundWindow(),sb,512);return sb.ToString();}
+}
+'@;`
 }
 
 // winMouseType is a PowerShell Add-Type block defining [FloMouse] with Move,

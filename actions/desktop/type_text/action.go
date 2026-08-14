@@ -31,6 +31,7 @@ var Inputs = [...]core.Connection{
 	{Name: "text", Type: core.ConnectionTypeText, Label: "Text", Placeholder: "Text to type into the focused field", Required: true},
 	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
 	{Name: "submit", Type: core.ConnectionTypeBoolean, Label: "Press Enter after typing (e.g. to run a typed command)"},
+	{Name: "settle_ms", Type: core.ConnectionTypeInteger, Label: "Settle After (ms)", Placeholder: "300"},
 }
 
 var Outputs = [...]core.Connection{
@@ -56,6 +57,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	} else if exit != 0 {
 		return desktop.ErrResult("type failed: " + stderr), nil
 	}
+	desktop.SettleAfter(inputs)
 	summary := "Typed text into the focused window"
 	if submit {
 		summary = "Typed text and pressed Enter"

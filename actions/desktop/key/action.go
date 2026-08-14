@@ -30,6 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "host_fingerprint", Type: core.ConnectionTypeString, Label: "Host Key Fingerprint", Placeholder: "SHA256:… (optional but recommended)"},
 	{Name: "keys", Type: core.ConnectionTypeString, Label: "Key(s)", Placeholder: "Linux: Return, ctrl+c · Windows: {ENTER}, ^c", Required: true},
 	{Name: "window", Type: core.ConnectionTypeString, Label: "Focus Window First (title substring, optional)", Placeholder: "Google Chrome"},
+	{Name: "settle_ms", Type: core.ConnectionTypeInteger, Label: "Settle After (ms)", Placeholder: "300"},
 }
 
 var Outputs = [...]core.Connection{
@@ -54,5 +55,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	} else if exit != 0 {
 		return desktop.ErrResult("key press failed: " + stderr), nil
 	}
+	desktop.SettleAfter(inputs)
 	return desktop.OkResult("Pressed "+keys, nil), nil
 }

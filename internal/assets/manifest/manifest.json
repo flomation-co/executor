@@ -213596,7 +213596,7 @@
     ]
   },
   "desktop/click": {
-    "hash": "dfc03cf86285265a88481718eb9cfcba5a9b6d57f6646bbe1a58eca6ec4882e3",
+    "hash": "9ede12c027961b4d8df062c41bb5ccd437bef011fcf12104dc8a7398205f0593",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Click",
@@ -213772,6 +213772,13 @@
         "value": null,
         "label": "Focus Window First (title substring, optional)",
         "placeholder": "Google Chrome"
+      },
+      {
+        "name": "settle_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Settle After (ms)",
+        "placeholder": "300"
       }
     ],
     "outputs": [
@@ -213959,7 +213966,7 @@
     ]
   },
   "desktop/key": {
-    "hash": "fc237457fe1be87e9a3b2ee581d7a0a6036aebd95c327964c9926ef614d8619b",
+    "hash": "83f47a7c31792a61f8102e43eb49aa2497e28787a7a4d6dd76af60cf58efb23c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Press Key",
@@ -214099,6 +214106,13 @@
         "value": null,
         "label": "Focus Window First (title substring, optional)",
         "placeholder": "Google Chrome"
+      },
+      {
+        "name": "settle_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Settle After (ms)",
+        "placeholder": "300"
       }
     ],
     "outputs": [
@@ -214460,7 +214474,7 @@
     ]
   },
   "desktop/open_url": {
-    "hash": "f4086616443ef5b88d1c4a088f4d30d599f7404fb9f8f6eb684925689e11fe9e",
+    "hash": "e7c835181183826a5c24a670a5d9c68edeefaf6c2fb3dd3bf1d68a6bbe9e81db",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Open URL",
@@ -214593,6 +214607,33 @@
         "label": "URL",
         "placeholder": "https://www.flomation.co",
         "required": true
+      },
+      {
+        "name": "same_tab",
+        "type": "boolean",
+        "value": null,
+        "label": "Navigate the current tab (instead of opening a new one)",
+        "placeholder": ""
+      },
+      {
+        "name": "window",
+        "type": "string",
+        "value": null,
+        "label": "Browser Window (title substring, used with Navigate current tab)",
+        "placeholder": "Google Chrome",
+        "visible_when": {
+          "field": "same_tab",
+          "values": [
+            "true"
+          ]
+        }
+      },
+      {
+        "name": "settle_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Settle After (ms)",
+        "placeholder": "1500"
       }
     ],
     "outputs": [
@@ -215146,6 +215187,193 @@
       }
     ]
   },
+  "desktop/screen_info": {
+    "hash": "da2401ca51b4d61663cce1857fb4d39aac630b682b127a5f5882ecb8de55983c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Desktop Screen Info",
+    "description": "Report a desktop VM's screen size and active window, and whether screenshot coordinates match.",
+    "website": "https://www.flomation.co",
+    "icon": "expand",
+    "date": "14/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Desktop",
+      "icon": "display",
+      "description": "Drive and record a desktop VM over SSH (screenshots, mouse, keyboard, screen recording)"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "os",
+        "type": "string",
+        "value": null,
+        "label": "Operating System",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Linux",
+            "value": "linux"
+          },
+          {
+            "name": "Windows",
+            "value": "windows"
+          }
+        ]
+      },
+      {
+        "name": "display",
+        "type": "string",
+        "value": null,
+        "label": "X Display (Linux)",
+        "placeholder": ":0"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "${secrets.DesktopVMKey}",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:… (optional but recommended)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Screen Width",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Screen Height",
+        "placeholder": ""
+      },
+      {
+        "name": "active_window",
+        "type": "string",
+        "value": null,
+        "label": "Active Window Title",
+        "placeholder": ""
+      },
+      {
+        "name": "coordinates_match_screenshot",
+        "type": "boolean",
+        "value": null,
+        "label": "Screenshot Coordinates Match Screen",
+        "placeholder": ""
+      },
+      {
+        "name": "coordinate_multiplier",
+        "type": "string",
+        "value": null,
+        "label": "Screenshot → Screen Multiplier",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "desktop/screenshot": {
     "hash": "325ae1f9ffdda7cc41a16b01b7fd37c856c9ed4acb875de923e685e0483764f1",
     "author": "Andy Esser",
@@ -215313,7 +215541,7 @@
     ]
   },
   "desktop/scroll": {
-    "hash": "11719596e8dc64c71aa26a9c57e08d5b919dfdca083630ae50e41e1d7487a76d",
+    "hash": "c82ef889953ec6a0204f71ba9f08636f897e218174f9e9d389551e5477e8644d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Scroll",
@@ -215462,6 +215690,34 @@
         "value": null,
         "label": "Notches",
         "placeholder": "3"
+      },
+      {
+        "name": "x",
+        "type": "integer",
+        "value": null,
+        "label": "X (point at the area to scroll)",
+        "placeholder": ""
+      },
+      {
+        "name": "y",
+        "type": "integer",
+        "value": null,
+        "label": "Y (point at the area to scroll)",
+        "placeholder": ""
+      },
+      {
+        "name": "window",
+        "type": "string",
+        "value": null,
+        "label": "Focus Window First (title substring, optional)",
+        "placeholder": "Google Chrome"
+      },
+      {
+        "name": "settle_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Settle After (ms)",
+        "placeholder": "300"
       }
     ],
     "outputs": [
@@ -215489,7 +215745,7 @@
     ]
   },
   "desktop/type_text": {
-    "hash": "bca0aae5d2e8a8cedfe0b5ed45a1ff229f1824a3938962bf530752f15d0d48ab",
+    "hash": "f084468d60da413bb9b36ff6a707e1bb8a33ed6cc22f98ec0e69853716a3f071",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Type Text",
@@ -215636,6 +215892,13 @@
         "value": null,
         "label": "Press Enter after typing (e.g. to run a typed command)",
         "placeholder": ""
+      },
+      {
+        "name": "settle_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Settle After (ms)",
+        "placeholder": "300"
       }
     ],
     "outputs": [
