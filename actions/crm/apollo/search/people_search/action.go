@@ -93,15 +93,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	people := apollo_common.Arr(resp, "people")
 	// Warn loudly if the plan gated the personal data (obfuscated surnames, no
 	// emails/cities) so a caller cannot mistake masked people for real contacts.
-	summary := apollo_common.GatePrefix(fmt.Sprintf("Found %d people", len(people)), people)
+	summary := apollo_common.GatePrefixSearch(fmt.Sprintf("Found %d people", len(people)), people)
+
 	// Apollo drops location values outside its taxonomy and answers an
-	// unfiltered search instead. Check against each PERSON's own location, since
-	// that is what person_locations filters on.
-	if warn := apollo_common.LocationIgnoredWarning(
-		apollo_common.LocationList("person_locations", inputs),
-		apollo_common.PersonLocations(people),
-	); warn != "" {
+	// unfiltered search instead, so check the results against what was asked for.
+	//
+	// Person location is the right thing to check — person_locations filters on
+	// the individual — but on a plan that masks personal data every person's city
+	// is null. In that case the honest answer is "unknown", so fall back to the
+	// employer's location (which is never masked) and label it as the
+	// company-level signal it is, rather than either staying silent or claiming
+	// the filter failed.
+	requestedPersonLocations := apollo_common.LocationList("person_locations", inputs)
+	personLocations := apollo_common.PersonLocations(people)
+	orgLocations := apollo_common.PeopleOrgLocations(people)
+
+	if warn := apollo_common.LocationIgnoredWarning(requestedPersonLocations, personLocations); warn != "" {
 		summary = warn + "\n" + summary
+	} else if note := apollo_common.PersonLocationNote(requestedPersonLocations, personLocations, orgLocations); note != "" {
+		summary = note + "\n" + summary
 	}
 	// Then state each person's own location separately from their employer's, so
 	// a company HQ is never read as confirming where the individual is.
