@@ -4,21 +4,21 @@ import (
 	"strings"
 	"testing"
 
+	core "flomation.app/automate/executor"
 	. "github.com/onsi/gomega"
 )
 
-// The default path: no reveal asked for, so no email came back. That is a
-// one-flag fix, and the message must say so rather than leaving the reader to
-// conclude the data is unavailable.
-func TestRevealHint_ExplainsUnsetFlag(t *testing.T) {
+// Reveal deliberately switched off: no email came back, and the message must
+// name the switch rather than leave the reader concluding the data is
+// unavailable.
+func TestRevealHint_ExplainsSwitchedOffFlag(t *testing.T) {
 	RegisterTestingT(t)
 
 	hint := RevealHint(map[string]interface{}{"name": "Ceri Henfrey"}, false)
 
-	Expect(hint).To(ContainSubstring("was NOT set"))
-	Expect(hint).To(ContainSubstring("defaults to false"))
+	Expect(hint).To(ContainSubstring("switched OFF"))
 	Expect(hint).To(ContainSubstring("1 credit"))
-	// Must not blame the plan when the flag simply was not sent.
+	// Must not blame the plan when reveal simply was not requested.
 	Expect(strings.ToLower(hint)).ToNot(ContainSubstring("plan"))
 }
 
@@ -29,7 +29,7 @@ func TestRevealHint_WhenRevealWasRequested(t *testing.T) {
 
 	hint := RevealHint(map[string]interface{}{"name": "Ceri Henfrey"}, true)
 
-	Expect(hint).To(ContainSubstring("even though Reveal Personal Emails was set"))
+	Expect(hint).To(ContainSubstring("even though Reveal Personal Emails was on"))
 	Expect(hint).To(ContainSubstring("no personal email on file"))
 	Expect(hint).To(ContainSubstring("credits"))
 }
@@ -57,7 +57,7 @@ func TestGatePrefix_AttributesToRevealFlagNotPlan(t *testing.T) {
 
 	Expect(out).To(ContainSubstring("USUALLY NOT a plan or credit problem"))
 	Expect(out).To(ContainSubstring("People Search is free"))
-	Expect(out).To(ContainSubstring("Reveal Personal Emails set to TRUE"))
+	Expect(out).To(ContainSubstring("Reveal Personal Emails ON by default"))
 	// has_email:true is Apollo being accurate, not misleading — say so.
 	Expect(out).To(ContainSubstring("an email EXISTS"))
 	Expect(out).To(ContainSubstring("2 of 3"))
@@ -77,4 +77,31 @@ func TestBoolValue(t *testing.T) {
 	RegisterTestingT(t)
 
 	Expect(BoolValue("missing", qInputs())).To(BeFalse())
+}
+
+// The default-ON behaviour rests entirely on three states being
+// distinguishable: never configured, explicitly on, explicitly off. If an
+// untouched input were indistinguishable from an explicit false, either the
+// default could never apply or an author's decision to switch reveal off would
+// be overridden — and the second would spend their credits against their wishes.
+func TestBoolValueDefault_TriState(t *testing.T) {
+	RegisterTestingT(t)
+
+	boolInput := func(v interface{}) []*core.Connection {
+		return []*core.Connection{{Name: "reveal", Type: core.ConnectionTypeBoolean, Value: v}}
+	}
+
+	// Never configured → the default applies.
+	Expect(BoolValueDefault("reveal", qInputs(), true)).To(BeTrue())
+	Expect(BoolValueDefault("reveal", boolInput(nil), true)).To(BeTrue())
+
+	// Explicitly off → honoured, NOT overridden by the default.
+	Expect(BoolValueDefault("reveal", boolInput(false), true)).To(BeFalse())
+
+	// Explicitly on → on.
+	Expect(BoolValueDefault("reveal", boolInput(true), false)).To(BeTrue())
+
+	// A ${...} substitution arrives as a string and must still be honoured.
+	Expect(BoolValueDefault("reveal", boolInput("false"), true)).To(BeFalse())
+	Expect(BoolValueDefault("reveal", boolInput("true"), false)).To(BeTrue())
 }

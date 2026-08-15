@@ -206,10 +206,21 @@ func OptionalBool(name string, inputs []*core.Connection) *bool {
 // BoolValue reads a boolean input as a plain bool, treating absent/unset as
 // false — matching Apollo's own defaults for the reveal_* flags.
 func BoolValue(name string, inputs []*core.Connection) bool {
+	return BoolValueDefault(name, inputs, false)
+}
+
+// BoolValueDefault reads a boolean input, falling back to def when the input is
+// absent or holds no interpretable value.
+//
+// The three states matter here. A boolean input is nil until someone touches it
+// and a real bool afterwards, so "never configured" stays distinguishable from
+// "deliberately switched off" — which is what lets a flag default to ON while
+// still honouring an author who turns it off.
+func BoolValueDefault(name string, inputs []*core.Connection, def bool) bool {
 	if v := OptionalBool(name, inputs); v != nil {
 		return *v
 	}
-	return false
+	return def
 }
 
 // StringList splits a comma-separated input (e.g. contact_ids) into a trimmed
@@ -783,9 +794,9 @@ func GatePrefix(summary string, records []map[string]interface{}) string {
 	warn := fmt.Sprintf(
 		"NOTE - PERSONAL DATA NOT REVEALED: %d of %d record(s) have a withheld surname (last_name_obfuscated) or a has_email/has_city flag with no value. "+
 			"This is USUALLY NOT a plan or credit problem. People Search is free and never returns personal emails — has_email:true simply means an email EXISTS and can be retrieved. "+
-			"To get it, call People: Enrich (people/match) with Reveal Personal Emails set to TRUE; it defaults to false, and an enrichment call without it returns a null email and spends no credit. "+
+			"To get it, call People: Enrich (people/match), which has Reveal Personal Emails ON by default; a search result alone will never carry an email. "+
 			"Apollo charges 1 credit per revealed email (8 for a mobile) and only when data is found. "+
-			"If reveal WAS set and the value is still null, then the record genuinely has no data for that field, or the key's plan/credits are exhausted. "+
+			"If reveal was on and the value is still null, then the record genuinely has no data for that field, or the key's plan/credits are exhausted. "+
 			"Until revealed, do not present these as confirmed contacts.",
 		gated, len(records))
 	if strings.TrimSpace(summary) == "" {
@@ -794,21 +805,23 @@ func GatePrefix(summary string, records []map[string]interface{}) string {
 	return warn + "\n\n" + summary
 }
 
-// RevealHint explains a missing email when the caller did not ask for one.
+// RevealHint explains a missing email, distinguishing the two very different
+// reasons for one.
 //
 // An enrichment that returns no email is ambiguous: it can mean "this person has
-// no email on file" or "you did not ask for it". Only the second is actionable,
-// and it is by far the more common — reveal_personal_emails defaults to false,
-// so the natural first call always comes back empty. Saying which case it is
-// turns a dead end into a one-flag fix.
+// no email on file" or "you asked us not to fetch it". Only the second is
+// actionable, and conflating them is what turns a one-switch fix into a
+// conclusion that the data is unavailable. Apollo's own default is not to
+// reveal, so this action defaults reveal ON — which means the second case now
+// only arises when an author has deliberately switched it off.
 func RevealHint(person map[string]interface{}, revealRequested bool) string {
 	if person == nil || !emptyValue(person["email"]) {
 		return ""
 	}
 	if revealRequested {
-		return "No email returned even though Reveal Personal Emails was set — Apollo has no personal email on file for this person, or the key's credits are exhausted. No credit is charged when nothing is found."
+		return "No email returned even though Reveal Personal Emails was on — Apollo has no personal email on file for this person, or the key's credits are exhausted. No credit is charged when nothing is found."
 	}
-	return "No email returned because Reveal Personal Emails was NOT set (it defaults to false). Apollo does not return personal emails unless explicitly asked. Re-run this action with Reveal Personal Emails enabled to retrieve it — 1 credit, charged only if an email is found."
+	return "No email returned because Reveal Personal Emails is switched OFF on this node. Apollo does not return personal emails unless asked. Switch it on to retrieve one — 1 credit, charged only if an email is found."
 }
 
 // truthyFlag reads Apollo's has_* flags, which arrive as either a bool or a

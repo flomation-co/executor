@@ -184638,7 +184638,7 @@
     ]
   },
   "crm/apollo/enrichment/people_bulk_match": {
-    "hash": "350a6c5eb0199e710276d375f9bffdaaf6321650a133704b85c0297ea82b5196",
+    "hash": "713c9fef7e01f66dd63a3316bf48f881e50b6a6b94511964624c59628925c459",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Bulk Enrich",
@@ -184684,7 +184684,7 @@
         "type": "boolean",
         "value": null,
         "label": "Reveal Personal Emails",
-        "placeholder": "REQUIRED to get an email — defaults off. 1 credit, charged only if found"
+        "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
       {
         "name": "reveal_phone_number",
@@ -184746,7 +184746,7 @@
     ]
   },
   "crm/apollo/enrichment/people_match": {
-    "hash": "22b7415283fad93e2ac5575605f7fe3741e7ac2237a939b76f1cc7891bff83ed",
+    "hash": "95f0eff3ad0a87e9eb607e1949cf17c30eb98e7d965b6f0ea07c848baab7bb1d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Enrich",
@@ -184833,7 +184833,7 @@
         "type": "boolean",
         "value": null,
         "label": "Reveal Personal Emails",
-        "placeholder": "REQUIRED to get an email — defaults off. 1 credit, charged only if found"
+        "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
       {
         "name": "reveal_phone_number",

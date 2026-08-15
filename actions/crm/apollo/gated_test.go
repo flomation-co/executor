@@ -45,7 +45,7 @@ func TestGatePrefix(t *testing.T) {
 	Expect(out).To(HavePrefix("NOTE - PERSONAL DATA NOT REVEALED"))
 	Expect(out).To(ContainSubstring("1 of 2 record(s)"))
 	// The cause is the un-set reveal flag, NOT the plan — see reveal_test.go.
-	Expect(out).To(ContainSubstring("Reveal Personal Emails set to TRUE"))
+	Expect(out).To(ContainSubstring("Reveal Personal Emails ON by default"))
 	Expect(strings.HasSuffix(out, "Found 2 people")).To(BeTrue())
 
 	// No gated records → summary unchanged (no false alarm on real data).

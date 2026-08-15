@@ -21,7 +21,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Apollo API Key", Placeholder: "${secrets.ApolloApiKey}", Required: true},
 	{Name: "details", Type: core.ConnectionTypeText, Label: "Details (JSON array)", Placeholder: `[{"email":"a@x.com"},{"first_name":"Ada","last_name":"Lovelace","domain":"x.com"}]`, Required: true},
-	{Name: "reveal_personal_emails", Type: core.ConnectionTypeBoolean, Label: "Reveal Personal Emails", Placeholder: "REQUIRED to get an email — defaults off. 1 credit, charged only if found"},
+	{Name: "reveal_personal_emails", Type: core.ConnectionTypeBoolean, Label: "Reveal Personal Emails", Placeholder: "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off.", Value: true},
 	{Name: "reveal_phone_number", Type: core.ConnectionTypeBoolean, Label: "Reveal Phone Number", Placeholder: "8 credits; requires a Webhook URL (delivered asynchronously)"},
 	{Name: "webhook_url", Type: core.ConnectionTypeString, Label: "Webhook URL (required for phone reveal)", Placeholder: "https://… public HTTPS endpoint", Visible: &core.VisibleWhen{Field: "reveal_phone_number", Values: []string{"true"}}},
 }
@@ -50,7 +50,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	body := map[string]interface{}{"details": arr}
-	apollo_common.SetBool(body, "reveal_personal_emails", "reveal_personal_emails", inputs)
+	// Email reveal defaults ON — see people_match for the reasoning. Note this
+	// action is a BULK call, so the cost scales with the number of details
+	// supplied: 1 credit per email actually found.
+	revealEmails := apollo_common.BoolValueDefault("reveal_personal_emails", inputs, true)
+	body["reveal_personal_emails"] = revealEmails
 	apollo_common.SetBool(body, "reveal_phone_number", "reveal_phone_number", inputs)
 	apollo_common.SetString(body, "webhook_url", "webhook_url", inputs)
 
