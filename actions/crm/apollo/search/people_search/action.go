@@ -27,7 +27,9 @@ var Inputs = [...]core.Connection{
 	{Name: "q_keywords", Type: core.ConnectionTypeString, Label: "Keywords", Placeholder: "Free-text search across name, title, company"},
 	{Name: "person_titles", Type: core.ConnectionTypeString, Label: "Job Titles", Placeholder: "CEO, Head of Sales (comma-separated)"},
 	{Name: "person_seniorities", Type: core.ConnectionTypeString, Label: "Seniorities", Placeholder: "owner, founder, c_suite, vp, director (comma-separated)"},
-	{Name: "person_locations", Type: core.ConnectionTypeString, Label: "Person Locations", Placeholder: "City, region or country, e.g. Chester, United Kingdom (comma-separated)"},
+	{Name: "person_locations", Type: core.ConnectionTypeString, Label: "Person Locations (where the PERSON lives)", Placeholder: "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"},
+	{Name: "organization_locations", Type: core.ConnectionTypeString, Label: "Company HQ Locations (where the COMPANY is)", Placeholder: "Chester, United Kingdom — separate MULTIPLE locations with ;"},
+	{Name: "contact_email_status", Type: core.ConnectionTypeString, Label: "Email Status", Options: []core.ConnectionOption{{Name: "Verified only", Value: "verified"}, {Name: "Verified or likely", Value: "verified,likely_to_engage"}, {Name: "Any", Value: ""}}},
 	{Name: "organization_domains", Type: core.ConnectionTypeString, Label: "Company Domains", Placeholder: "example.com (comma-separated)"},
 	{Name: "page", Type: core.ConnectionTypeInteger, Label: "Page", Placeholder: "1"},
 	{Name: "per_page", Type: core.ConnectionTypeInteger, Label: "Per Page", Placeholder: "25 (max 100)"},
@@ -60,7 +62,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	addList(q, "person_titles[]", apollo_common.StringList("person_titles", inputs))
 	addList(q, "person_seniorities[]", apollo_common.StringList("person_seniorities", inputs))
-	addList(q, "person_locations[]", apollo_common.StringList("person_locations", inputs))
+	// Locations are semicolon-separated — see apollo_common.LocationList. A comma
+	// is part of one Apollo location value, so splitting on it ORs a city with
+	// its country and quietly widens the search to the whole country.
+	//
+	// person_locations and organization_locations are deliberately separate
+	// inputs: the first is where the PERSON is, the second where their EMPLOYER
+	// is. They are not interchangeable — a "verified local" standard is a claim
+	// about the person, and a company HQ says nothing about where a given
+	// employee actually sits.
+	addList(q, "person_locations[]", apollo_common.LocationList("person_locations", inputs))
+	addList(q, "organization_locations[]", apollo_common.LocationList("organization_locations", inputs))
+	addList(q, "contact_email_status[]", apollo_common.StringList("contact_email_status", inputs))
 	addList(q, "q_organization_domains_list[]", normaliseDomains(apollo_common.StringList("organization_domains", inputs)))
 	if p := apollo_common.OptionalInt("page", inputs); p != nil {
 		q.Set("page", strconv.FormatInt(*p, 10))
@@ -81,6 +94,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// Warn loudly if the plan gated the personal data (obfuscated surnames, no
 	// emails/cities) so a caller cannot mistake masked people for real contacts.
 	summary := apollo_common.GatePrefix(fmt.Sprintf("Found %d people", len(people)), people)
+	// Then state each person's own location separately from their employer's, so
+	// a company HQ is never read as confirming where the individual is.
+	if prov := apollo_common.PeopleProvenance(people); prov != "" {
+		summary += "\n" + prov
+	}
 	return apollo_common.ListResult(people, summary), nil
 }
 

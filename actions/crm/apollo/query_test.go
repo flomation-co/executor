@@ -21,7 +21,9 @@ func TestQueryBuilders(t *testing.T) {
 
 	ins := qInputs(
 		[2]string{"name", "Acme"},
-		[2]string{"locations", "Chester, Liverpool"},
+		// Generic comma-splitting stays for genuine comma lists (ids, domains).
+		// Locations do NOT use this builder — see TestLocationList.
+		[2]string{"locations", "Chester,Liverpool"},
 		[2]string{"blank", "   "},
 	)
 	ins = append(ins,
@@ -42,6 +44,63 @@ func TestQueryBuilders(t *testing.T) {
 	Expect(q["locations[]"]).To(Equal([]string{"Chester", "Liverpool"}))
 	Expect(q.Get("page")).To(Equal("3"))
 	Expect(q.Get("sort_ascending")).To(Equal("true"))
+}
+
+// A comma belongs INSIDE one Apollo location value ("Chester, United Kingdom").
+// Splitting on it produced "Chester" OR "United Kingdom", and since Apollo ORs
+// array filters the country clause swallowed the city — the search silently
+// widened to the whole country while appearing to be scoped to a town.
+func TestLocationList_DoesNotSplitOnCommas(t *testing.T) {
+	RegisterTestingT(t)
+
+	ins := qInputs([2]string{"loc", "Chester, United Kingdom"})
+	Expect(LocationList("loc", ins)).To(Equal([]string{"Chester, United Kingdom"}))
+
+	q := url.Values{}
+	AddQueryLocationList(q, "organization_locations", "loc", ins)
+	Expect(q["organization_locations[]"]).To(Equal([]string{"Chester, United Kingdom"}))
+	// The country must never appear as a location of its own.
+	Expect(q["organization_locations[]"]).ToNot(ContainElement("United Kingdom"))
+}
+
+// The failure this guards against is two DIFFERENT queries collapsing to the
+// same thing: under comma-splitting both of these reduced to
+// "<somewhere> OR United Kingdom" and returned an identical national list.
+func TestLocationList_DistinctQueriesStayDistinct(t *testing.T) {
+	RegisterTestingT(t)
+
+	chester := LocationList("loc", qInputs([2]string{"loc", "Chester, United Kingdom"}))
+	cheshire := LocationList("loc", qInputs([2]string{"loc", "Cheshire, United Kingdom"}))
+
+	Expect(chester).ToNot(Equal(cheshire))
+	Expect(chester).To(HaveLen(1))
+	Expect(cheshire).To(HaveLen(1))
+}
+
+func TestLocationList_SemicolonSeparatesMultiple(t *testing.T) {
+	RegisterTestingT(t)
+
+	ins := qInputs([2]string{"loc", "Chester, United Kingdom; Wrexham, United Kingdom ;; Deeside, United Kingdom"})
+	Expect(LocationList("loc", ins)).To(Equal([]string{
+		"Chester, United Kingdom",
+		"Wrexham, United Kingdom",
+		"Deeside, United Kingdom",
+	}))
+
+	// Newlines work too, so a pasted column of locations behaves.
+	nl := qInputs([2]string{"loc", "Chester, United Kingdom\nWrexham, United Kingdom"})
+	Expect(LocationList("loc", nl)).To(HaveLen(2))
+}
+
+func TestLocationList_BlankAndAbsent(t *testing.T) {
+	RegisterTestingT(t)
+
+	Expect(LocationList("loc", qInputs([2]string{"loc", "   "}))).To(BeNil())
+	Expect(LocationList("missing", qInputs())).To(BeNil())
+
+	q := url.Values{}
+	AddQueryLocationList(q, "organization_locations", "missing", qInputs())
+	Expect(q).ToNot(HaveKey("organization_locations[]"))
 }
 
 func TestAddQueryFromMap(t *testing.T) {
