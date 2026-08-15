@@ -406,6 +406,25 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 									if boolValue != nil {
 										c.Required = *boolValue
 									}
+								case "Value":
+									// An input's declared DEFAULT. Previously dropped
+									// entirely — the switch handled every other field
+									// and simply had no case for this one, so `Value:
+									// true` parsed fine, built fine, tested fine, and
+									// arrived in the manifest as null. The editor then
+									// rendered the field empty while the action's own
+									// label advertised a default, and the two disagreed
+									// with nothing to indicate it.
+									//
+									// Same silent-mismatch class as the stringValue
+									// concatenation bug above, and found the same way:
+									// by an action declaring something that never
+									// took effect.
+									if boolValue != nil {
+										c.Value = *boolValue
+									} else if value != "" {
+										c.Value = value
+									}
 								case "FromCredentialMeta":
 									// Plain string literal only — same constraint as every
 									// other field here. A concatenated expression is a

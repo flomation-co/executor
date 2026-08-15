@@ -114154,28 +114154,28 @@
       {
         "name": "block_public_acls",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Block Public ACLs",
         "placeholder": ""
       },
       {
         "name": "ignore_public_acls",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Ignore Public ACLs",
         "placeholder": ""
       },
       {
         "name": "block_public_policy",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Block Public Policy",
         "placeholder": ""
       },
       {
         "name": "restrict_public_buckets",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Restrict Public Buckets",
         "placeholder": ""
       }
@@ -117447,7 +117447,7 @@
       {
         "name": "object_lock_enabled",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Object Lock Enabled",
         "placeholder": ""
       },
@@ -118047,28 +118047,28 @@
       {
         "name": "block_public_acls",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Block Public ACLs",
         "placeholder": ""
       },
       {
         "name": "ignore_public_acls",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Ignore Public ACLs",
         "placeholder": ""
       },
       {
         "name": "block_public_policy",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Block Public Policy",
         "placeholder": ""
       },
       {
         "name": "restrict_public_buckets",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Restrict Public Buckets",
         "placeholder": ""
       }
@@ -162848,7 +162848,7 @@
       {
         "name": "send_invitation",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Send Invitation Email",
         "placeholder": "On (default): Microsoft emails the invite; off: use the returned redeem URL yourself"
       },
@@ -163438,7 +163438,7 @@
       {
         "name": "account_enabled",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Account Enabled",
         "placeholder": "On (default): the user can sign in immediately"
       },
@@ -164625,7 +164625,7 @@
       {
         "name": "create_parents",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Create Parents",
         "placeholder": "On by default: create every missing level of the path. Turn off to fail when the parent is missing"
       },
@@ -165358,7 +165358,7 @@
       {
         "name": "wait_for_completion",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Wait for Completion",
         "placeholder": "On by default: poll up to 30s until the copy succeeds or fails"
       },
@@ -167041,7 +167041,7 @@
       {
         "name": "overwrite",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Overwrite",
         "placeholder": "On by default. Turn off to fail instead of replacing an existing file"
       },
@@ -168530,7 +168530,7 @@
       {
         "name": "wait_for_completion",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Wait for Completion",
         "placeholder": "On by default: poll up to 30s until the copy succeeds or fails"
       }
@@ -171608,7 +171608,7 @@
       {
         "name": "overwrite",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Overwrite",
         "placeholder": "On by default. Turn off to fail instead of replacing an existing blob"
       },
@@ -184682,7 +184682,7 @@
       {
         "name": "reveal_personal_emails",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Reveal Personal Emails",
         "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
@@ -184831,7 +184831,7 @@
       {
         "name": "reveal_personal_emails",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Reveal Personal Emails",
         "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
@@ -223808,7 +223808,7 @@
       {
         "name": "force",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Force Delete",
         "placeholder": "On (default): delete permanently. Off: move to trash."
       }
@@ -225553,7 +225553,7 @@
       {
         "name": "force",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Force Delete",
         "placeholder": "On (default): delete permanently. Off: move to trash."
       }
@@ -226698,7 +226698,7 @@
       {
         "name": "force",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Force Delete",
         "placeholder": "On (default): delete permanently. Off: move to trash."
       }
@@ -241837,14 +241837,14 @@
       {
         "name": "from",
         "type": "string",
-        "value": null,
+        "value": "0",
         "label": "From",
         "placeholder": "0"
       },
       {
         "name": "to",
         "type": "string",
-        "value": null,
+        "value": "100",
         "label": "To",
         "placeholder": "100"
       },
@@ -241872,7 +241872,7 @@
       {
         "name": "font",
         "type": "string",
-        "value": null,
+        "value": "poppins-bold",
         "label": "Font",
         "placeholder": "",
         "options": [
@@ -241900,7 +241900,7 @@
       {
         "name": "colour",
         "type": "colour",
-        "value": null,
+        "value": "#ffffff",
         "label": "Colour",
         "placeholder": ""
       },
@@ -241921,7 +241921,7 @@
       {
         "name": "duration_seconds",
         "type": "string",
-        "value": null,
+        "value": "2",
         "label": "Duration (seconds)",
         "placeholder": ""
       },
@@ -241998,7 +241998,7 @@
       {
         "name": "font",
         "type": "string",
-        "value": null,
+        "value": "poppins-bold",
         "label": "Font",
         "placeholder": "",
         "options": [
@@ -242026,21 +242026,21 @@
       {
         "name": "colour",
         "type": "colour",
-        "value": null,
+        "value": "#ffffff",
         "label": "Colour",
         "placeholder": "#ffffff, flomation-teal"
       },
       {
         "name": "shadow",
         "type": "boolean",
-        "value": null,
+        "value": false,
         "label": "Drop shadow",
         "placeholder": ""
       },
       {
         "name": "shadow_colour",
         "type": "colour",
-        "value": null,
+        "value": "#000000",
         "label": "Shadow colour",
         "placeholder": ""
       },
@@ -242054,14 +242054,14 @@
       {
         "name": "outline_colour",
         "type": "colour",
-        "value": null,
+        "value": "#000000",
         "label": "Outline colour",
         "placeholder": ""
       },
       {
         "name": "animation",
         "type": "string",
-        "value": null,
+        "value": "fade",
         "label": "Animation",
         "placeholder": "",
         "options": [
@@ -242100,7 +242100,7 @@
       {
         "name": "duration_seconds",
         "type": "string",
-        "value": null,
+        "value": "4",
         "label": "Duration (seconds)",
         "placeholder": ""
       },
@@ -242184,14 +242184,14 @@
       {
         "name": "accent_colour",
         "type": "colour",
-        "value": null,
+        "value": "#00aa9c",
         "label": "Accent colour",
         "placeholder": "#00aa9c"
       },
       {
         "name": "text_colour",
         "type": "colour",
-        "value": null,
+        "value": "#ffffff",
         "label": "Text colour",
         "placeholder": ""
       },
@@ -242212,7 +242212,7 @@
       {
         "name": "duration_seconds",
         "type": "string",
-        "value": null,
+        "value": "5",
         "label": "Duration (seconds)",
         "placeholder": ""
       },
@@ -258145,7 +258145,7 @@
       {
         "name": "effect",
         "type": "string",
-        "value": null,
+        "value": "grayscale",
         "label": "Effect",
         "placeholder": "",
         "options": [
@@ -258339,7 +258339,7 @@
       {
         "name": "colour",
         "type": "string",
-        "value": null,
+        "value": "black",
         "label": "Colour",
         "placeholder": "black, #ffffff"
       }
@@ -258409,7 +258409,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Target format",
         "placeholder": "",
         "options": [
@@ -258525,14 +258525,14 @@
       {
         "name": "colour",
         "type": "string",
-        "value": null,
+        "value": "white",
         "label": "Colour",
         "placeholder": "white, #ff0000, transparent"
       },
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Format",
         "placeholder": "",
         "options": [
@@ -258831,7 +258831,7 @@
       {
         "name": "background",
         "type": "string",
-        "value": null,
+        "value": "white",
         "label": "Background colour",
         "placeholder": ""
       }
@@ -259202,7 +259202,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Output format",
         "placeholder": "",
         "options": [
@@ -259337,7 +259337,7 @@
       {
         "name": "font",
         "type": "string",
-        "value": null,
+        "value": "poppins-bold",
         "label": "Font",
         "placeholder": "",
         "options": [
@@ -259365,14 +259365,14 @@
       {
         "name": "colour",
         "type": "colour",
-        "value": null,
+        "value": "#000000",
         "label": "Text colour",
         "placeholder": "#000000, flomation-teal"
       },
       {
         "name": "align",
         "type": "string",
-        "value": null,
+        "value": "center",
         "label": "Alignment",
         "placeholder": "",
         "options": [
@@ -259393,7 +259393,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Output format",
         "placeholder": "",
         "options": [
@@ -259505,7 +259505,7 @@
       {
         "name": "fit",
         "type": "string",
-        "value": null,
+        "value": "fit",
         "label": "Fit mode",
         "placeholder": "",
         "options": [
@@ -259526,7 +259526,7 @@
       {
         "name": "allow_upscale",
         "type": "boolean",
-        "value": null,
+        "value": false,
         "label": "Allow enlarging",
         "placeholder": ""
       }
@@ -259610,7 +259610,7 @@
       {
         "name": "angle",
         "type": "string",
-        "value": null,
+        "value": "0",
         "label": "Rotate",
         "placeholder": "",
         "options": [
@@ -259635,7 +259635,7 @@
       {
         "name": "flip",
         "type": "string",
-        "value": null,
+        "value": "none",
         "label": "Flip",
         "placeholder": "",
         "options": [
@@ -259804,14 +259804,14 @@
       {
         "name": "colour",
         "type": "string",
-        "value": null,
+        "value": "white",
         "label": "Colour",
         "placeholder": "white, #ff0000, rgba(0,0,0,0.5)"
       },
       {
         "name": "gravity",
         "type": "string",
-        "value": null,
+        "value": "SouthWest",
         "label": "Position",
         "placeholder": "",
         "options": [
@@ -259995,7 +259995,7 @@
       {
         "name": "gravity",
         "type": "string",
-        "value": null,
+        "value": "SouthEast",
         "label": "Position",
         "placeholder": "",
         "options": [
@@ -537286,7 +537286,7 @@
       {
         "name": "duration",
         "type": "string",
-        "value": null,
+        "value": "once",
         "label": "Duration",
         "placeholder": "",
         "options": [
@@ -539549,7 +539549,7 @@
       {
         "name": "currency",
         "type": "string",
-        "value": null,
+        "value": "gbp",
         "label": "Currency",
         "placeholder": "Three-letter ISO currency code, e.g. gbp",
         "required": true
@@ -560169,14 +560169,14 @@
       {
         "name": "metadata_merge",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Merge into the existing metadata rather than replacing it",
         "placeholder": ""
       },
       {
         "name": "reembed",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Re-generate the embedding from the new text",
         "placeholder": ""
       }
@@ -561956,7 +561956,7 @@
       {
         "name": "operation",
         "type": "string",
-        "value": null,
+        "value": "normalize",
         "label": "Operation",
         "placeholder": "",
         "options": [
@@ -561981,7 +561981,7 @@
       {
         "name": "amount",
         "type": "string",
-        "value": null,
+        "value": "3",
         "label": "Amount (dB for volume, seconds for fades)",
         "placeholder": "3"
       }
@@ -562066,14 +562066,14 @@
       {
         "name": "colour",
         "type": "string",
-        "value": null,
+        "value": "white",
         "label": "Text colour",
         "placeholder": "white, #ff0000"
       },
       {
         "name": "position",
         "type": "string",
-        "value": null,
+        "value": "bottom",
         "label": "Position",
         "placeholder": "",
         "options": [
@@ -562164,7 +562164,7 @@
       {
         "name": "reencode",
         "type": "boolean",
-        "value": null,
+        "value": false,
         "label": "Re-encode (use if the clips differ)",
         "placeholder": ""
       }
@@ -562241,7 +562241,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "mp3",
         "label": "Format",
         "placeholder": "",
         "options": [
@@ -562270,7 +562270,7 @@
       {
         "name": "bitrate",
         "type": "string",
-        "value": null,
+        "value": "192k",
         "label": "Bitrate (lossy formats)",
         "placeholder": "",
         "options": [
@@ -562458,7 +562458,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "mp3",
         "label": "Audio format",
         "placeholder": "",
         "options": [
@@ -562483,7 +562483,7 @@
       {
         "name": "bitrate",
         "type": "string",
-        "value": null,
+        "value": "192k",
         "label": "Bitrate",
         "placeholder": "",
         "options": [
@@ -562585,14 +562585,14 @@
       {
         "name": "fade_in_seconds",
         "type": "string",
-        "value": null,
+        "value": "1",
         "label": "Fade in (seconds, 0 = none)",
         "placeholder": "1"
       },
       {
         "name": "fade_out_seconds",
         "type": "string",
-        "value": null,
+        "value": "1",
         "label": "Fade out (seconds, 0 = none)",
         "placeholder": "1"
       }
@@ -562662,14 +562662,14 @@
       {
         "name": "fps",
         "type": "string",
-        "value": null,
+        "value": "1",
         "label": "Frames per second",
         "placeholder": "1"
       },
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Image format",
         "placeholder": "",
         "options": [
@@ -562763,7 +562763,7 @@
       {
         "name": "start_seconds",
         "type": "string",
-        "value": null,
+        "value": "0",
         "label": "Start (seconds)",
         "placeholder": "0"
       },
@@ -562777,7 +562777,7 @@
       {
         "name": "fps",
         "type": "string",
-        "value": null,
+        "value": "12",
         "label": "Frames per second",
         "placeholder": "12"
       },
@@ -562959,14 +562959,14 @@
       {
         "name": "duration_seconds",
         "type": "string",
-        "value": null,
+        "value": "5",
         "label": "Duration (seconds)",
         "placeholder": "5"
       },
       {
         "name": "zoom",
         "type": "string",
-        "value": null,
+        "value": "in",
         "label": "Zoom",
         "placeholder": "",
         "options": [
@@ -563068,7 +563068,7 @@
       {
         "name": "duration",
         "type": "string",
-        "value": null,
+        "value": "longest",
         "label": "Result length",
         "placeholder": "",
         "options": [
@@ -563089,7 +563089,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "mp3",
         "label": "Format",
         "placeholder": "",
         "options": [
@@ -563244,7 +563244,7 @@
       {
         "name": "position",
         "type": "string",
-        "value": null,
+        "value": "SouthEast",
         "label": "Position",
         "placeholder": "",
         "options": [
@@ -563295,7 +563295,7 @@
       {
         "name": "loop",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Loop the overlay to the video length",
         "placeholder": ""
       },
@@ -563379,7 +563379,7 @@
       {
         "name": "angle",
         "type": "string",
-        "value": null,
+        "value": "0",
         "label": "Rotate",
         "placeholder": "",
         "options": [
@@ -563404,7 +563404,7 @@
       {
         "name": "flip",
         "type": "string",
-        "value": null,
+        "value": "none",
         "label": "Flip",
         "placeholder": "",
         "options": [
@@ -563488,7 +563488,7 @@
       {
         "name": "resolution",
         "type": "string",
-        "value": null,
+        "value": "720p",
         "label": "Resolution",
         "placeholder": "",
         "options": [
@@ -563598,7 +563598,7 @@
       {
         "name": "shortest",
         "type": "boolean",
-        "value": null,
+        "value": true,
         "label": "Trim to the shorter track",
         "placeholder": ""
       }
@@ -563668,7 +563668,7 @@
       {
         "name": "seconds_per_image",
         "type": "string",
-        "value": null,
+        "value": "3",
         "label": "Seconds per image",
         "placeholder": "3"
       },
@@ -563752,7 +563752,7 @@
       {
         "name": "factor",
         "type": "string",
-        "value": null,
+        "value": "2",
         "label": "Speed",
         "placeholder": "",
         "options": [
@@ -563844,14 +563844,14 @@
       {
         "name": "timestamp_seconds",
         "type": "string",
-        "value": null,
+        "value": "1",
         "label": "Timestamp (seconds)",
         "placeholder": "1"
       },
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "png",
         "label": "Image format",
         "placeholder": "",
         "options": [
@@ -563938,7 +563938,7 @@
       {
         "name": "format",
         "type": "string",
-        "value": null,
+        "value": "mp4-h264",
         "label": "Format",
         "placeholder": "",
         "options": [
@@ -563963,7 +563963,7 @@
       {
         "name": "quality",
         "type": "string",
-        "value": null,
+        "value": "medium",
         "label": "Quality",
         "placeholder": "",
         "options": [
@@ -564054,7 +564054,7 @@
       {
         "name": "start_seconds",
         "type": "string",
-        "value": null,
+        "value": "0",
         "label": "Start (seconds)",
         "placeholder": "0"
       },
@@ -564069,7 +564069,7 @@
       {
         "name": "reencode",
         "type": "boolean",
-        "value": null,
+        "value": false,
         "label": "Re-encode (slower, frame-accurate)",
         "placeholder": ""
       }
@@ -564154,7 +564154,7 @@
       {
         "name": "position",
         "type": "string",
-        "value": null,
+        "value": "SouthEast",
         "label": "Position",
         "placeholder": "",
         "options": [
@@ -564267,7 +564267,7 @@
       {
         "name": "colour",
         "type": "string",
-        "value": null,
+        "value": "#00aa9c",
         "label": "Colour",
         "placeholder": "#00aa9c"
       }

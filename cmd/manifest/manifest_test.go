@@ -186,3 +186,104 @@ func TestNoInputHasABlankLabel(t *testing.T) {
 		t.Errorf("%d input(s) have a blank label: %v\n\nSee the note on TestNoActionHasABlankDescription — a blank here is more often the\ngenerator dropping a value than an author omitting one.", len(blank), blank)
 	}
 }
+
+// TestDeclaredInputDefaultsReachTheManifest — an input's declared default has to
+// survive into the manifest, because that file is what the editor renders.
+//
+// The generator handled every other Connection field and simply had no case for
+// Value, so `Value: true` parsed, built and tested cleanly and then arrived as
+// null. The editor drew an unticked box while the action's own label advertised
+// a default and its Execute applied one — three things disagreeing with nothing
+// to indicate it. This reads the committed manifest rather than a fixture,
+// because that mismatch was invisible precisely because the output looked valid.
+func TestDeclaredInputDefaultsReachTheManifest(t *testing.T) {
+	m := loadCommittedManifestWithValues(t)
+
+	// Representative of each kind that can carry one: a boolean default, and a
+	// string default. If the Value case is dropped again, both go null.
+	want := []struct {
+		action, input string
+		value         interface{}
+	}{
+		{"aws/s3/put_public_access_block", "block_public_acls", true},
+		{"crm/apollo/enrichment/people_match", "reveal_personal_emails", true},
+		{"ecommerce/woocommerce/product_delete", "force", true},
+		{"image/convert", "format", "png"},
+		{"graphics/animated_title", "colour", "#ffffff"},
+	}
+
+	for _, w := range want {
+		e, ok := m[w.action]
+		if !ok {
+			t.Errorf("%s missing from the manifest", w.action)
+			continue
+		}
+		found := false
+		for _, i := range e.Inputs {
+			if i.Name != w.input {
+				continue
+			}
+			found = true
+			if i.Value != w.value {
+				t.Errorf("%s#%s default = %v (%T), want %v — a declared default is not reaching the editor",
+					w.action, w.input, i.Value, i.Value, w.value)
+			}
+		}
+		if !found {
+			t.Errorf("%s has no input %q", w.action, w.input)
+		}
+	}
+}
+
+// TestBooleanDefaultsMatchTheirExecuteBehaviour guards the direction that
+// actually bites: a checkbox that renders one way and behaves another.
+//
+// Every boolean default in the tree was audited against its Execute when the
+// Value case was added. All but the S3 public-access-block flags were already
+// applied in Go, so surfacing them changed nothing but the tick; those flags
+// were NOT, which meant "Block Public Access" blocked nothing unless an operator
+// ticked all four boxes. This asserts the secure default specifically, since
+// that is the one where a regression is a security regression.
+func TestBooleanDefaultsMatchTheirExecuteBehaviour(t *testing.T) {
+	m := loadCommittedManifestWithValues(t)
+	for _, action := range []string{"aws/s3/put_public_access_block", "aws/s3/put_account_public_access_block"} {
+		e, ok := m[action]
+		if !ok {
+			t.Fatalf("%s missing from the manifest", action)
+		}
+		for _, name := range []string{"block_public_acls", "ignore_public_acls", "block_public_policy", "restrict_public_buckets"} {
+			var got interface{}
+			for _, i := range e.Inputs {
+				if i.Name == name {
+					got = i.Value
+				}
+			}
+			if got != true {
+				t.Errorf("%s#%s default = %v, want true — this action must block public access by default, not silently permit it", action, name, got)
+			}
+		}
+	}
+}
+
+type manifestEntryWithValues struct {
+	Inputs []struct {
+		Name  string      `json:"name"`
+		Value interface{} `json:"value"`
+	} `json:"inputs"`
+}
+
+func loadCommittedManifestWithValues(t *testing.T) map[string]manifestEntryWithValues {
+	t.Helper()
+	b, err := os.ReadFile(committedManifest)
+	if err != nil {
+		t.Fatalf("read manifest: %v", err)
+	}
+	var m map[string]manifestEntryWithValues
+	if err := json.Unmarshal(b, &m); err != nil {
+		t.Fatalf("parse manifest: %v", err)
+	}
+	if len(m) == 0 {
+		t.Fatal("manifest is empty — this test would pass vacuously")
+	}
+	return m
+}
