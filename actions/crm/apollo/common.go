@@ -203,6 +203,26 @@ func OptionalBool(name string, inputs []*core.Connection) *bool {
 	return c.Boolean()
 }
 
+// BoolValue reads a boolean input as a plain bool, treating absent/unset as
+// false — matching Apollo's own defaults for the reveal_* flags.
+func BoolValue(name string, inputs []*core.Connection) bool {
+	return BoolValueDefault(name, inputs, false)
+}
+
+// BoolValueDefault reads a boolean input, falling back to def when the input is
+// absent or holds no interpretable value.
+//
+// The three states matter here. A boolean input is nil until someone touches it
+// and a real bool afterwards, so "never configured" stays distinguishable from
+// "deliberately switched off" — which is what lets a flag default to ON while
+// still honouring an author who turns it off.
+func BoolValueDefault(name string, inputs []*core.Connection, def bool) bool {
+	if v := OptionalBool(name, inputs); v != nil {
+		return *v
+	}
+	return def
+}
+
 // StringList splits a comma-separated input (e.g. contact_ids) into a trimmed
 // slice, dropping blanks. Returns nil when the input is absent/blank.
 func StringList(name string, inputs []*core.Connection) []string {
@@ -525,6 +545,94 @@ func joinLocation(parts ...string) string {
 	return strings.Join(kept, ", ")
 }
 
+// minResultsForLocationCheck is the smallest result count worth judging. Below
+// this a zero-match run is just as likely to be a genuinely sparse area as an
+// ignored filter, and a warning would be noise.
+const minResultsForLocationCheck = 3
+
+// LocationIgnoredWarning reports when a location filter appears to have had no
+// effect, because NONE of the returned records mention the requested location.
+//
+// Apollo silently ignores location values outside its own taxonomy. It indexes
+// city, state/region and country; many UK counties are not in it. Ask for
+// "Cheshire, United Kingdom" and Apollo does not error or return nothing — it
+// drops the constraint and answers an unfiltered, relevance-ranked search. The
+// result is a plausible-looking page of large national employers (The Economist,
+// the FT, Robert Walters) that reads as a successful county search and is
+// nothing of the kind. That is the same silent-wrong-answer shape as the
+// comma-splitting bug, arriving by a different route.
+//
+// The check is deliberately conservative. Apollo's city filters legitimately
+// include surrounding towns — a "Chester" search returning Ellesmere Port and
+// Capenhurst is correct behaviour, not a miss — so this only speaks up when
+// literally nothing matches, and it reports the count as a fact and the cause as
+// a possibility rather than asserting breakage. A record's own location may also
+// simply be absent, so a warning is a prompt to verify, never a verdict.
+func LocationIgnoredWarning(requested []string, recordLocations []string) string {
+	if len(requested) == 0 || len(recordLocations) < minResultsForLocationCheck {
+		return ""
+	}
+
+	needles := make([]string, 0, len(requested)*2)
+	for _, r := range requested {
+		full := strings.ToLower(strings.TrimSpace(r))
+		if full == "" {
+			continue
+		}
+		needles = append(needles, full)
+		// Also match the leading segment, since a record reports its city and
+		// country in separate fields while the filter is "City, Country".
+		if head, _, found := strings.Cut(full, ","); found {
+			if h := strings.TrimSpace(head); h != "" {
+				needles = append(needles, h)
+			}
+		}
+	}
+	if len(needles) == 0 {
+		return ""
+	}
+
+	matched := 0
+	for _, loc := range recordLocations {
+		l := strings.ToLower(loc)
+		for _, n := range needles {
+			if strings.Contains(l, n) {
+				matched++
+				break
+			}
+		}
+	}
+	if matched > 0 {
+		return ""
+	}
+
+	return fmt.Sprintf(
+		"WARNING - LOCATION FILTER MAY HAVE BEEN IGNORED: none of the %d result(s) report the requested location (%s). "+
+			"Apollo silently drops location values it does not recognise and answers an UNFILTERED search instead, which looks like a normal result. "+
+			"Apollo indexes city, state/region and country — UK counties (e.g. \"Cheshire\") are often absent, so prefer a city such as \"Chester, United Kingdom\" "+
+			"and use ; to add neighbouring towns. Verify the geography of these results before treating them as local.",
+		len(recordLocations), strings.Join(requested, "; "))
+}
+
+// OrgLocations renders each organisation's own location for the filter check.
+func OrgLocations(records []map[string]interface{}) []string {
+	out := make([]string, 0, len(records))
+	for _, m := range records {
+		out = append(out, joinLocation(fieldStr(m, "city"), fieldStr(m, "state"), fieldStr(m, "country")))
+	}
+	return out
+}
+
+// PersonLocations renders each person's own location — NOT their employer's —
+// for the filter check, since person_locations filters on the individual.
+func PersonLocations(records []map[string]interface{}) []string {
+	out := make([]string, 0, len(records))
+	for _, m := range records {
+		out = append(out, joinLocation(fieldStr(m, "city"), fieldStr(m, "state"), fieldStr(m, "country")))
+	}
+	return out
+}
+
 func orNotProvided(s string) string {
 	if strings.TrimSpace(s) == "" {
 		return "not provided"
@@ -628,16 +736,26 @@ func AddQueryFromMap(q url.Values, m map[string]interface{}) {
 	}
 }
 
-// ── Plan-gated / obfuscated data detection ──────────────────────────────────
+// ── Withheld / obfuscated personal data ─────────────────────────────────────
 //
-// On limited Apollo plans, People Search and enrichment return records whose
-// personal data is WITHHELD: the surname comes back only as
-// `last_name_obfuscated` ("Mc***y") and email/city/phone are replaced by
-// `has_email` / `has_city` / `has_direct_phone` boolean flags with no actual
-// value. The results look plausible but are not verifiable or contactable, and
-// revealing them needs a plan with API access and enrichment credits. These
-// helpers detect that so an action can warn loudly rather than let an agent
-// present masked people as a confident cohort.
+// Apollo returns people records whose personal data is WITHHELD: the surname
+// comes back only as `last_name_obfuscated` ("Mc***y") and email/city/phone are
+// replaced by `has_email` / `has_city` / `has_direct_phone` boolean flags with
+// no actual value.
+//
+// The usual cause is NOT a billing problem. People Search is free and NEVER
+// returns personal emails, by design — `has_email: true` is Apollo correctly
+// saying "an email exists for this person, enrich to retrieve it". Emails come
+// only from the enrichment endpoints, and only when `reveal_personal_emails` is
+// explicitly set: it defaults to FALSE, so an enrichment call that omits it
+// returns a null email while consuming no credit. Apollo charges 1 credit for a
+// revealed email and 8 for a mobile, and only when data is actually found.
+//
+// Getting this attribution wrong is expensive in a way an empty result is not.
+// Reading withheld data as "our plan is too limited" leads to abandoning the
+// integration for a slower manual route, when the fix was a flag. So the warning
+// leads with the flag and offers plan/credits only as the fallback explanation.
+// See https://docs.apollo.io/reference/people-enrichment.
 
 // IsGatedRecord reports whether an Apollo person record has plan-gated personal
 // data (an obfuscated surname, or a has_* flag set while the real value is
@@ -658,9 +776,11 @@ func IsGatedRecord(m map[string]interface{}) bool {
 	return false
 }
 
-// GatePrefix returns summary with a loud data-gating warning prepended when any
-// of the records are plan-gated; otherwise it returns summary unchanged. The
-// warning is written into tool_result so an AI/agent caller cannot miss it.
+// GatePrefix returns summary with a withheld-data notice prepended when any of
+// the records have personal data withheld; otherwise it returns summary
+// unchanged. The notice goes into tool_result so an AI/agent caller cannot miss
+// it — and, critically, states the LIKELY CAUSE correctly so the reader fixes a
+// flag rather than concluding the integration is unusable.
 func GatePrefix(summary string, records []map[string]interface{}) string {
 	gated := 0
 	for _, m := range records {
@@ -671,11 +791,37 @@ func GatePrefix(summary string, records []map[string]interface{}) string {
 	if gated == 0 {
 		return summary
 	}
-	warn := fmt.Sprintf("WARNING - APOLLO DATA GATED: %d of %d result(s) have personal data withheld by this API key's Apollo plan (surnames obfuscated as last_name_obfuscated; email/city/phone hidden behind has_* flags). These people CANNOT be verified or contacted from this key - an Apollo plan with API access and available credits is required to reveal (unlock) them. Do NOT present these as confirmed contacts.", gated, len(records))
+	warn := fmt.Sprintf(
+		"NOTE - PERSONAL DATA NOT REVEALED: %d of %d record(s) have a withheld surname (last_name_obfuscated) or a has_email/has_city flag with no value. "+
+			"This is USUALLY NOT a plan or credit problem. People Search is free and never returns personal emails — has_email:true simply means an email EXISTS and can be retrieved. "+
+			"To get it, call People: Enrich (people/match), which has Reveal Personal Emails ON by default; a search result alone will never carry an email. "+
+			"Apollo charges 1 credit per revealed email (8 for a mobile) and only when data is found. "+
+			"If reveal was on and the value is still null, then the record genuinely has no data for that field, or the key's plan/credits are exhausted. "+
+			"Until revealed, do not present these as confirmed contacts.",
+		gated, len(records))
 	if strings.TrimSpace(summary) == "" {
 		return warn
 	}
 	return warn + "\n\n" + summary
+}
+
+// RevealHint explains a missing email, distinguishing the two very different
+// reasons for one.
+//
+// An enrichment that returns no email is ambiguous: it can mean "this person has
+// no email on file" or "you asked us not to fetch it". Only the second is
+// actionable, and conflating them is what turns a one-switch fix into a
+// conclusion that the data is unavailable. Apollo's own default is not to
+// reveal, so this action defaults reveal ON — which means the second case now
+// only arises when an author has deliberately switched it off.
+func RevealHint(person map[string]interface{}, revealRequested bool) string {
+	if person == nil || !emptyValue(person["email"]) {
+		return ""
+	}
+	if revealRequested {
+		return "No email returned even though Reveal Personal Emails was on — Apollo has no personal email on file for this person, or the key's credits are exhausted. No credit is charged when nothing is found."
+	}
+	return "No email returned because Reveal Personal Emails is switched OFF on this node. Apollo does not return personal emails unless asked. Switch it on to retrieve one — 1 credit, charged only if an email is found."
 }
 
 // truthyFlag reads Apollo's has_* flags, which arrive as either a bool or a

@@ -184638,7 +184638,7 @@
     ]
   },
   "crm/apollo/enrichment/people_bulk_match": {
-    "hash": "b7dd74f673b8706a5e1fdd4de9ec5537e8c59c548975dc380e0d3cc98cd6f824",
+    "hash": "713c9fef7e01f66dd63a3316bf48f881e50b6a6b94511964624c59628925c459",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Bulk Enrich",
@@ -184684,14 +184684,27 @@
         "type": "boolean",
         "value": null,
         "label": "Reveal Personal Emails",
-        "placeholder": "Consumes credits"
+        "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
       {
         "name": "reveal_phone_number",
         "type": "boolean",
         "value": null,
         "label": "Reveal Phone Number",
-        "placeholder": "Consumes credits"
+        "placeholder": "8 credits; requires a Webhook URL (delivered asynchronously)"
+      },
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL (required for phone reveal)",
+        "placeholder": "https://… public HTTPS endpoint",
+        "visible_when": {
+          "field": "reveal_phone_number",
+          "values": [
+            "true"
+          ]
+        }
       }
     ],
     "outputs": [
@@ -184733,7 +184746,7 @@
     ]
   },
   "crm/apollo/enrichment/people_match": {
-    "hash": "d299152b3d4d7d8adaa524d5029920cbd4146a405b6e37c726e2d41440ffe265",
+    "hash": "95f0eff3ad0a87e9eb607e1949cf17c30eb98e7d965b6f0ea07c848baab7bb1d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Enrich",
@@ -184820,14 +184833,27 @@
         "type": "boolean",
         "value": null,
         "label": "Reveal Personal Emails",
-        "placeholder": "Consumes credits"
+        "placeholder": "ON by default for this enrichment action — 1 credit per email, charged only if found. The box renders unticked until set; tick then untick it to explicitly turn reveal off."
       },
       {
         "name": "reveal_phone_number",
         "type": "boolean",
         "value": null,
         "label": "Reveal Phone Number",
-        "placeholder": "Consumes credits"
+        "placeholder": "8 credits; requires a Webhook URL (delivered asynchronously)"
+      },
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL (required for phone reveal)",
+        "placeholder": "https://… public HTTPS endpoint",
+        "visible_when": {
+          "field": "reveal_phone_number",
+          "values": [
+            "true"
+          ]
+        }
       }
     ],
     "outputs": [
@@ -184869,7 +184895,7 @@
     ]
   },
   "crm/apollo/search/organization_search": {
-    "hash": "ba119d82cd062c9e9e1b678f3bbf3a4f5a683e84d26e087a527646af0d13178a",
+    "hash": "6e14415ef2b5cd30a9953b53fd5e7fcc8e767476798e6633542b8cfe7b2f9173",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Companies: Search",
@@ -184914,7 +184940,7 @@
         "type": "string",
         "value": null,
         "label": "Company Locations",
-        "placeholder": "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"
+        "placeholder": "Chester, United Kingdom — use a CITY (UK counties are often unknown to Apollo and get ignored); separate multiple with ;"
       },
       {
         "name": "organization_num_employees_ranges",
@@ -184977,7 +185003,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "a8bdd2bbc6385d410bf2fc4730b0c0c4c51da454087bbf90ade0261635829627",
+    "hash": "bdfa3f0dde536e26666b2e2ca186685bbd23e51464b724d2fdce2f79c385e05b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",
@@ -185036,7 +185062,7 @@
         "type": "string",
         "value": null,
         "label": "Person Locations (where the PERSON lives)",
-        "placeholder": "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"
+        "placeholder": "Chester, United Kingdom — use a CITY (UK counties are often unknown to Apollo and get ignored); separate multiple with ;"
       },
       {
         "name": "organization_locations",

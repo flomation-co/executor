@@ -27,7 +27,7 @@ var Inputs = [...]core.Connection{
 	{Name: "q_keywords", Type: core.ConnectionTypeString, Label: "Keywords", Placeholder: "Free-text search across name, title, company"},
 	{Name: "person_titles", Type: core.ConnectionTypeString, Label: "Job Titles", Placeholder: "CEO, Head of Sales (comma-separated)"},
 	{Name: "person_seniorities", Type: core.ConnectionTypeString, Label: "Seniorities", Placeholder: "owner, founder, c_suite, vp, director (comma-separated)"},
-	{Name: "person_locations", Type: core.ConnectionTypeString, Label: "Person Locations (where the PERSON lives)", Placeholder: "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"},
+	{Name: "person_locations", Type: core.ConnectionTypeString, Label: "Person Locations (where the PERSON lives)", Placeholder: "Chester, United Kingdom — use a CITY (UK counties are often unknown to Apollo and get ignored); separate multiple with ;"},
 	{Name: "organization_locations", Type: core.ConnectionTypeString, Label: "Company HQ Locations (where the COMPANY is)", Placeholder: "Chester, United Kingdom — separate MULTIPLE locations with ;"},
 	{Name: "contact_email_status", Type: core.ConnectionTypeString, Label: "Email Status", Options: []core.ConnectionOption{{Name: "Verified only", Value: "verified"}, {Name: "Verified or likely", Value: "verified,likely_to_engage"}, {Name: "Any", Value: ""}}},
 	{Name: "organization_domains", Type: core.ConnectionTypeString, Label: "Company Domains", Placeholder: "example.com (comma-separated)"},
@@ -94,6 +94,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// Warn loudly if the plan gated the personal data (obfuscated surnames, no
 	// emails/cities) so a caller cannot mistake masked people for real contacts.
 	summary := apollo_common.GatePrefix(fmt.Sprintf("Found %d people", len(people)), people)
+	// Apollo drops location values outside its taxonomy and answers an
+	// unfiltered search instead. Check against each PERSON's own location, since
+	// that is what person_locations filters on.
+	if warn := apollo_common.LocationIgnoredWarning(
+		apollo_common.LocationList("person_locations", inputs),
+		apollo_common.PersonLocations(people),
+	); warn != "" {
+		summary = warn + "\n" + summary
+	}
 	// Then state each person's own location separately from their employer's, so
 	// a company HQ is never read as confirming where the individual is.
 	if prov := apollo_common.PeopleProvenance(people); prov != "" {
