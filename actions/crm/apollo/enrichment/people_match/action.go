@@ -66,5 +66,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return apollo_common.ErrorResult("no matching person found"), nil
 	}
 	name, _ := person["name"].(string)
-	return apollo_common.ObjectResult("", person, fmt.Sprintf("Enriched %s", name)), nil
+	// If the enriched record came back gated (obfuscated surname, no email/city),
+	// warn — the plan didn't reveal the data even for a direct match.
+	summary := apollo_common.GatePrefix(fmt.Sprintf("Enriched %s", name), []map[string]interface{}{person})
+	return apollo_common.ObjectResult("", person, summary), nil
 }

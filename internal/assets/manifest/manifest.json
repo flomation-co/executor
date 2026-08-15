@@ -184638,7 +184638,7 @@
     ]
   },
   "crm/apollo/enrichment/people_bulk_match": {
-    "hash": "b56e09b4affad687e3601ae179cffbefb81bdd4e582a1af14d5079854a545426",
+    "hash": "b7dd74f673b8706a5e1fdd4de9ec5537e8c59c548975dc380e0d3cc98cd6f824",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Bulk Enrich",
@@ -184733,7 +184733,7 @@
     ]
   },
   "crm/apollo/enrichment/people_match": {
-    "hash": "106a799da531111cd05521a98a875b941b90d7b92e5233d7c674f2b927d3d558",
+    "hash": "d299152b3d4d7d8adaa524d5029920cbd4146a405b6e37c726e2d41440ffe265",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Enrich",
@@ -184869,7 +184869,7 @@
     ]
   },
   "crm/apollo/search/organization_search": {
-    "hash": "9fca979b4ddafecee8b752441cb4c9d60689563c15e08a059eb73fa28eb97771",
+    "hash": "ba119d82cd062c9e9e1b678f3bbf3a4f5a683e84d26e087a527646af0d13178a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Companies: Search",
@@ -184914,7 +184914,7 @@
         "type": "string",
         "value": null,
         "label": "Company Locations",
-        "placeholder": "United Kingdom (comma-separated)"
+        "placeholder": "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"
       },
       {
         "name": "organization_num_employees_ranges",
@@ -184977,7 +184977,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "2e24275dc31dafb940533246ca586676b7cf157a62f8b4490eed86df4414754e",
+    "hash": "a8bdd2bbc6385d410bf2fc4730b0c0c4c51da454087bbf90ade0261635829627",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",
@@ -185035,8 +185035,36 @@
         "name": "person_locations",
         "type": "string",
         "value": null,
-        "label": "Person Locations",
-        "placeholder": "City, region or country, e.g. Chester, United Kingdom (comma-separated)"
+        "label": "Person Locations (where the PERSON lives)",
+        "placeholder": "Chester, United Kingdom — separate MULTIPLE locations with ; (a comma belongs inside one location)"
+      },
+      {
+        "name": "organization_locations",
+        "type": "string",
+        "value": null,
+        "label": "Company HQ Locations (where the COMPANY is)",
+        "placeholder": "Chester, United Kingdom — separate MULTIPLE locations with ;"
+      },
+      {
+        "name": "contact_email_status",
+        "type": "string",
+        "value": null,
+        "label": "Email Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Verified only",
+            "value": "verified"
+          },
+          {
+            "name": "Verified or likely",
+            "value": "verified,likely_to_engage"
+          },
+          {
+            "name": "Any",
+            "value": ""
+          }
+        ]
       },
       {
         "name": "organization_domains",

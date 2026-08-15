@@ -223,6 +223,52 @@ func StringList(name string, inputs []*core.Connection) []string {
 	return out
 }
 
+// LocationList splits a location input into Apollo location values.
+//
+// It splits on SEMICOLONS (and newlines), never on commas, because a comma is
+// part of an Apollo location value rather than a separator between them:
+// Apollo expects "Chester, United Kingdom" or "California, US" as a SINGLE
+// string.
+//
+// Splitting locations on commas — as StringList does, and as this field used to
+// — is not a cosmetic bug. Apollo ORs the values within an array filter, so
+// "Chester, United Kingdom" became "Chester OR United Kingdom": the country
+// clause swallows the city and the search quietly widens to the entire UK.
+// The giveaway is that two different queries collapse to the same thing —
+// "Chester, United Kingdom" and "Cheshire, United Kingdom" both reduce to
+// "<somewhere> OR United Kingdom" and return an identical page of large UK
+// employers. That reads as "the location filter is broken and returns national
+// results", which is precisely how it was reported, when in fact the filter was
+// working on the values we sent it.
+//
+// This mirrors RangeList, which already splits on ';' for the same underlying
+// reason (a comma is meaningful *inside* each headcount range).
+func LocationList(name string, inputs []*core.Connection) []string {
+	raw := strings.TrimSpace(OptionalString(name, inputs))
+	if raw == "" {
+		return nil
+	}
+	parts := strings.FieldsFunc(raw, func(r rune) bool { return r == ';' || r == '\n' || r == '\r' })
+	out := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if t := strings.TrimSpace(p); t != "" {
+			out = append(out, t)
+		}
+	}
+	if len(out) == 0 {
+		return nil
+	}
+	return out
+}
+
+// AddQueryLocationList adds a location input as repeated bracketed params,
+// preserving the comma inside each location value.
+func AddQueryLocationList(q url.Values, key, name string, inputs []*core.Connection) {
+	for _, v := range LocationList(name, inputs) {
+		q.Add(key+"[]", v)
+	}
+}
+
 // --- body setters (assign into the request body only when present) ---
 
 func SetString(body map[string]interface{}, field, name string, inputs []*core.Connection) {
@@ -417,6 +463,75 @@ func ListResult(items []map[string]interface{}, summary string) map[string]inter
 	}
 }
 
+// PeopleProvenance renders one explicit line per person separating WHERE THE
+// PERSON IS from WHERE THEIR EMPLOYER IS, plus the email and its Apollo status.
+//
+// The raw Apollo record contains both, but the person's own city sits at the
+// top level while the employer's sits nested under "organization" — so a reader
+// scanning the JSON easily reads a company HQ as though it confirmed the
+// individual. That conflation is exactly what a "verified local" standard must
+// not make: a company headquartered in Wrexham tells you nothing about where any
+// given employee actually sits.
+//
+// Missing values are stated as "not provided" rather than omitted, so an absent
+// field is visibly absent instead of quietly reading as agreement with whatever
+// sits next to it.
+func PeopleProvenance(records []map[string]interface{}) string {
+	if len(records) == 0 {
+		return ""
+	}
+	var b strings.Builder
+	b.WriteString("PER-PERSON PROVENANCE (person location and company location are SEPARATE claims — do not treat a company HQ as confirming the individual):\n")
+	for i, m := range records {
+		name := strings.TrimSpace(strings.TrimSpace(fieldStr(m, "first_name")) + " " + strings.TrimSpace(fieldStr(m, "last_name")))
+		if ob := strings.TrimSpace(fieldStr(m, "last_name_obfuscated")); ob != "" {
+			name = strings.TrimSpace(fieldStr(m, "first_name")) + " " + ob + " (SURNAME WITHHELD BY PLAN)"
+		}
+		if strings.TrimSpace(name) == "" {
+			name = "(name not provided)"
+		}
+
+		org := Obj(m, "organization")
+		fmt.Fprintf(&b, "%d. %s — %s @ %s | person location: %s | company location: %s | email: %s (status: %s)\n",
+			i+1,
+			name,
+			orNotProvided(fieldStr(m, "title")),
+			orNotProvided(fieldStr(org, "name")),
+			orNotProvided(joinLocation(fieldStr(m, "city"), fieldStr(m, "state"), fieldStr(m, "country"))),
+			orNotProvided(joinLocation(fieldStr(org, "city"), fieldStr(org, "state"), fieldStr(org, "country"))),
+			orNotProvided(fieldStr(m, "email")),
+			orNotProvided(fieldStr(m, "email_status")),
+		)
+	}
+	return b.String()
+}
+
+// fieldStr reads a string field, tolerating a non-string or absent value.
+func fieldStr(m map[string]interface{}, key string) string {
+	if m == nil {
+		return ""
+	}
+	s, _ := m[key].(string)
+	return strings.TrimSpace(s)
+}
+
+func joinLocation(parts ...string) string {
+	kept := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if t := strings.TrimSpace(p); t != "" {
+			kept = append(kept, t)
+		}
+	}
+	return strings.Join(kept, ", ")
+}
+
+func orNotProvided(s string) string {
+	if strings.TrimSpace(s) == "" {
+		return "not provided"
+	}
+	return s
+}
+
 // ErrorResult is a graceful failure — success=false, not a node error — so an
 // invalid parameter or rate limit can be handled within the flow.
 func ErrorResult(msg string) map[string]interface{} {
@@ -511,4 +626,77 @@ func AddQueryFromMap(q url.Values, m map[string]interface{}) {
 			q.Set(k, fmt.Sprint(vv))
 		}
 	}
+}
+
+// ── Plan-gated / obfuscated data detection ──────────────────────────────────
+//
+// On limited Apollo plans, People Search and enrichment return records whose
+// personal data is WITHHELD: the surname comes back only as
+// `last_name_obfuscated` ("Mc***y") and email/city/phone are replaced by
+// `has_email` / `has_city` / `has_direct_phone` boolean flags with no actual
+// value. The results look plausible but are not verifiable or contactable, and
+// revealing them needs a plan with API access and enrichment credits. These
+// helpers detect that so an action can warn loudly rather than let an agent
+// present masked people as a confident cohort.
+
+// IsGatedRecord reports whether an Apollo person record has plan-gated personal
+// data (an obfuscated surname, or a has_* flag set while the real value is
+// absent/empty).
+func IsGatedRecord(m map[string]interface{}) bool {
+	if m == nil {
+		return false
+	}
+	if s, ok := m["last_name_obfuscated"].(string); ok && strings.TrimSpace(s) != "" {
+		return true
+	}
+	if truthyFlag(m["has_email"]) && emptyValue(m["email"]) {
+		return true
+	}
+	if truthyFlag(m["has_city"]) && emptyValue(m["city"]) {
+		return true
+	}
+	return false
+}
+
+// GatePrefix returns summary with a loud data-gating warning prepended when any
+// of the records are plan-gated; otherwise it returns summary unchanged. The
+// warning is written into tool_result so an AI/agent caller cannot miss it.
+func GatePrefix(summary string, records []map[string]interface{}) string {
+	gated := 0
+	for _, m := range records {
+		if IsGatedRecord(m) {
+			gated++
+		}
+	}
+	if gated == 0 {
+		return summary
+	}
+	warn := fmt.Sprintf("WARNING - APOLLO DATA GATED: %d of %d result(s) have personal data withheld by this API key's Apollo plan (surnames obfuscated as last_name_obfuscated; email/city/phone hidden behind has_* flags). These people CANNOT be verified or contacted from this key - an Apollo plan with API access and available credits is required to reveal (unlock) them. Do NOT present these as confirmed contacts.", gated, len(records))
+	if strings.TrimSpace(summary) == "" {
+		return warn
+	}
+	return warn + "\n\n" + summary
+}
+
+// truthyFlag reads Apollo's has_* flags, which arrive as either a bool or a
+// string ("true"/"Yes").
+func truthyFlag(v interface{}) bool {
+	switch t := v.(type) {
+	case bool:
+		return t
+	case string:
+		s := strings.ToLower(strings.TrimSpace(t))
+		return s == "true" || s == "yes"
+	}
+	return false
+}
+
+func emptyValue(v interface{}) bool {
+	if v == nil {
+		return true
+	}
+	if s, ok := v.(string); ok {
+		return strings.TrimSpace(s) == ""
+	}
+	return false
 }

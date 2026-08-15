@@ -49,7 +49,8 @@ func TestExecute_FiltersAreQueryParamsWithBracketArrays(t *testing.T) {
 	ins := inputs(
 		[2]string{"api_key", "k123"},
 		[2]string{"person_titles", "Chief Executive, Founder"},
-		[2]string{"person_locations", "Chester, Wrexham"},
+		// Semicolon-separated: a comma belongs inside one location value.
+		[2]string{"person_locations", "Chester, United Kingdom; Wrexham, United Kingdom"},
 		[2]string{"organization_domains", "https://www.HSE.ie/about"},
 	)
 	ins = append(ins,
@@ -62,7 +63,10 @@ func TestExecute_FiltersAreQueryParamsWithBracketArrays(t *testing.T) {
 
 	// Arrays as repeated bracketed query params.
 	Expect(q["person_titles[]"]).To(Equal([]string{"Chief Executive", "Founder"}))
-	Expect(q["person_locations[]"]).To(Equal([]string{"Chester", "Wrexham"}))
+	// Each location stays whole; the country must never become its own value,
+	// which would OR the city away and widen the search to the entire country.
+	Expect(q["person_locations[]"]).To(Equal([]string{"Chester, United Kingdom", "Wrexham, United Kingdom"}))
+	Expect(q["person_locations[]"]).ToNot(ContainElement("United Kingdom"))
 	Expect(q["q_organization_domains_list[]"]).To(Equal([]string{"hse.ie"}))
 	// Scalars.
 	Expect(q.Get("page")).To(Equal("2"))

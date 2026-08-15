@@ -48,11 +48,15 @@ func TestExecute_CompanyFiltersAreQueryParams(t *testing.T) {
 	res, err := Execute(nil, nil, inputs(
 		[2]string{"api_key", "k123"},
 		[2]string{"q_organization_name", "Acme"},
-		[2]string{"organization_locations", "Chester, Liverpool"},
+		// Semicolon-separated: a comma belongs inside one location value.
+		[2]string{"organization_locations", "Chester, United Kingdom; Liverpool, United Kingdom"},
 	))
 	Expect(err).ToNot(HaveOccurred())
 	Expect(res["success"]).To(BeTrue())
 
 	Expect(q.Get("q_organization_name")).To(Equal("Acme"))
-	Expect(q["organization_locations[]"]).To(Equal([]string{"Chester", "Liverpool"}))
+	// Each location stays whole; the country must never become its own value,
+	// which would OR the city away and widen the search to the entire country.
+	Expect(q["organization_locations[]"]).To(Equal([]string{"Chester, United Kingdom", "Liverpool, United Kingdom"}))
+	Expect(q["organization_locations[]"]).ToNot(ContainElement("United Kingdom"))
 }

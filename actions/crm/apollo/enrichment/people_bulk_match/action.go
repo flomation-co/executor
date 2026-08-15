@@ -58,5 +58,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	matches := apollo_common.Arr(resp, "matches")
-	return apollo_common.ListResult(matches, fmt.Sprintf("Enriched %d people", len(matches))), nil
+	summary := apollo_common.GatePrefix(fmt.Sprintf("Enriched %d people", len(matches)), matches)
+	return apollo_common.ListResult(matches, summary), nil
 }
