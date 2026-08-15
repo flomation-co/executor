@@ -43,25 +43,23 @@ func TestRevealHint_SilentWhenEmailPresent(t *testing.T) {
 	Expect(RevealHint(nil, false)).To(Equal(""))
 }
 
-// The withheld-data notice must lead with the reveal flag and explicitly deny
-// the plan explanation as the default reading. Getting this backwards is what
-// caused the integration to be written off as unusable.
+// The ENRICHMENT notice must attribute a null email to the reveal flag, not the
+// plan. Getting this backwards is what caused the integration to be written off
+// as unusable. (The SEARCH variant carries different, search-specific advice —
+// see TestGatePrefixSearch_GivesSearchSpecificAdvice.)
 func TestGatePrefix_AttributesToRevealFlagNotPlan(t *testing.T) {
 	RegisterTestingT(t)
 
-	out := GatePrefix("Found 3 people", []map[string]interface{}{
+	out := GatePrefix("Enriched 3 people", []map[string]interface{}{
 		{"first_name": "Becky", "last_name_obfuscated": "W***n"},
 		{"has_email": true, "email": ""},
 		{"first_name": "Ok", "last_name": "Person", "email": "ok@example.com"},
 	})
 
-	Expect(out).To(ContainSubstring("USUALLY NOT a plan or credit problem"))
-	Expect(out).To(ContainSubstring("People Search is free"))
+	Expect(out).To(ContainSubstring("USUALLY the reveal flag rather than the plan"))
 	Expect(out).To(ContainSubstring("Reveal Personal Emails ON by default"))
-	// has_email:true is Apollo being accurate, not misleading — say so.
-	Expect(out).To(ContainSubstring("an email EXISTS"))
 	Expect(out).To(ContainSubstring("2 of 3"))
-	Expect(out).To(ContainSubstring("Found 3 people"))
+	Expect(out).To(ContainSubstring("Enriched 3 people"))
 }
 
 func TestGatePrefix_SilentWhenNothingWithheld(t *testing.T) {

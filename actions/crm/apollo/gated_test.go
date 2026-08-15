@@ -42,7 +42,7 @@ func TestGatePrefix(t *testing.T) {
 		{"first_name": "Ada", "last_name": "Lovelace", "email": "ada@x.com"},
 	}
 	out := GatePrefix("Found 2 people", gated)
-	Expect(out).To(HavePrefix("NOTE - PERSONAL DATA NOT REVEALED"))
+	Expect(out).To(HavePrefix("NOTE - PERSONAL DATA WITHHELD"))
 	Expect(out).To(ContainSubstring("1 of 2 record(s)"))
 	// The cause is the un-set reveal flag, NOT the plan — see reveal_test.go.
 	Expect(out).To(ContainSubstring("Reveal Personal Emails ON by default"))
