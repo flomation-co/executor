@@ -21,8 +21,9 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Apollo API Key", Placeholder: "${secrets.ApolloApiKey}", Required: true},
 	{Name: "details", Type: core.ConnectionTypeText, Label: "Details (JSON array)", Placeholder: `[{"email":"a@x.com"},{"first_name":"Ada","last_name":"Lovelace","domain":"x.com"}]`, Required: true},
-	{Name: "reveal_personal_emails", Type: core.ConnectionTypeBoolean, Label: "Reveal Personal Emails", Placeholder: "Consumes credits"},
-	{Name: "reveal_phone_number", Type: core.ConnectionTypeBoolean, Label: "Reveal Phone Number", Placeholder: "Consumes credits"},
+	{Name: "reveal_personal_emails", Type: core.ConnectionTypeBoolean, Label: "Reveal Personal Emails", Placeholder: "REQUIRED to get an email — defaults off. 1 credit, charged only if found"},
+	{Name: "reveal_phone_number", Type: core.ConnectionTypeBoolean, Label: "Reveal Phone Number", Placeholder: "8 credits; requires a Webhook URL (delivered asynchronously)"},
+	{Name: "webhook_url", Type: core.ConnectionTypeString, Label: "Webhook URL (required for phone reveal)", Placeholder: "https://… public HTTPS endpoint", Visible: &core.VisibleWhen{Field: "reveal_phone_number", Values: []string{"true"}}},
 }
 
 var Outputs = [...]core.Connection{
@@ -51,6 +52,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	body := map[string]interface{}{"details": arr}
 	apollo_common.SetBool(body, "reveal_personal_emails", "reveal_personal_emails", inputs)
 	apollo_common.SetBool(body, "reveal_phone_number", "reveal_phone_number", inputs)
+	apollo_common.SetString(body, "webhook_url", "webhook_url", inputs)
+
+	// Phone numbers are delivered asynchronously to a webhook, so Apollo requires
+	// webhook_url alongside reveal_phone_number.
+	if apollo_common.BoolValue("reveal_phone_number", inputs) && apollo_common.OptionalString("webhook_url", inputs) == "" {
+		return apollo_common.ErrorResult("Reveal Phone Number requires a Webhook URL: Apollo returns phone numbers asynchronously and delivers them to that URL, not in this response. Provide a public HTTPS Webhook URL, or turn off Reveal Phone Number (email reveal does not need one)."), nil
+	}
 
 	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/people/bulk_match", body)
 	if err != nil {

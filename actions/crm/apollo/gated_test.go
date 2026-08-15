@@ -42,9 +42,10 @@ func TestGatePrefix(t *testing.T) {
 		{"first_name": "Ada", "last_name": "Lovelace", "email": "ada@x.com"},
 	}
 	out := GatePrefix("Found 2 people", gated)
-	Expect(out).To(HavePrefix("WARNING - APOLLO DATA GATED"))
-	Expect(out).To(ContainSubstring("1 of 2 result(s)"))
-	Expect(out).To(ContainSubstring("available credits"))
+	Expect(out).To(HavePrefix("NOTE - PERSONAL DATA NOT REVEALED"))
+	Expect(out).To(ContainSubstring("1 of 2 record(s)"))
+	// The cause is the un-set reveal flag, NOT the plan — see reveal_test.go.
+	Expect(out).To(ContainSubstring("Reveal Personal Emails set to TRUE"))
 	Expect(strings.HasSuffix(out, "Found 2 people")).To(BeTrue())
 
 	// No gated records → summary unchanged (no false alarm on real data).
