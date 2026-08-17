@@ -1894,6 +1894,16 @@ import (
 	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
 	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
+	marketing_meta_ads_accounts_account_list "flomation.app/automate/executor/actions/marketing/meta_ads/accounts/account_list"
+	marketing_meta_ads_ads_ad_list "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_list"
+	marketing_meta_ads_ads_ad_update "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_update"
+	marketing_meta_ads_adsets_adset_create "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_create"
+	marketing_meta_ads_adsets_adset_list "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_list"
+	marketing_meta_ads_adsets_adset_update "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_update"
+	marketing_meta_ads_campaigns_campaign_create "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_create"
+	marketing_meta_ads_campaigns_campaign_list "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_list"
+	marketing_meta_ads_campaigns_campaign_update "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_update"
+	marketing_meta_ads_insights_insights_get "flomation.app/automate/executor/actions/marketing/meta_ads/insights/insights_get"
 	marketing_sendgrid_asm_group_create "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_create"
 	marketing_sendgrid_asm_group_delete "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_delete"
 	marketing_sendgrid_asm_group_get "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_get"
@@ -5461,6 +5471,16 @@ var Actions = map[string]core.Action{
 	"makefile/list_targets":                                                           makefile_list_targets.Execute,
 	"makefile/run_target":                                                             makefile_run_target.Execute,
 	"makefile/validate":                                                               makefile_validate.Execute,
+	"marketing/meta_ads/accounts/account_list":                                        marketing_meta_ads_accounts_account_list.Execute,
+	"marketing/meta_ads/ads/ad_list":                                                  marketing_meta_ads_ads_ad_list.Execute,
+	"marketing/meta_ads/ads/ad_update":                                                marketing_meta_ads_ads_ad_update.Execute,
+	"marketing/meta_ads/adsets/adset_create":                                          marketing_meta_ads_adsets_adset_create.Execute,
+	"marketing/meta_ads/adsets/adset_list":                                            marketing_meta_ads_adsets_adset_list.Execute,
+	"marketing/meta_ads/adsets/adset_update":                                          marketing_meta_ads_adsets_adset_update.Execute,
+	"marketing/meta_ads/campaigns/campaign_create":                                    marketing_meta_ads_campaigns_campaign_create.Execute,
+	"marketing/meta_ads/campaigns/campaign_list":                                      marketing_meta_ads_campaigns_campaign_list.Execute,
+	"marketing/meta_ads/campaigns/campaign_update":                                    marketing_meta_ads_campaigns_campaign_update.Execute,
+	"marketing/meta_ads/insights/insights_get":                                        marketing_meta_ads_insights_insights_get.Execute,
 	"marketing/sendgrid/asm_group_create":                                             marketing_sendgrid_asm_group_create.Execute,
 	"marketing/sendgrid/asm_group_delete":                                             marketing_sendgrid_asm_group_delete.Execute,
 	"marketing/sendgrid/asm_group_get":                                                marketing_sendgrid_asm_group_get.Execute,

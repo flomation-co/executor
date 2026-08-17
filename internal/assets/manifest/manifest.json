@@ -297634,6 +297634,1643 @@
       }
     ]
   },
+  "marketing/meta_ads/accounts/account_list": {
+    "hash": "dd347f750847eaf91b3d4e670e765b38ab589422e0d0c4760dd197f764d1daf3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Accounts: List",
+    "description": "List the Meta ad accounts this access token can manage.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Accounts",
+      "icon": "facebook",
+      "description": "Ad accounts reachable by the connected token"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Ad Accounts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/ads/ad_list": {
+    "hash": "8b758903383320728628cf1802366fb254695d210ce9270ce81c541f19cb4e11",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ads: List",
+    "description": "List ads in a Meta ad account, with status and creative reference.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "facebook",
+      "description": "Individual ads and their state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890 or 1234567890",
+        "required": true
+      },
+      {
+        "name": "effective_status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Ads",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/ads/ad_update": {
+    "hash": "cf7ee9982d77e2224f69d78a34fee23ea04eba52012f6f7cf3a6e93acb175849",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ads: Update",
+    "description": "Rename, pause or activate an existing Meta ad.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+pen",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "facebook",
+      "description": "Individual ads and their state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "ad_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Name (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Active — starts spending",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID (only needed when changing a budget)",
+        "placeholder": "act_1234567890"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": "{\"bid_amount\":200}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/adsets/adset_create": {
+    "hash": "e31b9ecfab3c136438f3ce87c847c0de031257a2adb88321fb8276920f9d1fd8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Sets: Create",
+    "description": "Create a Meta ad set with targeting, budget, schedule and optimisation goal.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+plus",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Sets",
+      "icon": "facebook",
+      "description": "Targeting, schedule, optimisation and bidding"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890 or 1234567890",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Paused (default — safe)",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Active — starts spending immediately",
+            "value": "ACTIVE"
+          }
+        ]
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "Daily Budget",
+        "placeholder": "50.00"
+      },
+      {
+        "name": "lifetime_budget",
+        "type": "money",
+        "value": null,
+        "label": "Lifetime Budget (needs an End Time)",
+        "placeholder": "500.00"
+      },
+      {
+        "name": "billing_event",
+        "type": "string",
+        "value": null,
+        "label": "Billing Event",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Impressions",
+            "value": "IMPRESSIONS"
+          },
+          {
+            "name": "Link clicks",
+            "value": "LINK_CLICKS"
+          },
+          {
+            "name": "Post engagement",
+            "value": "POST_ENGAGEMENT"
+          },
+          {
+            "name": "Thruplay (video)",
+            "value": "THRUPLAY"
+          }
+        ]
+      },
+      {
+        "name": "optimization_goal",
+        "type": "string",
+        "value": null,
+        "label": "Optimisation Goal",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Link clicks",
+            "value": "LINK_CLICKS"
+          },
+          {
+            "name": "Landing page views",
+            "value": "LANDING_PAGE_VIEWS"
+          },
+          {
+            "name": "Impressions",
+            "value": "IMPRESSIONS"
+          },
+          {
+            "name": "Reach",
+            "value": "REACH"
+          },
+          {
+            "name": "Leads",
+            "value": "LEAD_GENERATION"
+          },
+          {
+            "name": "Conversions (offsite)",
+            "value": "OFFSITE_CONVERSIONS"
+          },
+          {
+            "name": "Post engagement",
+            "value": "POST_ENGAGEMENT"
+          },
+          {
+            "name": "Thruplay (video)",
+            "value": "THRUPLAY"
+          }
+        ]
+      },
+      {
+        "name": "bid_amount",
+        "type": "money",
+        "value": null,
+        "label": "Bid Cap (optional)",
+        "placeholder": "2.00"
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (ISO 8601)",
+        "placeholder": "2026-09-01T09:00:00+0100"
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (ISO 8601)",
+        "placeholder": "2026-09-30T23:59:00+0100"
+      },
+      {
+        "name": "targeting",
+        "type": "text",
+        "value": null,
+        "label": "Targeting (JSON object)",
+        "placeholder": "{\"geo_locations\":{\"countries\":[\"GB\"]},\"age_min\":25,\"age_max\":54}"
+      },
+      {
+        "name": "promoted_object",
+        "type": "text",
+        "value": null,
+        "label": "Promoted Object (JSON, required by some goals)",
+        "placeholder": "{\"page_id\":\"1234567890\"}"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/adsets/adset_list": {
+    "hash": "63aeae1a059256e0b64d9027e39ccfc68a3241940492253d2900d6709fa21b49",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Sets: List",
+    "description": "List ad sets in a Meta ad account, with targeting, budget and schedule.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Sets",
+      "icon": "facebook",
+      "description": "Targeting, schedule, optimisation and bidding"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890 or 1234567890",
+        "required": true
+      },
+      {
+        "name": "effective_status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Ad Sets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/adsets/adset_update": {
+    "hash": "fc64e405c058cc9184d81597dc4aa9c30de382c9929dd88f6bbe3da6515521db",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Sets: Update",
+    "description": "Rename, pause, activate or re-budget an existing Meta ad set.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+pen",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Sets",
+      "icon": "facebook",
+      "description": "Targeting, schedule, optimisation and bidding"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "adset_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Name (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Active — starts spending",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "Daily Budget",
+        "placeholder": "50.00"
+      },
+      {
+        "name": "lifetime_budget",
+        "type": "money",
+        "value": null,
+        "label": "Lifetime Budget",
+        "placeholder": "500.00"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID (only needed when changing a budget)",
+        "placeholder": "act_1234567890"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": "{\"bid_amount\":200}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/campaigns/campaign_create": {
+    "hash": "c9ed894cf9f5f556fe9f628380a3ff2642ea45d3500d0d9ff95abb6b33f13c44",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaigns: Create",
+    "description": "Create a Meta ad campaign with an objective and optional budget.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+plus",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "facebook",
+      "description": "Campaign objectives, budgets and state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890 or 1234567890",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "objective",
+        "type": "string",
+        "value": null,
+        "label": "Objective",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Awareness",
+            "value": "OUTCOME_AWARENESS"
+          },
+          {
+            "name": "Traffic",
+            "value": "OUTCOME_TRAFFIC"
+          },
+          {
+            "name": "Engagement",
+            "value": "OUTCOME_ENGAGEMENT"
+          },
+          {
+            "name": "Leads",
+            "value": "OUTCOME_LEADS"
+          },
+          {
+            "name": "App Promotion",
+            "value": "OUTCOME_APP_PROMOTION"
+          },
+          {
+            "name": "Sales",
+            "value": "OUTCOME_SALES"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Paused (default — safe)",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Active — starts spending immediately",
+            "value": "ACTIVE"
+          }
+        ]
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "Daily Budget",
+        "placeholder": "50.00"
+      },
+      {
+        "name": "lifetime_budget",
+        "type": "money",
+        "value": null,
+        "label": "Lifetime Budget",
+        "placeholder": "500.00"
+      },
+      {
+        "name": "special_ad_categories",
+        "type": "string",
+        "value": null,
+        "label": "Special Ad Categories",
+        "placeholder": "NONE, HOUSING, EMPLOYMENT, CREDIT, ISSUES_ELECTIONS_POLITICS, ONLINE_GAMBLING_AND_GAMING",
+        "options": [
+          {
+            "name": "None",
+            "value": "NONE"
+          },
+          {
+            "name": "Housing",
+            "value": "HOUSING"
+          },
+          {
+            "name": "Employment",
+            "value": "EMPLOYMENT"
+          },
+          {
+            "name": "Credit",
+            "value": "CREDIT"
+          },
+          {
+            "name": "Social issues, elections or politics",
+            "value": "ISSUES_ELECTIONS_POLITICS"
+          },
+          {
+            "name": "Online gambling and gaming",
+            "value": "ONLINE_GAMBLING_AND_GAMING"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": "{\"bid_strategy\":\"LOWEST_COST_WITHOUT_CAP\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/campaigns/campaign_list": {
+    "hash": "39e8a80877cf82e3d97913ba47542b8d88d38b32c2f8b519b0e4d9464d4695d7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaigns: List",
+    "description": "List campaigns in a Meta ad account, with status and budget.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "facebook",
+      "description": "Campaign objectives, budgets and state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890 or 1234567890",
+        "required": true
+      },
+      {
+        "name": "effective_status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Campaigns",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/campaigns/campaign_update": {
+    "hash": "da263b469d0e56999ca983b77f89c01e66eddfbac2bd9859c4093a08997bbf75",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaigns: Update",
+    "description": "Rename, pause, activate or re-budget an existing Meta campaign.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+pen",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "facebook",
+      "description": "Campaign objectives, budgets and state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Name (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Active — starts spending",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Archived",
+            "value": "ARCHIVED"
+          }
+        ]
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "Daily Budget",
+        "placeholder": "50.00"
+      },
+      {
+        "name": "lifetime_budget",
+        "type": "money",
+        "value": null,
+        "label": "Lifetime Budget",
+        "placeholder": "500.00"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID (only needed when changing a budget)",
+        "placeholder": "act_1234567890"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": "{\"bid_amount\":200}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/insights/insights_get": {
+    "hash": "37d94f344019766fceccbdcae3cab000db2eaf6de8d8e6bb346584f2e4f4e503",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Insights: Get",
+    "description": "Get Meta ad performance (spend, impressions, clicks, conversions) for an account, campaign, ad set or ad.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+chart-line",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Insights",
+      "icon": "facebook",
+      "description": "Performance reporting at any level of the hierarchy"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account / Campaign / Ad Set / Ad ID",
+        "placeholder": "act_1234567890, or a campaign/ad set/ad ID",
+        "required": true
+      },
+      {
+        "name": "level",
+        "type": "string",
+        "value": null,
+        "label": "Breakdown Level",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Aggregate (default — one row)",
+            "value": ""
+          },
+          {
+            "name": "Per account",
+            "value": "account"
+          },
+          {
+            "name": "Per campaign",
+            "value": "campaign"
+          },
+          {
+            "name": "Per ad set",
+            "value": "adset"
+          },
+          {
+            "name": "Per ad",
+            "value": "ad"
+          }
+        ]
+      },
+      {
+        "name": "date_preset",
+        "type": "string",
+        "value": null,
+        "label": "Date Range",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Today",
+            "value": "today"
+          },
+          {
+            "name": "Yesterday",
+            "value": "yesterday"
+          },
+          {
+            "name": "Last 7 days",
+            "value": "last_7d"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "last_14d"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "last_30d"
+          },
+          {
+            "name": "This month",
+            "value": "this_month"
+          },
+          {
+            "name": "Last month",
+            "value": "last_month"
+          },
+          {
+            "name": "Maximum",
+            "value": "maximum"
+          }
+        ]
+      },
+      {
+        "name": "time_range_since",
+        "type": "string",
+        "value": null,
+        "label": "Custom Range — Since (YYYY-MM-DD)",
+        "placeholder": "2026-08-01"
+      },
+      {
+        "name": "time_range_until",
+        "type": "string",
+        "value": null,
+        "label": "Custom Range — Until (YYYY-MM-DD)",
+        "placeholder": "2026-08-17"
+      },
+      {
+        "name": "time_increment",
+        "type": "string",
+        "value": null,
+        "label": "Time Increment",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Whole range as one row",
+            "value": ""
+          },
+          {
+            "name": "Daily",
+            "value": "1"
+          },
+          {
+            "name": "Weekly",
+            "value": "7"
+          },
+          {
+            "name": "Monthly",
+            "value": "monthly"
+          }
+        ]
+      },
+      {
+        "name": "breakdowns",
+        "type": "string",
+        "value": null,
+        "label": "Breakdowns",
+        "placeholder": "age,gender  ·  country  ·  publisher_platform (comma-separated)"
+      },
+      {
+        "name": "filtering",
+        "type": "text",
+        "value": null,
+        "label": "Filtering (JSON array)",
+        "placeholder": "[{\"field\":\"spend\",\"operator\":\"GREATER_THAN\",\"value\":100}]"
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Metrics",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Insight Rows",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/sendgrid/asm_group_create": {
     "hash": "f5599a45fa675dbb635de1e0e6e746b2e3d09bea6ac71d2ef9493e53ee5d48b9",
     "author": "Dave McElin",
