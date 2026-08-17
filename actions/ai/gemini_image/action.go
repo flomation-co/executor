@@ -56,12 +56,19 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
+		// String, NOT Secret. A model name is not a credential, and the editor
+		// intercepts Secret in a later branch — so typing it Secret both renders
+		// it as a masked field and stops it ever reaching the dynamic-options
+		// path that the other AI actions use for live model lists. This is the
+		// documented gotcha in CLAUDE.md; gemini_image had been missed.
 		Name:  "model",
-		Type:  core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeString,
 		Label: "Model",
 		Options: []core.ConnectionOption{
 			{Name: "Gemini 2.5 Flash Image (Nano Banana)", Value: "gemini-2.5-flash-image"},
-			{Name: "Gemini 2.0 Flash Preview Image Generation", Value: "gemini-2.0-flash-preview-image-generation"},
+			{Name: "Gemini 3.1 Flash Image (Nano Banana 2)", Value: "gemini-3.1-flash-image"},
+			{Name: "Gemini 3.1 Flash Lite Image (fastest, cheapest)", Value: "gemini-3.1-flash-lite-image"},
+			{Name: "Gemini 3 Pro Image (Nano Banana Pro — 4K)", Value: "gemini-3-pro-image"},
 		},
 	},
 	{

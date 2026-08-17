@@ -2101,7 +2101,7 @@
     ]
   },
   "ai/gemini_image": {
-    "hash": "154a323dcb49be82450313fb9dca6b06af9aa3059a492ba806643bb565f69a5b",
+    "hash": "ef77d3705b164660582b94a3e027b1badfc32eb1de04145f3247220f0761b6f0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Image",
@@ -2126,7 +2126,7 @@
       },
       {
         "name": "model",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Model",
         "placeholder": "",
@@ -2136,8 +2136,16 @@
             "value": "gemini-2.5-flash-image"
           },
           {
-            "name": "Gemini 2.0 Flash Preview Image Generation",
-            "value": "gemini-2.0-flash-preview-image-generation"
+            "name": "Gemini 3.1 Flash Image (Nano Banana 2)",
+            "value": "gemini-3.1-flash-image"
+          },
+          {
+            "name": "Gemini 3.1 Flash Lite Image (fastest, cheapest)",
+            "value": "gemini-3.1-flash-lite-image"
+          },
+          {
+            "name": "Gemini 3 Pro Image (Nano Banana Pro — 4K)",
+            "value": "gemini-3-pro-image"
           }
         ]
       },
