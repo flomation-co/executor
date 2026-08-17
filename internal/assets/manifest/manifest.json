@@ -536845,7 +536845,7 @@
     ]
   },
   "social/facebook/get_page_insights": {
-    "hash": "85c0235362a5ec1bbe2ddc6f05c076011b1919f4e623837c7668af597d46287e",
+    "hash": "cdf2de90d3239f38f3bce5c8435d586edf3e18ec9de46e92285e74dbf8432bcf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Insights",
@@ -536887,6 +536887,13 @@
         "label": "Page ID",
         "placeholder": "${first_page_id}",
         "required": true
+      },
+      {
+        "name": "metrics",
+        "type": "string",
+        "value": null,
+        "label": "Metrics (comma-separated)",
+        "placeholder": ""
       },
       {
         "name": "period",
@@ -536951,6 +536958,20 @@
         "type": "integer",
         "value": null,
         "label": "Total Followers",
+        "placeholder": ""
+      },
+      {
+        "name": "metrics",
+        "type": "object",
+        "value": null,
+        "label": "All Returned Metrics",
+        "placeholder": ""
+      },
+      {
+        "name": "missing_metrics",
+        "type": "object",
+        "value": null,
+        "label": "Requested But Not Returned",
         "placeholder": ""
       },
       {

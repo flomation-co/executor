@@ -16,7 +16,11 @@ import (
 )
 
 const (
-	GraphAPIBase   = "https://graph.facebook.com/v19.0"
+	// Graph version. v19.0 EXPIRED on 21 May 2026 and was still pinned here —
+	// Meta does not hard-fail an expired version, it silently routes the call
+	// elsewhere, so nothing appeared broken while the effective request surface
+	// drifted with no signal. v25.0 runs until July 2028.
+	GraphAPIBase   = "https://graph.facebook.com/v25.0"
 	requestTimeout = 30 * time.Second
 	maxResponse    = 1 << 20 // 1 MB
 )
