@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	meta "flomation.app/automate/executor/actions/marketing/meta_ads"
@@ -49,6 +50,17 @@ var Inputs = [...]core.Connection{
 		{Name: "Conversions (offsite)", Value: "OFFSITE_CONVERSIONS"},
 		{Name: "Post engagement", Value: "POST_ENGAGEMENT"},
 		{Name: "Thruplay (video)", Value: "THRUPLAY"},
+	}},
+	// bid_strategy was previously reachable only by hand-assembling it into the
+	// Additional Fields JSON, which is exactly where an agent goes wrong — it is
+	// a small fixed enum, so it belongs here with its valid values.
+	//
+	// Note this is an AD SET level setting. Under campaign budget optimisation
+	// the CAMPAIGN owns the bid strategy and this is ignored.
+	{Name: "bid_strategy", Type: core.ConnectionTypeString, Label: "Bid Strategy", Options: []core.ConnectionOption{
+		{Name: "Lowest cost (automatic — no cap needed)", Value: "LOWEST_COST_WITHOUT_CAP"},
+		{Name: "Lowest cost with bid cap (needs a Bid Cap)", Value: "LOWEST_COST_WITH_BID_CAP"},
+		{Name: "Cost cap (needs a Bid Cap)", Value: "COST_CAP"},
 	}},
 	{Name: "bid_amount", Type: core.ConnectionTypeMoney, Label: "Bid Cap (optional)", Placeholder: "2.00"},
 	{Name: "start_time", Type: core.ConnectionTypeString, Label: "Start Time (ISO 8601)", Placeholder: "2026-09-01T09:00:00+0100"},
@@ -99,6 +111,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	meta.SetParam(p, "billing_event", "billing_event", inputs)
 	meta.SetParam(p, "optimization_goal", "optimization_goal", inputs)
+	meta.SetParam(p, "bid_strategy", "bid_strategy", inputs)
+
+	// Bid/billing combinations Meta rejects, caught here because its own error
+	// does not name the offending pair — it complains about a missing
+	// bid_amount without saying which of the three settings made it mandatory,
+	// which sends the reader round several wrong fixes first.
+	if msg := bidRequirementError(
+		meta.OptionalString("optimization_goal", inputs),
+		meta.OptionalString("billing_event", inputs),
+		meta.OptionalString("bid_strategy", inputs),
+		meta.OptionalString("bid_amount", inputs),
+	); msg != "" {
+		return meta.ErrorResult(msg), nil
+	}
 	meta.SetParam(p, "start_time", "start_time", inputs)
 	meta.SetParam(p, "end_time", "end_time", inputs)
 
@@ -153,4 +179,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		summary += fmt.Sprintf(" Budget interpreted in %s.", currency)
 	}
 	return meta.OkResult(summary, map[string]interface{}{"id": id, "status": status, "currency": currency}), nil
+}
+
+// bidRequirementError returns a message when the chosen bid settings need a bid
+// cap that has not been given, or "" when the combination is valid.
+//
+// Two separate rules, both of which surface from Meta as the same unhelpful
+// complaint about a missing bid_amount:
+//
+//  1. LOWEST_COST_WITH_BID_CAP and COST_CAP require a cap by definition. This
+//     one is documented.
+//  2. LINK_CLICKS optimisation billed on IMPRESSIONS also requires one, even
+//     with no bid strategy set and even when the budget lives on the campaign.
+//     That pairing is NOT obvious from the reference, and it is the one that
+//     cost two round trips and a wrong diagnosis to find: Meta objects to the
+//     bid while the reader is looking at the budget.
+func bidRequirementError(optimisationGoal, billingEvent, bidStrategy, bidAmount string) string {
+	if strings.TrimSpace(bidAmount) != "" {
+		return ""
+	}
+
+	switch bidStrategy {
+	case "LOWEST_COST_WITH_BID_CAP", "COST_CAP":
+		return "Bid Strategy " + bidStrategy + " requires a Bid Cap. Set one, or choose LOWEST_COST_WITHOUT_CAP, which bids automatically and needs no cap."
+	}
+
+	if optimisationGoal == "LINK_CLICKS" && billingEvent == "IMPRESSIONS" {
+		return "Meta requires a Bid Cap when LINK_CLICKS optimisation is billed on IMPRESSIONS. " +
+			"Set a Bid Cap, or change the Billing Event. " +
+			"Note the billing event decides what you are CHARGED for: IMPRESSIONS bills per 1,000 impressions, LINK_CLICKS bills per click — it is not a formality. " +
+			"Moving the budget to the campaign does NOT lift this requirement. " +
+			"If a Bid Cap is still demanded after changing the billing event, check the PARENT CAMPAIGN's bid_strategy: " +
+			"under campaign budget optimisation the campaign owns the bid strategy, and a cap-requiring one there (LOWEST_COST_WITH_BID_CAP or COST_CAP) forces a Bid Cap on every ad set beneath it, whatever this ad set is set to. " +
+			"Read it with Campaigns: List, requesting the bid_strategy field."
+	}
+	return ""
 }

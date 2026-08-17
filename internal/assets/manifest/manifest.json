@@ -298154,7 +298154,7 @@
     ]
   },
   "marketing/meta_ads/adsets/adset_create": {
-    "hash": "e31b9ecfab3c136438f3ce87c847c0de031257a2adb88321fb8276920f9d1fd8",
+    "hash": "881bfc7036355f0c6291df29525cda208b23527c047cf03d1e1302617c4df8d3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ad Sets: Create",
@@ -298312,6 +298312,27 @@
           {
             "name": "Thruplay (video)",
             "value": "THRUPLAY"
+          }
+        ]
+      },
+      {
+        "name": "bid_strategy",
+        "type": "string",
+        "value": null,
+        "label": "Bid Strategy",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Lowest cost (automatic — no cap needed)",
+            "value": "LOWEST_COST_WITHOUT_CAP"
+          },
+          {
+            "name": "Lowest cost with bid cap (needs a Bid Cap)",
+            "value": "LOWEST_COST_WITH_BID_CAP"
+          },
+          {
+            "name": "Cost cap (needs a Bid Cap)",
+            "value": "COST_CAP"
           }
         ]
       },
