@@ -297635,11 +297635,11 @@
     ]
   },
   "marketing/meta_ads/accounts/account_list": {
-    "hash": "dd347f750847eaf91b3d4e670e765b38ab589422e0d0c4760dd197f764d1daf3",
+    "hash": "e7243b2f36b3c8c302d2127ab1cf5dbc371cdc4dcd5887cfb2b2f8fd6ea96d54",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ad Accounts: List",
-    "description": "List the Meta ad accounts this access token can manage.",
+    "description": "List the Meta ad accounts this access token can manage, or those a business owns.",
     "website": "https://www.flomation.co",
     "icon": "facebook+list",
     "date": "17/08/2026",
@@ -297674,6 +297674,13 @@
         "value": null,
         "label": "App Secret (recommended)",
         "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "business_id",
+        "type": "string",
+        "value": null,
+        "label": "Business ID (optional — list accounts the BUSINESS owns instead)",
+        "placeholder": "1507486194117794"
       },
       {
         "name": "fields",
