@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"strconv"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	meta "flomation.app/automate/executor/actions/marketing/meta_ads"
@@ -44,8 +45,19 @@ var Inputs = [...]core.Connection{
 		{Name: "Paused (default — safe)", Value: "PAUSED"},
 		{Name: "Active — starts spending immediately", Value: "ACTIVE"},
 	}},
-	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget", Placeholder: "50.00"},
-	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget", Placeholder: "500.00"},
+	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "50.00"},
+	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "500.00"},
+	// Exposed here as well as on the ad set because THIS is the level that
+	// bit: under campaign budget optimisation the campaign owns the bid
+	// strategy, and a cap-requiring one set here forces a Bid Cap on every ad
+	// set beneath it — with an error that points at the ad set, not here.
+	// Previously reachable only through the Additional Fields JSON, which is
+	// how it got set unintentionally in the first place.
+	{Name: "bid_strategy", Type: core.ConnectionTypeString, Label: "Bid Strategy", Options: []core.ConnectionOption{
+		{Name: "Lowest cost (automatic — no cap needed)", Value: "LOWEST_COST_WITHOUT_CAP"},
+		{Name: "Lowest cost with bid cap (forces a Bid Cap on every ad set)", Value: "LOWEST_COST_WITH_BID_CAP"},
+		{Name: "Cost cap (forces a Bid Cap on every ad set)", Value: "COST_CAP"},
+	}},
 	{Name: "special_ad_categories", Type: core.ConnectionTypeString, Label: "Special Ad Categories", Placeholder: "NONE, HOUSING, EMPLOYMENT, CREDIT, ISSUES_ELECTIONS_POLITICS, ONLINE_GAMBLING_AND_GAMING", Options: []core.ConnectionOption{
 		{Name: "None", Value: "NONE"},
 		{Name: "Housing", Value: "HOUSING"},
@@ -93,6 +105,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		status = "PAUSED"
 	}
 	p.Set("status", status)
+	meta.SetParam(p, "bid_strategy", "bid_strategy", inputs)
 
 	// special_ad_categories is REQUIRED by Meta on every campaign create — an
 	// omitted value is rejected rather than defaulted. NONE is the honest
@@ -107,18 +120,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// currency from the account rather than assuming. Only fetched when a budget
 	// is actually being set, to avoid an extra call on every create.
 	currency := ""
+	var budgetNotes []string
 	if meta.OptionalString("daily_budget", inputs) != "" || meta.OptionalString("lifetime_budget", inputs) != "" {
 		currency, err = meta.AccountCurrency(flow, client, account)
 		if err != nil {
 			return meta.ErrorResult(err.Error()), nil
 		}
-		for input, param := range map[string]string{"daily_budget": "daily_budget", "lifetime_budget": "lifetime_budget"} {
-			minor, cerr := meta.BudgetMinorUnits(input, currency, inputs)
+		for _, field := range []string{"daily_budget", "lifetime_budget"} {
+			minor, cerr := meta.BudgetMinorUnits(field, currency, inputs)
 			if cerr != nil {
-				return meta.ErrorResult(fmt.Sprintf("%s: %s", input, cerr.Error())), nil
+				return meta.ErrorResult(fmt.Sprintf("%s: %s", field, cerr.Error())), nil
 			}
 			if minor != nil {
-				p.Set(param, strconv.FormatInt(*minor, 10))
+				p.Set(field, strconv.FormatInt(*minor, 10))
+				// Echo exactly what was sent — a hundredfold conversion error
+				// is otherwise invisible until the money has gone.
+				budgetNotes = append(budgetNotes,
+					meta.DescribeBudget(strings.ReplaceAll(field, "_", " "), meta.OptionalString(field, inputs), currency, *minor))
 			}
 		}
 	}
@@ -138,8 +156,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if status == "PAUSED" {
 		summary += ". It is PAUSED and will not spend until set to ACTIVE."
 	}
-	if currency != "" {
-		summary += fmt.Sprintf(" Budget interpreted in %s.", currency)
+	if len(budgetNotes) > 0 {
+		summary += ". " + strings.Join(budgetNotes, "; ") + "."
 	}
 	return meta.OkResult(summary, map[string]interface{}{
 		"id":       id,

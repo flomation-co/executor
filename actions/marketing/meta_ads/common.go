@@ -564,3 +564,23 @@ func SetJSONValue(p url.Values, key string, value interface{}) error {
 	p.Set(key, string(b))
 	return nil
 }
+
+// DescribeBudget renders what was ACTUALLY sent to Meta for a money field, in
+// both units: "daily budget 10.00 GBP (sent as 1000)".
+//
+// This exists because the dangerous failure here is silent and hundredfold.
+// Meta takes budgets as minor-unit integers, so an AI that knows the API — and
+// helpfully pre-converts £10 to 1000 before calling — gets 1000 multiplied
+// again into 100000, and books £1,000 a day instead of £10. Nothing errors; the
+// campaign is simply created wrong, and reading it back shows a large number
+// that is easy to misread a second time.
+//
+// Echoing both the major-unit input and the exact integer sent makes that
+// visible in the tool result at a glance, to a human or an agent, without
+// anyone having to know the convention.
+func DescribeBudget(label, majorInput, currency string, minorSent int64) string {
+	if strings.TrimSpace(majorInput) == "" {
+		return ""
+	}
+	return fmt.Sprintf("%s %s %s (sent to Meta as %d)", label, majorInput, currency, minorSent)
+}

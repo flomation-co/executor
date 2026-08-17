@@ -181,3 +181,52 @@ func TestExecute_SurfacesGraphErrorsGracefully(t *testing.T) {
 	Expect(out["success"]).To(Equal(false))
 	Expect(out["error"]).To(ContainSubstring("below the minimum for GBP"))
 }
+
+// The dangerous failure here is silent and hundredfold: an AI that knows Meta
+// takes minor units may pre-convert £10 to 1000, which is then multiplied again
+// into 100000 and books £1,000 a day. Nothing errors. Echoing the exact integer
+// sent alongside the major-unit input makes it visible immediately, rather than
+// after the money has gone.
+func TestExecute_ReportsExactMinorUnitsSent(t *testing.T) {
+	RegisterTestingT(t)
+	_, posted := stub(t, "GBP")
+
+	out, err := Execute(nil, nil, in(
+		[2]string{"access_token", "EAAG"},
+		[2]string{"account_id", "1234567890"},
+		[2]string{"name", "Test"},
+		[2]string{"objective", "OUTCOME_LEADS"},
+		[2]string{"daily_budget", "10.00"},
+	))
+
+	Expect(err).To(BeNil())
+	Expect(posted.Get("daily_budget")).To(Equal("1000"))
+
+	summary, _ := out["tool_result"].(string)
+	Expect(summary).To(ContainSubstring("10.00 GBP"), "the major-unit input must be echoed")
+	Expect(summary).To(ContainSubstring("sent to Meta as 1000"), "the exact integer must be echoed")
+	// A pre-converted value would show as 100000 here, which is the whole point.
+	Expect(summary).ToNot(ContainSubstring("100000"))
+}
+
+// The pre-converted case: an agent passing 1000 for "£10" produces £1,000/day.
+// The action cannot know it was a mistake, but it must make it visible.
+func TestExecute_PreConvertedBudgetIsVisibleInTheResult(t *testing.T) {
+	RegisterTestingT(t)
+	_, posted := stub(t, "GBP")
+
+	out, err := Execute(nil, nil, in(
+		[2]string{"access_token", "EAAG"},
+		[2]string{"account_id", "1"},
+		[2]string{"name", "Test"},
+		[2]string{"objective", "OUTCOME_LEADS"},
+		[2]string{"daily_budget", "1000"}, // meant £10, passed pence
+	))
+
+	Expect(err).To(BeNil())
+	Expect(posted.Get("daily_budget")).To(Equal("100000"))
+
+	summary, _ := out["tool_result"].(string)
+	Expect(summary).To(ContainSubstring("sent to Meta as 100000"),
+		"a hundredfold error must be legible in the result, not discovered later")
+}
