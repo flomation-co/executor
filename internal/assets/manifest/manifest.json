@@ -299076,7 +299076,7 @@
     ]
   },
   "marketing/meta_ads/campaigns/campaign_create": {
-    "hash": "dfdd613e8a4ac92e73be028db70e4eb369fcd02c8cd7174d3127037484bb0dcf",
+    "hash": "050cef0d9baeae46ae91886734f8ea4d5861afb6c134cf29b02807bd0e2a2daf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Campaigns: Create",
@@ -299196,6 +299196,27 @@
         "value": null,
         "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "500.00"
+      },
+      {
+        "name": "bid_strategy",
+        "type": "string",
+        "value": null,
+        "label": "Bid Strategy",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Lowest cost (automatic — no cap needed)",
+            "value": "LOWEST_COST_WITHOUT_CAP"
+          },
+          {
+            "name": "Lowest cost with bid cap (forces a Bid Cap on every ad set)",
+            "value": "LOWEST_COST_WITH_BID_CAP"
+          },
+          {
+            "name": "Cost cap (forces a Bid Cap on every ad set)",
+            "value": "COST_CAP"
+          }
+        ]
       },
       {
         "name": "special_ad_categories",
@@ -299425,7 +299446,7 @@
     ]
   },
   "marketing/meta_ads/campaigns/campaign_update": {
-    "hash": "c0fe665a1bf25ddbfa8be22699a65880c5aafbc6f4adefe48b2312875ef7d437",
+    "hash": "2e78f9d7d080fbb9baf6787588acb618789890c65cffef0dbe01d77563787c5c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Campaigns: Update",
@@ -299518,6 +299539,27 @@
         "value": null,
         "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "500.00"
+      },
+      {
+        "name": "bid_strategy",
+        "type": "string",
+        "value": null,
+        "label": "Bid Strategy",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Lowest cost (automatic — no cap needed)",
+            "value": "LOWEST_COST_WITHOUT_CAP"
+          },
+          {
+            "name": "Lowest cost with bid cap (forces a Bid Cap on every ad set)",
+            "value": "LOWEST_COST_WITH_BID_CAP"
+          },
+          {
+            "name": "Cost cap (forces a Bid Cap on every ad set)",
+            "value": "COST_CAP"
+          }
+        ]
       },
       {
         "name": "account_id",

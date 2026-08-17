@@ -47,6 +47,17 @@ var Inputs = [...]core.Connection{
 	}},
 	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "50.00"},
 	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "500.00"},
+	// Exposed here as well as on the ad set because THIS is the level that
+	// bit: under campaign budget optimisation the campaign owns the bid
+	// strategy, and a cap-requiring one set here forces a Bid Cap on every ad
+	// set beneath it — with an error that points at the ad set, not here.
+	// Previously reachable only through the Additional Fields JSON, which is
+	// how it got set unintentionally in the first place.
+	{Name: "bid_strategy", Type: core.ConnectionTypeString, Label: "Bid Strategy", Options: []core.ConnectionOption{
+		{Name: "Lowest cost (automatic — no cap needed)", Value: "LOWEST_COST_WITHOUT_CAP"},
+		{Name: "Lowest cost with bid cap (forces a Bid Cap on every ad set)", Value: "LOWEST_COST_WITH_BID_CAP"},
+		{Name: "Cost cap (forces a Bid Cap on every ad set)", Value: "COST_CAP"},
+	}},
 	{Name: "special_ad_categories", Type: core.ConnectionTypeString, Label: "Special Ad Categories", Placeholder: "NONE, HOUSING, EMPLOYMENT, CREDIT, ISSUES_ELECTIONS_POLITICS, ONLINE_GAMBLING_AND_GAMING", Options: []core.ConnectionOption{
 		{Name: "None", Value: "NONE"},
 		{Name: "Housing", Value: "HOUSING"},
@@ -94,6 +105,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		status = "PAUSED"
 	}
 	p.Set("status", status)
+	meta.SetParam(p, "bid_strategy", "bid_strategy", inputs)
 
 	// special_ad_categories is REQUIRED by Meta on every campaign create — an
 	// omitted value is rejected rather than defaulted. NONE is the honest
