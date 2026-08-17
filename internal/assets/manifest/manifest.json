@@ -298154,7 +298154,7 @@
     ]
   },
   "marketing/meta_ads/adsets/adset_create": {
-    "hash": "881bfc7036355f0c6291df29525cda208b23527c047cf03d1e1302617c4df8d3",
+    "hash": "22310c7c979820727a997c3302be70056bd6e85185cdb600fac8b220a651cdc5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ad Sets: Create",
@@ -298239,14 +298239,14 @@
         "name": "daily_budget",
         "type": "money",
         "value": null,
-        "label": "Daily Budget",
+        "label": "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "50.00"
       },
       {
         "name": "lifetime_budget",
         "type": "money",
         "value": null,
-        "label": "Lifetime Budget (needs an End Time)",
+        "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence. Needs an End Time.",
         "placeholder": "500.00"
       },
       {
@@ -298340,7 +298340,7 @@
         "name": "bid_amount",
         "type": "money",
         "value": null,
-        "label": "Bid Cap (optional)",
+        "label": "Bid Cap in POUNDS/major units — e.g. 1.00 means £1.00. Do NOT pre-convert to pence.",
         "placeholder": "2.00"
       },
       {
@@ -298566,7 +298566,7 @@
     ]
   },
   "marketing/meta_ads/adsets/adset_update": {
-    "hash": "fc64e405c058cc9184d81597dc4aa9c30de382c9929dd88f6bbe3da6515521db",
+    "hash": "f04b518ce699ed9f33200cc0aff72b9c4998c1ff5af99c6336109f43b6ba8e13",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ad Sets: Update",
@@ -298650,14 +298650,14 @@
         "name": "daily_budget",
         "type": "money",
         "value": null,
-        "label": "Daily Budget",
+        "label": "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "50.00"
       },
       {
         "name": "lifetime_budget",
         "type": "money",
         "value": null,
-        "label": "Lifetime Budget",
+        "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "500.00"
       },
       {
@@ -299076,7 +299076,7 @@
     ]
   },
   "marketing/meta_ads/campaigns/campaign_create": {
-    "hash": "c9ed894cf9f5f556fe9f628380a3ff2642ea45d3500d0d9ff95abb6b33f13c44",
+    "hash": "dfdd613e8a4ac92e73be028db70e4eb369fcd02c8cd7174d3127037484bb0dcf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Campaigns: Create",
@@ -299187,14 +299187,14 @@
         "name": "daily_budget",
         "type": "money",
         "value": null,
-        "label": "Daily Budget",
+        "label": "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "50.00"
       },
       {
         "name": "lifetime_budget",
         "type": "money",
         "value": null,
-        "label": "Lifetime Budget",
+        "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "500.00"
       },
       {
@@ -299425,7 +299425,7 @@
     ]
   },
   "marketing/meta_ads/campaigns/campaign_update": {
-    "hash": "da263b469d0e56999ca983b77f89c01e66eddfbac2bd9859c4093a08997bbf75",
+    "hash": "c0fe665a1bf25ddbfa8be22699a65880c5aafbc6f4adefe48b2312875ef7d437",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Campaigns: Update",
@@ -299509,14 +299509,14 @@
         "name": "daily_budget",
         "type": "money",
         "value": null,
-        "label": "Daily Budget",
+        "label": "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "50.00"
       },
       {
         "name": "lifetime_budget",
         "type": "money",
         "value": null,
-        "label": "Lifetime Budget",
+        "label": "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.",
         "placeholder": "500.00"
       },
       {

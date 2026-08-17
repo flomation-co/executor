@@ -36,8 +36,8 @@ var Inputs = [...]core.Connection{
 		{Name: "Paused", Value: "PAUSED"},
 		{Name: "Archived", Value: "ARCHIVED"},
 	}},
-	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget", Placeholder: "50.00"},
-	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget", Placeholder: "500.00"},
+	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "50.00"},
+	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "500.00"},
 	{Name: "account_id", Type: core.ConnectionTypeString, Label: "Ad Account ID (only needed when changing a budget)", Placeholder: "act_1234567890"},
 	{Name: "fields", Type: core.ConnectionTypeText, Label: "Additional Fields (JSON object)", Placeholder: `{"bid_amount":200}`},
 }

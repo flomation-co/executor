@@ -33,8 +33,8 @@ var Inputs = [...]core.Connection{
 		{Name: "Paused (default — safe)", Value: "PAUSED"},
 		{Name: "Active — starts spending immediately", Value: "ACTIVE"},
 	}},
-	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget", Placeholder: "50.00"},
-	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget (needs an End Time)", Placeholder: "500.00"},
+	{Name: "daily_budget", Type: core.ConnectionTypeMoney, Label: "Daily Budget in POUNDS/major units — e.g. 10.00 means £10.00. Do NOT pre-convert to pence; the action does that.", Placeholder: "50.00"},
+	{Name: "lifetime_budget", Type: core.ConnectionTypeMoney, Label: "Lifetime Budget in POUNDS/major units — e.g. 500.00 means £500.00. Do NOT pre-convert to pence. Needs an End Time.", Placeholder: "500.00"},
 	{Name: "billing_event", Type: core.ConnectionTypeString, Label: "Billing Event", Options: []core.ConnectionOption{
 		{Name: "Impressions", Value: "IMPRESSIONS"},
 		{Name: "Link clicks", Value: "LINK_CLICKS"},
@@ -62,7 +62,7 @@ var Inputs = [...]core.Connection{
 		{Name: "Lowest cost with bid cap (needs a Bid Cap)", Value: "LOWEST_COST_WITH_BID_CAP"},
 		{Name: "Cost cap (needs a Bid Cap)", Value: "COST_CAP"},
 	}},
-	{Name: "bid_amount", Type: core.ConnectionTypeMoney, Label: "Bid Cap (optional)", Placeholder: "2.00"},
+	{Name: "bid_amount", Type: core.ConnectionTypeMoney, Label: "Bid Cap in POUNDS/major units — e.g. 1.00 means £1.00. Do NOT pre-convert to pence.", Placeholder: "2.00"},
 	{Name: "start_time", Type: core.ConnectionTypeString, Label: "Start Time (ISO 8601)", Placeholder: "2026-09-01T09:00:00+0100"},
 	{Name: "end_time", Type: core.ConnectionTypeString, Label: "End Time (ISO 8601)", Placeholder: "2026-09-30T23:59:00+0100"},
 	// Targeting is a large, deeply nested structure with hundreds of valid
