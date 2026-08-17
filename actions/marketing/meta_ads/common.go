@@ -428,3 +428,139 @@ func num(m map[string]interface{}, key string) int64 {
 	}
 	return 0
 }
+
+// --- customer-list audience hashing ---
+
+// AudienceSchema is a customer-list field Meta accepts for matching.
+type AudienceSchema string
+
+const (
+	SchemaEmail AudienceSchema = "EMAIL"
+	SchemaPhone AudienceSchema = "PHONE"
+)
+
+// HashAudienceValue normalises a customer-list value and returns its SHA-256
+// hex digest.
+//
+// Raw personal data must NEVER reach Meta: customer-list audiences are matched
+// on hashes precisely so the advertiser does not hand over their list in the
+// clear. Sending an unhashed email would leak a customer's identity to a third
+// party for no benefit, since Meta would fail to match it anyway.
+//
+// Normalisation is not optional either — it IS the matching key. Meta hashes
+// its own side after the same normalisation, so " Ada@Example.COM " and
+// "ada@example.com" must produce the same digest or the match silently fails
+// and the audience quietly under-counts with nothing to indicate why.
+//
+//   - EMAIL: trim, lowercase.
+//   - PHONE: digits only (drop +, spaces, brackets, hyphens), keeping the
+//     country code, i.e. E.164 without the plus.
+//
+// An empty or unusable value returns ok=false so the caller can skip it rather
+// than send the hash of an empty string, which matches nobody and inflates the
+// reported upload count.
+func HashAudienceValue(schema AudienceSchema, raw string) (string, bool) {
+	v := strings.TrimSpace(raw)
+	if v == "" {
+		return "", false
+	}
+
+	switch schema {
+	case SchemaEmail:
+		v = strings.ToLower(v)
+		// Hashing something that is not an address produces a digest that
+		// cannot match, and counting it as uploaded would overstate the
+		// audience. Require a local part, a single @, and a dotted domain.
+		local, domain, found := strings.Cut(v, "@")
+		if !found || local == "" || domain == "" ||
+			strings.Contains(domain, "@") || !strings.Contains(domain, ".") ||
+			strings.HasPrefix(domain, ".") || strings.HasSuffix(domain, ".") {
+			return "", false
+		}
+	case SchemaPhone:
+		// "(0)" is the European convention for an optional trunk prefix —
+		// "+44 (0)7700 900123" means 447700900123, NOT 4407700900123. Stripping
+		// only the digits would keep that zero and produce a number that
+		// silently matches nobody, which is exactly the failure this whole
+		// function exists to avoid. The brackets mark the zero unambiguously,
+		// so removing it is safe; guessing at unbracketed trunk zeros is not,
+		// and is deliberately not attempted.
+		v = strings.ReplaceAll(v, "(0)", "")
+		var digits strings.Builder
+		for _, r := range v {
+			if r >= '0' && r <= '9' {
+				digits.WriteRune(r)
+			}
+		}
+		v = digits.String()
+		// Too short to carry a country code plus a subscriber number.
+		//
+		// Known limit: a number in NATIONAL format ("07700900123") passes this
+		// check but will not match, because Meta matches on country code. There
+		// is no safe way to infer the country here, so the caller has to supply
+		// numbers in international form.
+		if len(v) < 7 {
+			return "", false
+		}
+	default:
+		return "", false
+	}
+
+	sum := sha256.Sum256([]byte(v))
+	return hex.EncodeToString(sum[:]), true
+}
+
+// BuildAudiencePayload hashes every supplied value and returns Meta's
+// customer-list payload, plus how many values were usable and how many were
+// skipped.
+//
+// The skipped count is returned rather than swallowed: an upload that silently
+// drops half its list looks identical to one that worked.
+func BuildAudiencePayload(schema AudienceSchema, values []string) (payload string, used, skipped int, err error) {
+	data := make([][]string, 0, len(values))
+	for _, v := range values {
+		h, ok := HashAudienceValue(schema, v)
+		if !ok {
+			skipped++
+			continue
+		}
+		data = append(data, []string{h})
+	}
+	if len(data) == 0 {
+		return "", 0, skipped, fmt.Errorf("no usable %s values — all %d entries were blank or malformed", schema, skipped)
+	}
+
+	b, err := json.Marshal(map[string]interface{}{
+		"schema": []string{string(schema)},
+		"data":   data,
+	})
+	if err != nil {
+		return "", 0, skipped, err
+	}
+	return string(b), len(data), skipped, nil
+}
+
+// SplitLines splits a newline- or comma-separated list into trimmed values.
+func SplitLines(raw string) []string {
+	parts := strings.FieldsFunc(raw, func(r rune) bool {
+		return r == '\n' || r == '\r' || r == ',' || r == ';'
+	})
+	out := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if t := strings.TrimSpace(p); t != "" {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
+// SetJSONValue marshals a Go value into a parameter as a JSON string, which is
+// how Graph accepts structured fields inside a form-encoded body.
+func SetJSONValue(p url.Values, key string, value interface{}) error {
+	b, err := json.Marshal(value)
+	if err != nil {
+		return fmt.Errorf("could not encode %s: %w", key, err)
+	}
+	p.Set(key, string(b))
+	return nil
+}

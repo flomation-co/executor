@@ -297742,6 +297742,142 @@
       }
     ]
   },
+  "marketing/meta_ads/ads/ad_create": {
+    "hash": "21e695b21acb20be9829d4b91d17bfe4eb771c663428aa85dd8577564bd1cc8a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ads: Create",
+    "description": "Create a Meta ad from an existing ad set and creative.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+plus",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "facebook",
+      "description": "Individual ads and their state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "adset_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "creative_id",
+        "type": "string",
+        "value": null,
+        "label": "Creative ID (from Creatives: Create)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Paused (default — safe)",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Active — enters review, then starts spending",
+            "value": "ACTIVE"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/ads/ad_list": {
     "hash": "8b758903383320728628cf1802366fb254695d210ce9270ce81c541f19cb4e11",
     "author": "Andy Esser",
@@ -298542,6 +298678,375 @@
       }
     ]
   },
+  "marketing/meta_ads/audiences/audience_add_users": {
+    "hash": "c7ae30b9ede43a05e667feba4b5a43c6210b137ccdabb42907a960a287e1bce0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Audiences: Add People",
+    "description": "Add people to a Meta custom audience. Emails and phones are hashed locally before sending.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+user-plus",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Audiences",
+      "icon": "facebook",
+      "description": "Custom and lookalike audiences"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "audience_id",
+        "type": "string",
+        "value": null,
+        "label": "Custom Audience ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Matching On",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Email address",
+            "value": "EMAIL"
+          },
+          {
+            "name": "Phone number",
+            "value": "PHONE"
+          }
+        ]
+      },
+      {
+        "name": "values",
+        "type": "text",
+        "value": null,
+        "label": "Email addresses or phone numbers (one per line)",
+        "placeholder": "ada@example.com\nsam@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audience_id",
+        "type": "string",
+        "value": null,
+        "label": "Custom Audience ID",
+        "placeholder": ""
+      },
+      {
+        "name": "num_received",
+        "type": "integer",
+        "value": null,
+        "label": "Received by Meta",
+        "placeholder": ""
+      },
+      {
+        "name": "num_invalid",
+        "type": "integer",
+        "value": null,
+        "label": "Rejected by Meta",
+        "placeholder": ""
+      },
+      {
+        "name": "skipped_locally",
+        "type": "integer",
+        "value": null,
+        "label": "Skipped Before Sending",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/audiences/audience_create": {
+    "hash": "f7535c09a381b4f6b0fba14a64d7fb37568b3ed174bc67805534836c804740e8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Audiences: Create",
+    "description": "Create a Meta custom audience to populate with hashed customer data.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+people-group",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Audiences",
+      "icon": "facebook",
+      "description": "Custom and lookalike audiences"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Audience Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_file_source",
+        "type": "string",
+        "value": null,
+        "label": "Where did this data come from?",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Provided directly by the customers",
+            "value": "USER_PROVIDED_ONLY"
+          },
+          {
+            "name": "From partners or other sources",
+            "value": "PARTNER_PROVIDED_ONLY"
+          },
+          {
+            "name": "A mix of both",
+            "value": "BOTH_USER_AND_PARTNER_PROVIDED"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Custom Audience ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/audiences/audience_list": {
+    "hash": "695b21433ba46461d775b331fc1f806cc170ec0714d8071087eed7222b08e82b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Audiences: List",
+    "description": "List the custom audiences in a Meta ad account, with size and delivery status.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Audiences",
+      "icon": "facebook",
+      "description": "Custom and lookalike audiences"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Custom Audiences",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/campaigns/campaign_create": {
     "hash": "c9ed894cf9f5f556fe9f628380a3ff2642ea45d3500d0d9ff95abb6b33f13c44",
     "author": "Andy Esser",
@@ -299032,6 +299537,197 @@
       }
     ]
   },
+  "marketing/meta_ads/creatives/creative_create": {
+    "hash": "d5c9cb5ffc2056ef120faac7521fe526cfa689493e6fb9f3d4db83260fc1fe31",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Creatives: Create",
+    "description": "Create a Meta ad creative from a Page, image, message and link.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+image",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Creatives",
+      "icon": "facebook",
+      "description": "Ad creatives — the image, copy and destination an ad shows"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Creative Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Facebook Page ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Primary Text",
+        "placeholder": "The copy shown above the image"
+      },
+      {
+        "name": "headline",
+        "type": "string",
+        "value": null,
+        "label": "Headline",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "link",
+        "type": "string",
+        "value": null,
+        "label": "Destination URL",
+        "placeholder": "https://www.flomation.co"
+      },
+      {
+        "name": "image_hash",
+        "type": "string",
+        "value": null,
+        "label": "Image Hash (from Media: Upload Image)",
+        "placeholder": "${node.image_hash}"
+      },
+      {
+        "name": "call_to_action",
+        "type": "string",
+        "value": null,
+        "label": "Call to Action",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Learn More",
+            "value": "LEARN_MORE"
+          },
+          {
+            "name": "Sign Up",
+            "value": "SIGN_UP"
+          },
+          {
+            "name": "Shop Now",
+            "value": "SHOP_NOW"
+          },
+          {
+            "name": "Book Now",
+            "value": "BOOK_TRAVEL"
+          },
+          {
+            "name": "Contact Us",
+            "value": "CONTACT_US"
+          },
+          {
+            "name": "Download",
+            "value": "DOWNLOAD"
+          },
+          {
+            "name": "Get Quote",
+            "value": "GET_QUOTE"
+          },
+          {
+            "name": "Subscribe",
+            "value": "SUBSCRIBE"
+          }
+        ]
+      },
+      {
+        "name": "object_story_spec",
+        "type": "text",
+        "value": null,
+        "label": "Full Story Spec (JSON — overrides the fields above)",
+        "placeholder": "{\"page_id\":\"123\",\"link_data\":{...}}"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON object)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Creative ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/insights/insights_get": {
     "hash": "37d94f344019766fceccbdcae3cab000db2eaf6de8d8e6bb346584f2e4f4e503",
     "author": "Andy Esser",
@@ -299253,6 +299949,102 @@
         "type": "string",
         "value": null,
         "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/media/image_upload": {
+    "hash": "3da680e5bf4b200adf711c021fbc0ee19868840a527fd5310e0e7ea5a4e3b3ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Media: Upload Image",
+    "description": "Upload an image to a Meta ad account and return the image hash for use in a creative.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+cloud-arrow-up",
+    "date": "17/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Media",
+      "icon": "facebook",
+      "description": "Upload images and video for use in ad creatives"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "image",
+        "type": "file",
+        "value": null,
+        "label": "Image",
+        "placeholder": "Wire from an image node, or a flo:blob:/flo:file: reference",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image_hash",
+        "type": "string",
+        "value": null,
+        "label": "Image Hash",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Image URL",
         "placeholder": ""
       },
       {
