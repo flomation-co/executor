@@ -495,12 +495,24 @@ func HashAudienceValue(schema AudienceSchema, raw string) (string, bool) {
 		}
 		v = digits.String()
 		// Too short to carry a country code plus a subscriber number.
-		//
-		// Known limit: a number in NATIONAL format ("07700900123") passes this
-		// check but will not match, because Meta matches on country code. There
-		// is no safe way to infer the country here, so the caller has to supply
-		// numbers in international form.
 		if len(v) < 7 {
+			return "", false
+		}
+
+		// A NATIONAL-format number is rejected outright rather than hashed.
+		//
+		// Meta matches on the full international number, so "07700900456"
+		// hashes cleanly, uploads successfully, is counted as received — and
+		// matches nobody. That is the worst possible outcome: it looks like it
+		// worked. An audience quietly missing a third of its members produces a
+		// campaign that under-delivers with no error anywhere to explain it.
+		//
+		// A leading 0 is the trunk prefix in most of the world and is never
+		// valid at the start of an international number, so this is a safe
+		// signal. The country cannot be inferred safely — guessing would
+		// corrupt real numbers — so the caller is told to supply the country
+		// code rather than having one invented for them.
+		if strings.HasPrefix(v, "0") {
 			return "", false
 		}
 	default:
@@ -517,18 +529,22 @@ func HashAudienceValue(schema AudienceSchema, raw string) (string, bool) {
 //
 // The skipped count is returned rather than swallowed: an upload that silently
 // drops half its list looks identical to one that worked.
-func BuildAudiencePayload(schema AudienceSchema, values []string) (payload string, used, skipped int, err error) {
+func BuildAudiencePayload(schema AudienceSchema, values []string) (payload string, used int, skipped []string, err error) {
 	data := make([][]string, 0, len(values))
 	for _, v := range values {
 		h, ok := HashAudienceValue(schema, v)
 		if !ok {
-			skipped++
+			if r := SkipReason(schema, v); r != "" {
+				skipped = append(skipped, r)
+			} else {
+				skipped = append(skipped, fmt.Sprintf("%q could not be used", v))
+			}
 			continue
 		}
 		data = append(data, []string{h})
 	}
 	if len(data) == 0 {
-		return "", 0, skipped, fmt.Errorf("no usable %s values — all %d entries were blank or malformed", schema, skipped)
+		return "", 0, skipped, fmt.Errorf("no usable %s values — every entry was rejected: %s", schema, strings.Join(skipped, "; "))
 	}
 
 	b, err := json.Marshal(map[string]interface{}{
@@ -638,4 +654,39 @@ func blameDetail(e map[string]interface{}) string {
 		return ""
 	}
 	return " — Meta names the offending field(s): " + strings.Join(parts, ", ")
+}
+
+// SkipReason explains, in one line, why a value could not be used.
+//
+// "3 skipped" tells a caller nothing actionable — and an agent will happily
+// report it as success. Naming the cause is the difference between a fixable
+// list and a silently incomplete audience.
+func SkipReason(schema AudienceSchema, raw string) string {
+	v := strings.TrimSpace(raw)
+	if v == "" {
+		return ""
+	}
+	if schema == SchemaPhone {
+		digits := onlyDigits(strings.ReplaceAll(v, "(0)", ""))
+		if strings.HasPrefix(digits, "0") {
+			return fmt.Sprintf("%q is in national format — Meta matches on the full international number, so add the country code (e.g. +44) or it will match nobody", raw)
+		}
+		if len(digits) < 7 {
+			return fmt.Sprintf("%q is too short to be a phone number", raw)
+		}
+	}
+	if schema == SchemaEmail {
+		return fmt.Sprintf("%q is not a valid email address", raw)
+	}
+	return fmt.Sprintf("%q could not be used", raw)
+}
+
+func onlyDigits(s string) string {
+	var b strings.Builder
+	for _, r := range s {
+		if r >= '0' && r <= '9' {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
 }

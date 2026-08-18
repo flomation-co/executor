@@ -298715,7 +298715,7 @@
     ]
   },
   "marketing/meta_ads/audiences/audience_add_users": {
-    "hash": "c7ae30b9ede43a05e667feba4b5a43c6210b137ccdabb42907a960a287e1bce0",
+    "hash": "eb6eea8c61b06ed6bec200274b15ce33d0387606bb0bc509c0f0a86650626bd7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Audiences: Add People",
@@ -298824,6 +298824,13 @@
         "type": "integer",
         "value": null,
         "label": "Skipped Before Sending",
+        "placeholder": ""
+      },
+      {
+        "name": "skipped_reasons",
+        "type": "object",
+        "value": null,
+        "label": "Why Entries Were Skipped",
         "placeholder": ""
       },
       {

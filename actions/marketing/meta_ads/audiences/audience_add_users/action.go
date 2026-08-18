@@ -5,6 +5,7 @@ package audience_add_users
 import (
 	"fmt"
 	"net/url"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	meta "flomation.app/automate/executor/actions/marketing/meta_ads"
@@ -41,6 +42,7 @@ var Outputs = [...]core.Connection{
 	{Name: "num_received", Type: core.ConnectionTypeInteger, Label: "Received by Meta"},
 	{Name: "num_invalid", Type: core.ConnectionTypeInteger, Label: "Rejected by Meta"},
 	{Name: "skipped_locally", Type: core.ConnectionTypeInteger, Label: "Skipped Before Sending"},
+	{Name: "skipped_reasons", Type: core.ConnectionTypeObject, Label: "Why Entries Were Skipped"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
@@ -85,11 +87,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	summary := fmt.Sprintf("Sent %d hashed %s value(s) to audience %s — Meta received %d, rejected %d",
 		used, schema, audienceID, received, invalid)
-	if skipped > 0 {
-		// Say this out loud. A partial upload is indistinguishable from a
-		// complete one unless the shortfall is reported, and a quietly
-		// half-populated audience means an ad campaign that misses people.
-		summary += fmt.Sprintf(". %d entr(ies) were skipped before sending as blank or malformed", skipped)
+	if len(skipped) > 0 {
+		// Say this out loud, WITH the reason. A partial upload is
+		// indistinguishable from a complete one unless the shortfall is
+		// reported, and a bare count invites reporting it as success — a
+		// quietly half-populated audience means a campaign that misses people
+		// with nothing anywhere to explain why.
+		summary += fmt.Sprintf(". %d entr(ies) were NOT sent: %s", len(skipped), strings.Join(skipped, "; "))
 	}
 	summary += ". Meta matches audiences asynchronously, so the size will not update immediately."
 
@@ -97,7 +101,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"audience_id":     audienceID,
 		"num_received":    received,
 		"num_invalid":     invalid,
-		"skipped_locally": skipped,
+		"skipped_locally": len(skipped),
+		"skipped_reasons": skipped,
 	}), nil
 }
 
