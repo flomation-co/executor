@@ -1896,15 +1896,18 @@ import (
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
 	marketing_meta_ads_accounts_account_list "flomation.app/automate/executor/actions/marketing/meta_ads/accounts/account_list"
 	marketing_meta_ads_ads_ad_create "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_create"
+	marketing_meta_ads_ads_ad_get "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_get"
 	marketing_meta_ads_ads_ad_list "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_list"
 	marketing_meta_ads_ads_ad_update "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_update"
 	marketing_meta_ads_adsets_adset_create "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_create"
+	marketing_meta_ads_adsets_adset_get "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_get"
 	marketing_meta_ads_adsets_adset_list "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_list"
 	marketing_meta_ads_adsets_adset_update "flomation.app/automate/executor/actions/marketing/meta_ads/adsets/adset_update"
 	marketing_meta_ads_audiences_audience_add_users "flomation.app/automate/executor/actions/marketing/meta_ads/audiences/audience_add_users"
 	marketing_meta_ads_audiences_audience_create "flomation.app/automate/executor/actions/marketing/meta_ads/audiences/audience_create"
 	marketing_meta_ads_audiences_audience_list "flomation.app/automate/executor/actions/marketing/meta_ads/audiences/audience_list"
 	marketing_meta_ads_campaigns_campaign_create "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_create"
+	marketing_meta_ads_campaigns_campaign_get "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_get"
 	marketing_meta_ads_campaigns_campaign_list "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_list"
 	marketing_meta_ads_campaigns_campaign_update "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_update"
 	marketing_meta_ads_creatives_creative_create "flomation.app/automate/executor/actions/marketing/meta_ads/creatives/creative_create"
@@ -5481,15 +5484,18 @@ var Actions = map[string]core.Action{
 	"makefile/validate":                                                               makefile_validate.Execute,
 	"marketing/meta_ads/accounts/account_list":                                        marketing_meta_ads_accounts_account_list.Execute,
 	"marketing/meta_ads/ads/ad_create":                                                marketing_meta_ads_ads_ad_create.Execute,
+	"marketing/meta_ads/ads/ad_get":                                                   marketing_meta_ads_ads_ad_get.Execute,
 	"marketing/meta_ads/ads/ad_list":                                                  marketing_meta_ads_ads_ad_list.Execute,
 	"marketing/meta_ads/ads/ad_update":                                                marketing_meta_ads_ads_ad_update.Execute,
 	"marketing/meta_ads/adsets/adset_create":                                          marketing_meta_ads_adsets_adset_create.Execute,
+	"marketing/meta_ads/adsets/adset_get":                                             marketing_meta_ads_adsets_adset_get.Execute,
 	"marketing/meta_ads/adsets/adset_list":                                            marketing_meta_ads_adsets_adset_list.Execute,
 	"marketing/meta_ads/adsets/adset_update":                                          marketing_meta_ads_adsets_adset_update.Execute,
 	"marketing/meta_ads/audiences/audience_add_users":                                 marketing_meta_ads_audiences_audience_add_users.Execute,
 	"marketing/meta_ads/audiences/audience_create":                                    marketing_meta_ads_audiences_audience_create.Execute,
 	"marketing/meta_ads/audiences/audience_list":                                      marketing_meta_ads_audiences_audience_list.Execute,
 	"marketing/meta_ads/campaigns/campaign_create":                                    marketing_meta_ads_campaigns_campaign_create.Execute,
+	"marketing/meta_ads/campaigns/campaign_get":                                       marketing_meta_ads_campaigns_campaign_get.Execute,
 	"marketing/meta_ads/campaigns/campaign_list":                                      marketing_meta_ads_campaigns_campaign_list.Execute,
 	"marketing/meta_ads/campaigns/campaign_update":                                    marketing_meta_ads_campaigns_campaign_update.Execute,
 	"marketing/meta_ads/creatives/creative_create":                                    marketing_meta_ads_creatives_creative_create.Execute,
