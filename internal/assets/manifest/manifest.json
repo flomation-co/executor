@@ -536600,7 +536600,7 @@
     ]
   },
   "slack/rich_message": {
-    "hash": "836ae654711a05ffb0f8862554b4cbd2849499cba83acb7cbcc1316115c38260",
+    "hash": "3de3e616444dded7735e5373fb298b1163e08e7ca7e60768859a7fe22ae703b9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -536624,7 +536624,7 @@
       },
       {
         "name": "channel_id",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${channel_id}"
@@ -536777,7 +536777,7 @@
     ]
   },
   "slack/send_message": {
-    "hash": "23ff79f5255029b9f20ad07e88ee19c63736736737ab3a46deca605f00722dd3",
+    "hash": "21a012b02ac9cd2dfffd26b25956d3923136ce1f6eb4ab389c2f678fa9a77aed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -536802,7 +536802,7 @@
       },
       {
         "name": "channel_id",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${channel_id}",
