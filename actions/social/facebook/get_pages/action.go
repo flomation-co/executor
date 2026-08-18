@@ -3,6 +3,7 @@ package facebook_get_pages
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	fb "flomation.app/automate/executor/actions/social/facebook"
@@ -76,9 +77,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		outputs["first_page_token"] = result.Data[0].AccessToken
 	}
 
-	summary := fmt.Sprintf("Found %d pages", len(result.Data))
+	// The summary must carry the IDs, because tool_result is what an AI caller
+	// reads — the outputs below are available to a wired flow but invisible to
+	// an agent choosing what to do next. Naming only the page meant an agent
+	// that needed the ID (to create an ad creative, say) could see the page
+	// existed and still not know its ID, and either had to ask a human or
+	// invent one. Listing them is a few characters; the alternative is a
+	// fabricated ID reaching a live API.
+	summary := fmt.Sprintf("Found %d page(s)", len(result.Data))
 	if len(result.Data) > 0 {
-		summary += fmt.Sprintf(": %s", result.Data[0].Name)
+		listed := make([]string, 0, len(result.Data))
+		for _, p := range result.Data {
+			listed = append(listed, fmt.Sprintf("%s (ID: %s)", p.Name, p.ID))
+		}
+		summary += ": " + strings.Join(listed, ", ")
 	}
 
 	return fb.SuccessResult(summary, outputs), nil

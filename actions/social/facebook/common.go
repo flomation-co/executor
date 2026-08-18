@@ -15,8 +15,12 @@ import (
 	core "flomation.app/automate/executor"
 )
 
+// GraphAPIBase is the Graph API root. A var, not a const, so tests can point it
+// at an httptest server — this package had no execution tests at all because it
+// could not be redirected.
+var GraphAPIBase = "https://graph.facebook.com/v19.0"
+
 const (
-	GraphAPIBase   = "https://graph.facebook.com/v19.0"
 	requestTimeout = 30 * time.Second
 	maxResponse    = 1 << 20 // 1 MB
 )
