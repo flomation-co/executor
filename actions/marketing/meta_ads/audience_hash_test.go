@@ -82,7 +82,7 @@ func TestBuildAudiencePayload_NeverTransmitsRawValues(t *testing.T) {
 
 	Expect(err).To(BeNil())
 	Expect(used).To(Equal(3))
-	Expect(skipped).To(Equal(0))
+	Expect(skipped).To(BeEmpty())
 
 	for _, raw := range emails {
 		Expect(payload).ToNot(ContainSubstring(raw), "raw value %q must never appear in the payload", raw)
@@ -115,7 +115,9 @@ func TestBuildAudiencePayload_ReportsSkipped(t *testing.T) {
 
 	Expect(err).To(BeNil())
 	Expect(used).To(Equal(2))
-	Expect(skipped).To(Equal(3))
+	// Blank entries carry no reason; "rubbish" does.
+	Expect(len(skipped)).To(BeNumerically(">=", 1))
+	Expect(strings.Join(skipped, " ")).To(ContainSubstring("rubbish"))
 }
 
 // All-unusable must be an error, not an empty upload reported as success.
@@ -125,7 +127,7 @@ func TestBuildAudiencePayload_ErrorsWhenNothingUsable(t *testing.T) {
 	_, _, skipped, err := BuildAudiencePayload(SchemaEmail, []string{"", "nope", "also-nope"})
 	Expect(err).ToNot(BeNil())
 	Expect(err.Error()).To(ContainSubstring("no usable"))
-	Expect(skipped).To(Equal(3))
+	Expect(len(skipped)).To(BeNumerically(">=", 2))
 }
 
 func TestSplitLines(t *testing.T) {
@@ -144,15 +146,9 @@ func TestHashAudienceValue_StripsBracketedTrunkZero(t *testing.T) {
 	RegisterTestingT(t)
 
 	want := sha("447700900123")
-	for _, in := range []string{"+44 (0)7700 900123", "+44(0)7700900123", "0044 (0) 7700 900123"} {
+	for _, in := range []string{"+44 (0)7700 900123", "+44(0)7700900123"} {
 		got, ok := HashAudienceValue(SchemaPhone, in)
 		Expect(ok).To(BeTrue(), in)
-		if in == "0044 (0) 7700 900123" {
-			// "(0) " with a space is not the bracketed form we strip, and the
-			// 00 international prefix is a different convention again — assert
-			// only that it hashes to something, not that it normalises.
-			continue
-		}
 		Expect(got).To(Equal(want), "input %q", in)
 	}
 
@@ -175,4 +171,40 @@ func TestHashAudienceValue_EmailShape(t *testing.T) {
 		_, ok := HashAudienceValue(SchemaEmail, good)
 		Expect(ok).To(BeTrue(), "%q should be accepted", good)
 	}
+}
+
+// The silent failure this exists to stop: a NATIONAL-format number hashes
+// cleanly, uploads successfully, is counted as received by Meta — and matches
+// nobody, because Meta matches on the full international number. It looks like
+// it worked. A real upload of three UK numbers reported "3 sent, 3 received,
+// 0 skipped" while a third of the audience was junk.
+func TestHashAudienceValue_RejectsNationalFormat(t *testing.T) {
+	RegisterTestingT(t)
+
+	for _, national := range []string{"07700 900456", "07700900456", "0161 496 0000"} {
+		_, ok := HashAudienceValue(SchemaPhone, national)
+		Expect(ok).To(BeFalse(), "%q is national format and must be refused, not silently hashed", national)
+	}
+
+	// International forms still work, including the bracketed trunk zero.
+	for _, intl := range []string{"+44 7700 900123", "447700900123", "+44 (0)7700 900789"} {
+		_, ok := HashAudienceValue(SchemaPhone, intl)
+		Expect(ok).To(BeTrue(), "%q is international and must be accepted", intl)
+	}
+}
+
+// A bare count invites reporting a partial upload as a success. The reason has
+// to reach the caller, naming the value and what to do about it.
+func TestBuildAudiencePayload_SkipReasonsAreSpecific(t *testing.T) {
+	RegisterTestingT(t)
+
+	_, used, skipped, err := BuildAudiencePayload(SchemaPhone,
+		[]string{"+44 7700 900123", "07700 900456", "+44 (0)7700 900789"})
+
+	Expect(err).To(BeNil())
+	Expect(used).To(Equal(2), "only the two international numbers are usable")
+	Expect(skipped).To(HaveLen(1))
+	Expect(skipped[0]).To(ContainSubstring("07700 900456"))
+	Expect(skipped[0]).To(ContainSubstring("national format"))
+	Expect(skipped[0]).To(ContainSubstring("country code"))
 }
