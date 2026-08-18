@@ -150,6 +150,7 @@ func apiError(status int, decoded map[string]interface{}, raw []byte) error {
 	}
 	code := num(e, "code")
 	sub := num(e, "error_subcode")
+	blame := blameDetail(e)
 
 	// 4 / 17 / 32 / 613 are the throttling family. Say so plainly: on the
 	// Limited access tier these are expected rather than exceptional, and a
@@ -164,9 +165,9 @@ func apiError(status int, decoded map[string]interface{}, raw []byte) error {
 		return fmt.Errorf("permissions error from Meta (code %d, subcode %d): %s — the token needs ads_management (write) or ads_read (read), and the app must have access to this ad account", code, sub, msg)
 	}
 	if sub != 0 {
-		return fmt.Errorf("error from the Meta Marketing API (code %d, subcode %d): %s", code, sub, msg)
+		return fmt.Errorf("error from the Meta Marketing API (code %d, subcode %d): %s%s", code, sub, msg, blame)
 	}
-	return fmt.Errorf("error from the Meta Marketing API (code %d): %s", code, msg)
+	return fmt.Errorf("error from the Meta Marketing API (code %d): %s%s", code, msg, blame)
 }
 
 // --- ad account id handling ---
@@ -583,4 +584,58 @@ func DescribeBudget(label, majorInput, currency string, minorSent int64) string 
 		return ""
 	}
 	return fmt.Sprintf("%s %s %s (sent to Meta as %d)", label, majorInput, currency, minorSent)
+}
+
+// blameDetail extracts the field-level detail Meta buries in error_data, and
+// renders it as a suffix.
+//
+// Meta routinely answers a malformed request with a sentence that names nothing
+// — "The ad creative is invalid" — while separately reporting exactly WHICH
+// field it objected to, in error_data.blame_field_specs. Dropping that turns a
+// precise answer into a guessing game: the reader is left choosing between
+// permissions, an unapproved image and a provisioning delay, when Meta already
+// said which field was wrong.
+//
+// blame_field_specs is an array of field PATHS, each itself an array of
+// segments, so it arrives as [["creative","object_story_spec","link_data",
+// "image_hash"]] and has to be flattened to be readable.
+func blameDetail(e map[string]interface{}) string {
+	data, _ := e["error_data"].(map[string]interface{})
+	if data == nil {
+		return ""
+	}
+
+	var parts []string
+	if specs, ok := data["blame_field_specs"].([]interface{}); ok {
+		for _, spec := range specs {
+			segs, ok := spec.([]interface{})
+			if !ok {
+				// Occasionally a bare string rather than a path array.
+				if s, ok := spec.(string); ok && strings.TrimSpace(s) != "" {
+					parts = append(parts, s)
+				}
+				continue
+			}
+			var path []string
+			for _, seg := range segs {
+				if s, ok := seg.(string); ok && s != "" {
+					path = append(path, s)
+				}
+			}
+			if len(path) > 0 {
+				parts = append(parts, strings.Join(path, "."))
+			}
+		}
+	}
+
+	// Some errors carry a plain-text detail instead of, or as well as, the
+	// field paths.
+	if detail := str(data, "blame_field"); detail != "" {
+		parts = append(parts, detail)
+	}
+
+	if len(parts) == 0 {
+		return ""
+	}
+	return " — Meta names the offending field(s): " + strings.Join(parts, ", ")
 }

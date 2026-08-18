@@ -169,3 +169,62 @@ func TestAPIError_ClassifiesTheCommonFailures(t *testing.T) {
 	Expect(apiError(500, nil, []byte("upstream exploded")).Error()).
 		To(ContainSubstring("upstream exploded"))
 }
+
+// Meta routinely answers a malformed request with a sentence that names nothing
+// — "The ad creative is invalid" — while separately reporting exactly which
+// field it objected to. Dropping that turned a precise answer into a guessing
+// game between permissions, an unapproved image and a provisioning delay.
+func TestAPIError_SurfacesBlameFieldSpecs(t *testing.T) {
+	RegisterTestingT(t)
+
+	body := map[string]interface{}{"error": map[string]interface{}{
+		"code": float64(100), "error_subcode": float64(1487015),
+		"message":        "Invalid parameter",
+		"error_user_msg": "The ad creative is invalid.",
+		"error_data": map[string]interface{}{
+			"blame_field_specs": []interface{}{
+				[]interface{}{"creative", "object_story_spec", "link_data", "image_hash"},
+			},
+		},
+	}}
+
+	err := apiError(400, body, nil)
+	Expect(err.Error()).To(ContainSubstring("The ad creative is invalid"))
+	Expect(err.Error()).To(ContainSubstring("1487015"))
+	// The whole point: the field path must reach the reader.
+	Expect(err.Error()).To(ContainSubstring("creative.object_story_spec.link_data.image_hash"))
+}
+
+func TestAPIError_BlameFieldSpecs_Shapes(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Multiple paths.
+	multi := map[string]interface{}{"error": map[string]interface{}{
+		"code": float64(100), "message": "Invalid parameter",
+		"error_data": map[string]interface{}{"blame_field_specs": []interface{}{
+			[]interface{}{"targeting", "geo_locations"},
+			[]interface{}{"bid_amount"},
+		}},
+	}}
+	Expect(apiError(400, multi, nil).Error()).To(ContainSubstring("targeting.geo_locations, bid_amount"))
+
+	// A bare string rather than a path array.
+	bare := map[string]interface{}{"error": map[string]interface{}{
+		"code": float64(100), "message": "Invalid parameter",
+		"error_data": map[string]interface{}{"blame_field_specs": []interface{}{"adset_id"}},
+	}}
+	Expect(apiError(400, bare, nil).Error()).To(ContainSubstring("adset_id"))
+
+	// No error_data at all — must not add a dangling suffix.
+	plain := map[string]interface{}{"error": map[string]interface{}{
+		"code": float64(100), "message": "Invalid parameter",
+	}}
+	Expect(apiError(400, plain, nil).Error()).ToNot(ContainSubstring("offending field"))
+
+	// error_data present but empty.
+	empty := map[string]interface{}{"error": map[string]interface{}{
+		"code": float64(100), "message": "Invalid parameter",
+		"error_data": map[string]interface{}{},
+	}}
+	Expect(apiError(400, empty, nil).Error()).ToNot(ContainSubstring("offending field"))
+}
