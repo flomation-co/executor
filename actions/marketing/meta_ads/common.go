@@ -228,6 +228,52 @@ func BudgetMinorUnits(name, currency string, inputs []*core.Connection) (*int64,
 	return stripe_common.MoneyToMinorUnits(name, currency, inputs)
 }
 
+// CampaignBudgetConflict reports whether the parent campaign already owns the
+// budget, which makes an ad set budget invalid.
+//
+// Meta calls this campaign budget optimisation, and its rejection —
+// "You can only set an ad set budget or a campaign budget" — arrives only AFTER
+// the attempt, with no indication of which side already has one. Worse, a
+// campaign with CBO also commonly carries a cap-requiring bid strategy, so the
+// two failures land together and fixing either one alone still fails. That is
+// exactly how it played out in practice: each correct fix looked like a wrong
+// one because the other error was still there.
+//
+// Returns an empty string when there is no conflict. A failed lookup is NOT an
+// error — if the campaign cannot be read, the create should be attempted and
+// Meta's own answer used, rather than blocking on a pre-check.
+func CampaignBudgetConflict(flow *core.Flow, c *Client, campaignID string, adSetHasBudget bool) string {
+	if !adSetHasBudget || campaignID == "" {
+		return ""
+	}
+	resp, err := c.Get(flow, "/"+campaignID, url.Values{"fields": {"name,daily_budget,lifetime_budget,bid_strategy"}})
+	if err != nil {
+		return ""
+	}
+
+	daily := str(resp, "daily_budget")
+	lifetime := str(resp, "lifetime_budget")
+	if daily == "" && lifetime == "" {
+		return ""
+	}
+
+	which, amount := "a daily budget", daily
+	if daily == "" {
+		which, amount = "a lifetime budget", lifetime
+	}
+	msg := fmt.Sprintf(
+		"The parent campaign already has %s (%s in the account's minor units), so Meta will not accept an ad set budget as well — you can set one or the other, not both. "+
+			"Either remove the budget from this ad set and let the campaign control spend, or remove it from the campaign.",
+		which, amount)
+
+	// Name the bid strategy too when it forces a cap. These two constraints
+	// travel together and are much easier to fix in one pass than in two.
+	if bs := str(resp, "bid_strategy"); bs == "LOWEST_COST_WITH_BID_CAP" || bs == "COST_CAP" {
+		msg += fmt.Sprintf(" Note the campaign also uses bid strategy %s, so every ad set beneath it needs a Bid Cap.", bs)
+	}
+	return msg
+}
+
 // --- input helpers ---
 
 func RequiredString(name string, inputs []*core.Connection) (string, error) {

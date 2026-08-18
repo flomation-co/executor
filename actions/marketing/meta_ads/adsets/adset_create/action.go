@@ -137,6 +137,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	daily := meta.OptionalString("daily_budget", inputs)
 	lifetime := meta.OptionalString("lifetime_budget", inputs)
 
+	// Meta only reports the campaign-vs-ad-set budget conflict after the
+	// attempt, and never says which side already has a budget. One read of the
+	// campaign answers it — and picks up a cap-requiring bid strategy at the
+	// same time, since the two constraints travel together and are far easier
+	// to fix in one pass than discovered one failure at a time.
+	if msg := meta.CampaignBudgetConflict(flow, client, campaign, daily != "" || lifetime != ""); msg != "" {
+		return meta.ErrorResult(msg), nil
+	}
+
 	// Meta rejects a lifetime budget without an end time, with a message that
 	// does not name the missing field. Catching it here costs one comparison and
 	// saves a confusing round trip.
