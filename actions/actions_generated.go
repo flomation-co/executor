@@ -1908,6 +1908,8 @@ import (
 	marketing_meta_ads_campaigns_campaign_list "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_list"
 	marketing_meta_ads_campaigns_campaign_update "flomation.app/automate/executor/actions/marketing/meta_ads/campaigns/campaign_update"
 	marketing_meta_ads_creatives_creative_create "flomation.app/automate/executor/actions/marketing/meta_ads/creatives/creative_create"
+	marketing_meta_ads_creatives_creative_get "flomation.app/automate/executor/actions/marketing/meta_ads/creatives/creative_get"
+	marketing_meta_ads_creatives_creative_list "flomation.app/automate/executor/actions/marketing/meta_ads/creatives/creative_list"
 	marketing_meta_ads_insights_insights_get "flomation.app/automate/executor/actions/marketing/meta_ads/insights/insights_get"
 	marketing_meta_ads_media_image_upload "flomation.app/automate/executor/actions/marketing/meta_ads/media/image_upload"
 	marketing_sendgrid_asm_group_create "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_create"
@@ -5491,6 +5493,8 @@ var Actions = map[string]core.Action{
 	"marketing/meta_ads/campaigns/campaign_list":                                      marketing_meta_ads_campaigns_campaign_list.Execute,
 	"marketing/meta_ads/campaigns/campaign_update":                                    marketing_meta_ads_campaigns_campaign_update.Execute,
 	"marketing/meta_ads/creatives/creative_create":                                    marketing_meta_ads_creatives_creative_create.Execute,
+	"marketing/meta_ads/creatives/creative_get":                                       marketing_meta_ads_creatives_creative_get.Execute,
+	"marketing/meta_ads/creatives/creative_list":                                      marketing_meta_ads_creatives_creative_list.Execute,
 	"marketing/meta_ads/insights/insights_get":                                        marketing_meta_ads_insights_insights_get.Execute,
 	"marketing/meta_ads/media/image_upload":                                           marketing_meta_ads_media_image_upload.Execute,
 	"marketing/sendgrid/asm_group_create":                                             marketing_sendgrid_asm_group_create.Execute,

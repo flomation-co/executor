@@ -299806,6 +299806,217 @@
       }
     ]
   },
+  "marketing/meta_ads/creatives/creative_get": {
+    "hash": "911735fe97ce9cf02e2345989e71e7cea3cec8465e1f0f9c3ea940cadab22a90",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Creatives: Get",
+    "description": "Read a Meta ad creative by ID, including its full object_story_spec.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+eye",
+    "date": "18/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Creatives",
+      "icon": "facebook",
+      "description": "Ad creatives — the image, copy and destination an ad shows"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "creative_id",
+        "type": "string",
+        "value": null,
+        "label": "Creative ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Creative",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Creative ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/creatives/creative_list": {
+    "hash": "bdbfed721774f4de3e75e987e7c5909f5394f4d8d9ae3d1a97e864ff96149cbb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Creatives: List",
+    "description": "List the ad creatives in a Meta ad account.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+list",
+    "date": "18/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Creatives",
+      "icon": "facebook",
+      "description": "Ad creatives — the image, copy and destination an ad shows"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Account ID",
+        "placeholder": "act_1234567890",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Page Cursor (from a previous run)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Creatives",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/insights/insights_get": {
     "hash": "37d94f344019766fceccbdcae3cab000db2eaf6de8d8e6bb346584f2e4f4e503",
     "author": "Andy Esser",
