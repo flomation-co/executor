@@ -18,7 +18,7 @@ import (
 // GraphAPIBase is the Graph API root. A var, not a const, so tests can point it
 // at an httptest server — this package had no execution tests at all because it
 // could not be redirected.
-var GraphAPIBase = "https://graph.facebook.com/v19.0"
+var GraphAPIBase = "https://graph.facebook.com/v25.0"
 
 const (
 	requestTimeout = 30 * time.Second
