@@ -297893,6 +297893,101 @@
       }
     ]
   },
+  "marketing/meta_ads/ads/ad_get": {
+    "hash": "796534a0b0d0ae0b0ad67fb57e62b1ce92c900d0cfd4803f8312c76a52d38ae5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ads: Get",
+    "description": "Read a Meta ad by ID, including its ad set, creative and effective status.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+eye",
+    "date": "18/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "facebook",
+      "description": "Individual ads and their state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "ad_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ad",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/ads/ad_list": {
     "hash": "8b758903383320728628cf1802366fb254695d210ce9270ce81c541f19cb4e11",
     "author": "Andy Esser",
@@ -298162,7 +298257,7 @@
     ]
   },
   "marketing/meta_ads/adsets/adset_create": {
-    "hash": "22310c7c979820727a997c3302be70056bd6e85185cdb600fac8b220a651cdc5",
+    "hash": "e703d58ba950bcc3428de2e2308c832f944a51746b9a8b4b5d2e3ffadab68d9b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ad Sets: Create",
@@ -298414,6 +298509,101 @@
         "type": "string",
         "value": null,
         "label": "Ad Account Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/adsets/adset_get": {
+    "hash": "46c72717c1207762fe6c8dcd40547ef1a030ea633462704607a1835052891b13",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Sets: Get",
+    "description": "Read a Meta ad set by ID, including targeting, budget and bid settings.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+eye",
+    "date": "18/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Sets",
+      "icon": "facebook",
+      "description": "Targeting, schedule, optimisation and bidding"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "adset_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ad Set",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Set ID",
         "placeholder": ""
       },
       {
@@ -299301,6 +299491,101 @@
         "type": "string",
         "value": null,
         "label": "Ad Account Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/meta_ads/campaigns/campaign_get": {
+    "hash": "d78f8d31498652f35cd0a80af1a98c1367e049109319b571c8ae682af6067c1a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaigns: Get",
+    "description": "Read a Meta campaign by ID, including objective, budget and bid strategy.",
+    "website": "https://www.flomation.co",
+    "icon": "facebook+eye",
+    "date": "18/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Meta Ads",
+      "icon": "facebook",
+      "description": "Create, adjust and report on Facebook and Instagram advertising via the Meta Marketing API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "facebook",
+      "description": "Campaign objectives, budgets and state"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Meta Access Token",
+        "placeholder": "${secrets.MetaAdsToken}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret (recommended)",
+        "placeholder": "${secrets.MetaAppSecret}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Campaign",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
         "placeholder": ""
       },
       {
