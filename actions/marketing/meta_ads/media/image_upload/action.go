@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"net/url"
 	"os"
-	"path/filepath"
 
 	core "flomation.app/automate/executor"
 	meta "flomation.app/automate/executor/actions/marketing/meta_ads"
@@ -45,6 +44,12 @@ var Inputs = [...]core.Connection{
 	{Name: "image", Type: core.ConnectionTypeFile, Required: true,
 		Label:       "Image file reference (flo:blob:… or flo:file:…) from an upstream image or Download File action — NOT a URL",
 		Placeholder: "Wire from an image node, or a flo:blob:/flo:file: reference"},
+	// Meta keys the upload response by filename and shows it in the ad image
+	// library, so it is worth being able to set. Left blank it comes from the
+	// image itself, or is generated with the right extension.
+	{Name: "filename", Type: core.ConnectionTypeString,
+		Label:       "Filename to store the image under (optional — defaults to the image's own name)",
+		Placeholder: "advert-summer.jpg"},
 }
 
 var Outputs = [...]core.Connection{
@@ -72,10 +77,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return meta.ErrorResult("an execution context is required to read the image"), nil
 	}
 
-	path, _, err := flow.ResolveToLocalFile(imageRef)
+	path, mimeType, err := flow.ResolveToLocalFile(imageRef)
 	if err != nil {
 		return meta.ErrorResult("could not read the image: " + err.Error()), nil
 	}
+
+	// Meta rejects an upload whose filename has no image extension, and keys
+	// its response by that name, so it must always be a real one.
+	filename := core.UploadFilename(
+		meta.OptionalString("filename", inputs), imageRef, mimeType, "image")
 
 	info, err := os.Stat(path)
 	if err != nil {
@@ -94,7 +104,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	p := url.Values{
 		"bytes":    {base64.StdEncoding.EncodeToString(raw)},
-		"filename": {filepath.Base(path)},
+		"filename": {filename},
 	}
 
 	resp, err := meta.NewClient(token, secret).Post(flow, meta.AccountPath(account)+"/adimages", p)
@@ -122,7 +132,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	return meta.OkResult(
 		fmt.Sprintf("Uploaded %s (%.0f KB). Image hash: %s — pass this to Creatives: Create.",
-			filepath.Base(path), float64(info.Size())/1024, hash),
+			filename, float64(info.Size())/1024, hash),
 		map[string]interface{}{"image_hash": hash, "url": imageURL},
 	), nil
 }

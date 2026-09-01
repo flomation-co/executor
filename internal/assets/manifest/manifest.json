@@ -113253,7 +113253,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "6f703b10078a63e0491435a27c4747a36887edbe834d9537080a9cff3470f9be",
+    "hash": "26a1eddca0c9d68a351f70e55ac8919ce0098c7d2f0b710b3382403a221fe030",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -165613,7 +165613,7 @@
     ]
   },
   "azure/files/file_download": {
-    "hash": "5e577ff502b7d168356bd58f78097d433b06353f4c6aabdc776cb10e029e60de",
+    "hash": "df6ac29be58fd5502a88cc51c4fb0ee94ea5a16d9b1eca371b771f10e02bf28e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Files: Download File",
@@ -166889,7 +166889,7 @@
     ]
   },
   "azure/files/file_upload": {
-    "hash": "e144159594ad43c20749f08a380f1c9db396d938a1a1b44a019a0e87ebf67a7f",
+    "hash": "a5ad94e8bf925c84820b8e2e15a2fc5297e620a3ebfa71cff13071fdbc72fa50",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Files: Upload File",
@@ -167020,9 +167020,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "summary.pdf",
-        "required": true
+        "label": "File Name (optional — defaults to the uploaded file's own name)",
+        "placeholder": "summary.pdf"
       },
       {
         "name": "content",
@@ -168792,7 +168791,7 @@
     ]
   },
   "azure/storage/blob_download": {
-    "hash": "c173deadd89bbaab18ef6bfa7b54d4db244eff40bde6318afe37d55f5c55038e",
+    "hash": "57cb9c53266308cc4af03e0d389456ecabd82a3e0a6279901b30ab8463e653de",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Download Blob",
@@ -171427,7 +171426,7 @@
     ]
   },
   "azure/storage/blob_upload": {
-    "hash": "810a985e0582bfbd95824c04b0c2bdc74f41068702a629eaf251e612b98c531e",
+    "hash": "c39fe517eb2d5a9b48e0a97697a092a1af7be19e418cf097d079fe1d094a0b3b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Upload Blob",
@@ -171551,9 +171550,8 @@
         "name": "blob_name",
         "type": "string",
         "value": null,
-        "label": "Blob Name",
-        "placeholder": "reports/2026/summary.pdf",
-        "required": true
+        "label": "Blob Name (optional — a trailing / keeps the file's own name)",
+        "placeholder": "reports/2026/summary.pdf"
       },
       {
         "name": "content",
@@ -189346,7 +189344,7 @@
     ]
   },
   "crm/salesforce/attachment_create": {
-    "hash": "815f8ba90bb0635b973be803c9bbf6762842b19e22680c9549b648c9dc9f72ea",
+    "hash": "53088596d8dc324fd6d322ba18de06904272baf71551fd9c29dc47b56b2d3db7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Attachment (Classic)",
@@ -189401,9 +189399,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "contract.pdf — include the extension",
-        "required": true
+        "label": "File Name (optional — defaults to the attached file's own name)",
+        "placeholder": "contract.pdf — include the extension"
       },
       {
         "name": "file",
@@ -189655,7 +189652,7 @@
     ]
   },
   "crm/salesforce/attachment_download": {
-    "hash": "c0e1ddbe84f3f05780109c39a37b729b465db1b09674550b13bd1bd94ec5bae5",
+    "hash": "11917314e2f7df964982478fae553679c90124e6e17222d2067d626adbb44bf5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download Attachment (Classic)",
@@ -198185,7 +198182,7 @@
     ]
   },
   "crm/salesforce/file_download": {
-    "hash": "0c7a45df43c3c8c2518ce82a633b5c441b82909e90ac92957061cefab7c1abb0",
+    "hash": "a9da159c95f53c730dbc1844b473ad2bb97367c61547282ab706961df7cbfe0a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download File",
@@ -198578,7 +198575,7 @@
     ]
   },
   "crm/salesforce/file_upload": {
-    "hash": "2d5063a8b6543bf44b4c7566e13f89b6a3899f5f2fbcf3de1e033699ed543103",
+    "hash": "06764f5666e653388e5ea857213ecddaace8a9880d7dace1c745fd4797d0e53e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Upload File",
@@ -213557,7 +213554,7 @@
     ]
   },
   "databricks/upload_file": {
-    "hash": "2d61e00c76b78a5f36bd832bc9f838e4571f58071d8060f489d50a564eab7437",
+    "hash": "f12dba362db6c09ebf11bca90108f45d116d3233d29fd8f9e4e4d8d919a89463",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Upload File",
@@ -213592,7 +213589,7 @@
         "name": "path",
         "type": "string",
         "value": null,
-        "label": "Volume File Path",
+        "label": "Volume File Path — a trailing / keeps the uploaded file's own name",
         "placeholder": "/Volumes/main/default/my_volume/file.csv",
         "required": true
       },
@@ -228164,7 +228161,7 @@
     ]
   },
   "filetransfer/upload": {
-    "hash": "19d4ac044404d3c3f9362a4d0e7bac4b6fa5cdda718d30978e78a0373575a7f7",
+    "hash": "255ed31ac3c17abefd8bb272bcc88e65c6e441204012b7413dbe1c84176286d0",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Upload File (FTP/SFTP)",
@@ -239896,7 +239893,7 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "cb9a67e47f2045c24b3422ca09de2ae19a28d0bbaf2d13de03c4ae10c50227dc",
+    "hash": "f5875794df284fbc29586ed5c2c0f9891eb8eb08d24762c682a0a3b97a2431d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
@@ -239920,9 +239917,8 @@
         "name": "name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "report.txt",
-        "required": true
+        "label": "File Name (optional — defaults to the uploaded file's own name)",
+        "placeholder": "report.txt"
       },
       {
         "name": "content",
@@ -289453,7 +289449,7 @@
     ]
   },
   "jira/attachment_add": {
-    "hash": "76ae9fda19007a0e55e16caf6fcc82cb639627ecdcf5d76a8703dc57f0432a54",
+    "hash": "85f4887125790509810aa7380ca6c2ebd228aa77c9c8c31961e1be17cdb40b1b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Add Attachment",
@@ -289504,9 +289500,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "The name to store the file under, e.g. report.pdf",
-        "required": true
+        "label": "File Name (optional — defaults to the attached file's own name)",
+        "placeholder": "The name to store the file under, e.g. report.pdf"
       },
       {
         "name": "base64_content",
@@ -300549,7 +300544,7 @@
     ]
   },
   "marketing/meta_ads/media/image_upload": {
-    "hash": "b4a3999fb644da19cdac22e2597c04e2f34090051b0a117ee256406443ccbe78",
+    "hash": "9db80c2e4d2c6e109026ef305e27717e694b59db4802b1aca21f930920768a1b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Media: Upload Image",
@@ -300604,6 +300599,13 @@
         "label": "Image file reference (flo:blob:… or flo:file:…) from an upstream image or Download File action — NOT a URL",
         "placeholder": "Wire from an image node, or a flo:blob:/flo:file: reference",
         "required": true
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename to store the image under (optional — defaults to the image's own name)",
+        "placeholder": "advert-summer.jpg"
       }
     ],
     "outputs": [
@@ -304200,7 +304202,7 @@
     ]
   },
   "marketing/sendgrid/mail_send": {
-    "hash": "63092c8a957ebc8e79cd7a394895cb3a79f5d7c499d6cf58cfe4bb7f8b68f496",
+    "hash": "f4a3dd41a2304c8876c3fd982912907cf30565cc276a095faea3ec78629dee07",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid: Send Email",
@@ -318137,7 +318139,7 @@
     ]
   },
   "microsoft/powerpoint/upload": {
-    "hash": "b95a5ad5e95353212675b9d7d6039a88c42569aee5d572a92e85474634d83303",
+    "hash": "039687ce80f74e5c6ff47adef3de6eaab35a84e9daedd17a2953e67cc8c67b0a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload Presentation",
@@ -318161,9 +318163,8 @@
         "name": "filename",
         "type": "string",
         "value": null,
-        "label": "Filename",
-        "placeholder": "presentation.pptx",
-        "required": true
+        "label": "Filename (optional — defaults to the uploaded file's own name)",
+        "placeholder": "presentation.pptx"
       },
       {
         "name": "content",
@@ -536335,7 +536336,7 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "5bad2a3a63c6bc697c2a602306e3578badc10a3b5a0964ab9d0282f4103364b8",
+    "hash": "a72fdcf60cf5e63419341953731f2fbba6495159837277fd9cfe3458a0b72438",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
@@ -536391,9 +536392,8 @@
         "name": "filename",
         "type": "string",
         "value": null,
-        "label": "Filename including extension (e.g. report.csv, photo.png, data.json)",
-        "placeholder": "",
-        "required": true
+        "label": "Filename including extension, e.g. report.csv (optional — defaults to the uploaded file's own name)",
+        "placeholder": ""
       },
       {
         "name": "title",
@@ -567342,7 +567342,7 @@
     ]
   },
   "web/download": {
-    "hash": "ec67e5ac2daf636dcaab9a70a7d1dfce7b0eab916e56bb2fd2e979afb50ac148",
+    "hash": "a01d1c68dbfa30b54bc643228ea5f1798d2be33cd06355e3bc62b36056611adb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download File",

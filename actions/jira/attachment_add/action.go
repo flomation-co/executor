@@ -28,7 +28,8 @@ var Inputs = [...]core.Connection{
 	{Name: "email", Type: core.ConnectionTypeString, Label: "Account Email", Placeholder: "The Atlassian account email that owns the API token", Required: true},
 	{Name: "api_token", Type: core.ConnectionTypeSecret, Label: "API Token", Placeholder: "id.atlassian.com ▸ Security ▸ Create and manage API tokens", Required: true},
 	{Name: "issue_key", Type: core.ConnectionTypeString, Label: "Issue Key", Placeholder: "The issue to attach the file to, e.g. SCRUM-1", Required: true},
-	{Name: "file_name", Type: core.ConnectionTypeString, Label: "File Name", Placeholder: "The name to store the file under, e.g. report.pdf", Required: true},
+	{Name: "file_name", Type: core.ConnectionTypeString, Placeholder: "The name to store the file under, e.g. report.pdf",
+		Label: "File Name (optional — defaults to the attached file's own name)"},
 	{Name: "base64_content", Type: core.ConnectionTypeString, Label: "File Content (base64)", Placeholder: "The file's bytes, base64-encoded", Required: true},
 }
 
@@ -49,18 +50,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return jira.ErrorResult(err.Error()), nil
 	}
-	fileName, err := jira.RequiredString("file_name", inputs)
-	if err != nil {
-		return jira.ErrorResult(err.Error()), nil
-	}
 	b64, err := jira.RequiredString("base64_content", inputs)
 	if err != nil {
 		return jira.ErrorResult(err.Error()), nil
 	}
 
 	var raw []byte
+	var mimeType string
 	if core.IsFileRef(b64) || core.IsBlobToken(b64) {
-		raw, _, err = flow.ResolveToBytes(b64)
+		raw, mimeType, err = flow.ResolveToBytes(b64)
 		if err != nil {
 			return jira.ErrorResult("could not read the attachment: " + err.Error()), nil
 		}
@@ -73,6 +71,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if len(raw) > jira.MaxAttachmentBytes {
 		return jira.ErrorResult(fmt.Sprintf("attachment exceeds the %d MB upload limit", jira.MaxAttachmentBytes>>20)), nil
 	}
+
+	// Jira shows the attachment under this name and picks its preview from
+	// the extension, so it always needs a real one.
+	fileName := core.UploadFilename(
+		jira.OptionalString("file_name", inputs), b64, mimeType, "attachment")
 
 	var buf bytes.Buffer
 	w := multipart.NewWriter(&buf)

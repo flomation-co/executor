@@ -36,7 +36,8 @@ var Inputs = [...]core.Connection{
 	{Name: "endpoint", Type: core.ConnectionTypeString, Label: "Custom Endpoint", Placeholder: "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
-	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
+	{Name: "blob_name", Type: core.ConnectionTypeString, Placeholder: "reports/2026/summary.pdf",
+		Label: "Blob Name (optional — a trailing / keeps the file's own name)"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Content", Placeholder: "Text, base64, a flo:file reference, or ${parent.file} from an upstream node", Required: true},
 	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Placeholder: "Detected from the content when blank (e.g. application/pdf)"},
 	{
@@ -76,10 +77,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	blobName, err := storage.RequiredString("blob_name", inputs)
-	if err != nil {
-		return storage.ErrorResult(err.Error()), nil
-	}
+	blobName := storage.OptionalString("blob_name", inputs)
 	contentConn := core.FindConnection("content", inputs)
 	if contentConn == nil || contentConn.String() == nil || *contentConn.String() == "" {
 		return storage.ErrorResult("content is required"), nil
@@ -91,6 +89,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(fmt.Sprintf("failed to resolve content: %s", err.Error())), nil
 	}
+
+	// A blank name, or one ending in "/", means "put it in there under its own
+	// name" rather than creating a blob literally called "" or "prefix/".
+	blobName = core.UploadDestination(blobName, *contentConn.String(), resolvedMime, "upload")
 
 	contentType := storage.OptionalString("content_type", inputs)
 	if contentType == "" {

@@ -23,7 +23,8 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "host", Type: core.ConnectionTypeString, Label: "Workspace URL", Placeholder: "https://dbc-xxxxxxxx.cloud.databricks.com", Required: true},
 	{Name: "token", Type: core.ConnectionTypeSecret, Label: "Access Token (PAT)", Placeholder: "dapi...", Required: true},
-	{Name: "path", Type: core.ConnectionTypeString, Label: "Volume File Path", Placeholder: "/Volumes/main/default/my_volume/file.csv", Required: true},
+	{Name: "path", Type: core.ConnectionTypeString, Required: true, Placeholder: "/Volumes/main/default/my_volume/file.csv",
+		Label: "Volume File Path — a trailing / keeps the uploaded file's own name"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "File Content", Required: true},
 	{Name: "is_base64", Type: core.ConnectionTypeBoolean, Label: "Content is Base64", Placeholder: "Enable for binary files"},
 	{Name: "overwrite", Type: core.ConnectionTypeBoolean, Label: "Overwrite if Exists"},
@@ -53,12 +54,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	content := *contentConn.String()
 
 	data := []byte(content)
+	mimeType := ""
 	if core.IsFileRef(content) || core.IsBlobToken(content) {
-		resolved, _, rerr := flow.ResolveToBytes(content)
+		resolved, resolvedMime, rerr := flow.ResolveToBytes(content)
 		if rerr != nil {
 			return databricks.ErrorResult("could not read the file: " + rerr.Error()), nil
 		}
-		data = resolved
+		data, mimeType = resolved, resolvedMime
 	} else if conn := core.FindConnection("is_base64", inputs); conn != nil && conn.Boolean() != nil && *conn.Boolean() {
 		decoded, derr := base64.StdEncoding.DecodeString(content)
 		if derr != nil {
@@ -66,6 +68,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		data = decoded
 	}
+
+	// A path ending in "/" names the volume directory rather than the file, so
+	// keep the file's own name rather than writing an object called "".
+	path = core.UploadDestination(path, content, mimeType, "upload")
 
 	apiPath := "/api/2.0/fs/files" + databricks.EncodePath(path)
 	overwrite := true // default to overwrite

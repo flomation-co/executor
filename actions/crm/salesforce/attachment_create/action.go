@@ -50,7 +50,8 @@ var Inputs = [...]core.Connection{
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "Account, Contact, Case… — only used to help you pick the record"},
 	{Name: "parent_id", Type: core.ConnectionTypeString, Label: "Attach To Record", Placeholder: "The record the file belongs to, e.g. 0015f00000XyzAAB", Required: true},
 
-	{Name: "file_name", Type: core.ConnectionTypeString, Label: "File Name", Placeholder: "contract.pdf — include the extension", Required: true},
+	{Name: "file_name", Type: core.ConnectionTypeString, Placeholder: "contract.pdf — include the extension",
+		Label: "File Name (optional — defaults to the attached file's own name)"},
 	{Name: "file", Type: core.ConnectionTypeString, Label: "File", Placeholder: "The file from an earlier step, or base64 content", Required: true},
 
 	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Placeholder: "application/pdf — blank lets Salesforce work it out from the name"},
@@ -82,19 +83,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := salesforce.ValidateRecordID(parentID); err != nil {
 		return nil, err
 	}
-	fileName, err := salesforce.RequiredString("file_name", inputs)
-	if err != nil {
-		return nil, fmt.Errorf("file_name is required — Salesforce shows it as the attachment's name")
-	}
 	source, err := salesforce.RequiredString("file", inputs)
 	if err != nil {
 		return nil, fmt.Errorf("file is required — wire in a file from an earlier step, or paste base64 content")
 	}
 
-	raw, err := resolveBytes(flow, source)
+	raw, mimeType, err := resolveBytes(flow, source)
 	if err != nil {
 		return nil, err
 	}
+
+	// Salesforce shows this as the attachment's name and reads the file type
+	// from its extension, so it always needs a real one.
+	fileName := core.UploadFilename(
+		salesforce.OptionalString("file_name", inputs), source, mimeType, "attachment")
+
 	if len(raw) > maxAttachmentBytes {
 		return nil, fmt.Errorf("the file is %d MB — a Classic attachment can hold up to %d MB. Use Upload File instead for anything larger", len(raw)>>20, maxAttachmentBytes>>20)
 	}
@@ -139,19 +142,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // reference or blob token from an upstream action, or base64 typed in by hand.
 // A value that is none of those is a configuration mistake, so it fails hard
 // rather than uploading whatever the string happened to contain.
-func resolveBytes(flow *core.Flow, value string) ([]byte, error) {
+// resolveBytes reads the file, returning its MIME type alongside so the caller
+// can give a derived filename the right extension. Base64 content carries no
+// type, so that case returns "".
+func resolveBytes(flow *core.Flow, value string) ([]byte, string, error) {
 	if core.IsFileRef(value) || core.IsBlobToken(value) {
-		raw, _, err := flow.ResolveToBytes(value)
+		raw, mimeType, err := flow.ResolveToBytes(value)
 		if err != nil {
-			return nil, fmt.Errorf("could not read the file: %w", err)
+			return nil, "", fmt.Errorf("could not read the file: %w", err)
 		}
-		return raw, nil
+		return raw, mimeType, nil
 	}
 	raw, err := base64.StdEncoding.DecodeString(strings.TrimSpace(value))
 	if err != nil {
-		return nil, fmt.Errorf("file must be a file from an earlier step, or base64-encoded content: %w", err)
+		return nil, "", fmt.Errorf("file must be a file from an earlier step, or base64-encoded content: %w", err)
 	}
-	return raw, nil
+	return raw, "", nil
 }
 
 // resolveContentType prefers the operator's value and otherwise leaves the

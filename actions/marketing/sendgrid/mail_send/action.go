@@ -185,11 +185,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			}
 			cs, _ := m["content"].(string)
 			if core.IsFileRef(cs) || core.IsBlobToken(cs) {
-				data, _, rerr := flow.ResolveToBytes(cs)
+				data, mimeType, rerr := flow.ResolveToBytes(cs)
 				if rerr != nil {
 					return sendgrid.ErrorResult("could not read an attachment: " + rerr.Error()), nil
 				}
 				m["content"] = base64.StdEncoding.EncodeToString(data)
+				// SendGrid requires a filename on every attachment and shows
+				// it to the recipient, so fill it in from the reference when
+				// the caller wired in a file but did not name it.
+				name, _ := m["filename"].(string)
+				m["filename"] = core.UploadFilename(name, cs, mimeType, "attachment")
+				if t, _ := m["type"].(string); t == "" && mimeType != "" {
+					m["type"] = mimeType
+				}
 			}
 		}
 		body["attachments"] = arr

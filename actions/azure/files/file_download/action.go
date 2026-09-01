@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"path"
 	"strings"
 
 	core "flomation.app/automate/executor"
@@ -114,7 +113,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// The bytes land on the workspace as a media file; EmitMediaFile hands back
 	// a blob token for small files (previewable, survives suspension) or a
 	// flo:file: reference for big ones — either is accepted downstream.
-	scratch, err := flow.MediaScratchFile(path.Ext(fileName))
+	scratch, err := flow.MediaScratchFileNamed(fileName)
 	if err != nil {
 		return files.ErrorResult(fmt.Sprintf("failed to allocate a scratch file: %s", err.Error())), nil
 	}

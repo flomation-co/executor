@@ -33,7 +33,8 @@ var Inputs = [...]core.Connection{
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "share", Type: core.ConnectionTypeString, Label: "Share", Placeholder: "my-share", Required: true},
 	{Name: "directory", Type: core.ConnectionTypeString, Label: "Directory", Placeholder: "Leave blank for the share's root, or e.g. reports/2026"},
-	{Name: "file_name", Type: core.ConnectionTypeString, Label: "File Name", Placeholder: "summary.pdf", Required: true},
+	{Name: "file_name", Type: core.ConnectionTypeString, Placeholder: "summary.pdf",
+		Label: "File Name (optional — defaults to the uploaded file's own name)"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Content", Placeholder: "Text, base64, a flo:file reference, or ${parent.file} from an upstream node", Required: true},
 	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Placeholder: "Detected from the content when blank (e.g. application/pdf)"},
 	{Name: "metadata", Type: core.ConnectionTypeObject, Label: "Metadata (JSON)", Placeholder: `{"source":"flomation"}`},
@@ -82,15 +83,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return files.ErrorResult(err.Error()), nil
 	}
 	dir := strings.Trim(files.OptionalString("directory", inputs), "/")
-	fileName, err := files.RequiredString("file_name", inputs)
-	if err != nil {
-		return files.ErrorResult(err.Error()), nil
-	}
-	logical := files.JoinPath(dir, fileName)
-	if err := files.ValidateFilePath("file_name", logical); err != nil {
-		return files.ErrorResult(err.Error()), nil
-	}
-
 	contentConn := core.FindConnection("content", inputs)
 	if contentConn == nil || contentConn.String() == nil || *contentConn.String() == "" {
 		return files.ErrorResult("content is required"), nil
@@ -100,6 +92,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	body, resolvedMime, err := flow.ResolveToBytes(*contentConn.String())
 	if err != nil {
 		return files.ErrorResult(fmt.Sprintf("failed to resolve content: %s", err.Error())), nil
+	}
+
+	// Content is resolved first so a blank name can fall back to the name the
+	// file already had. The path is validated afterwards, as before — a
+	// derived name goes through exactly the same check as a typed one.
+	fileName := core.UploadFilename(
+		files.OptionalString("file_name", inputs), *contentConn.String(), resolvedMime, "upload")
+	logical := files.JoinPath(dir, fileName)
+	if err := files.ValidateFilePath("file_name", logical); err != nil {
+		return files.ErrorResult(err.Error()), nil
 	}
 	if len(body) > files.MaxUploadBody {
 		return files.ErrorResult(fmt.Sprintf("the content is %d bytes, over the %d MB upload limit — use Copy File, which transfers server-side at any size",

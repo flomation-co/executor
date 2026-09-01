@@ -26,7 +26,8 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "name", Type: core.ConnectionTypeString, Label: "File Name", Required: true, Placeholder: "report.txt"},
+	{Name: "name", Type: core.ConnectionTypeString, Placeholder: "report.txt",
+		Label: "File Name (optional — defaults to the uploaded file's own name)"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Text Content"},
 	{Name: "base64_content", Type: core.ConnectionTypeString, Label: "Binary content (base64, blob or file reference)"},
 	{Name: "mime_type", Type: core.ConnectionTypeString, Label: "MIME Type", Placeholder: "text/plain"},
@@ -46,10 +47,6 @@ var Outputs = [...]core.Connection{
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	name := google.OptStr("name", inputs)
-	if name == "" {
-		return google.ErrorResult("name is required")
-	}
-
 	textContent := google.OptStr("content", inputs)
 	b64Content := google.OptStr("base64_content", inputs)
 	mimeType := google.OptStr("mime_type", inputs)
@@ -94,6 +91,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			}
 		}
 	}
+
+	// Drive will happily store an unnamed file, and then show it as
+	// "Untitled" with a generic icon. Fall back to the name the reference
+	// carried, or a generated one with the right extension.
+	fallback := "upload"
+	if textContent != "" {
+		fallback = "note"
+	}
+	name = core.UploadFilename(name, b64Content, mimeType, fallback)
 
 	// Build metadata
 	metadata := map[string]interface{}{

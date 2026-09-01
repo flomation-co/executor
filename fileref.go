@@ -153,6 +153,19 @@ func (f *Flow) ResolveToLocalFile(value string) (path string, mimeType string, e
 			return "", "", fmt.Errorf("fetch blob: %w", err)
 		}
 		_, _, blobMime, _ := ParseBlobToken(value)
+		// Write under the token's own name when it has one, so an action
+		// that names its upload from the resolved path (filepath.Base) sends
+		// the file's real name rather than a scratch handle.
+		if name := EnsureFilenameExtension(BlobTokenName(value), blobMime); name != "" {
+			p, err := f.MediaScratchFileNamed(name)
+			if err != nil {
+				return "", "", err
+			}
+			if err := os.WriteFile(p, b, 0o600); err != nil {
+				return "", "", err
+			}
+			return p, mimeOfFile(p), nil
+		}
 		return f.writeScratch(b, extForMime(blobMime))
 
 	case isHTTPURL(value):
@@ -274,7 +287,11 @@ func (f *Flow) EmitMediaFile(path string) (string, error) {
 	if bs := f.Blobs(); bs != nil && fi.Size() <= mediaBlobLimitBytes {
 		if b, rerr := os.ReadFile(path); rerr == nil {
 			if tok, perr := bs.Put(b, mimeOfFile(path)); perr == nil && tok != "" {
-				return tok, nil
+				// Carry the filename on the token. Without this the name dies
+				// here — a flo:file: reference keeps its base name in the path,
+				// but a blob is just a handle, so every upload downstream of a
+				// small file would have to invent one.
+				return WithBlobTokenName(tok, filepath.Base(path)), nil
 			}
 		}
 		// Any read/put failure (no backend, quota, oversize) → workspace ref.
@@ -323,6 +340,27 @@ var canonicalExtForMime = map[string]string{
 	"audio/ogg":       ".ogg",
 	"audio/wav":       ".wav",
 	"application/pdf": ".pdf",
+	// Text and data types bite just as hard: on macOS "text/plain" resolves to
+	// ".conf" and "application/json" to ".map", which is how a downloaded
+	// passwd file ends up called passwd.conf.
+	"text/plain":                    ".txt",
+	"text/csv":                      ".csv",
+	"text/html":                     ".html",
+	"text/markdown":                 ".md",
+	"text/xml":                      ".xml",
+	"application/xml":               ".xml",
+	"application/json":              ".json",
+	"application/zip":               ".zip",
+	"application/gzip":              ".gz",
+	"application/csv":               ".csv",
+	"application/rtf":               ".rtf",
+	"application/msword":            ".doc",
+	"application/vnd.ms-excel":      ".xls",
+	"application/vnd.ms-powerpoint": ".ppt",
+	"application/vnd.openxmlformats-officedocument.wordprocessingml.document":   ".docx",
+	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":         ".xlsx",
+	"application/vnd.openxmlformats-officedocument.presentationml.presentation": ".pptx",
+	"application/octet-stream": ".bin",
 }
 
 // extForMime maps a MIME type to a file extension (with dot), best-effort.
@@ -366,4 +404,177 @@ func isLikelyBase64(s string) bool {
 		}
 	}
 	return true
+}
+
+// maxFilenameBytes caps a filename so a hostile or merely silly name cannot
+// blow past a filesystem's per-component limit (255 on ext4/APFS). The
+// extension is preserved when truncating — it is the part that decides how the
+// receiving service handles the upload.
+const maxFilenameBytes = 200
+
+// SanitiseFilename reduces an arbitrary string to a safe single path component,
+// or "" when nothing usable survives.
+//
+// SECURITY-CRITICAL: names arrive from blob tokens, Content-Disposition headers
+// and LLM tool arguments, and are used to build a path under the workspace
+// scratch directory. A name must therefore never be able to express a
+// directory, escape upwards, or smuggle a separator past a later join.
+//
+// It deliberately does NOT invent an extension — callers that want one use
+// EnsureFilenameExtension, so "no name at all" stays distinguishable from
+// "a name without an extension".
+func SanitiseFilename(name string) string {
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return ""
+	}
+
+	// Both separators, whatever the host: a Windows-shaped name reaching a
+	// Linux runner must not keep its backslashes as ordinary characters.
+	name = strings.ReplaceAll(name, "\\", "/")
+	if i := strings.LastIndex(name, "/"); i >= 0 {
+		name = name[i+1:]
+	}
+
+	// Drop anything non-printable, plus the characters that are separators or
+	// wildcards on some host we might run on.
+	name = strings.Map(func(r rune) rune {
+		if r < 0x20 || r == 0x7f {
+			return -1
+		}
+		switch r {
+		case '/', '\\', ':', '*', '?', '"', '<', '>', '|':
+			return -1
+		}
+		return r
+	}, name)
+
+	// A leading dot would make the file hidden and, for "." / "..", name a
+	// directory rather than a file.
+	name = strings.TrimLeft(strings.TrimSpace(name), ".")
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return ""
+	}
+
+	if len(name) > maxFilenameBytes {
+		ext := filepath.Ext(name)
+		if len(ext) > 16 { // not really an extension, just a late dot
+			ext = ""
+		}
+		stem := name[:len(name)-len(ext)]
+		if cut := maxFilenameBytes - len(ext); cut > 0 && cut < len(stem) {
+			stem = strings.ToValidUTF8(stem[:cut], "")
+		}
+		name = stem + ext
+	}
+	return name
+}
+
+// EnsureFilenameExtension appends the extension implied by mimeType when name
+// has none. Slack picks a preview renderer from the extension, Meta's
+// /adimages rejects an upload without one, and Drive shows a generic icon —
+// so a name that lost its extension is worth repairing.
+//
+// A name that already has one is returned untouched: second-guessing an
+// explicit ".log" because the sniffed type says text/plain helps nobody.
+func EnsureFilenameExtension(name, mimeType string) string {
+	if name == "" || filepath.Ext(name) != "" {
+		return name
+	}
+	if ext := extForMime(mimeType); ext != "" {
+		return name + ext
+	}
+	return name
+}
+
+// FilenameForRef returns the filename a media reference carries, without
+// reading any bytes: the name= hint on a blob token, or the base name of a
+// flo:file: workspace reference. Returns "" for a reference that carries no
+// name, and for raw bytes or base64 (which never do).
+func FilenameForRef(ref string) string {
+	switch {
+	case IsBlobToken(ref):
+		return BlobTokenName(ref)
+	case IsFileRef(ref):
+		rel, ok := ParseFileRef(ref)
+		if !ok {
+			return ""
+		}
+		return SanitiseFilename(filepath.Base(rel))
+	}
+	return ""
+}
+
+// UploadFilename decides the name an upload should travel under, in the order
+// a person would expect:
+//
+//  1. what the flow author or agent explicitly asked for
+//  2. the name the reference carried from wherever the file came from
+//  3. a unique name, so two uploads in one execution cannot collide
+//
+// In every case an extension implied by mimeType is added when the chosen name
+// lacks one. The result is never empty.
+//
+// fallbackStem names the third case ("attachment", "upload", …) so the
+// generated name still says something about where it came from.
+func UploadFilename(explicit, ref, mimeType, fallbackStem string) string {
+	if n := EnsureFilenameExtension(SanitiseFilename(explicit), mimeType); n != "" {
+		return n
+	}
+	if n := EnsureFilenameExtension(FilenameForRef(ref), mimeType); n != "" {
+		return n
+	}
+	if fallbackStem = SanitiseFilename(fallbackStem); fallbackStem == "" {
+		fallbackStem = "file"
+	}
+	return EnsureFilenameExtension(fallbackStem+"-"+randomToken(), mimeType)
+}
+
+// randomToken returns a short hex string used to make generated filenames
+// unique within an execution.
+func randomToken() string {
+	b := make([]byte, 4)
+	if _, err := rand.Read(b); err != nil {
+		return "0"
+	}
+	return hex.EncodeToString(b)
+}
+
+// MediaScratchFileNamed returns a path inside the workspace media scratch
+// directory that KEEPS the given filename, by making the containing directory
+// unique instead of the file. Preserving the name is the whole point: it is
+// what an upload sends onwards.
+//
+// Falls back to MediaScratchFile's random name when nothing usable survives
+// sanitisation.
+func (f *Flow) MediaScratchFileNamed(name string) (string, error) {
+	clean := SanitiseFilename(name)
+	if clean == "" {
+		return f.MediaScratchFile("")
+	}
+	ws, err := workspaceDir()
+	if err != nil {
+		return "", err
+	}
+	dir := filepath.Join(ws, mediaScratchDir, randomToken()+randomToken())
+	if err := os.MkdirAll(dir, 0o700); err != nil {
+		return "", err
+	}
+	return filepath.Join(dir, clean), nil
+}
+
+// UploadDestination resolves a destination that may name either a file or the
+// directory to put it in — an S3 key, a blob name, an SFTP remote path.
+//
+// Blank means "wherever, call it whatever the file is called". A trailing
+// slash means "in here, keep the name". Anything else is taken literally,
+// because a destination the author spelled out in full is a decision, not a
+// default to improve on.
+func UploadDestination(dest, ref, mimeType, fallbackStem string) string {
+	dest = strings.TrimSpace(dest)
+	if dest != "" && !strings.HasSuffix(dest, "/") {
+		return dest
+	}
+	return dest + UploadFilename("", ref, mimeType, fallbackStem)
 }

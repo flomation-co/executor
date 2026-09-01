@@ -18,7 +18,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -96,7 +95,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// Give the scratch file the real extension so downstream MIME sniffing,
 	// previews and "attach this to an email" all behave.
 	name := downloadName(salesforce.OptionalString("file_name", inputs), record, versionID)
-	scratch, err := flow.MediaScratchFile(filepath.Ext(name))
+	scratch, err := flow.MediaScratchFileNamed(name)
 	if err != nil {
 		return salesforce.ErrorResult(fmt.Sprintf("failed to allocate a working file: %v", err)), nil
 	}
@@ -201,7 +200,7 @@ func streamTo(instanceURL, token, path, dest string) (int64, string, error) {
 		return 0, "", salesforce.CheckResponse(&salesforce.APIResponse{StatusCode: resp.StatusCode, Body: body, Headers: resp.Header})
 	}
 
-	// #nosec G304 -- dest is our own MediaScratchFile result: a random name
+	// #nosec G304 -- dest is our own MediaScratchFileNamed result: a sanitised name
 	// inside the execution workspace's media scratch directory, never operator
 	// input.
 	fh, err := os.OpenFile(dest, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0o600)
