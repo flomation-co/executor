@@ -37,7 +37,7 @@ func TestDetokeniseInputs_NilStore_ReturnsErrorForTokenValues(t *testing.T) {
 	args := map[string]interface{}{
 		"audio_base64": "flo:blob:f0f0e5c8b2a14d9e8c7f3b1a6d2e4f5c?size=443080&type=audio/mpeg",
 	}
-	out, err := DetokeniseInputs(args, nil)
+	out, err := DetokeniseInputs(args, nil, nil)
 
 	Expect(err).To(HaveOccurred(), "nil store with a token must surface an error so the agent loop can react")
 	Expect(err.Error()).To(ContainSubstring("audio_base64"), "error must name the offending field for AI feedback")
@@ -64,7 +64,7 @@ func TestDetokeniseInputs_NonTokenValues_PassThrough(t *testing.T) {
 		"nil":         nil,
 		"actual-text": "the user said 'flo:blob:something'",
 	}
-	out, err := DetokeniseInputs(args, nil)
+	out, err := DetokeniseInputs(args, nil, nil)
 
 	Expect(err).NotTo(HaveOccurred(), "no real tokens → no error even with nil store")
 	for k, v := range args {
@@ -83,7 +83,7 @@ func TestDetokeniseInputs_NonTokenValues_PassThrough(t *testing.T) {
 // available" warnings for tools the AI never even passed args to.
 func TestDetokeniseInputs_EmptyMap(t *testing.T) {
 	RegisterTestingT(t)
-	out, err := DetokeniseInputs(map[string]interface{}{}, nil)
+	out, err := DetokeniseInputs(map[string]interface{}{}, nil, nil)
 	Expect(err).NotTo(HaveOccurred())
 	Expect(out).To(BeEmpty())
 }
@@ -101,7 +101,7 @@ func TestDetokeniseInputs_MultipleFailedTokens_SingleError(t *testing.T) {
 		"audio_base64": "flo:blob:f0f0e5c8b2a14d9e8c7f3b1a6d2e4f5c?size=1&type=audio/mpeg",
 		"image_base64": "flo:blob:abababababababababababababababab?size=1&type=image/png",
 	}
-	_, err := DetokeniseInputs(args, nil)
+	_, err := DetokeniseInputs(args, nil, nil)
 
 	Expect(err).To(HaveOccurred())
 	// Exactly ONE field name appears — the implementation records the
@@ -128,7 +128,7 @@ func TestDetokeniseInputs_UUIDFormatToken_RejectedAsMalformed(t *testing.T) {
 	args := map[string]interface{}{
 		"audio_base64": "flo:blob:3b3b8e0e-7f3a-4c3a-a7d5-0e1e6b3b8e0e?size=513715&type=audio/mpeg",
 	}
-	out, err := DetokeniseInputs(args, nil)
+	out, err := DetokeniseInputs(args, nil, nil)
 
 	Expect(err).To(HaveOccurred(), "UUID-format token must be rejected — it's a hallucination")
 	Expect(err.Error()).To(ContainSubstring("audio_base64"))
@@ -156,7 +156,7 @@ func TestDetokeniseInputs_NearMissPrefix_RejectedAsMalformed(t *testing.T) {
 	}
 	for _, malformed := range cases {
 		args := map[string]interface{}{"audio_base64": malformed}
-		_, err := DetokeniseInputs(args, nil)
+		_, err := DetokeniseInputs(args, nil, nil)
 		Expect(err).To(HaveOccurred(),
 			"malformed token %q should be rejected", malformed)
 		Expect(err.Error()).To(ContainSubstring("not a valid blob token"),

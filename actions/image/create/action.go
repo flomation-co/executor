@@ -57,7 +57,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	colour := ic.OptionalStringDefault("colour", "white", inputs)
 	format := ic.OptionalStringDefault("format", "png", inputs)
 
-	outPath, err := flow.MediaScratchFile(format)
+	outPath, err := flow.MediaScratchFileNamed("image." + format)
 	if err != nil {
 		return ic.ErrResult(err.Error())
 	}

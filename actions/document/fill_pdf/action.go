@@ -143,7 +143,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// 3. Fill the form from the merged JSON.
-	outPath, err := flow.MediaScratchFile(".pdf")
+	outPath, err := flow.MediaScratchOutput(templatePath, ".pdf")
 	if err != nil {
 		return errResult("scratch: " + err.Error())
 	}
@@ -153,7 +153,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// 4. Optionally lock every field so the completed PDF isn't editable.
 	if flatten {
-		lockedPath, err := flow.MediaScratchFile(".pdf")
+		lockedPath, err := flow.MediaScratchOutput(templatePath, ".pdf")
 		if err != nil {
 			return errResult("scratch: " + err.Error())
 		}

@@ -99,13 +99,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// action output) as well as inline text.
 	cs := *contents.String()
 	bodyBytes := []byte(cs)
+	mimeType := ""
 	if core.IsFileRef(cs) || core.IsBlobToken(cs) {
-		resolved, _, rerr := flow.ResolveToBytes(cs)
+		resolved, resolvedMime, rerr := flow.ResolveToBytes(cs)
 		if rerr != nil {
 			return nil, rerr
 		}
-		bodyBytes = resolved
+		bodyBytes, mimeType = resolved, resolvedMime
 	}
+
+	// A blank key, or one ending in "/", means "put it in there under its own
+	// name" rather than writing an object literally called "" or "prefix/".
+	key := core.UploadDestination(strFrom(filename), cs, mimeType, "upload")
 
 	region := awscommon.InputString("aws_region", inputs)
 	if region == "" {
@@ -117,7 +122,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	_, err = s.Client.PutObject(context.Background(), &awsS3.PutObjectInput{
-		Key:    aws.String(*filename.String()),
+		Key:    aws.String(key),
 		Bucket: aws.String(*bucket.String()),
 		Body:   bytes.NewReader(bodyBytes),
 	})
@@ -127,7 +132,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	return map[string]interface{}{
 		"bucket":   *bucket.String(),
-		"filename": *filename.String(),
+		"filename": key,
 		"result":   0,
 	}, nil
+}
+
+// strFrom reads a connection that may be absent or unset without panicking —
+// the key is optional now, so it can legitimately be neither.
+func strFrom(c *core.Connection) string {
+	if c == nil || c.String() == nil {
+		return ""
+	}
+	return *c.String()
 }

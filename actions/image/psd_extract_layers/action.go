@@ -93,7 +93,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if !shouldExtract(s.idx, s.name, wanted, anyNamed) {
 			continue
 		}
-		layerPath, err := flow.MediaScratchFile("png")
+		// Name each layer after the document it came from and the layer
+		// itself, so a folder of extracted layers reads as something rather
+		// than a pile of handles.
+		layerPath, err := flow.MediaScratchFileNamed(layerFileName(inPath, s.name, s.idx) + ".png")
 		if err != nil {
 			return ic.ErrResult(err.Error())
 		}
@@ -146,4 +149,21 @@ func parseNames(csv string) map[string]bool {
 func atoi(s string) int {
 	n, _ := strconv.Atoi(strings.TrimSpace(s))
 	return n
+}
+
+// layerFileName builds the name an extracted layer is saved under:
+// "<document>-<layer>", falling back to the layer's index when it is unnamed
+// and to the layer alone when the document arrived without a name.
+//
+// The layer name and index are passed separately because scene is declared
+// inside Execute.
+func layerFileName(psdPath, layerName string, idx int) string {
+	name := layerName
+	if name == "" {
+		name = "layer-" + strconv.Itoa(idx)
+	}
+	if stem := core.MediaStem(psdPath); stem != "" {
+		return stem + "-" + name
+	}
+	return name
 }

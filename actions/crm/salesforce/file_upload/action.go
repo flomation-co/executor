@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime"
 	"mime/multipart"
 	"net/http"
 	"net/textproto"
@@ -134,7 +135,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("the file is %d MB — Salesforce Files accepts up to %d MB per upload", info.Size()>>20, int64(maxFileBytes)>>20)
 	}
 
-	fileName := resolveFileName(salesforce.OptionalString("file_name", inputs), title, path)
+	fileName := resolveFileName(salesforce.OptionalString("file_name", inputs), title, source, path)
 
 	// ContentLocation "S" means Salesforce-hosted. The alternatives ("E"
 	// external, "L" link) describe files that live somewhere else entirely and
@@ -187,14 +188,27 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // type from. An explicit file name wins; otherwise the title is given the
 // resolved file's extension, because a title of "Signed contract" stored with
 // no extension previews as an unknown blob.
-func resolveFileName(explicit, title, path string) string {
+//
+// When there is no title either, fall back to the name the reference carried —
+// a download keeps what the server called it — and finally to a generated name,
+// so PathOnClient is never blank.
+func resolveFileName(explicit, title, ref, path string) string {
 	if explicit != "" {
-		return explicit
+		return core.SanitiseFilename(explicit)
 	}
-	if ext := filepath.Ext(path); ext != "" {
-		return title + ext
+	if title != "" {
+		if ext := filepath.Ext(path); ext != "" {
+			return core.SanitiseFilename(title + ext)
+		}
+		return core.SanitiseFilename(title)
 	}
-	return title
+	return core.UploadFilename("", ref, mimeOfPath(path), "upload")
+}
+
+// mimeOfPath maps a resolved workspace path to a MIME type via its extension,
+// which is all UploadFilename needs to pick an extension back out.
+func mimeOfPath(path string) string {
+	return mime.TypeByExtension(filepath.Ext(path))
 }
 
 // uploadSummary phrases the outcome the way the operator described the job:

@@ -414,3 +414,68 @@ func truncateForErr(s string) string {
 // Kept here intentionally so the import block stays stable and any
 // reviewer touching the file sees the hex helper as "available".
 var _ = hex.EncodeToString
+
+// blobTokenNameParam is the optional query parameter carrying a blob's
+// original filename. Optional and additive: tokens minted before it existed
+// simply have no name, and every parser here already tolerates unknown
+// parameters, so nothing needs to be migrated.
+//
+// The name is a HINT for display and for naming an upload — never a path.
+// It is sanitised on the way in and again on the way out, because a token can
+// reach us from an LLM tool call and must not be able to steer a file write.
+const blobTokenNameParam = "name"
+
+// BlobTokenName returns the original filename a token carries, or "" when it
+// carries none. The value is re-sanitised on read: a token is untrusted input.
+func BlobTokenName(s string) string {
+	if !strings.HasPrefix(s, BlobTokenPrefix) {
+		return ""
+	}
+	body := strings.TrimPrefix(s, BlobTokenPrefix)
+	i := strings.Index(body, "?")
+	if i < 0 {
+		return ""
+	}
+	q, err := url.ParseQuery(body[i+1:])
+	if err != nil {
+		return ""
+	}
+	return SanitiseFilename(q.Get(blobTokenNameParam))
+}
+
+// WithBlobTokenName returns token with a name= hint attached, replacing any
+// name it already carries. Returns token unchanged when it is not a blob token
+// or the name sanitises away to nothing.
+func WithBlobTokenName(token, name string) string {
+	clean := SanitiseFilename(name)
+	if clean == "" || !IsBlobToken(token) {
+		return token
+	}
+
+	body := strings.TrimPrefix(token, BlobTokenPrefix)
+	handle, query := body, ""
+	if i := strings.Index(body, "?"); i >= 0 {
+		handle, query = body[:i], body[i+1:]
+	}
+	q, err := url.ParseQuery(query)
+	if err != nil {
+		return token
+	}
+	q.Set(blobTokenNameParam, clean)
+
+	// Encode() sorts keys, which would reorder size/type and churn every
+	// token string. Rebuild in the canonical order instead so a token that
+	// gains a name still matches the documented shape.
+	var sb strings.Builder
+	sb.WriteString(BlobTokenPrefix)
+	sb.WriteString(handle)
+	sb.WriteString("?size=")
+	sb.WriteString(q.Get("size"))
+	if v := q.Get("type"); v != "" {
+		sb.WriteString("&type=")
+		sb.WriteString(url.QueryEscape(v))
+	}
+	sb.WriteString("&" + blobTokenNameParam + "=")
+	sb.WriteString(url.QueryEscape(clean))
+	return sb.String()
+}

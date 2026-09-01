@@ -164,7 +164,18 @@ func TokeniseLargeOutputs(outputs map[string]interface{}, store *BlobStore) ([]T
 // Returns the new args map (always a fresh map, never the input)
 // plus any error from the FIRST failed resolution. Subsequent
 // errors are silently ignored — one clear message beats a wall.
-func DetokeniseInputs(args map[string]interface{}, store *BlobStore) (map[string]interface{}, error) {
+//
+// fileRefInputs names the inputs that take a file REFERENCE rather
+// than a value — ConnectionTypeFile, whose contract is that the token
+// reaches the action intact so ResolveToLocalFile can resolve it. For
+// those the token is VALIDATED (an unknown handle still fails here,
+// where the error can name the field) but passed through verbatim.
+//
+// Substituting the bytes for those inputs threw away the token's MIME
+// hint, and the hint is the only thing that gives the resolved scratch
+// file an extension. That produced extensionless uploads to Meta's
+// /adimages, which rejects them. Pass nil when no input is file-typed.
+func DetokeniseInputs(args map[string]interface{}, store *BlobStore, fileRefInputs map[string]bool) (map[string]interface{}, error) {
 	if len(args) == 0 {
 		return args, nil
 	}
@@ -211,6 +222,14 @@ func DetokeniseInputs(args map[string]interface{}, store *BlobStore) (map[string
 			if firstErr == nil {
 				firstErr = errors.New(k + ": " + err.Error())
 			}
+			out[k] = v
+			continue
+		}
+		// A file-typed input wants the reference, not the bytes. The
+		// Get above still ran, so a hallucinated handle is caught here
+		// rather than inside the action; the store caches the result,
+		// so the action's own resolution costs nothing.
+		if fileRefInputs[k] {
 			out[k] = v
 			continue
 		}
@@ -334,4 +353,21 @@ func canonicalFormatToMIME(format string) string {
 		return "audio/wav"
 	}
 	return ""
+}
+
+// FileRefInputNames returns the set of input names on a node that carry a
+// file REFERENCE rather than a value, so DetokeniseInputs knows which
+// blob tokens to leave intact for the action to resolve itself.
+func FileRefInputNames(inputs []*Connection) map[string]bool {
+	var names map[string]bool
+	for _, in := range inputs {
+		if in == nil || in.Type != ConnectionTypeFile {
+			continue
+		}
+		if names == nil {
+			names = make(map[string]bool, 2)
+		}
+		names[in.Name] = true
+	}
+	return names
 }

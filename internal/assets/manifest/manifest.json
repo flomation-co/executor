@@ -113253,7 +113253,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "6f703b10078a63e0491435a27c4747a36887edbe834d9537080a9cff3470f9be",
+    "hash": "26a1eddca0c9d68a351f70e55ac8919ce0098c7d2f0b710b3382403a221fe030",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -165613,7 +165613,7 @@
     ]
   },
   "azure/files/file_download": {
-    "hash": "5e577ff502b7d168356bd58f78097d433b06353f4c6aabdc776cb10e029e60de",
+    "hash": "df6ac29be58fd5502a88cc51c4fb0ee94ea5a16d9b1eca371b771f10e02bf28e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Files: Download File",
@@ -166889,7 +166889,7 @@
     ]
   },
   "azure/files/file_upload": {
-    "hash": "e144159594ad43c20749f08a380f1c9db396d938a1a1b44a019a0e87ebf67a7f",
+    "hash": "a5ad94e8bf925c84820b8e2e15a2fc5297e620a3ebfa71cff13071fdbc72fa50",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Files: Upload File",
@@ -167020,9 +167020,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "summary.pdf",
-        "required": true
+        "label": "File Name (optional — defaults to the uploaded file's own name)",
+        "placeholder": "summary.pdf"
       },
       {
         "name": "content",
@@ -168792,7 +168791,7 @@
     ]
   },
   "azure/storage/blob_download": {
-    "hash": "c173deadd89bbaab18ef6bfa7b54d4db244eff40bde6318afe37d55f5c55038e",
+    "hash": "57cb9c53266308cc4af03e0d389456ecabd82a3e0a6279901b30ab8463e653de",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Download Blob",
@@ -171427,7 +171426,7 @@
     ]
   },
   "azure/storage/blob_upload": {
-    "hash": "810a985e0582bfbd95824c04b0c2bdc74f41068702a629eaf251e612b98c531e",
+    "hash": "c39fe517eb2d5a9b48e0a97697a092a1af7be19e418cf097d079fe1d094a0b3b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Upload Blob",
@@ -171551,9 +171550,8 @@
         "name": "blob_name",
         "type": "string",
         "value": null,
-        "label": "Blob Name",
-        "placeholder": "reports/2026/summary.pdf",
-        "required": true
+        "label": "Blob Name (optional — a trailing / keeps the file's own name)",
+        "placeholder": "reports/2026/summary.pdf"
       },
       {
         "name": "content",
@@ -189346,7 +189344,7 @@
     ]
   },
   "crm/salesforce/attachment_create": {
-    "hash": "815f8ba90bb0635b973be803c9bbf6762842b19e22680c9549b648c9dc9f72ea",
+    "hash": "53088596d8dc324fd6d322ba18de06904272baf71551fd9c29dc47b56b2d3db7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Attachment (Classic)",
@@ -189401,9 +189399,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "contract.pdf — include the extension",
-        "required": true
+        "label": "File Name (optional — defaults to the attached file's own name)",
+        "placeholder": "contract.pdf — include the extension"
       },
       {
         "name": "file",
@@ -189655,7 +189652,7 @@
     ]
   },
   "crm/salesforce/attachment_download": {
-    "hash": "c0e1ddbe84f3f05780109c39a37b729b465db1b09674550b13bd1bd94ec5bae5",
+    "hash": "11917314e2f7df964982478fae553679c90124e6e17222d2067d626adbb44bf5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download Attachment (Classic)",
@@ -198185,7 +198182,7 @@
     ]
   },
   "crm/salesforce/file_download": {
-    "hash": "0c7a45df43c3c8c2518ce82a633b5c441b82909e90ac92957061cefab7c1abb0",
+    "hash": "a9da159c95f53c730dbc1844b473ad2bb97367c61547282ab706961df7cbfe0a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download File",
@@ -198578,7 +198575,7 @@
     ]
   },
   "crm/salesforce/file_upload": {
-    "hash": "2d5063a8b6543bf44b4c7566e13f89b6a3899f5f2fbcf3de1e033699ed543103",
+    "hash": "06764f5666e653388e5ea857213ecddaace8a9880d7dace1c745fd4797d0e53e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Upload File",
@@ -213557,7 +213554,7 @@
     ]
   },
   "databricks/upload_file": {
-    "hash": "2d61e00c76b78a5f36bd832bc9f838e4571f58071d8060f489d50a564eab7437",
+    "hash": "f12dba362db6c09ebf11bca90108f45d116d3233d29fd8f9e4e4d8d919a89463",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Upload File",
@@ -213592,7 +213589,7 @@
         "name": "path",
         "type": "string",
         "value": null,
-        "label": "Volume File Path",
+        "label": "Volume File Path — a trailing / keeps the uploaded file's own name",
         "placeholder": "/Volumes/main/default/my_volume/file.csv",
         "required": true
       },
@@ -214889,7 +214886,7 @@
     ]
   },
   "desktop/record_stop": {
-    "hash": "e1a28243bbdcc25f91318dd2da452f4b30739f50086afae2fee21a36b4a47169",
+    "hash": "24cf02023215f0d0b7676de1d36467289107cb026f1501016c11243965013de4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Stop Recording",
@@ -215437,7 +215434,7 @@
     ]
   },
   "desktop/screenshot": {
-    "hash": "325ae1f9ffdda7cc41a16b01b7fd37c856c9ed4acb875de923e685e0483764f1",
+    "hash": "d19d8679596b62eb49b5233550452d1f5393289353ef94606e9666428571150d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Desktop Screenshot",
@@ -221788,7 +221785,7 @@
     ]
   },
   "document/fill_pdf": {
-    "hash": "7c26a178f7b01b1483763c61847464b138f1a4ab1e44a31bc59e0adc414b535c",
+    "hash": "54cf5abe2532ca4e6b4bd404f9230b6687f57551a05cfb983e83b8245a2c5bd1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fill PDF Form",
@@ -228164,7 +228161,7 @@
     ]
   },
   "filetransfer/upload": {
-    "hash": "19d4ac044404d3c3f9362a4d0e7bac4b6fa5cdda718d30978e78a0373575a7f7",
+    "hash": "255ed31ac3c17abefd8bb272bcc88e65c6e441204012b7413dbe1c84176286d0",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Upload File (FTP/SFTP)",
@@ -239896,7 +239893,7 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "cb9a67e47f2045c24b3422ca09de2ae19a28d0bbaf2d13de03c4ae10c50227dc",
+    "hash": "f5875794df284fbc29586ed5c2c0f9891eb8eb08d24762c682a0a3b97a2431d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
@@ -239920,9 +239917,8 @@
         "name": "name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "report.txt",
-        "required": true
+        "label": "File Name (optional — defaults to the uploaded file's own name)",
+        "placeholder": "report.txt"
       },
       {
         "name": "content",
@@ -258127,7 +258123,7 @@
     ]
   },
   "image/adjust": {
-    "hash": "131db4005142d6ee406913474621481a70e3a5905f80876621bc220fe9a3769f",
+    "hash": "c72d89f4ae2e9d8faad90d6d8cefaed0116c77cd2611f2ec1664195186b19b50",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Adjust Image",
@@ -258230,7 +258226,7 @@
     ]
   },
   "image/autocrop": {
-    "hash": "0c0e287e4208c904edc213c6b8b0f60ab789159649ab30485322aed40fbc58c4",
+    "hash": "93540afbda7e83c6c97a3c420e7794d935f98ba83213cc977a3b9b31cd35f9b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Auto-crop Image",
@@ -258314,7 +258310,7 @@
     ]
   },
   "image/border": {
-    "hash": "a13a2e329b5f27c0ff5d5e24a5a2a117bbd0368091a8f6d1f6bf909474436b13",
+    "hash": "d95c6f1c1fc6784e00838356edf7037d138a36bc846b391341cb53efa8ef7902",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Border",
@@ -258391,7 +258387,7 @@
     ]
   },
   "image/convert": {
-    "hash": "58ecae602cee84688c34a5ccf342b1fc5621028bb760e6a7d77e2bc5a169161a",
+    "hash": "44c2ef0a3838a14a97e31d9e82c23f97d27e50381abac832b176681e01883c03",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Convert Image Format",
@@ -258501,7 +258497,7 @@
     ]
   },
   "image/create": {
-    "hash": "e2ac96c5379599f046f0a2186f198892f89b616ea8cf0bb5984b827d782cc9b6",
+    "hash": "f8782ae356f3c3e9342736315f59f8bb2dd73dbf4293111507336d737df5cf45",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Image",
@@ -258608,7 +258604,7 @@
     ]
   },
   "image/crop": {
-    "hash": "2f0bc1b4f5e3cabac6874beb49bc9538f86046657be4585be0d9f775fc9d51d7",
+    "hash": "17737366e07f4a29cc538ee773c9770a7530b91959e9227d7099829d388bb397",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Crop Image",
@@ -258792,7 +258788,7 @@
     ]
   },
   "image/montage": {
-    "hash": "90ac8bd296784da0e8528b2dedd10fc41bcaff59a1ef6b23f1a7889b179cde24",
+    "hash": "191f46609b421bd246159e9e90837c410f2b861ce17f0b824c4a7eeab63698b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Montage / Grid",
@@ -258890,7 +258886,7 @@
     ]
   },
   "image/optimize": {
-    "hash": "cbce20378e14c9aa0c77a5a6730ee78c682eef9363c2aba15b2433b852c91662",
+    "hash": "d2977c44ddc82df081608d610038e882e509f62e9ad7834bc493fef7c93ecdd2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Optimize Image",
@@ -259030,7 +259026,7 @@
     ]
   },
   "image/psd_extract_layers": {
-    "hash": "3a62cabab6925f1c9d56fbbb0a2eea0c727029a32f640c575cdd49e15104ae11",
+    "hash": "d73dd886d5cdb25653ee4f6bc84e8180f9c79d4ea348e6220f55a59b36d81fce",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Extract PSD Layers",
@@ -259184,7 +259180,7 @@
     ]
   },
   "image/psd_rasterise": {
-    "hash": "a828c78b1e26c6176a3e99fd51602c0ddf1fcbac463781deff2ebc2a75b109ac",
+    "hash": "979e5add65647bc9c8daac43cc211e71b84890b8bb5cc7ccb4bf5e8093c26d21",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Rasterise PSD",
@@ -259303,7 +259299,7 @@
     ]
   },
   "image/psd_render_text": {
-    "hash": "e52967cbbc4c0f4b1905cc6bbeaad8cbd33de318d6ae823df7d8a0b2961a52b1",
+    "hash": "437565f7213c5582fcbbd62d2e1b6f95cbe70e871077b40ce0e4f61265687a20",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Personalise PSD Text",
@@ -259473,7 +259469,7 @@
     ]
   },
   "image/resize": {
-    "hash": "ca885d55664750244136e4df8b14c2b8d30d1aacdddc181ecda05f271bf05911",
+    "hash": "9f64d4ade012a23c2fda6124010ba4cd65580b14a29c7941e0d14ac7438d1e11",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Resize Image",
@@ -259592,7 +259588,7 @@
     ]
   },
   "image/rotate": {
-    "hash": "5af174ede8110e00376a124664877e120e80d03be46228293a93b1a393d9fa5c",
+    "hash": "942bb08ec4b2808965bbc8ef45858322dc829c916127dc3734779dbf0257665b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Rotate / Flip Image",
@@ -259701,7 +259697,7 @@
     ]
   },
   "image/round_corners": {
-    "hash": "0c1b852437d1a7366924a0317843084f32ebd50b77fed580673248346425885d",
+    "hash": "0f13eff3711f4850181ae3e14701fa88239718ba2cdc4d8505d879702540381c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Round Corners",
@@ -259771,7 +259767,7 @@
     ]
   },
   "image/text": {
-    "hash": "acf7d7e57bcb1067c9581e54aada94228237bf7a4dcd59826d92e301893b3a06",
+    "hash": "59107dac4da4f49c5708bf806f2715f9048d4e52ea357dc489c6029544945b73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Text to Image",
@@ -259899,7 +259895,7 @@
     ]
   },
   "image/to_pdf": {
-    "hash": "f768bd4cd20603e2b3d6c464130fc6df2bef040a567b00840bf31e2cdad338cb",
+    "hash": "19480c5bddb1852f26b9a87c203f58bb448e3c45385f2446aa79ce6efe51599a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Images to PDF",
@@ -259969,7 +259965,7 @@
     ]
   },
   "image/watermark": {
-    "hash": "e8347af964b93b6e2b8b0cb3ae0ef1a9fb828cb7cdfc4aa5a7e3c52a4f386be4",
+    "hash": "a9b99411d98276ed9bc25e24e7c225a9a44ea57c5d864ec60bef5d81aa32e853",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Watermark Image",
@@ -289453,7 +289449,7 @@
     ]
   },
   "jira/attachment_add": {
-    "hash": "76ae9fda19007a0e55e16caf6fcc82cb639627ecdcf5d76a8703dc57f0432a54",
+    "hash": "85f4887125790509810aa7380ca6c2ebd228aa77c9c8c31961e1be17cdb40b1b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Add Attachment",
@@ -289504,9 +289500,8 @@
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "File Name",
-        "placeholder": "The name to store the file under, e.g. report.pdf",
-        "required": true
+        "label": "File Name (optional — defaults to the attached file's own name)",
+        "placeholder": "The name to store the file under, e.g. report.pdf"
       },
       {
         "name": "base64_content",
@@ -300549,7 +300544,7 @@
     ]
   },
   "marketing/meta_ads/media/image_upload": {
-    "hash": "3da680e5bf4b200adf711c021fbc0ee19868840a527fd5310e0e7ea5a4e3b3ab",
+    "hash": "9db80c2e4d2c6e109026ef305e27717e694b59db4802b1aca21f930920768a1b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Media: Upload Image",
@@ -300601,9 +300596,16 @@
         "name": "image",
         "type": "file",
         "value": null,
-        "label": "Image",
+        "label": "Image file reference (flo:blob:… or flo:file:…) from an upstream image or Download File action — NOT a URL",
         "placeholder": "Wire from an image node, or a flo:blob:/flo:file: reference",
         "required": true
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename to store the image under (optional — defaults to the image's own name)",
+        "placeholder": "advert-summer.jpg"
       }
     ],
     "outputs": [
@@ -304200,7 +304202,7 @@
     ]
   },
   "marketing/sendgrid/mail_send": {
-    "hash": "63092c8a957ebc8e79cd7a394895cb3a79f5d7c499d6cf58cfe4bb7f8b68f496",
+    "hash": "f4a3dd41a2304c8876c3fd982912907cf30565cc276a095faea3ec78629dee07",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid: Send Email",
@@ -318137,7 +318139,7 @@
     ]
   },
   "microsoft/powerpoint/upload": {
-    "hash": "b95a5ad5e95353212675b9d7d6039a88c42569aee5d572a92e85474634d83303",
+    "hash": "039687ce80f74e5c6ff47adef3de6eaab35a84e9daedd17a2953e67cc8c67b0a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload Presentation",
@@ -318161,9 +318163,8 @@
         "name": "filename",
         "type": "string",
         "value": null,
-        "label": "Filename",
-        "placeholder": "presentation.pptx",
-        "required": true
+        "label": "Filename (optional — defaults to the uploaded file's own name)",
+        "placeholder": "presentation.pptx"
       },
       {
         "name": "content",
@@ -536335,7 +536336,7 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "5bad2a3a63c6bc697c2a602306e3578badc10a3b5a0964ab9d0282f4103364b8",
+    "hash": "a72fdcf60cf5e63419341953731f2fbba6495159837277fd9cfe3458a0b72438",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
@@ -536391,9 +536392,8 @@
         "name": "filename",
         "type": "string",
         "value": null,
-        "label": "Filename including extension (e.g. report.csv, photo.png, data.json)",
-        "placeholder": "",
-        "required": true
+        "label": "Filename including extension, e.g. report.csv (optional — defaults to the uploaded file's own name)",
+        "placeholder": ""
       },
       {
         "name": "title",
@@ -537558,7 +537558,7 @@
     ]
   },
   "social/facebook/get_pages": {
-    "hash": "c272053b00bfae600415720e0900a47ca0f90aa01c33428603163c2a368e8791",
+    "hash": "a236ae6bee0c52ee4352696b37417bbd1a324e7fc2cd74f7fd6b7578bb4bd43c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Pages",
@@ -564961,7 +564961,7 @@
     ]
   },
   "video/adjust_audio": {
-    "hash": "82498ed1f32adfeb1ff42298fdd5a89f08d6838a780bbc7a2d3a584e358c506d",
+    "hash": "030599b3df6a483c9b7fb1dff7c5c32e1ef94eeac128e1873986bbddd7198602",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Adjust Audio",
@@ -565056,7 +565056,7 @@
     ]
   },
   "video/burn_text": {
-    "hash": "1e55ac4d9374063f64c78ac35e540c48883ac784f7c522ee23ab328a22b56da5",
+    "hash": "6fb2cbbc53a0e22254f7e116ac4855d8054f43fcd3a74001ec2986a75fcfc2c0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Burn Text onto Video",
@@ -565169,7 +565169,7 @@
     ]
   },
   "video/concat": {
-    "hash": "fc9d424698ae1872e85e858ab3ee05f9ff9ce7ee5e53c18d17f7d4d704f0c8ae",
+    "hash": "260649c8e5d53666e87378457f086f976b82118ab26a71849bfe570938abcab3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Concatenate Videos",
@@ -565246,7 +565246,7 @@
     ]
   },
   "video/convert_audio": {
-    "hash": "81b3648ed766ef9ccabc430c2296bdb39b02d380ca40267a22533e6c2e31c5ea",
+    "hash": "7f7ccb98df23df85e9becea9c56b8f10ef87e7d51a3af785b303d36dba8ba41c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Convert Audio",
@@ -565370,7 +565370,7 @@
     ]
   },
   "video/crop_video": {
-    "hash": "b9548b0b37cf2a2feb1bb38b787ebb08b41211b56223faf61574593345b21bbc",
+    "hash": "82dff5ef451b43db96b63e10fa4993e50d9f7a83c9a31c9814ee1d0a37217a7a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Crop Video",
@@ -565463,7 +565463,7 @@
     ]
   },
   "video/extract_audio": {
-    "hash": "e7ee9a2ad2a202f18dcaa899c58d394f8f59ff4f44d1bd1005d68250f07ec74b",
+    "hash": "95fb955f7ef8707fe6ef504869a32d865ba3c45bac3acd39ac42b94f71598804",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Extract Audio",
@@ -565590,7 +565590,7 @@
     ]
   },
   "video/fade": {
-    "hash": "ac93bb91d67dae89f0e7505afd87a9957bfc1a9bfee65dc10f196b6e0c527b96",
+    "hash": "d2777cc8d2fdcb1f93b543b917d41655a8f5293dd65f38d626e7cf13b9bbd00f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fade Video In / Out",
@@ -565667,7 +565667,7 @@
     ]
   },
   "video/frames": {
-    "hash": "e83b66696b25bc195e85e278b2abf109e1ce56217b667339b714d413eda8dee1",
+    "hash": "07934ef044a75da865b8d424e67995ea0fedbfb5012cbd66ca5c7d1e38579661",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Extract Frames",
@@ -565768,7 +565768,7 @@
     ]
   },
   "video/gif": {
-    "hash": "5d19102359d4b1d8d8510dbaf0fefdc57fb115e4cc444b726004708dc7565db9",
+    "hash": "e9d1347b145c842cd202982612b7ad6124a27bd00b941b99ab573d65135b9707",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Video to GIF",
@@ -565964,7 +565964,7 @@
     ]
   },
   "video/ken_burns": {
-    "hash": "120fab2609706716b0ab9f42a5412a582e2994861a394019c61b962126313cea",
+    "hash": "dd31661ce53e1f6d6a00349c100a7096da6d3965663ea86658fce0ff19f839de",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ken Burns (Animate Image)",
@@ -566065,7 +566065,7 @@
     ]
   },
   "video/mix_audio": {
-    "hash": "b34c8d375a9c56c14e0962d509270f63a671797248d26048d5b2f4239a606c9c",
+    "hash": "39e574c84a14a15657ff75db56c1ce561cdd146afe50edad753cb056bd54c22c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Mix Audio",
@@ -566178,7 +566178,7 @@
     ]
   },
   "video/mute": {
-    "hash": "fdbcd2654a9d605eb8fe1541dcd174595c417c79d756a68a5c36a56b56360171",
+    "hash": "1f3956c90f9c1bdbc5901323745d5f2470c08c6426083445fe6772e48cf105da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Mute Video",
@@ -566241,7 +566241,7 @@
     ]
   },
   "video/overlay": {
-    "hash": "d70d23c70ef161cec858e86143c69df1a52b8d6d7a6645c8a17c284bf6e37f93",
+    "hash": "27438c5ea1f9f2de1d80db89dcff7cab6ca157fe2b8717992f5897d9584e15a8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Overlay Video / Graphic",
@@ -566384,7 +566384,7 @@
     ]
   },
   "video/rotate_video": {
-    "hash": "cea610ac891413252aa2d62cd814951b6179aa88f85226a11689212492d9d1be",
+    "hash": "0e3a23ec232d33e15eb3a17c804a4318d3cadb36e969a51e53cb157a9412fe0d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Rotate / Flip Video",
@@ -566493,7 +566493,7 @@
     ]
   },
   "video/scale": {
-    "hash": "66b894cba5b47d215ff658a801266d61fa657b2c5c8753f40acb32d2b3908b39",
+    "hash": "382f56d46705783ca5ebcddedb84cd9480c8ceda840017cfbd5f57a4a7dc90ec",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Scale Video",
@@ -566595,7 +566595,7 @@
     ]
   },
   "video/set_audio": {
-    "hash": "fecb7919bcbe9384eff00252dfe4d3028d59fcaac7a842457f9b930267d50771",
+    "hash": "473d07f33871ca24a083acd188e8d95996575cab65ae63b88d6ea52a6052a1f0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Video Audio",
@@ -566673,7 +566673,7 @@
     ]
   },
   "video/slideshow": {
-    "hash": "099ced8a6fb6b2ec3d2e939ecad07182dcf4a1ce2ce9b941c12265873314f826",
+    "hash": "496773f898c6ac94131a873c3e3aa4fcb7f4b0caf8356eae2b208eb55bdcda39",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slideshow from Images",
@@ -566757,7 +566757,7 @@
     ]
   },
   "video/speed": {
-    "hash": "2eda360f3b9fa8f166e9965bf4242e4cb973cd92bd3f9c4739a01dcaacd140a5",
+    "hash": "2c0e7582e4b99e6c28b1e56feac527367266c9596043399180d2e79e9cb0036c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Change Video Speed",
@@ -566849,7 +566849,7 @@
     ]
   },
   "video/thumbnail": {
-    "hash": "ee39f11f3a8cfaeb1a0e9667de581e21a3ac864c31892009a06f76f57a70f2bd",
+    "hash": "0409f4cbda65fb0b5106fe591fc1f06bb631ba5e8dafc7807519e79e525b28ec",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Thumbnail",
@@ -566943,7 +566943,7 @@
     ]
   },
   "video/transcode": {
-    "hash": "de2bb690ea3f0d51f399194034833b1ce0f85de9e78b2d37727444fa3ca94450",
+    "hash": "4c133563f65bc9551f4ccdf84a14767801a0db0636333fdf4555411c5f9f6182",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Transcode Video",
@@ -567059,7 +567059,7 @@
     ]
   },
   "video/trim": {
-    "hash": "7e35f419e1f4f2980a3f677e71a38efd49b66be872ae361a3ef59b822947d89b",
+    "hash": "a99a543319a13d43854291f03f273ba20608673824611ee7adbe241d60edbca2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim Video",
@@ -567151,7 +567151,7 @@
     ]
   },
   "video/video_watermark": {
-    "hash": "ca4025b28f3718afaaac47c1b4d946c9406fa3bab2b45911b5ec0dc22ed3f612",
+    "hash": "dbdea7383bece05fcf0798455191a99887a0f5c23c86e2055067e36b0031cc2c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Watermark Video",
@@ -567258,7 +567258,7 @@
     ]
   },
   "video/waveform": {
-    "hash": "95a9fb4cc6c003a381f3c074b3f190b3c74b4022638bdd121a7196d12e00b0f5",
+    "hash": "940b9a435585109a19a858d311ab79289e06f4444d23be3b2e5ca72f72d5a077",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Audio Waveform Image",
@@ -567342,7 +567342,7 @@
     ]
   },
   "web/download": {
-    "hash": "ec67e5ac2daf636dcaab9a70a7d1dfce7b0eab916e56bb2fd2e979afb50ac148",
+    "hash": "a01d1c68dbfa30b54bc643228ea5f1798d2be33cd06355e3bc62b36056611adb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download File",

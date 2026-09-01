@@ -76,7 +76,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := os.MkdirAll(framesDir, 0o700); err != nil {
 		return vc.ErrResult(err.Error())
 	}
-	pattern := filepath.Join(framesDir, "frame_%04d."+format)
+	// Prefix with the video's own name where it has one, so a set of frames
+	// uploaded or attached elsewhere says which video it came from.
+	stem := "frame"
+	if src := core.MediaStem(inPath); src != "" {
+		stem = src + "-frame"
+	}
+	pattern := filepath.Join(framesDir, stem+"_%04d."+format)
 
 	ctx, cancel := context.WithTimeout(flow.GoContext(), vc.DefaultTimeout)
 	defer cancel()
@@ -87,7 +93,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return vc.ErrResult(fmt.Sprintf("ffmpeg failed: %v: %s", err, vc.Tail(stderr, 400)))
 	}
 
-	matches, _ := filepath.Glob(filepath.Join(framesDir, "frame_*."+format))
+	matches, _ := filepath.Glob(filepath.Join(framesDir, stem+"_*."+format))
 	sort.Strings(matches)
 	refs := make([]string, 0, len(matches))
 	for _, m := range matches {

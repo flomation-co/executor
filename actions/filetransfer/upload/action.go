@@ -159,18 +159,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("username is required")
 	}
 
-	// remote_path is the full destination including the filename. We don't
-	// trim path traversal here the way the local file/write action does — a
-	// remote path is the user's own server and ".." may be legitimate — but
-	// we do require it to be non-empty and absolute-ish.
+	// remote_path is the destination. We don't trim path traversal here the way
+	// the local file/write action does — a remote path is the user's own server
+	// and ".." may be legitimate — but it has to name something.
 	remotePath := strings.TrimSpace(strVal(core.FindConnection("remote_path", inputs)))
-	if remotePath == "" {
-		return nil, fmt.Errorf("remote_path is required")
-	}
 
-	data, err := resolveContent(flow, inputs)
+	data, mimeType, err := resolveContent(flow, inputs)
 	if err != nil {
 		return nil, err
+	}
+
+	// A path ending in "/" names the directory, so keep the file's own name
+	// rather than trying to write to the directory itself.
+	remotePath = core.UploadDestination(remotePath, contentValue(inputs), mimeType, "upload")
+	if remotePath == "" {
+		return nil, fmt.Errorf("remote_path is required")
 	}
 
 	createDirs := boolVal(core.FindConnection("create_dirs", inputs))
@@ -201,32 +204,34 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // resolveContent reads the content input and, when content_is_base64 is set,
 // decodes it so binary payloads (PDFs, images) round-trip intact. Raw text is
 // passed through byte-for-byte.
-func resolveContent(flow *core.Flow, inputs []*core.Connection) ([]byte, error) {
+// It also returns the MIME type when the content came from a reference, so a
+// derived filename can be given the right extension.
+func resolveContent(flow *core.Flow, inputs []*core.Connection) ([]byte, string, error) {
 	conn := core.FindConnection("content", inputs)
 	if conn == nil || conn.String() == nil {
-		return nil, fmt.Errorf("content is required")
+		return nil, "", fmt.Errorf("content is required")
 	}
 	raw := *conn.String()
 
 	// A workspace file or blob reference (e.g. a large media action output)
 	// takes precedence over the base64/text handling.
 	if core.IsFileRef(raw) || core.IsBlobToken(raw) {
-		data, _, err := flow.ResolveToBytes(raw)
+		data, mimeType, err := flow.ResolveToBytes(raw)
 		if err != nil {
-			return nil, fmt.Errorf("read content reference: %w", err)
+			return nil, "", fmt.Errorf("read content reference: %w", err)
 		}
-		return data, nil
+		return data, mimeType, nil
 	}
 
 	if boolVal(core.FindConnection("content_is_base64", inputs)) {
 		// Tolerate whitespace/newlines that often creep into pasted base64.
 		decoded, err := base64.StdEncoding.DecodeString(strings.TrimSpace(raw))
 		if err != nil {
-			return nil, fmt.Errorf("content is not valid base64: %w", err)
+			return nil, "", fmt.Errorf("content is not valid base64: %w", err)
 		}
-		return decoded, nil
+		return decoded, "", nil
 	}
-	return []byte(raw), nil
+	return []byte(raw), "", nil
 }
 
 // resolvePort returns the user-supplied port, or the protocol default
@@ -444,4 +449,14 @@ func boolVal(c *core.Connection) bool {
 		return false
 	}
 	return *c.Boolean()
+}
+
+// contentValue returns the raw content input, so the destination resolver can
+// read the filename off a flo:blob:/flo:file: reference.
+func contentValue(inputs []*core.Connection) string {
+	conn := core.FindConnection("content", inputs)
+	if conn == nil || conn.String() == nil {
+		return ""
+	}
+	return *conn.String()
 }

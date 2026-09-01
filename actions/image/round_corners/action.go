@@ -49,7 +49,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return ic.ErrResult("could not read the input image: " + err.Error())
 	}
-	outPath, err := flow.MediaScratchFile("png") // needs alpha
+	outPath, err := flow.MediaScratchOutput(inPath, "png") // needs alpha
 	if err != nil {
 		return ic.ErrResult(err.Error())
 	}

@@ -48,7 +48,8 @@ var Inputs = [...]core.Connection{
 	{Name: "file_blob", Type: core.ConnectionTypeString, Label: "File to upload (flo:blob: token from an upstream action)"},
 	{Name: "file_base64", Type: core.ConnectionTypeString, Label: "File bytes as base64 (alternative to file_blob)"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "File content as text (for code snippets, CSV, logs, etc.)"},
-	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename including extension (e.g. report.csv, photo.png, data.json)", Required: true},
+	{Name: "filename", Type: core.ConnectionTypeString,
+		Label: "Filename including extension, e.g. report.csv (optional — defaults to the uploaded file's own name)"},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Display title for the file in Slack (optional, defaults to filename)"},
 	{Name: "initial_comment", Type: core.ConnectionTypeString, Label: "Message to post alongside the file (optional)"},
 }
@@ -88,7 +89,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// well-extensioned name but otherwise derives the extension from the resolved
 	// MIME type (a flo:blob: token carries type=image/png; a flo:file: ref carries
 	// its path extension) with a byte-sniff fallback.
-	filename := deriveFilename(str("filename", inputs), content != "", mimeType, contentBytes)
+	filename := deriveFilename(str("filename", inputs), fileBlob, content != "", mimeType, contentBytes)
 	title := str("title", inputs)
 	if title == "" {
 		title = filename
@@ -256,19 +257,38 @@ func resolveFileBytes(flow *core.Flow, fileBlob, fileBase64, content string) ([]
 // to choose a preview renderer. It keeps a caller-supplied name that already has
 // a usable, specific extension (the AI often knows "report.csv"), but when the
 // name is missing or generic — empty, no extension, or the historical
-// "file.bin"/"file.txt" default — it derives the extension from the resolved
-// MIME type, falling back to sniffing the bytes. isText nudges an unknown
-// payload towards .txt rather than .bin.
-func deriveFilename(name string, isText bool, mimeType string, data []byte) string {
-	name = strings.TrimSpace(name)
-	if ext := path.Ext(name); ext != "" && !strings.EqualFold(ext, ".bin") {
-		return name // caller gave a usable, specific name
+// "file.bin"/"file.txt" default — it falls back to the name the file reference
+// carried from wherever it came from, and failing that derives the extension
+// from the resolved MIME type, sniffing the bytes as a last resort. isText
+// nudges an unknown payload towards .txt rather than .bin.
+func deriveFilename(name, ref string, isText bool, mimeType string, data []byte) string {
+	if n := usableName(name); n != "" {
+		return n
 	}
-	base := strings.TrimSuffix(name, path.Ext(name))
+	// The reference often knows the real name: a download keeps what the
+	// server called it, and an asset keeps what was uploaded.
+	if n := usableName(core.FilenameForRef(ref)); n != "" {
+		return n
+	}
+	base := strings.TrimSuffix(strings.TrimSpace(name), path.Ext(strings.TrimSpace(name)))
 	if base == "" || strings.EqualFold(base, "file") {
 		base = "file"
 	}
 	return base + extensionForContent(isText, mimeType, data)
+}
+
+// usableName returns name when it already carries a specific extension, else "".
+// ".bin" is treated as no extension: it was this action's historical default
+// and tells Slack nothing about how to preview the file.
+func usableName(name string) string {
+	name = strings.TrimSpace(name)
+	if name == "" {
+		return ""
+	}
+	if ext := path.Ext(name); ext != "" && !strings.EqualFold(ext, ".bin") {
+		return core.SanitiseFilename(name)
+	}
+	return ""
 }
 
 // extensionForContent maps a MIME type (or, failing that, sniffed bytes) to a

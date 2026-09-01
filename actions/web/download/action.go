@@ -87,13 +87,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	mimeType := cleanMime(resp.Header.Get("Content-Type"))
-	filename := deriveFilename(optStr("filename", inputs), u, mimeType)
-	ext := strings.TrimPrefix(strings.ToLower(path.Ext(filename)), ".")
-	if ext == "" {
-		ext = "bin"
-	}
+	filename := deriveFilename(optStr("filename", inputs), resp.Header.Get("Content-Disposition"), u, mimeType)
 
-	scratch, err := flow.MediaScratchFile(ext)
+	// Write under the real filename rather than a random scratch handle. The
+	// name is the whole reason to prefer this over a raw fetch: whatever
+	// consumes the reference — a Drive upload, a Slack attachment, Meta's
+	// image library — sends it onwards.
+	scratch, err := flow.MediaScratchFileNamed(filename)
 	if err != nil {
 		return errResult(fmt.Sprintf("workspace unavailable: %s", err)), nil
 	}
@@ -155,20 +155,42 @@ func isDisallowedIP(ip net.IP) bool {
 		ip.IsUnspecified() || ip.IsMulticast()
 }
 
-// deriveFilename picks the best filename: an explicit input, else the URL's last
-// path segment, else a generated name using the extension implied by the MIME.
-func deriveFilename(explicit string, u *url.URL, mimeType string) string {
-	if explicit != "" {
-		return explicit
+// deriveFilename picks the best filename available, preferring what the caller
+// asked for, then what the server said the file is called, then the URL's last
+// path segment, and finally a generated name carrying the right extension.
+//
+// Content-Disposition is worth consulting because the interesting URLs often
+// have no filename in them at all — a signed S3 link, an export endpoint, a
+// /download/<id> route — and the header is where the real name lives.
+func deriveFilename(explicit, contentDisposition string, u *url.URL, mimeType string) string {
+	if n := core.SanitiseFilename(explicit); n != "" {
+		return core.EnsureFilenameExtension(n, mimeType)
 	}
-	if base := path.Base(u.Path); base != "" && base != "/" && base != "." && strings.Contains(base, ".") {
-		return base
+	if n := core.SanitiseFilename(filenameFromDisposition(contentDisposition)); n != "" {
+		return core.EnsureFilenameExtension(n, mimeType)
 	}
-	ext := "bin"
-	if exts, _ := mime.ExtensionsByType(mimeType); len(exts) > 0 {
-		ext = strings.TrimPrefix(exts[0], ".")
+	if base := path.Base(u.Path); strings.Contains(base, ".") {
+		if n := core.SanitiseFilename(base); n != "" {
+			return n
+		}
 	}
-	return "download." + ext
+	return core.UploadFilename("", "", mimeType, "download")
+}
+
+// filenameFromDisposition reads the filename out of a Content-Disposition
+// header, preferring RFC 5987's filename* (which carries an encoding, so it
+// can express non-ASCII names) over the plain filename.
+func filenameFromDisposition(header string) string {
+	if header == "" {
+		return ""
+	}
+	_, params, err := mime.ParseMediaType(header)
+	if err != nil {
+		return ""
+	}
+	// ParseMediaType already decodes filename* into "filename" when present,
+	// so one lookup covers both forms.
+	return params["filename"]
 }
 
 func cleanMime(ct string) string {

@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"time"
 
 	core "flomation.app/automate/executor"
@@ -28,7 +29,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename", Required: true, Placeholder: "presentation.pptx"},
+	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename (optional — defaults to the uploaded file's own name)", Placeholder: "presentation.pptx"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "File Content (base64)", Required: true},
 	{Name: "folder_path", Type: core.ConnectionTypeString, Label: "Folder Path"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
@@ -45,9 +46,6 @@ var Outputs = [...]core.Connection{
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	filename := microsoft.OptStr("filename", inputs)
-	if filename == "" {
-		return microsoft.ErrorResult("filename is required")
-	}
 
 	contentConn := core.FindConnection("content", inputs)
 	if contentConn == nil || contentConn.String() == nil || *contentConn.String() == "" {
@@ -71,8 +69,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Accept a flo:file:/flo:blob: reference (e.g. a large media output) or base64.
 	var decoded []byte
+	var mimeType string
 	if core.IsFileRef(rawContent) || core.IsBlobToken(rawContent) {
-		decoded, _, err = flow.ResolveToBytes(rawContent)
+		decoded, mimeType, err = flow.ResolveToBytes(rawContent)
 		if err != nil {
 			return microsoft.ErrorResult("could not read the file: " + err.Error())
 		}
@@ -83,13 +82,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	filename = core.UploadFilename(filename, rawContent, mimeType, "upload")
+
+	// The name goes into the request path, and can now come from a
+	// Content-Disposition header or an agent, so escape it. Graph accepts a
+	// percent-encoded segment; folderPath is left alone because its slashes
+	// are meaningful.
+	escaped := url.PathEscape(filename)
 	var endpoint string
 	if folderPath != "" {
 		endpoint = fmt.Sprintf("%s/me/drive/root:/%s/%s:/content",
-			microsoft.GraphAPI, folderPath, filename)
+			microsoft.GraphAPI, folderPath, escaped)
 	} else {
 		endpoint = fmt.Sprintf("%s/me/drive/root:/%s:/content",
-			microsoft.GraphAPI, filename)
+			microsoft.GraphAPI, escaped)
 	}
 
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPut, endpoint, bytes.NewReader(decoded))
