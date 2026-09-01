@@ -2800,7 +2800,8 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						// next tool call — either with a real token
 						// from this turn's manifest, or by calling the
 						// producing tool again.
-						if detoked, derr := DetokeniseInputs(req.Input, f.Blobs()); derr == nil {
+						if detoked, derr := DetokeniseInputs(req.Input, f.Blobs(),
+							FileRefInputNames(matchedTool.Data.Config.Inputs)); derr == nil {
 							req.Input = detoked
 						} else {
 							log.WithFields(log.Fields{

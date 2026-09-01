@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"mime"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -154,10 +155,35 @@ func (f *Flow) ResolveToLocalFile(value string) (path string, mimeType string, e
 		_, _, blobMime, _ := ParseBlobToken(value)
 		return f.writeScratch(b, extForMime(blobMime))
 
+	case isHTTPURL(value):
+		// Writing the URL text to a file and calling it the image is worse
+		// than failing: the upload "succeeds" locally and the remote service
+		// complains about the file contents instead. Fetching it here is not
+		// the answer either — that needs the SSRF guard that lives in the
+		// Download File action — so point at that action by name.
+		return "", "", fmt.Errorf(
+			"%q is a URL, not file content: use the Download File action first "+
+				"and pass its file reference here", truncateForErr(strings.TrimSpace(value)))
+
 	default:
 		// A de-tokenised blob (raw bytes as string) or a legacy *_base64 value.
 		return f.writeScratch(decodeMaybeBase64(value), "")
 	}
+}
+
+// isHTTPURL reports whether s is a bare http(s) URL. Deliberately narrow: it
+// must be the WHOLE value, so a base64 payload or a text file that merely
+// mentions a URL is unaffected.
+func isHTTPURL(s string) bool {
+	t := strings.TrimSpace(s)
+	if strings.ContainsAny(t, " \t\r\n") {
+		return false
+	}
+	if !strings.HasPrefix(t, "http://") && !strings.HasPrefix(t, "https://") {
+		return false
+	}
+	u, err := url.Parse(t)
+	return err == nil && u.Host != ""
 }
 
 // ResolveToBytes turns any inbound media representation into its raw bytes (plus
@@ -182,6 +208,12 @@ func (f *Flow) ResolveToBytes(value string) ([]byte, string, error) {
 		}
 		_, _, blobMime, _ := ParseBlobToken(value)
 		return b, blobMime, nil
+	case isHTTPURL(value):
+		// Same reasoning as ResolveToLocalFile: a sink action handed a URL
+		// would otherwise upload a file whose contents are the URL text.
+		return nil, "", fmt.Errorf(
+			"%q is a URL, not file content: use the Download File action first "+
+				"and pass its file reference here", truncateForErr(strings.TrimSpace(value)))
 	default:
 		return decodeMaybeBase64(value), "", nil
 	}
@@ -269,10 +301,38 @@ func mimeOfFile(path string) string {
 	return strings.SplitN(http.DetectContentType(head[:n]), ";", 2)[0]
 }
 
+// canonicalExtForMime pins the extension for the media types that leave the
+// platform in an upload. mime.ExtensionsByType returns the host's list in the
+// order its mime.types file happens to define, so image/jpeg resolves to
+// ".jfif" on macOS and ".jpg" on most Linux hosts. An extension that varies by
+// runner is a bad thing to send an external API as a filename — Meta's
+// /adimages is picky about it — so the common cases are decided here.
+var canonicalExtForMime = map[string]string{
+	"image/jpeg":      ".jpg",
+	"image/png":       ".png",
+	"image/gif":       ".gif",
+	"image/webp":      ".webp",
+	"image/bmp":       ".bmp",
+	"image/tiff":      ".tif",
+	"image/svg+xml":   ".svg",
+	"video/mp4":       ".mp4",
+	"video/quicktime": ".mov",
+	"video/webm":      ".webm",
+	"audio/mpeg":      ".mp3",
+	"audio/mp4":       ".m4a",
+	"audio/ogg":       ".ogg",
+	"audio/wav":       ".wav",
+	"application/pdf": ".pdf",
+}
+
 // extForMime maps a MIME type to a file extension (with dot), best-effort.
 func extForMime(m string) string {
 	if m == "" {
 		return ""
+	}
+	m = strings.ToLower(strings.TrimSpace(strings.SplitN(m, ";", 2)[0]))
+	if ext, ok := canonicalExtForMime[m]; ok {
+		return ext
 	}
 	if exts, err := mime.ExtensionsByType(m); err == nil && len(exts) > 0 {
 		return exts[0]

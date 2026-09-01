@@ -37,7 +37,14 @@ var Inputs = [...]core.Connection{
 	// Takes any of the executor's media representations, so it can be wired
 	// straight from an image action, a file download or an uploaded asset
 	// without the author converting anything by hand.
-	{Name: "image", Type: core.ConnectionTypeFile, Label: "Image", Placeholder: "Wire from an image node, or a flo:blob:/flo:file: reference", Required: true},
+	// The Label is what an AI agent sees as this parameter's description
+	// (the Placeholder is editor-only), so it has to say what a valid value
+	// looks like. Without that, an agent holding an image URL reasonably
+	// assumes the field takes one — Meta's /adimages does not accept a URL,
+	// and fetching it here would duplicate Download File's SSRF guard.
+	{Name: "image", Type: core.ConnectionTypeFile, Required: true,
+		Label:       "Image file reference (flo:blob:… or flo:file:…) from an upstream image or Download File action — NOT a URL",
+		Placeholder: "Wire from an image node, or a flo:blob:/flo:file: reference"},
 }
 
 var Outputs = [...]core.Connection{

@@ -300549,7 +300549,7 @@
     ]
   },
   "marketing/meta_ads/media/image_upload": {
-    "hash": "3da680e5bf4b200adf711c021fbc0ee19868840a527fd5310e0e7ea5a4e3b3ab",
+    "hash": "b4a3999fb644da19cdac22e2597c04e2f34090051b0a117ee256406443ccbe78",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Media: Upload Image",
@@ -300601,7 +300601,7 @@
         "name": "image",
         "type": "file",
         "value": null,
-        "label": "Image",
+        "label": "Image file reference (flo:blob:… or flo:file:…) from an upstream image or Download File action — NOT a URL",
         "placeholder": "Wire from an image node, or a flo:blob:/flo:file: reference",
         "required": true
       }
@@ -537558,7 +537558,7 @@
     ]
   },
   "social/facebook/get_pages": {
-    "hash": "c272053b00bfae600415720e0900a47ca0f90aa01c33428603163c2a368e8791",
+    "hash": "a236ae6bee0c52ee4352696b37417bbd1a324e7fc2cd74f7fd6b7578bb4bd43c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Pages",
