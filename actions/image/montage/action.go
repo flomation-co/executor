@@ -76,7 +76,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return ic.ErrResult("provide at least one image reference")
 	}
 
-	outPath, err := flow.MediaScratchFile("png")
+	outPath, err := flow.MediaScratchOutputFor(paths, "montage", "png")
 	if err != nil {
 		return ic.ErrResult(err.Error())
 	}

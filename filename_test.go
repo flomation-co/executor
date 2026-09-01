@@ -290,3 +290,136 @@ func TestUploadFilename_NeverProducesAnExtensionlessName(t *testing.T) {
 	// still always a name.
 	Expect(UploadFilename("", "", "", "upload")).To(HavePrefix("upload-"))
 }
+
+func TestMediaScratchOutput_CarriesTheInputName(t *testing.T) {
+	RegisterTestingT(t)
+	chdirWorkspace(t)
+
+	f := &Flow{}
+
+	// The usual case: an input that arrived with a real name.
+	src, err := f.MediaScratchFileNamed("company logo.png")
+	Expect(err).ToNot(HaveOccurred())
+
+	// Same extension (resize, crop, adjust).
+	out, err := f.MediaScratchOutput(src, "png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("company logo.png"))
+	Expect(out).ToNot(Equal(src), "the output must not overwrite the input")
+
+	// Changed extension (convert, extract audio, thumbnail).
+	out, err = f.MediaScratchOutput(src, "jpg")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("company logo.jpg"))
+
+	// A leading dot is accepted too, matching MediaScratchFile.
+	out, err = f.MediaScratchOutput(src, ".webp")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("company logo.webp"))
+}
+
+func TestMediaScratchOutput_FallsBackWhenThereIsNoRealName(t *testing.T) {
+	RegisterTestingT(t)
+	chdirWorkspace(t)
+
+	f := &Flow{}
+
+	// An input that came from raw bytes has a generated name. Carrying that
+	// through would look deliberate while saying nothing, so a fresh
+	// generated name is used instead.
+	src, err := f.MediaScratchFile("png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(isGeneratedScratchStem(strings.TrimSuffix(filepath.Base(src), ".png"))).To(BeTrue())
+
+	out, err := f.MediaScratchOutput(src, "jpg")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Ext(out)).To(Equal(".jpg"))
+	Expect(isGeneratedScratchStem(strings.TrimSuffix(filepath.Base(out), ".jpg"))).To(BeTrue())
+
+	// Nothing at all still yields a usable path.
+	out, err = f.MediaScratchOutput("", "png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Ext(out)).To(Equal(".png"))
+}
+
+func TestScratchStem(t *testing.T) {
+	RegisterTestingT(t)
+
+	Expect(scratchStem("/ws/.flomation/media/ab/holiday snap.jpeg")).To(Equal("holiday snap"))
+	Expect(scratchStem("report.tar.gz")).To(Equal("report.tar"))
+	Expect(scratchStem("/ws/.flomation/media/3f2a9b0c1d2e3f40.png")).To(BeEmpty())
+	Expect(scratchStem("")).To(BeEmpty())
+	Expect(scratchStem("/")).To(BeEmpty())
+
+	// A 16-character name that is not hex is a real name.
+	Expect(scratchStem("abcdefghijklmnop.png")).To(Equal("abcdefghijklmnop"))
+}
+
+// TestNameSurvivesATransformChain follows a file through the shape a real flow
+// has: download, then two transforms, then an upload. Each hop resolves a
+// reference and emits a new one, which is exactly where the name used to be
+// dropped — a transform wrote its output to a generated scratch name, so
+// everything downstream of the first edit was anonymous again.
+func TestNameSurvivesATransformChain(t *testing.T) {
+	RegisterTestingT(t)
+	chdirWorkspace(t)
+
+	f := &Flow{}
+
+	// Download File writes the bytes under the name the server gave them.
+	downloaded, err := f.MediaScratchFileNamed("product shot.png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(os.WriteFile(downloaded, []byte("\x89PNG\r\n\x1a\n"), 0o600)).To(Succeed())
+	ref, err := f.EmitMediaFile(downloaded)
+	Expect(err).ToNot(HaveOccurred())
+
+	// Resize: resolve the reference, write the output beside it, emit again.
+	src, _, err := f.ResolveToLocalFile(ref)
+	Expect(err).ToNot(HaveOccurred())
+	resized, err := f.MediaScratchOutput(src, "png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(resized)).To(Equal("product shot.png"))
+	Expect(os.WriteFile(resized, []byte("\x89PNG\r\n\x1a\n"), 0o600)).To(Succeed())
+	ref, err = f.EmitMediaFile(resized)
+	Expect(err).ToNot(HaveOccurred())
+
+	// Convert to JPEG: the stem is kept, the extension follows the format.
+	src, _, err = f.ResolveToLocalFile(ref)
+	Expect(err).ToNot(HaveOccurred())
+	converted, err := f.MediaScratchOutput(src, "jpg")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(converted)).To(Equal("product shot.jpg"))
+	Expect(os.WriteFile(converted, jpegBytes, 0o600)).To(Succeed())
+	ref, err = f.EmitMediaFile(converted)
+	Expect(err).ToNot(HaveOccurred())
+
+	// The upload at the end of the chain still knows what to call it.
+	Expect(UploadFilename("", ref, "image/jpeg", "upload")).To(Equal("product shot.jpg"))
+}
+
+// TestMediaScratchOutputFor_SingleVersusMany covers the aggregate rule: one
+// input keeps its name, several get a stem, because naming a six-page document
+// after its first page would be worse than not naming it.
+func TestMediaScratchOutputFor_SingleVersusMany(t *testing.T) {
+	RegisterTestingT(t)
+	chdirWorkspace(t)
+
+	f := &Flow{}
+	one, err := f.MediaScratchFileNamed("scan.png")
+	Expect(err).ToNot(HaveOccurred())
+	two, err := f.MediaScratchFileNamed("page two.png")
+	Expect(err).ToNot(HaveOccurred())
+
+	out, err := f.MediaScratchOutputFor([]string{one}, "document", "pdf")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("scan.pdf"))
+
+	out, err = f.MediaScratchOutputFor([]string{one, two}, "document", "pdf")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("document.pdf"))
+
+	// No inputs at all still yields the stem rather than a handle.
+	out, err = f.MediaScratchOutputFor(nil, "montage", "png")
+	Expect(err).ToNot(HaveOccurred())
+	Expect(filepath.Base(out)).To(Equal("montage.png"))
+}

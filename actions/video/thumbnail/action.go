@@ -54,7 +54,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return vc.ErrResult("could not read the input video: " + err.Error())
 	}
-	outPath, err := flow.MediaScratchFile(format)
+	outPath, err := flow.MediaScratchOutput(inPath, format)
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}

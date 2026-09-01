@@ -91,7 +91,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if ext == "" {
 		ext = ".mp4"
 	}
-	outPath, err := flow.MediaScratchFile(ext)
+	outPath, err := flow.MediaScratchOutput(videoPath, ext)
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}

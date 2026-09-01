@@ -90,7 +90,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := os.WriteFile(listPath, []byte(b.String()), 0o600); err != nil {
 		return vc.ErrResult(err.Error())
 	}
-	outPath, err := flow.MediaScratchFile("mp4")
+	outPath, err := flow.MediaScratchFileNamed("slideshow.mp4")
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}

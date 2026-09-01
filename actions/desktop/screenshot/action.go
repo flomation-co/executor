@@ -63,7 +63,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return desktop.ErrResult("screenshot was empty — is an interactive desktop session available?"), nil
 	}
 
-	scratch, err := flow.MediaScratchFile("png")
+	scratch, err := flow.MediaScratchFileNamed("screenshot.png")
 	if err != nil {
 		return desktop.ErrResult("allocating scratch file: " + err.Error()), nil
 	}

@@ -578,3 +578,84 @@ func UploadDestination(dest, ref, mimeType, fallbackStem string) string {
 	}
 	return dest + UploadFilename("", ref, mimeType, fallbackStem)
 }
+
+// MediaScratchOutput returns a scratch path for an action's output, named
+// after the input it was derived from with the given extension: a resize of
+// "logo.png" comes out as "logo.png", and converting it to JPEG comes out as
+// "logo.jpg".
+//
+// srcPath is the input as ResolveToLocalFile returned it, so its base name is
+// already the real one when the reference carried it. When it carries no
+// usable name — raw bytes, base64, a reference that never had one — this falls
+// back to MediaScratchFile's generated name, which is what every media action
+// did before.
+//
+// ext may be given with or without a leading dot, matching MediaScratchFile.
+func (f *Flow) MediaScratchOutput(srcPath, ext string) (string, error) {
+	stem := scratchStem(srcPath)
+	if stem == "" {
+		return f.MediaScratchFile(ext)
+	}
+	if ext != "" && !strings.HasPrefix(ext, ".") {
+		ext = "." + ext
+	}
+	return f.MediaScratchFileNamed(stem + ext)
+}
+
+// scratchStem returns the part of a path's base name to carry onto an output,
+// or "" when there is nothing worth carrying.
+//
+// A name MediaScratchFile generated is treated as no name at all: passing
+// "3f2a9b0c1d2e3f40.png" through to the output would look deliberate while
+// saying nothing, and the point of this is to preserve names people recognise.
+func scratchStem(srcPath string) string {
+	base := SanitiseFilename(filepath.Base(srcPath))
+	if base == "" {
+		return ""
+	}
+	stem := strings.TrimSuffix(base, filepath.Ext(base))
+	if stem == "" || isGeneratedScratchStem(stem) {
+		return ""
+	}
+	return stem
+}
+
+// scratchStemHexLen is the length of the hex name MediaScratchFile generates:
+// 8 random bytes.
+const scratchStemHexLen = 16
+
+func isGeneratedScratchStem(stem string) bool {
+	if len(stem) != scratchStemHexLen {
+		return false
+	}
+	for _, r := range stem {
+		if !((r >= '0' && r <= '9') || (r >= 'a' && r <= 'f')) {
+			return false
+		}
+	}
+	return true
+}
+
+// MediaScratchOutputFor names the output of an action that combines several
+// inputs. With exactly one input it behaves like MediaScratchOutput, because
+// converting a single "scan.png" to PDF really should produce "scan.pdf". With
+// several it uses stem, since naming a six-page document after its first page
+// would be worse than not naming it at all.
+func (f *Flow) MediaScratchOutputFor(srcPaths []string, stem, ext string) (string, error) {
+	if len(srcPaths) == 1 {
+		return f.MediaScratchOutput(srcPaths[0], ext)
+	}
+	if ext != "" && !strings.HasPrefix(ext, ".") {
+		ext = "." + ext
+	}
+	return f.MediaScratchFileNamed(stem + ext)
+}
+
+// MediaStem returns the meaningful base name of a resolved media path, without
+// its extension, or "" when the path carries no real name (raw bytes reach the
+// workspace under a generated one). Actions that build a derived name from
+// several parts use it — extracting PSD layers, for instance, wants
+// "<document>-<layer>.png" rather than either half alone.
+func MediaStem(srcPath string) string {
+	return scratchStem(srcPath)
+}

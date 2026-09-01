@@ -80,7 +80,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return desktop.ErrResult("recording was empty — was a recording running?"), nil
 	}
 
-	scratch, err := flow.MediaScratchFile("mp4")
+	scratch, err := flow.MediaScratchFileNamed("recording.mp4")
 	if err != nil {
 		return desktop.ErrResult("allocating scratch file: " + err.Error()), nil
 	}

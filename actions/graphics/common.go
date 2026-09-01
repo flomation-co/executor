@@ -103,7 +103,7 @@ func RenderVideo(ctx context.Context, flow *core.Flow, width, height, fps int, d
 	// image/apng would render but has no download-extension mapping. -f apng below
 	// forces animated content regardless of the extension, and ffmpeg content-probes
 	// on the way back in, so the Overlay action still sees every frame.
-	out, err := flow.MediaScratchFile("png")
+	out, err := flow.MediaScratchFileNamed("animation.png")
 	if err != nil {
 		return "", err
 	}

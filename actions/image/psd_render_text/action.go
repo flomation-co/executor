@@ -164,7 +164,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	dc.DrawStringAnchored(text, tx, ty, ax, 0.5)
 
 	// Save as PNG, then convert to the requested container if needed.
-	renderedPNG, err := flow.MediaScratchFile("png")
+	renderedPNG, err := flow.MediaScratchOutput(inPath, "png")
 	if err != nil {
 		return ic.ErrResult(err.Error())
 	}
@@ -174,7 +174,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	outPath := renderedPNG
 	ext := normaliseExt(format)
 	if ext != "png" {
-		converted, err := flow.MediaScratchFile(ext)
+		converted, err := flow.MediaScratchOutput(inPath, ext)
 		if err != nil {
 			return ic.ErrResult(err.Error())
 		}

@@ -59,11 +59,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Resolve each reference to a local file and build the concat list.
 	var listBuilder strings.Builder
+	var paths []string
 	for _, r := range refs {
 		p, _, e := flow.ResolveToLocalFile(r)
 		if e != nil {
 			return vc.ErrResult("could not read a video: " + e.Error())
 		}
+		paths = append(paths, p)
 		// ffmpeg concat list format: file '<path>' — escape any single quotes.
 		esc := strings.ReplaceAll(p, "'", `'\''`)
 		listBuilder.WriteString("file '" + esc + "'\n")
@@ -76,7 +78,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := os.WriteFile(listPath, []byte(listBuilder.String()), 0o600); err != nil {
 		return vc.ErrResult(err.Error())
 	}
-	outPath, err := flow.MediaScratchFile("mp4")
+	outPath, err := flow.MediaScratchOutputFor(paths, "concat", "mp4")
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}

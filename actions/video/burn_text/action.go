@@ -124,7 +124,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := os.WriteFile(textPath, []byte(text), 0o600); err != nil {
 		return vc.ErrResult(err.Error())
 	}
-	outPath, err := flow.MediaScratchFile(ext)
+	outPath, err := flow.MediaScratchOutput(inPath, ext)
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}
