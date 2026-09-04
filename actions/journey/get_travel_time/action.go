@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Travel Time"
 	Description  = "Quickly get the distance and duration between two locations without computing a full route."
+	Summary      = "Find how far apart two places are and how long the trip takes"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+clock"
 	Date         = "11/06/2026"

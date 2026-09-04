@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tracking Pixel Trigger"
 	Description  = "Triggers a flow when a tracking pixel image is loaded"
+	Summary      = "Start when a tracking pixel is loaded, such as in an email"
 	Website      = "https://www.flomation.co"
 	Icon         = "image"
 	Date         = "23/03/2026"

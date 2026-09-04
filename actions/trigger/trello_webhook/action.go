@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Trello Webhook Trigger"
 	Description  = "Triggers a flow when something changes on a Trello board, list, or card you watch (a card is created, moved, commented on, and so on). The webhook is registered automatically for the model you choose; set the Trello API Secret to have each delivery's HMAC-SHA1 signature verified."
+	Summary      = "Start when a Trello card, list or board changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello"
 	Date         = "07/07/2026"

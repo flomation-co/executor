@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Web Trigger"
 	Description  = "Triggers a flow from an HTTP request of any verb; pair with a Web Response action to return a body/status"
+	Summary      = "Start when someone calls a web address you choose"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe"
 	Date         = "13/07/2026"

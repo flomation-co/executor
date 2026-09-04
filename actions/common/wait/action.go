@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Wait"
 	Description  = "Suspend execution for a duration, then auto-resume"
+	Summary      = "Wait a set time, then carry on automatically"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock+play"
 	Date         = "01/06/2026"

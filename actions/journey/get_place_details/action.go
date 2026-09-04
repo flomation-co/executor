@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Place Details"
 	Description  = "Fetch opening hours, phone, website and rating details for a place ID."
+	Summary      = "Look up a place's opening hours, phone number and rating"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+eye"
 	Date         = "11/06/2026"

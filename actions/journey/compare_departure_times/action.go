@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Compare Departure Times"
 	Description  = "Run the same route at multiple departure times and surface rush-hour deltas."
+	Summary      = "Compare the same journey at different times of day"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+clock"
 	Date         = "11/06/2026"

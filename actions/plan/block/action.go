@@ -37,6 +37,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan / Block"
 	Description  = "Mark the current plan task as blocked when you cannot make progress. Call with a clear reason."
+	Summary      = "Flag that a plan step cannot continue, and why"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+circle-stop"
 	Date         = "22/06/2026"

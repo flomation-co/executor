@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "CloudWatch Alarm Trigger"
 	Description  = "Triggers a flow when a CloudWatch alarm changes state (OK, ALARM, INSUFFICIENT_DATA). Polls DescribeAlarms."
+	Summary      = "Start when a CloudWatch alarm changes state"
 	Website      = "https://www.flomation.co"
 	Icon         = "bell+bolt"
 	Date         = "22/07/2026"

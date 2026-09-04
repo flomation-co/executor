@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Join"
 	Description  = "Join an array of strings with a separator"
+	Summary      = "Turn a list into one piece of text"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+link"
 	Date         = "19/04/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Manual Trigger"
 	Description  = "A simple trigger invoked by pressing the play button, or as the default means"
+	Summary      = "Start when you press play"
 	Website      = "https://www.flomation.co"
 	Icon         = "play"
 	Date         = "27/11/2025"

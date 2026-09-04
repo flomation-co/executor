@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Data Extract"
 	Description  = "Selectively extract outputs from parent nodes"
+	Summary      = "Pick out just the values you need from earlier steps"
 	Website      = "https://www.flomation.co"
 	Icon         = "filter"
 	Date         = "20/03/2026"

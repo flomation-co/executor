@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Monday.com Webhook Trigger"
 	Description  = "Triggers a flow when something happens on a Monday.com board you watch — an item is created, a column value changes, an update is posted, and so on. The webhook is registered automatically for the board and event you choose (Monday's challenge handshake is handled for you)."
+	Summary      = "Start when something changes on a Monday.com board"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday"
 	Date         = "07/07/2026"

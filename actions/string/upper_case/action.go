@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Upper Case"
 	Description  = "Convert a string to upper case"
+	Summary      = "Change text to upper case"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+arrow-up"
 	Date         = "19/04/2026"

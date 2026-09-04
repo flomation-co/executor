@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Make Variable"
 	Description  = "Extract a variable value from a Makefile"
+	Summary      = "Read a variable out of a Makefile"
 	Website      = "https://www.flomation.co"
 	Icon         = "gears+eye"
 	Date         = "31/05/2026"

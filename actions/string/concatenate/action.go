@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Concatenate"
 	Description  = "Join two or more strings together"
+	Summary      = "Stick pieces of text together"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+link"
 	Date         = "19/04/2026"

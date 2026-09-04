@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Multiplication"
 	Description  = "Multiply two numbers together and return the product. Accepts integers or decimals."
+	Summary      = "Multiply two numbers together"
 	Website      = "https://www.flomation.co"
 	Icon         = "xmark"
 	Date         = "05/03/2026"

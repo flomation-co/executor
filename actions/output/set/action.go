@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Set Output"
 	Description  = "Pass data out from a Flow"
+	Summary      = "Send a result back out of this flow"
 	Website      = "https://www.flomation.co"
 	Icon         = "dollar-sign"
 	Date         = "27/11/2025"

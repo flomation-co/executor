@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Elevation Profile"
 	Description  = "Sample elevations along a route polyline and return total ascent, descent, min and max."
+	Summary      = "See how much a route climbs and descends"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+chart-area"
 	Date         = "11/06/2026"

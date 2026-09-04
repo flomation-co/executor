@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Asana Webhook Trigger"
 	Description  = "Triggers a flow when something changes on an Asana task or project you watch (a task is added, changed, completed, commented on, and so on). The webhook is registered automatically for the resource you choose — Asana's handshake and per-delivery HMAC-SHA256 signature are handled for you."
+	Summary      = "Start when an Asana task or project changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana"
 	Date         = "07/07/2026"

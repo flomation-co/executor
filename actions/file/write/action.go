@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Write File"
 	Description  = "Write content to a file"
+	Summary      = "Save something to a file"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-pen"
 	Date         = "23/03/2026"

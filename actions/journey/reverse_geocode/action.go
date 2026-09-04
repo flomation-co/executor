@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Reverse Geocode"
 	Description  = "Convert latitude and longitude into a human-readable address."
+	Summary      = "Turn map coordinates into an address"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+map"
 	Date         = "11/06/2026"

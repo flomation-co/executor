@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Subtraction"
 	Description  = "Subtract one number from another and return the difference. Accepts integers or decimals."
+	Summary      = "Take one number away from another"
 	Website      = "https://www.flomation.co"
 	Icon         = "minus"
 	Date         = "05/03/2026"

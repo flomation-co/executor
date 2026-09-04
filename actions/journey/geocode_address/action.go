@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Geocode Address"
 	Description  = "Convert a textual address into latitude and longitude coordinates."
+	Summary      = "Turn an address into map coordinates"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+magnifying-glass"
 	Date         = "11/06/2026"

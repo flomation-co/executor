@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Begin Sub-Flow"
 	Description  = "Entry point of a reusable sub-flow. Give it a name and connect actions below it."
+	Summary      = "Mark where a reusable set of steps starts"
 	Website      = "https://www.flomation.co"
 	Icon         = "play"
 	Date         = "19/04/2026"

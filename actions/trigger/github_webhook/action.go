@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Webhook Trigger"
 	Description  = "Triggers a flow when a GitHub webhook event is received"
+	Summary      = "Start when something happens on GitHub"
 	Website      = "https://www.flomation.co"
 	Icon         = "github"
 	Date         = "26/04/2026"

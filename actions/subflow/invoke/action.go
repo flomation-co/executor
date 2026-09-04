@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoke Sub-Flow"
 	Description  = "Call a named sub-flow subroutine and return its results"
+	Summary      = "Run a reusable set of steps and use what comes back"
 	Website      = "https://www.flomation.co"
 	Icon         = "share-from-square"
 	Date         = "19/04/2026"

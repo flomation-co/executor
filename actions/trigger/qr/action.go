@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "QR Code Trigger"
 	Description  = "Triggers a flow when a QR code is scanned"
+	Summary      = "Start when someone scans your QR code"
 	Website      = "https://www.flomation.co"
 	Icon         = "qrcode"
 	Date         = "23/03/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom Webhook Trigger"
 	Description  = "Triggers a flow when something happens in your Intercom workspace — a new conversation starts, a customer replies, a ticket changes state, a contact is created, and so on. Intercom doesn't let apps register webhooks automatically, so paste the trigger's webhook URL into your Intercom Developer Hub app under Configure → Webhooks and pick the topics to send."
+	Summary      = "Start when something happens in Intercom"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom"
 	Date         = "08/07/2026"

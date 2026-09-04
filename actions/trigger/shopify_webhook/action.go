@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify Webhook Trigger"
 	Description  = "Triggers a flow when a Shopify webhook event is received (orders, products, ...). Verify with your app's API secret key."
+	Summary      = "Start when an order or product changes in Shopify"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify"
 	Date         = "02/07/2026"

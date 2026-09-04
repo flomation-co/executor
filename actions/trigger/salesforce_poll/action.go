@@ -50,6 +50,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Record Created or Updated"
 	Description  = "Triggers a flow when a Salesforce record is created — or created or changed — on any object, including your own custom ones. Checks on an interval and only ever fires for records it has not already seen."
+	Summary      = "Start when a Salesforce record is added or changed"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+bolt"
 	Date         = "26/07/2026"

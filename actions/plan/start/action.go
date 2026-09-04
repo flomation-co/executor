@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan / Start"
 	Description  = "Start a draft plan you previously authored. Transitions the plan from draft to active and begins dispatching tasks."
+	Summary      = "Set a plan running"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+play"
 	Date         = "24/06/2026"

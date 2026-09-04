@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Form Trigger"
 	Description  = "Triggers a flow when a form is submitted"
+	Summary      = "Start when someone fills in your form"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "23/03/2026"

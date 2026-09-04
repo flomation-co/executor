@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "If"
 	Description  = "Evaluate a condition and branch execution accordingly"
+	Summary      = "Go one way or the other depending on a condition"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "20/03/2026"

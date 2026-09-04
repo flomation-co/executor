@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Messenger Trigger"
 	Description  = "Triggers a flow when a message is received via Facebook Messenger"
+	Summary      = "Start when someone messages your Facebook Page"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook-messenger"
 	Date         = "24/05/2026"

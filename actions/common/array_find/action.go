@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Array Find"
 	Description  = "Find an item in an array by index or by matching a field value"
+	Summary      = "Find one item in a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "magnifying-glass"
 	Date         = "22/05/2026"

@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "On Error"
 	Description  = "Executes when a flow error occurs"
+	Summary      = "Run these steps if something goes wrong"
 	Website      = "https://www.flomation.co"
 	Icon         = "triangle-exclamation"
 	Date         = "25/03/2026"

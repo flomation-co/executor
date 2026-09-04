@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Run Make Target"
 	Description  = "Execute a Makefile target"
+	Summary      = "Run a target from a Makefile"
 	Website      = "https://www.flomation.co"
 	Icon         = "gears+play"
 	Date         = "31/05/2026"

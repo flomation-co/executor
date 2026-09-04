@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Trim"
 	Description  = "Remove whitespace from both ends of a string"
+	Summary      = "Remove spaces from both ends of some text"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+xmark"
 	Date         = "19/04/2026"

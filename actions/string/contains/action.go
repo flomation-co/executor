@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contains"
 	Description  = "Check if a string contains a substring"
+	Summary      = "Check whether some text appears inside other text"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+magnifying-glass"
 	Date         = "19/04/2026"

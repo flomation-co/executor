@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Substring"
 	Description  = "Extract a portion of a string by start and end positions"
+	Summary      = "Take part of a piece of text"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+filter"
 	Date         = "19/04/2026"

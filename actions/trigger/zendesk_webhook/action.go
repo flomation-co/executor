@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk Webhook Trigger"
 	Description  = "Triggers a flow when a Zendesk ticket is created or updated. Flomation registers the Zendesk webhook and business rule automatically. Leave Conditions empty to fire on every ticket create/update, or supply Zendesk trigger conditions as JSON to narrow it."
+	Summary      = "Start when a Zendesk ticket is raised or updated"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk"
 	Date         = "03/07/2026"

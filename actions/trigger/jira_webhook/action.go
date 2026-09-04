@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jira Webhook Trigger"
 	Description  = "Triggers a flow when a Jira issue or comment event occurs (created, updated or deleted). The webhook is registered automatically; optionally filter with JQL, and set a signing secret to have Jira's HMAC-SHA256 payload signature verified."
+	Summary      = "Start when a Jira issue or comment changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira"
 	Date         = "06/07/2026"

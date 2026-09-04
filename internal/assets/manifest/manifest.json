@@ -4695,11 +4695,12 @@
     ]
   },
   "arithmetic/addition": {
-    "hash": "a8be7a5887114f374ae4957eb5464f4d5350781dcbc33f09c65fe91137168563",
+    "hash": "e74d9ed942de1447c6bb02fb5bebb66d247e6349baf6d3e8f2672c252d0d369d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Addition",
     "description": "Add two numbers together and return the sum. Accepts integers or decimals.",
+    "summary": "Add two numbers together",
     "website": "https://www.flomation.co",
     "icon": "plus",
     "date": "05/03/2026",
@@ -4750,11 +4751,12 @@
     ]
   },
   "arithmetic/division": {
-    "hash": "ae44047601d2010da4779cd08a3e63bd95b301f720e7706994a12f30915abbac",
+    "hash": "aafc0347977919a659bff155c1df5844229676601eba99728d7ab7723ebe4fab",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Division",
     "description": "Divide one number by another and return the quotient. Accepts integers or decimals.",
+    "summary": "Divide one number by another",
     "website": "https://www.flomation.co",
     "icon": "divide",
     "date": "05/03/2026",
@@ -4805,11 +4807,12 @@
     ]
   },
   "arithmetic/multiplication": {
-    "hash": "7772f43ae57d2fb69f67215b0b6dd577ba56f511bc084c909e747ec57d3e2542",
+    "hash": "dbe3501e09357cc0107c59e38a7cb1a221594f998da7cf4a7dba704c9ef4a41e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Multiplication",
     "description": "Multiply two numbers together and return the product. Accepts integers or decimals.",
+    "summary": "Multiply two numbers together",
     "website": "https://www.flomation.co",
     "icon": "xmark",
     "date": "05/03/2026",
@@ -4860,11 +4863,12 @@
     ]
   },
   "arithmetic/subtraction": {
-    "hash": "ad1826a2a00d21eb6a4d045d32ffba8d5685017832266f7e7725d645fef3d775",
+    "hash": "95908caa8c5cab7e51c7f67520b12404672ac409686531bcf4060985c6f79080",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Subtraction",
     "description": "Subtract one number from another and return the difference. Accepts integers or decimals.",
+    "summary": "Take one number away from another",
     "website": "https://www.flomation.co",
     "icon": "minus",
     "date": "05/03/2026",
@@ -181267,11 +181271,12 @@
     ]
   },
   "common/array_find": {
-    "hash": "92fdc9218159d4a3a8f0864ee2cff581c29db25aa425170d7d22b5f936529cd4",
+    "hash": "5ff56c25ab34e4ebd61e836056745f7a6c7f96ebc353f769f68d90781eb08b60",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Find",
     "description": "Find an item in an array by index or by matching a field value",
+    "summary": "Find one item in a list",
     "website": "https://www.flomation.co",
     "icon": "magnifying-glass",
     "date": "22/05/2026",
@@ -181443,11 +181448,12 @@
     ]
   },
   "common/array_index": {
-    "hash": "8f54593a70345ffd6701e757b1fa673f6093bb4fd458a639ef76327e4c0b3e23",
+    "hash": "8702b3f3d187b6bc06b798438c6f2f077704d0235d528ffa3ba385311f58e6be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Index",
     "description": "Extract a single item from an array by its index (0-based)",
+    "summary": "Take a single item out of a list by its position",
     "website": "https://www.flomation.co",
     "icon": "list+magnifying-glass",
     "date": "19/04/2026",
@@ -181507,11 +181513,12 @@
     ]
   },
   "common/array_length": {
-    "hash": "b4af90c6a3afda7466162542a77450634521af349ec4abe03f480f2a210453e0",
+    "hash": "c72f07bbfbb43f1e6e54afacafc643e000c6119089a3bb6bb590ac99d46f8f8d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Length",
     "description": "Returns the number of items in an array. Optionally walk a dotted path into a JSON object first (e.g. path=\"data.items\").",
+    "summary": "Count how many items are in a list",
     "website": "https://www.flomation.co",
     "icon": "list+hashtag",
     "date": "19/04/2026",
@@ -181570,11 +181577,12 @@
     ]
   },
   "common/asset": {
-    "hash": "24ea5c9646840ea32911abf9166b21c531de8b4fbe46aba53c1760612e9e3153",
+    "hash": "b1027cc2126534d689b9c409ca34c03482321c863b287d56c97ef57b9fc439d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "File Asset",
     "description": "Reference an uploaded file (logo, image, PSD) from other nodes",
+    "summary": "Use a file you have uploaded, like a logo or image",
     "website": "https://www.flomation.co",
     "icon": "paperclip",
     "date": "15/07/2026",
@@ -181626,11 +181634,12 @@
     ]
   },
   "common/data_combine": {
-    "hash": "b6f4c73aa6bdbff1c9845c040366feb5f036c55f7646eec6e5d9a7a840c3e2d6",
+    "hash": "70c12a766737fb2ee16f8b8918369948cc30f35c1b5b97818c9f5ed64a0b628e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Combine",
     "description": "Combine all parent outputs into a single object",
+    "summary": "Merge everything from the steps above into one bundle",
     "website": "https://www.flomation.co",
     "icon": "object-group",
     "date": "20/03/2026",
@@ -181659,11 +181668,12 @@
     ]
   },
   "common/data_extract": {
-    "hash": "898b0d713505e765deced6336f9ad250b8853639c84e697e832251a9a704e9d2",
+    "hash": "474390fcff4b0412140f3ba4971a8e93c03a94bc1bd692ce9dfdafb3c7311e00",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Extract",
     "description": "Selectively extract outputs from parent nodes",
+    "summary": "Pick out just the values you need from earlier steps",
     "website": "https://www.flomation.co",
     "icon": "filter",
     "date": "20/03/2026",
@@ -181701,11 +181711,12 @@
     ]
   },
   "common/data_rename": {
-    "hash": "8afc6b1453fe2b67fb62e5eec539b15c007c83f67a43302d221dbc5f9a596f6b",
+    "hash": "e64eed18f7a0009797208de565d0cb2a783dfb2dfcecfaa6a52f4ec66c9c30b8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Rename",
     "description": "Rename an input key to a different output key",
+    "summary": "Give a value a different name",
     "website": "https://www.flomation.co",
     "icon": "i-cursor",
     "date": "21/03/2026",
@@ -181758,11 +181769,12 @@
     ]
   },
   "common/format_date": {
-    "hash": "ae5570636d73ae77daf5bdee68880b97153aecceceb63753186e0210fbf34b88",
+    "hash": "1ce4d31c9e20e473e60c39c0ad97708e3973c2eb3137ef1ddab3a33e8f22fbd8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Format Date",
     "description": "Format a date/time value or the current time into a string",
+    "summary": "Format a date or time into whatever layout you need",
     "website": "https://www.flomation.co",
     "icon": "calendar",
     "date": "19/04/2026",
@@ -181964,11 +181976,12 @@
     ]
   },
   "common/object_get": {
-    "hash": "3c2fcfa69b4183247ebfb212d3473aa73f93cfa0a6e36949bd09910dc3d7f18f",
+    "hash": "809a869828af6ebf82735c8714ee11f9f791a78a4e8c629f30ea86db87dc4f5f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Object Get Field",
     "description": "Extract a field from an object by name, with dot-notation for nested access",
+    "summary": "Pull a single field out of a record",
     "website": "https://www.flomation.co",
     "icon": "magnifying-glass",
     "date": "22/05/2026",
@@ -182042,11 +182055,12 @@
     ]
   },
   "common/pause": {
-    "hash": "2395dccd8edcc730243a939bca6d79381c9af20f5d6473dcf1d1840de1b04d3f",
+    "hash": "72385e941181d16548327a1340d67f30758155a36c8b070dbc4be635802c8fa0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Pause",
     "description": "Suspend execution until manually resumed",
+    "summary": "Stop here until somebody resumes the flow by hand",
     "website": "https://www.flomation.co",
     "icon": "pause",
     "date": "01/06/2026",
@@ -182090,11 +182104,12 @@
     ]
   },
   "common/set_variable": {
-    "hash": "90a65516c7e93d09c3cbf88ad12ce2dd8ed2e00f88d7c17ba9f19330fe4b9d0e",
+    "hash": "b75a517b0721947743daf1f6042480e576dff3dd241e0e4708a257c7d13e2105",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Variable",
     "description": "Set a flow-wide variable accessible via ${var.name}",
+    "summary": "Save a value to reuse anywhere later in the flow",
     "website": "https://www.flomation.co",
     "icon": "code",
     "date": "25/03/2026",
@@ -182140,11 +182155,12 @@
     ]
   },
   "common/sleep": {
-    "hash": "071a1f33bb7febf98df6c20f9bf35a06eddc7ebd85d6cf04c8e70343194619f6",
+    "hash": "d6db990021a9fecfc5b07b4a518fbc4d05ee526d4f2e91e773c0f6d007ef4c01",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sleep",
     "description": "Pause execution for a specified duration",
+    "summary": "Wait a while before carrying on",
     "website": "https://www.flomation.co",
     "icon": "clock+pause",
     "date": "03/04/2026",
@@ -182203,11 +182219,12 @@
     ]
   },
   "common/smtp": {
-    "hash": "00542101fa76b7cb2f01739deb59c07c90fa8dd87c258182e659c8731b57f039",
+    "hash": "ff3442b50a45b3b6f434e0c9a24af07cd0f2d198088eb62f30a0a01e296877d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
     "description": "Send an HTML email via SMTP",
+    "summary": "Send an email from your own mail server",
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "27/11/2025",
@@ -182315,11 +182332,12 @@
     ]
   },
   "common/start_flow": {
-    "hash": "12573554a43875a6006cbbb25960c1bc6e12d1858950e485374b519e332a3208",
+    "hash": "0ab6afe4fc5c40b411033d511642492eddbc72bde1ecb32fb650b40516a3f397",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Start Flow",
     "description": "Trigger another flow, optionally waiting for completion",
+    "summary": "Run another one of your flows",
     "website": "https://www.flomation.co",
     "icon": "share-from-square",
     "date": "25/03/2026",
@@ -182378,11 +182396,12 @@
     ]
   },
   "common/wait": {
-    "hash": "56f18e37406a1350e597bad5c2ae23dcb2b968392fc431ab4bc34d885fc774b3",
+    "hash": "0b412698629392a516010664d4a70aef11d997b2a18b134cc7783e9f07215383",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Wait",
     "description": "Suspend execution for a duration, then auto-resume",
+    "summary": "Wait a set time, then carry on automatically",
     "website": "https://www.flomation.co",
     "icon": "clock+play",
     "date": "01/06/2026",
@@ -182440,11 +182459,12 @@
     ]
   },
   "conditional/for": {
-    "hash": "1e5751e27df3577b6705fc2d8549d5af9d556b277b9a020df2b09b2c4b9592b9",
+    "hash": "fa0b2de1c0dcb2143a2d6cfba84854c780f348e055ff3d621a15def0677cdcdc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "For",
     "description": "Loop a fixed number of times",
+    "summary": "Repeat the steps below a set number of times",
     "website": "https://www.flomation.co",
     "icon": "arrow-rotate-right",
     "date": "25/03/2026",
@@ -182503,11 +182523,12 @@
     ]
   },
   "conditional/if": {
-    "hash": "2959515ac8f7b5338539f6934c0fd203fe47a405ada77423d9a4e778e51545e4",
+    "hash": "72bb33f53253a2b6b936716e3de4c64fd7e0ae09a7da68f6c2b348741d9957ef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "If",
     "description": "Evaluate a condition and branch execution accordingly",
+    "summary": "Go one way or the other depending on a condition",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "20/03/2026",
@@ -182583,11 +182604,12 @@
     ]
   },
   "conditional/switch": {
-    "hash": "d51acc704a6116b130fa3e5203f18c9979b9549d356dc904f4bc19680ffa5308",
+    "hash": "d021d9a945df5682cb6383234878b69dc8ea3dbbd4b1092897c65ccbccc22448",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Switch",
     "description": "Route execution to one of multiple branches based on matching conditions",
+    "summary": "Send the flow down one of several paths",
     "website": "https://www.flomation.co",
     "icon": "route",
     "date": "04/04/2026",
@@ -182669,11 +182691,12 @@
     ]
   },
   "conditional/while": {
-    "hash": "4030558203eb571abe0172329bb136d2c90948ffd47ceaad16b6ffcc653509ff",
+    "hash": "d51d86af51947472b9ce72ee00a761776423bd129b20c52ac96abf78e28f3445",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "While",
     "description": "Loop while a condition is true",
+    "summary": "Keep repeating the steps below while something stays true",
     "website": "https://www.flomation.co",
     "icon": "repeat",
     "date": "25/03/2026",
@@ -236870,11 +236893,12 @@
     ]
   },
   "error/on_error": {
-    "hash": "2993955f40a587683fef31cd5032d2fbad2c5cba1daa035f4dc1d412216d0d97",
+    "hash": "cbffaebabd817675a93779671a2bb4988937c1dd1133e1a35693a83f76a21028",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "On Error",
     "description": "Executes when a flow error occurs",
+    "summary": "Run these steps if something goes wrong",
     "website": "https://www.flomation.co",
     "icon": "triangle-exclamation",
     "date": "25/03/2026",
@@ -236917,11 +236941,12 @@
     ]
   },
   "file/read": {
-    "hash": "be45263e8632bb33f7d81e98edac26fd60e350037cf2244626f736f9fba5920c",
+    "hash": "feb7517d9bd4fe06612740343fe1ea79ee0d532a734b65347488362364780551",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read File",
     "description": "Read the contents of a file",
+    "summary": "Read what is inside a file",
     "website": "https://www.flomation.co",
     "icon": "file-lines",
     "date": "23/03/2026",
@@ -236980,11 +237005,12 @@
     ]
   },
   "file/write": {
-    "hash": "c0bb33f2ab7be923194f86e1f9e750b16acd3ac8d9456772deaa2b5026c23f6b",
+    "hash": "59d11eba48228a26bbba3d21951cae95a19d027bea6a6364a77ec64b007bd786",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write File",
     "description": "Write content to a file",
+    "summary": "Save something to a file",
     "website": "https://www.flomation.co",
     "icon": "file-pen",
     "date": "23/03/2026",
@@ -266928,11 +266954,12 @@
     ]
   },
   "humanintheloop/await": {
-    "hash": "2cdff45ac3828c5352a2e2920f71dd2cbe8d36cebe877cfc515d954e66bccc84",
+    "hash": "e4a7d9be041c02529674b47e73b2ee10eaad8474069c989c3dc337716c523b5b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Human Approval",
     "description": "Ask a human to choose an option, then branch on their answer. Suspends until a reply or timeout.",
+    "summary": "Ask a person to decide, then continue based on their answer",
     "website": "https://www.flomation.co",
     "icon": "user+check",
     "date": "04/07/2026",
@@ -301081,11 +301108,12 @@
     ]
   },
   "journey/calculate_route": {
-    "hash": "0c7c157d38caaea6e48ce5992e6d571dbca8c145a4f0b36e1e0fec8758c489fe",
+    "hash": "67b58be907162d2cdd414241f2f8c0f4a09a2de65a868204aed49cbf66a5bd67",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calculate Route",
     "description": "Calculate a route between two locations with optional waypoints, returning distance, duration, polyline and turn-by-turn steps.",
+    "summary": "Work out a route between places, with distance and timings",
     "website": "https://www.flomation.co",
     "icon": "route+arrow-right",
     "date": "11/06/2026",
@@ -301280,11 +301308,12 @@
     ]
   },
   "journey/compare_departure_times": {
-    "hash": "174967021b1b7f76608673115e6caf278b7e743258181d7905f5e1df4a63da6e",
+    "hash": "2616f830d2dbe2d4bb47e50a4097bbdbedf3716d51fc2af3ffc8cdce8b906d78",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Compare Departure Times",
     "description": "Run the same route at multiple departure times and surface rush-hour deltas.",
+    "summary": "Compare the same journey at different times of day",
     "website": "https://www.flomation.co",
     "icon": "route+clock",
     "date": "11/06/2026",
@@ -301445,11 +301474,12 @@
     ]
   },
   "journey/find_arrive_by": {
-    "hash": "8eb0e09718e29eced38f47ead3ecce50bc92665b76ba7edcb528691db099afc6",
+    "hash": "bb75ca7013af2071fca5d7d22bb1a7d5023b8886f5509a92c19f99cee56f1281",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Departure Time",
     "description": "Calculate when to leave to arrive by a given time, accounting for traffic at that hour.",
+    "summary": "Work out when to set off to arrive on time",
     "website": "https://www.flomation.co",
     "icon": "route+hourglass-start",
     "date": "11/06/2026",
@@ -301589,11 +301619,12 @@
     ]
   },
   "journey/find_nearby_places": {
-    "hash": "9adc99ac0de7a9f9e07599bd07c18325d0f0589b81894cec15bd37a7c7d07f5c",
+    "hash": "5c6f279e3581407451a6038593755b7c5a144fc52f4e28358996759320b572a6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Nearby Places",
     "description": "Find points of interest (restaurants, hotels, petrol stations etc.) around a location.",
+    "summary": "Find places nearby, like petrol stations or restaurants",
     "website": "https://www.flomation.co",
     "icon": "route+map",
     "date": "11/06/2026",
@@ -301756,11 +301787,12 @@
     ]
   },
   "journey/generate_itinerary_pdf": {
-    "hash": "0aeb7b4885cbd64c56584e8ae2cfdceaeb99e1435d9703c09373d10747c61b44",
+    "hash": "bd9d2dbf7e0befe2cdd9dd24dfa71efec286cfff65867070bee4be252a76b5be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Itinerary PDF",
     "description": "Build a printable PDF with a map, distance/duration summary, and turn-by-turn directions for a route.",
+    "summary": "Make a printable PDF of a journey with map and directions",
     "website": "https://www.flomation.co",
     "icon": "route+file",
     "date": "11/06/2026",
@@ -301894,11 +301926,12 @@
     ]
   },
   "journey/geocode_address": {
-    "hash": "ff17072142128a27cbc839ee600b056a3a8e805bd3c330efbda722cbb71a96f6",
+    "hash": "0fa1be576f899d6db4706dc6d8bad56c5eb33779e82948d78bbb56ea603b6373",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Geocode Address",
     "description": "Convert a textual address into latitude and longitude coordinates.",
+    "summary": "Turn an address into map coordinates",
     "website": "https://www.flomation.co",
     "icon": "route+magnifying-glass",
     "date": "11/06/2026",
@@ -302004,11 +302037,12 @@
     ]
   },
   "journey/get_elevation_profile": {
-    "hash": "832c7838e453aae3fe59c6885753e18e84d267c239acc33ccbfeb2a3cb1c86d1",
+    "hash": "ca7807b75dc0d04040ce356af15b4747986f0d794fd2c15d0e805f99c7274771",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Elevation Profile",
     "description": "Sample elevations along a route polyline and return total ascent, descent, min and max.",
+    "summary": "See how much a route climbs and descends",
     "website": "https://www.flomation.co",
     "icon": "route+chart-area",
     "date": "11/06/2026",
@@ -302128,11 +302162,12 @@
     ]
   },
   "journey/get_place_details": {
-    "hash": "cc899438cd98fe677357909bed5cc7aabd87fb8d051a4236b7bd49fa7b43ac84",
+    "hash": "946501d63186fd777def61468f4c4f040fec219dc90f012c0bcfdd06ae1d56f1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Place Details",
     "description": "Fetch opening hours, phone, website and rating details for a place ID.",
+    "summary": "Look up a place's opening hours, phone number and rating",
     "website": "https://www.flomation.co",
     "icon": "route+eye",
     "date": "11/06/2026",
@@ -302259,11 +302294,12 @@
     ]
   },
   "journey/get_travel_time": {
-    "hash": "6eeb4bd510167f5e8af3a314d28928669b8b707c6b7ee528121dd1b38b75d857",
+    "hash": "00bccf19bd12ab85165f13fc3b352a74685c0950beee4978e558c2a9694ff250",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Travel Time",
     "description": "Quickly get the distance and duration between two locations without computing a full route.",
+    "summary": "Find how far apart two places are and how long the trip takes",
     "website": "https://www.flomation.co",
     "icon": "route+clock",
     "date": "11/06/2026",
@@ -302402,11 +302438,12 @@
     ]
   },
   "journey/optimise_route": {
-    "hash": "185c7f1c8cb889dddebc15414aa52419c5fb4f589444d70f11c5cb91003a0e45",
+    "hash": "0239a7cf92d815d92e54edf711ffee60cc4b12647ab9c711e9c34a10f650c74e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Optimise Route",
     "description": "Find the shortest visit order for a set of stops, with optional fixed start and end anchors.",
+    "summary": "Put a list of stops in the quickest order",
     "website": "https://www.flomation.co",
     "icon": "route+rotate",
     "date": "11/06/2026",
@@ -302582,11 +302619,12 @@
     ]
   },
   "journey/render_route_gpx": {
-    "hash": "8bcb4c0067c6815b109f1bd31d31fe07e40162e02f874ea7a0e722d6bc8d5dd2",
+    "hash": "fa458b3b1bcf4865b4aa417c0dde1fd6708d4dc1f3f63b2516e26beeec778051",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Export Route as GPX",
     "description": "Convert a route polyline into GPX XML for import into Garmin, Strava, Komoot and other GPS apps.",
+    "summary": "Export a route for Garmin, Strava or Komoot",
     "website": "https://www.flomation.co",
     "icon": "route+file-export",
     "date": "11/06/2026",
@@ -302659,11 +302697,12 @@
     ]
   },
   "journey/render_static_map": {
-    "hash": "77647d3d0f1808c99459f3ceffb33624cbe368eb9c4cf16e6317538f935d63dd",
+    "hash": "66c06a7e4d2df71055d6631d994dceacbf69187c10f842e32d3a3068f2b2749f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Render Static Map",
     "description": "Generate a PNG of a route from an encoded polyline, sized for inline display or PDF embedding.",
+    "summary": "Draw a route as a picture you can share or print",
     "website": "https://www.flomation.co",
     "icon": "route+image",
     "date": "11/06/2026",
@@ -302776,11 +302815,12 @@
     ]
   },
   "journey/reverse_geocode": {
-    "hash": "b3f4a21046e0323f7581aa69a4ae141ee9cf609afc84aa56e62c72c07d4b980c",
+    "hash": "e7001a358898680869a5fca40a8a31e3f2cfd214a0e42bca1d4b258601da6012",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reverse Geocode",
     "description": "Convert latitude and longitude into a human-readable address.",
+    "summary": "Turn map coordinates into an address",
     "website": "https://www.flomation.co",
     "icon": "route+map",
     "date": "11/06/2026",
@@ -306215,11 +306255,12 @@
     ]
   },
   "makefile/get_variable": {
-    "hash": "1f1bd578cd41f1ea6a2b99c4909af65e0ee7a6fde635e620cec17d7315b579cb",
+    "hash": "b93d3e3bf74ec9f8a2082e3c35b309841cf1a122e6e96156374fe0b21eb8ad26",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Make Variable",
     "description": "Extract a variable value from a Makefile",
+    "summary": "Read a variable out of a Makefile",
     "website": "https://www.flomation.co",
     "icon": "gears+eye",
     "date": "31/05/2026",
@@ -306285,11 +306326,12 @@
     ]
   },
   "makefile/list_targets": {
-    "hash": "fbf5ac330f31c51e1acd8ff707964a939252207e36b5f7f4acf3f4e22cbc39f7",
+    "hash": "09d2f089e939e1b780110d7aefb5fbabf0582635f4dd521ccac323199d766b67",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Make Targets",
     "description": "List all targets defined in a Makefile",
+    "summary": "List everything a Makefile can run",
     "website": "https://www.flomation.co",
     "icon": "gears+list",
     "date": "31/05/2026",
@@ -306354,11 +306396,12 @@
     ]
   },
   "makefile/run_target": {
-    "hash": "c3607ab5678697b48cccb4a81410b08511a1980f84712b0741fa704f4269b84e",
+    "hash": "ddd5a2e6d177fa9f20bc3f8c8c5b0b84db3d7c6700209016ed6ab884d8f92e65",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Make Target",
     "description": "Execute a Makefile target",
+    "summary": "Run a target from a Makefile",
     "website": "https://www.flomation.co",
     "icon": "gears+play",
     "date": "31/05/2026",
@@ -306452,11 +306495,12 @@
     ]
   },
   "makefile/validate": {
-    "hash": "2a4d6842469b0aa9d048eb83f1766c71ffe6d45101436af86e66003059195c51",
+    "hash": "a928ce823a1752517fe683e1d0ee2c9ae7986812187d723ee605af551a2bcaf9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Validate Makefile",
     "description": "Check a Makefile for syntax errors",
+    "summary": "Check a Makefile for mistakes",
     "website": "https://www.flomation.co",
     "icon": "gears+check",
     "date": "31/05/2026",
@@ -531658,11 +531702,12 @@
     ]
   },
   "output/set": {
-    "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
+    "hash": "e965540c14cb49eaa88e26fb1f1d1e5f711941582da2efff1317550b7b41b82a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Output",
     "description": "Pass data out from a Flow",
+    "summary": "Send a result back out of this flow",
     "website": "https://www.flomation.co",
     "icon": "dollar-sign",
     "date": "27/11/2025",
@@ -531693,11 +531738,12 @@
     "outputs": null
   },
   "output/set_outputs": {
-    "hash": "ac0d6709eeb11562c429dbfd3f2532e2afd0db3a447f03efb42a4a4fef1fc0c7",
+    "hash": "22ddb2f00cf3f3c784605ecb625caad463b7aa9cd792d1572c8a63cc651e185e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Outputs",
     "description": "Set all parent outputs as flow outputs",
+    "summary": "Send everything from the previous step back out",
     "website": "https://www.flomation.co",
     "icon": "list-check",
     "date": "25/03/2026",
@@ -531711,11 +531757,12 @@
     "outputs": null
   },
   "output/web_response": {
-    "hash": "3b4fd9d9eb6dc3fba0768be1a622fc76a00e374e357c331cccb71dd9488b852d",
+    "hash": "33556a9950de4452ec1915a84a7836a1c8157819ac4a0cdef2687011036048c7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Response",
     "description": "Set the HTTP response (body, status code, content type, headers) returned by a Web Trigger flow",
+    "summary": "Reply to the web request that started this flow",
     "website": "https://www.flomation.co",
     "icon": "paper-plane",
     "date": "13/07/2026",
@@ -531773,11 +531820,12 @@
     ]
   },
   "plan/block": {
-    "hash": "9d224591eabb9670137612fc2a7fa8ab9d44b6dc8e1bdb685ae589a388708710",
+    "hash": "edececdcd4d991fa755734fdc3aaa4ae7150b59faf39f3aa80167700da44ab7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Block",
     "description": "Mark the current plan task as blocked when you cannot make progress. Call with a clear reason.",
+    "summary": "Flag that a plan step cannot continue, and why",
     "website": "https://www.flomation.co",
     "icon": "list-check+circle-stop",
     "date": "22/06/2026",
@@ -531844,11 +531892,12 @@
     ]
   },
   "plan/cancel": {
-    "hash": "a0cfeca60db3010086af1ac79769e17f74803506de1c6756ddcf43ab91f4985a",
+    "hash": "4949b748b4762a2047d938441537a5259edd83bc2059d90c6d5ee53be4f3c9ed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Cancel",
     "description": "Cancel a plan you created. Stops all pending and in-progress tasks. Idempotent on already-terminal plans.",
+    "summary": "Stop a plan and everything still to do in it",
     "website": "https://www.flomation.co",
     "icon": "list-check+circle-xmark",
     "date": "23/06/2026",
@@ -531914,11 +531963,12 @@
     ]
   },
   "plan/create": {
-    "hash": "819fca6d7fdcf618f2201728c0963abe100c8d6aa2f6f43d049dfe6f56ce305a",
+    "hash": "e2c8d9b1116d8cfb84d7e5cce6209f47ef3c8211f40cf54478af027433ea6486",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Plan",
     "description": "Generate a multi-step plan with dependent tasks the agent will autonomously progress over time.",
+    "summary": "Give an agent a multi-step plan to work through",
     "website": "https://www.flomation.co",
     "icon": "list-check",
     "date": "22/06/2026",
@@ -532000,11 +532050,12 @@
     ]
   },
   "plan/get_status": {
-    "hash": "d2bba88351845707e05c1d4fc173b747eb5aef591c0634d017da3faf53dcdfa1",
+    "hash": "7552b3e477ca9873b02460cbd50b624e3514b13dc066938dbb3d824c21870c4b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Get Status",
     "description": "Read a plan's current state: status, task counts, and full task list.",
+    "summary": "Check how a plan is getting on",
     "website": "https://www.flomation.co",
     "icon": "list-check+magnifying-glass",
     "date": "23/06/2026",
@@ -532091,11 +532142,12 @@
     ]
   },
   "plan/revise": {
-    "hash": "df112c988adec003944454f9fd145cc2d56f605ab5e4331ffbd0819e182ec82b",
+    "hash": "c6b8de256923616fbd5581196d8616aae490e3f1e176a16756e8ed2c2b9f927b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Revise",
     "description": "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans.",
+    "summary": "Add, remove or change the steps in a plan",
     "website": "https://www.flomation.co",
     "icon": "list-check+pencil",
     "date": "24/06/2026",
@@ -532203,11 +532255,12 @@
     ]
   },
   "plan/start": {
-    "hash": "6c365323a4f9eba277bfa2245ee4477136fcd796b44a675a7738677b41684fd9",
+    "hash": "d6fb6db8da4ef904c8d916cfa34d87b51f641e169ca296ce052870149a5d4b76",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Start",
     "description": "Start a draft plan you previously authored. Transitions the plan from draft to active and begins dispatching tasks.",
+    "summary": "Set a plan running",
     "website": "https://www.flomation.co",
     "icon": "list-check+play",
     "date": "24/06/2026",
@@ -547908,11 +547961,12 @@
     ]
   },
   "string/concatenate": {
-    "hash": "d595ca6b03031dbe24dedf1c9619b6c36febcb3a8c74566e3141b1137cb380c9",
+    "hash": "ad9df22bf03265fd4c2f1bfd4a9a1a7a098860dfedfa21f165c14d08dc7699ce",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Concatenate",
     "description": "Join two or more strings together",
+    "summary": "Stick pieces of text together",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+link",
     "date": "19/04/2026",
@@ -547985,11 +548039,12 @@
     ]
   },
   "string/contains": {
-    "hash": "2ddecd9c4ce722aff89a70014b754ba33f773825a427693d63fce56c0e026ae9",
+    "hash": "023766f8a56e6e3a13fcf5fefd680620ce70c89e0982b79752ed0aec562e3999",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contains",
     "description": "Check if a string contains a substring",
+    "summary": "Check whether some text appears inside other text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+magnifying-glass",
     "date": "19/04/2026",
@@ -548056,11 +548111,12 @@
     ]
   },
   "string/join": {
-    "hash": "15d40813edb9c0891954d0b3fae623f340955e88e1a2aae5543f4693a4943efc",
+    "hash": "1b1c27690380370692d4cece459274a3c675362304ba0d3be361f6a8edab9693",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Join",
     "description": "Join an array of strings with a separator",
+    "summary": "Turn a list into one piece of text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+link",
     "date": "19/04/2026",
@@ -548119,11 +548175,12 @@
     ]
   },
   "string/lower_case": {
-    "hash": "27d3156d32391e07ddc76d307e686882e8bb2b412f0fa9f64ebfe71d13692ee3",
+    "hash": "46823ddde1ad7ceb0cc536075e7c337f029fda22263d19f174676515b424412f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Lower Case",
     "description": "Convert a string to lower case",
+    "summary": "Change text to lower case",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+arrow-down",
     "date": "19/04/2026",
@@ -548175,11 +548232,12 @@
     ]
   },
   "string/repeat": {
-    "hash": "517329975a2289c2115823f7bd97e587cacd8173b5d744dd4cf0f0abfbd6196b",
+    "hash": "ebbdf7e8570c7114847fc0e6812fe7f1a5f558eef33cfd39916e7820435d02d3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Repeat",
     "description": "Repeat a string a given number of times",
+    "summary": "Repeat a piece of text several times",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+repeat",
     "date": "19/04/2026",
@@ -548239,11 +548297,12 @@
     ]
   },
   "string/replace": {
-    "hash": "61d194e0633e1a3f02f0dea1886c6b1bf88947c888a4badd0153befca14fab16",
+    "hash": "f0aa956ec6ed6990be6205fa076ecee4f0dd187876c06a02f206ed9605bc025a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace",
     "description": "Replace all occurrences of a substring with another string",
+    "summary": "Swap one piece of text for another",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+pencil",
     "date": "19/04/2026",
@@ -548317,11 +548376,12 @@
     ]
   },
   "string/substring": {
-    "hash": "6e836f0e19d91249913cbdf667b7373482ef658d9b1ba2e498cf8d30327e1e6e",
+    "hash": "087ece3a8e73d861f5157104d6e72f5eb05ead98aba113af7354905200f9b447",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Substring",
     "description": "Extract a portion of a string by start and end positions",
+    "summary": "Take part of a piece of text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+filter",
     "date": "19/04/2026",
@@ -548388,11 +548448,12 @@
     ]
   },
   "string/trim": {
-    "hash": "5318d01e95e06ab0d788f045e1d5cf0d0426fcb9d457c0c09772bc120d8a7e92",
+    "hash": "2850211e705add756cd0e249d0db3ae929491cd4a8a7792fe318daca3097dc38",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim",
     "description": "Remove whitespace from both ends of a string",
+    "summary": "Remove spaces from both ends of some text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+xmark",
     "date": "19/04/2026",
@@ -548444,11 +548505,12 @@
     ]
   },
   "string/trim_end": {
-    "hash": "3be2b8e93737bc9eed8772f4bfdf74e93300e73094da1704a30a2167a8b22d0c",
+    "hash": "c74ed76eeb6afea24b5cf53ec31c635c8a5ccea6958ca86b4c6461be997b5786",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim End",
     "description": "Remove whitespace from the end of a string",
+    "summary": "Remove spaces from the end of some text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+arrow-left",
     "date": "19/04/2026",
@@ -548500,11 +548562,12 @@
     ]
   },
   "string/trim_start": {
-    "hash": "c92063abe6ab18fa37631e87772f856297228707fcb381a54bb08de544a9cc1c",
+    "hash": "328cc1615aacb7f8beb2447e8af0434ffbf4d57d1454b5a9c8df1bda75ab6035",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim Start",
     "description": "Remove whitespace from the start of a string",
+    "summary": "Remove spaces from the start of some text",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+arrow-right",
     "date": "19/04/2026",
@@ -548556,11 +548619,12 @@
     ]
   },
   "string/upper_case": {
-    "hash": "8d8f17005e8ab7cee06b7ca9aeabd4e96856cdd35c25debffe92e99c7937f549",
+    "hash": "7abb02a90b679740b167df01f37afd43ce5cea1bfa5c5ee69f64c7f4a28fe6d8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upper Case",
     "description": "Convert a string to upper case",
+    "summary": "Change text to upper case",
     "website": "https://www.flomation.co",
     "icon": "i-cursor+arrow-up",
     "date": "19/04/2026",
@@ -553360,11 +553424,12 @@
     ]
   },
   "subflow/begin": {
-    "hash": "7797862805ba9c85ac630538f9d42b8466828cb9bcf5448ea44de1bc195d9448",
+    "hash": "9fb7cfeb6fefdb178997a00efbf34bad8be96a33fd31bc8bcc6aea6c848accef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Begin Sub-Flow",
     "description": "Entry point of a reusable sub-flow. Give it a name and connect actions below it.",
+    "summary": "Mark where a reusable set of steps starts",
     "website": "https://www.flomation.co",
     "icon": "play",
     "date": "19/04/2026",
@@ -553402,11 +553467,12 @@
     ]
   },
   "subflow/end": {
-    "hash": "20792bda3473648ba1ef5ad5c085617817fc95b497046ef6d7e7235a14fb6317",
+    "hash": "d5e1d973c79c8f8506665767f6bd57c401d7bbad49d47647fc8d667a4a99151c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "End Sub-Flow",
     "description": "Return point of a sub-flow. Outputs are returned to the Invoke node.",
+    "summary": "Mark where a reusable set of steps ends",
     "website": "https://www.flomation.co",
     "icon": "stop",
     "date": "19/04/2026",
@@ -553436,11 +553502,12 @@
     ]
   },
   "subflow/invoke": {
-    "hash": "3ba8e3d2816e254d6d5ea53692e3509556f8c80a7298178e728239bcf35daeeb",
+    "hash": "effaa4e35963a0b407247691254f8ff1e9e0bc1de765a614a3c355c1540e0a48",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoke Sub-Flow",
     "description": "Call a named sub-flow subroutine and return its results",
+    "summary": "Run a reusable set of steps and use what comes back",
     "website": "https://www.flomation.co",
     "icon": "share-from-square",
     "date": "19/04/2026",
@@ -557720,11 +557787,12 @@
     ]
   },
   "trigger/acuity_webhook": {
-    "hash": "e6caca8b03346cf54289238f641f22ac8e4e5ee906569b3b7104d7591a1b39fd",
+    "hash": "27e4f12fe53dac97b97d9435d3574384c7e0dee340ed3507b0181a205b822f8d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Acuity Scheduling Trigger",
     "description": "Triggers a flow when an Acuity Scheduling event occurs (appointment scheduled/rescheduled/canceled/changed, or order completed). The webhook subscription is registered with Acuity automatically.",
+    "summary": "Start when an Acuity appointment is booked or changed",
     "website": "https://www.flomation.co",
     "icon": "acuity",
     "date": "04/07/2026",
@@ -557849,11 +557917,12 @@
     ]
   },
   "trigger/airtable_poll": {
-    "hash": "6a3e908b974dbb10a9e1ef5c419305a9cafdedc36f311751b8c3a96f8eab17be",
+    "hash": "8b7aa962f5f4804216dfbf584f88912b05598417b7bf642b45dc5cc4d7b760cc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Airtable Trigger",
     "description": "Triggers a flow when records are created or updated in an Airtable table. Polls the table on an interval using a Created Time or Last Modified Time field.",
+    "summary": "Start when an Airtable record is added or changed",
     "website": "https://www.flomation.co",
     "icon": "airtable",
     "date": "01/07/2026",
@@ -557985,11 +558054,12 @@
     ]
   },
   "trigger/apollo_webhook": {
-    "hash": "e7efa918fe24c4da7aa18232b172cdfde370a265bb7ccd8740fcb7103924a0e1",
+    "hash": "57578cfede15237e3250cd9a8dc1d3119a73b1b8b6bbba1d5acc03a6945fc22b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Apollo Webhook Trigger",
     "description": "Triggers a flow when an Apollo.io webhook fires (contact/account created, sequence engagement…)",
+    "summary": "Start when something changes in Apollo",
     "website": "https://www.flomation.co",
     "icon": "apollo",
     "date": "01/08/2026",
@@ -558062,11 +558132,12 @@
     ]
   },
   "trigger/asana_webhook": {
-    "hash": "8b5014c3d35bcca921b858be944962b7f3cf648623ca8762f92c8288bd5e360f",
+    "hash": "d1e18c8b4c33cace94db51319957fad47a3f77bf8e2a6155294f87b51cf21d81",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Asana Webhook Trigger",
     "description": "Triggers a flow when something changes on an Asana task or project you watch (a task is added, changed, completed, commented on, and so on). The webhook is registered automatically for the resource you choose — Asana's handshake and per-delivery HMAC-SHA256 signature are handled for you.",
+    "summary": "Start when an Asana task or project changes",
     "website": "https://www.flomation.co",
     "icon": "asana",
     "date": "07/07/2026",
@@ -558154,11 +558225,12 @@
     ]
   },
   "trigger/awx_webhook": {
-    "hash": "ba96aac15beadc524cd2fd2231a02360dc5828fbc316814370b1bfe9d1a78c38",
+    "hash": "f4421d8999c814a304a2414b1b71ff90786da53eb2b02d6e36314469efc566e8",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX Job Trigger",
     "description": "Triggers a flow when an AWX / AAP job starts, succeeds, fails or is canceled. Flomation registers the notification in AWX automatically. Note that AWX sends each notification once and never retries, so an event raised while Flomation is unreachable is lost.",
+    "summary": "Start when an AWX or AAP job finishes",
     "website": "https://www.flomation.co",
     "icon": "ansible",
     "date": "14/07/2026",
@@ -558465,11 +558537,12 @@
     ]
   },
   "trigger/calcom_webhook": {
-    "hash": "48f5092d907bca55b183aa75b8abdd3a3f0061e35b502130fbc0f794bdb36417",
+    "hash": "952f8402f14bfc29896603d9c0dbc9a0ea343092834ca0c50af79a378bab6397",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com Webhook Trigger",
     "description": "Triggers a flow when a Cal.com event occurs (booking created/rescheduled/cancelled, meeting ended, and more). The webhook subscription is registered with Cal.com automatically.",
+    "summary": "Start when a Cal.com booking is made or cancelled",
     "website": "https://www.flomation.co",
     "icon": "calcom",
     "date": "03/07/2026",
@@ -558624,11 +558697,12 @@
     ]
   },
   "trigger/calendly_webhook": {
-    "hash": "2711dda6dc9f5598be8eec080544def61673ab4af0b9ea947a27141d2f07f9b2",
+    "hash": "d7d814ecf1f39cac55cfae4612735999630517e25c2750c6f54137e439f8bc6b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Calendly Webhook Trigger",
     "description": "Triggers a flow when a Calendly event occurs (invitee created/canceled, no-shows, routing form submissions). The webhook subscription is registered with Calendly automatically.",
+    "summary": "Start when a Calendly booking is made or cancelled",
     "website": "https://www.flomation.co",
     "icon": "calendly",
     "date": "03/07/2026",
@@ -558762,11 +558836,12 @@
     ]
   },
   "trigger/cloudwatch_alarm": {
-    "hash": "895470a448c06520d15bb6d67b641f43c6d9f1ed16eab4b805a325f5dd2f978d",
+    "hash": "71e7c8a3bb49b2b38c1ef071e51963abd457201b0e20231a928cb0fe9e0497c7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "CloudWatch Alarm Trigger",
     "description": "Triggers a flow when a CloudWatch alarm changes state (OK, ALARM, INSUFFICIENT_DATA). Polls DescribeAlarms.",
+    "summary": "Start when a CloudWatch alarm changes state",
     "website": "https://www.flomation.co",
     "icon": "bell+bolt",
     "date": "22/07/2026",
@@ -558901,11 +558976,12 @@
     ]
   },
   "trigger/cloudwatch_logs": {
-    "hash": "c28a23cab72ef0aec45dbe0599318370176999b2173c406b164c4ced861a4915",
+    "hash": "cbee3b0d3063c1fb65f3a89e7eb5b88a47e6885c2dd5903c3ae7f8924dfb0146",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "CloudWatch Logs Trigger",
     "description": "Triggers a flow when log events match a filter pattern in a log group. Polls FilterLogEvents.",
+    "summary": "Start when matching text appears in your CloudWatch logs",
     "website": "https://www.flomation.co",
     "icon": "file-lines+bell",
     "date": "22/07/2026",
@@ -559009,11 +559085,12 @@
     ]
   },
   "trigger/cloudwatch_metric": {
-    "hash": "b1836b25b44c8b0b4853da0d9684998bd851929071bcb02ef2e4bdcdfc5d8fb8",
+    "hash": "fa97752580b2e200b0816a529470cfa956f4b32f816ace456e9a71f03350ef08",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "CloudWatch Metric Threshold Trigger",
     "description": "Triggers a flow when a CloudWatch metric crosses a threshold (edge-triggered). Polls GetMetricStatistics.",
+    "summary": "Start when a CloudWatch metric crosses a threshold",
     "website": "https://www.flomation.co",
     "icon": "gauge+bell",
     "date": "22/07/2026",
@@ -559210,11 +559287,12 @@
     ]
   },
   "trigger/database_row": {
-    "hash": "f66ebe35440e8824937f7c421fcdcea3360d392e3a56cda58035b6bf2146b5b8",
+    "hash": "ee395e8e044e2b8137493f014b736816820eb600ca18287a583fe69ea079c7c5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Database Row Trigger",
     "description": "Triggers a flow when a new row is inserted into a SQL table. Polls on an interval, tracking a monotonic cursor column (id or timestamp).",
+    "summary": "Start when a new row appears in your database",
     "website": "https://www.flomation.co",
     "icon": "database+plus",
     "date": "16/07/2026",
@@ -559378,11 +559456,12 @@
     ]
   },
   "trigger/email": {
-    "hash": "691f69495951b10c4cb9226f8584576b4a83b0b31d2dd01c1c7040d61b4a907e",
+    "hash": "2c4595d56c2718dbea1b02aa3949ec088486502742069620e1dd1aa2139f4c38",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Trigger",
     "description": "Triggers a flow when a new email arrives in a connected Gmail account",
+    "summary": "Start when a new email arrives in Gmail",
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "08/04/2026",
@@ -559504,11 +559583,12 @@
     ]
   },
   "trigger/facebook_feed": {
-    "hash": "c8cab4eb219d6b48c3477b95d63ff2606886a7fb8395669fad4f7f2c065725a3",
+    "hash": "bf07b1f52b10b8b38e4828a0849baa6cf56a996c83ef334f8298f1b2f153e55b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Feed Trigger",
     "description": "Triggers a flow on comments, reactions or posts on a Facebook Page",
+    "summary": "Start on comments, reactions or posts on your Facebook Page",
     "website": "https://www.flomation.co",
     "icon": "facebook+bolt",
     "date": "24/05/2026",
@@ -559638,11 +559718,12 @@
     ]
   },
   "trigger/facebook_messenger": {
-    "hash": "da5120028d59d5435ff03d38065b344efce14ca6f667c908ac0d58ccfe8b9e0f",
+    "hash": "b56d09d713d270100b12c6f9c98683a7e9f94558da10a3936ae6c9a0907bfa65",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Messenger Trigger",
     "description": "Triggers a flow when a message is received via Facebook Messenger",
+    "summary": "Start when someone messages your Facebook Page",
     "website": "https://www.flomation.co",
     "icon": "facebook-messenger",
     "date": "24/05/2026",
@@ -559758,11 +559839,12 @@
     ]
   },
   "trigger/form": {
-    "hash": "6e6a0d901b182f5495e604425df2ee982954989a155a53fe1f4f754eb873b971",
+    "hash": "4aebbaf9cd65ead3c252efdcc7bdcb56a0eb4f98b12867eda3ad3315e690f31d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Form Trigger",
     "description": "Triggers a flow when a form is submitted",
+    "summary": "Start when someone fills in your form",
     "website": "https://www.flomation.co",
     "icon": "file-lines",
     "date": "23/03/2026",
@@ -559799,11 +559881,12 @@
     ]
   },
   "trigger/freshsales_webhook": {
-    "hash": "cfe9a6a4c51f9fd51e7872a6b2aa1f41043ebb819f664ded854af635602cf9f2",
+    "hash": "0e880eda848db9c16d988d94ba94eadfe2290988cc0db5315c3b4c161ce3937e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Freshsales Webhook Trigger",
     "description": "Triggers a flow when a Freshsales workflow webhook fires (contact, account or deal changes).",
+    "summary": "Start when a Freshsales contact, account or deal changes",
     "website": "https://www.flomation.co",
     "icon": "freshworks",
     "date": "04/09/2026",
@@ -559883,11 +559966,12 @@
     ]
   },
   "trigger/git_poll": {
-    "hash": "f2c4622b03c7358cd3173ecd37adc3161416663ed8a1984c3e955e98910073e4",
+    "hash": "4947a360e8310cff196319a6899cb5b1a3197b6b89ec6f01cd0b091ad5b1e13f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Poll Trigger",
     "description": "Triggers a flow when changes are detected in a Git repository",
+    "summary": "Start when a Git repository changes",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "22/03/2026",
@@ -559960,11 +560044,12 @@
     ]
   },
   "trigger/github_webhook": {
-    "hash": "48c25fa82935658e3ace4db92a52f23d747ce6e14535b48e7c953ba719fa8c56",
+    "hash": "bbb07c9c36eb5fc8e6c9184c36d6880b051d09fe7504fa6252b55f8001aba8aa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Webhook Trigger",
     "description": "Triggers a flow when a GitHub webhook event is received",
+    "summary": "Start when something happens on GitHub",
     "website": "https://www.flomation.co",
     "icon": "github",
     "date": "26/04/2026",
@@ -560107,11 +560192,12 @@
     ]
   },
   "trigger/gitlab_webhook": {
-    "hash": "bdfb591c84b81d6c6f7dbf39343702bd47f8ad61b57d542cb60a9639da87e8ec",
+    "hash": "a43eccc90da5f0bd2648555200d11d1c10d9084ea1e41c1381e9efe0a5ef5f32",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Webhook Trigger",
     "description": "Triggers a flow when a GitLab webhook event is received",
+    "summary": "Start when something happens on GitLab",
     "website": "https://www.flomation.co",
     "icon": "gitlab",
     "date": "26/04/2026",
@@ -560268,11 +560354,12 @@
     ]
   },
   "trigger/google_drive": {
-    "hash": "ebefabe821d2d8cc12a8fd2a191fda2e145c1654013a7edc2a06b1e17212496c",
+    "hash": "791461050542fd96beb21ace89771a7414097e0b3c55457b2f6dbfe4a5d07ed2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Google Drive Trigger",
     "description": "Triggers when files change in a Google Drive folder",
+    "summary": "Start when files change in a Google Drive folder",
     "website": "https://www.flomation.co",
     "icon": "google",
     "date": "01/06/2026",
@@ -560408,11 +560495,12 @@
     ]
   },
   "trigger/heygen_webhook": {
-    "hash": "70964d6edf9c1ed866b206507a1b542e6fbada25112d5695afda3823d95c6091",
+    "hash": "9f568806a56ca34b4d9b7a06cb322e65d02d6e1fc13d72a03f5025a504cb03c1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "HeyGen Webhook Trigger",
     "description": "Triggers a flow when a HeyGen video is ready (avatar_video.success / .fail, translation events).",
+    "summary": "Start when a HeyGen video has finished rendering",
     "website": "https://www.flomation.co",
     "icon": "film+bolt",
     "date": "12/08/2026",
@@ -560499,11 +560587,12 @@
     ]
   },
   "trigger/hubspot_webhook": {
-    "hash": "a70de399a92214e77e4cce8f69e6842d0b2db58506041301fb1773bab8db3f22",
+    "hash": "8cbd9b318c5a6cddffd42c551d0201af279f932d8583d59d524a48991ee36076",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "HubSpot Webhook Trigger",
     "description": "Triggers a flow when a HubSpot webhook event is received (contact/company/deal/ticket creation, deletion, or property change).",
+    "summary": "Start when a HubSpot contact, company or deal changes",
     "website": "https://www.flomation.co",
     "icon": "hubspot",
     "date": "30/06/2026",
@@ -560603,11 +560692,12 @@
     ]
   },
   "trigger/image": {
-    "hash": "746e45399d9a876c699ad875be3810935ac995f13c2a0fbb7298f2cc4ec4fc68",
+    "hash": "d13d5e2fb7fb80418083824f3e5faad21a807a0b8933e5a4fb85a1f7520512d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tracking Pixel Trigger",
     "description": "Triggers a flow when a tracking pixel image is loaded",
+    "summary": "Start when a tracking pixel is loaded, such as in an email",
     "website": "https://www.flomation.co",
     "icon": "image",
     "date": "23/03/2026",
@@ -560650,11 +560740,12 @@
     ]
   },
   "trigger/intercom_webhook": {
-    "hash": "45bca92f0b2588015fab6b8c3083fbc4966bfe315ee58fb0ba0280f9f598a51a",
+    "hash": "a53a71fddb0296adf80655683685a7fd5fc08413204acb4dcf343c07b2d010a5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Intercom Webhook Trigger",
     "description": "Triggers a flow when something happens in your Intercom workspace — a new conversation starts, a customer replies, a ticket changes state, a contact is created, and so on. Intercom doesn't let apps register webhooks automatically, so paste the trigger's webhook URL into your Intercom Developer Hub app under Configure → Webhooks and pick the topics to send.",
+    "summary": "Start when something happens in Intercom",
     "website": "https://www.flomation.co",
     "icon": "intercom",
     "date": "08/07/2026",
@@ -560922,11 +561013,12 @@
     ]
   },
   "trigger/jira_webhook": {
-    "hash": "1d8f627f16a30b33e23851642f013017966adfed04f7a9943ae6a3f5aa9a1520",
+    "hash": "c1865e58f1cd8862afd4956ff865d7abb1750ece16fb8fb74e3269906dab6567",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jira Webhook Trigger",
     "description": "Triggers a flow when a Jira issue or comment event occurs (created, updated or deleted). The webhook is registered automatically; optionally filter with JQL, and set a signing secret to have Jira's HMAC-SHA256 payload signature verified.",
+    "summary": "Start when a Jira issue or comment changes",
     "website": "https://www.flomation.co",
     "icon": "jira",
     "date": "06/07/2026",
@@ -561234,11 +561326,12 @@
     ]
   },
   "trigger/jotform_webhook": {
-    "hash": "93126d50f7c9bef0cb012597c42ca4630a091da4fb787210f4a10025b0802826",
+    "hash": "3a19c46515ba3c997abef864ca5cc80ec74847245d8e7f3e8a7c365a8cfbb7d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "JotForm Webhook Trigger",
     "description": "Triggers a flow when a JotForm form submission webhook is received.",
+    "summary": "Start when someone completes your JotForm",
     "website": "https://www.flomation.co",
     "icon": "clipboard-list",
     "date": "11/07/2026",
@@ -561310,11 +561403,12 @@
     ]
   },
   "trigger/linkedin_poll": {
-    "hash": "bc80192e7a86d7e14316ce67d0c085868168b5cba8803d12856a74b56e10aeed",
+    "hash": "d8c7f0ea71309f9343b8f040a8c42dc40e1afbc5be6a4252c1a73411d6e15c69",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Activity Trigger",
     "description": "Triggers a flow on new comments or reactions on LinkedIn posts",
+    "summary": "Start when someone comments on or reacts to your LinkedIn post",
     "website": "https://www.flomation.co",
     "icon": "linkedin",
     "date": "24/05/2026",
@@ -561423,11 +561517,12 @@
     ]
   },
   "trigger/mailchimp_webhook": {
-    "hash": "0c141b0008b8178e66fcbf3ca480ca776232b79eda0d4f662ebd6dcf358d12f0",
+    "hash": "528cc013498ab217f4dc3806c58d9374a9c357439eb7cb000e0e527fb8fb7689",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Mailchimp Trigger",
     "description": "Triggers a flow on Mailchimp audience events (subscribe, unsubscribe, profile update, cleaned, email changed, campaign sent) via a webhook.",
+    "summary": "Start when someone subscribes or unsubscribes in Mailchimp",
     "website": "https://www.flomation.co",
     "icon": "mailchimp",
     "date": "01/07/2026",
@@ -561522,11 +561617,12 @@
     ]
   },
   "trigger/manual": {
-    "hash": "91109374db62ff75a99c52420786bdc8821643d16e8c8bc895707644876f4ba1",
+    "hash": "35eb746fc48da0ddf63d35fec9a928a61cf1c7086caf18b1e65fbd3d38f0eea3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Trigger",
     "description": "A simple trigger invoked by pressing the play button, or as the default means",
+    "summary": "Start when you press play",
     "website": "https://www.flomation.co",
     "icon": "play",
     "date": "27/11/2025",
@@ -561555,11 +561651,12 @@
     ]
   },
   "trigger/microsoft_outlook": {
-    "hash": "85787ac447ee429277d170a8ff4edd698d2ce1af1384859af59542406bef9e33",
+    "hash": "5e3228bbb4f5c5253d580a5f97ef5b23c0537de3996c7167d45bb31d0acdb53d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Microsoft Outlook Trigger",
     "description": "Triggers a flow when a new email arrives in a connected Microsoft 365 account",
+    "summary": "Start when a new email arrives in Outlook",
     "website": "https://www.flomation.co",
     "icon": "microsoft+envelope",
     "date": "04/06/2026",
@@ -561694,11 +561791,12 @@
     ]
   },
   "trigger/monday_webhook": {
-    "hash": "d8f0d990eab2756a64da907dd38d6327cec86ad976220360bf2a81fedc3939d1",
+    "hash": "8bf8c02d8bd6a9b88f529edc6680c29d6cf4822ac160fb66765d7960ec4f05e6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Monday.com Webhook Trigger",
     "description": "Triggers a flow when something happens on a Monday.com board you watch — an item is created, a column value changes, an update is posted, and so on. The webhook is registered automatically for the board and event you choose (Monday's challenge handshake is handled for you).",
+    "summary": "Start when something changes on a Monday.com board",
     "website": "https://www.flomation.co",
     "icon": "monday",
     "date": "07/07/2026",
@@ -561829,11 +561927,12 @@
     ]
   },
   "trigger/mqtt": {
-    "hash": "0b1a8a7e197e2dfbe9d4033135800f2b3616a238f619d78d5eb5de3063aa485f",
+    "hash": "7f5fcd21d37c1d4040ffd658696e6c49d2cafa5bd461ebdcff75e05394709dcc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "MQTT Trigger",
     "description": "Start a flow whenever a message arrives on an MQTT topic. Flomation holds a subscription open to your broker and runs the flow the moment a message is published. Wildcards are supported: + matches one level, # matches the rest.",
+    "summary": "Start when a message arrives on an MQTT topic",
     "website": "https://www.flomation.co",
     "icon": "tower-broadcast",
     "date": "12/07/2026",
@@ -562080,11 +562179,12 @@
     ]
   },
   "trigger/plan_task": {
-    "hash": "95d0d7d2296b0bb0f4755ee25a2e40e5502a60d0116a5dd9d91db2ecc167a139",
+    "hash": "62bde528c0baccf0066c904c5eca3e4071fcab6c3f78f4618aa5bcc0ca939e7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan Task Trigger",
     "description": "Fires when a plan task is dispatched. Carries task framing into the agent's orchestrator without flow amendment.",
+    "summary": "Start when a plan hands the agent its next task",
     "website": "https://www.flomation.co",
     "icon": "list-check+bolt",
     "date": "22/06/2026",
@@ -562183,11 +562283,12 @@
     ]
   },
   "trigger/qr": {
-    "hash": "a34973effbc20e2644053abb6892aff28ad00ada381f1ec80406b3fb4b21578e",
+    "hash": "5dbc6d9fe28aa82d3e44decb1f87c4f3ccb2eaf6aafacb1eb8a5709b99a7cd4f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "QR Code Trigger",
     "description": "Triggers a flow when a QR code is scanned",
+    "summary": "Start when someone scans your QR code",
     "website": "https://www.flomation.co",
     "icon": "qrcode",
     "date": "23/03/2026",
@@ -562223,11 +562324,12 @@
     ]
   },
   "trigger/quickbooks_webhook": {
-    "hash": "e642455ecc808d9805c8dba17d8fd6e06ca3b05f49633f09cd17087a54165c16",
+    "hash": "90626a3f455b033dda1068b92501ac9cc1430d8f0fa81ffc2e1c79847caafbd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "QuickBooks Webhook Trigger",
     "description": "Triggers a flow when a QuickBooks Online entity changes (customer, invoice, payment…)",
+    "summary": "Start when something changes in QuickBooks",
     "website": "https://www.flomation.co",
     "icon": "quickbooks",
     "date": "10/07/2026",
@@ -562321,11 +562423,12 @@
     ]
   },
   "trigger/rds_event": {
-    "hash": "14c64c62982aad7ac1855bb9e099b37b7aeb00ac40d68ff528213303930887b6",
+    "hash": "4df4e22c8c0b0bcf165223f36604142ddda42b5a27fbc0b083e1dc36347318d4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "RDS Event Trigger",
     "description": "Triggers a flow on AWS RDS/Aurora events (failover, backup complete, low storage, availability change). Polls DescribeEvents on an interval.",
+    "summary": "Start on an AWS database event, such as a failover or backup",
     "website": "https://www.flomation.co",
     "icon": "database+bell",
     "date": "21/07/2026",
@@ -562472,11 +562575,12 @@
     ]
   },
   "trigger/route53_health_check": {
-    "hash": "4f27c866736aeca24f8f09c9988309931d6aaa1fd683faca5368cfc3b5daefd0",
+    "hash": "9bc3fad36f51ae3464efc2d197270465046ab3efaad2b978ac79c41d5ee3e9df",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Route 53 Health Check Trigger",
     "description": "Triggers a flow when a Route 53 health check goes unhealthy (or recovers). Polls GetHealthCheckStatus.",
+    "summary": "Start when a Route 53 health check fails or recovers",
     "website": "https://www.flomation.co",
     "icon": "gauge+bell",
     "date": "22/07/2026",
@@ -562593,11 +562697,12 @@
     ]
   },
   "trigger/s3": {
-    "hash": "ffd0a4424b39c12853776f43be2ab03a599a222d9bde1f4f2c63f1206a1ee84d",
+    "hash": "00a53d3dce6f92e0007f9b2736e48136ade6ceb933e30badb6acbaac01307fd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "S3 Trigger",
     "description": "Triggers a flow when objects are created or deleted in an S3 bucket",
+    "summary": "Start when a file is added to or removed from S3",
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "23/03/2026",
@@ -562780,11 +562885,12 @@
     ]
   },
   "trigger/salesforce_poll": {
-    "hash": "c7a0a127f643d6af8f9cd54d03ba8fe2d413f08359b38d1e81c936d12f2bafcf",
+    "hash": "e984bcca576dfa44477a0e7212bf430cb3a492bb8e7d2327c1069b85470702da",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Record Created or Updated",
     "description": "Triggers a flow when a Salesforce record is created — or created or changed — on any object, including your own custom ones. Checks on an interval and only ever fires for records it has not already seen.",
+    "summary": "Start when a Salesforce record is added or changed",
     "website": "https://www.flomation.co",
     "icon": "salesforce+bolt",
     "date": "26/07/2026",
@@ -562905,11 +563011,12 @@
     ]
   },
   "trigger/schedule": {
-    "hash": "72660031b88b57c56819ed536b365e86186ba9a1d057148df1ca7d94ddac7735",
+    "hash": "55b569224fb69fdf2cf444fbfb30093f755d154b2a15da2d97293dac2747fe2c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Schedule Trigger",
     "description": "Triggers a flow on a recurring schedule",
+    "summary": "Start on a repeating schedule",
     "website": "https://www.flomation.co",
     "icon": "clock",
     "date": "22/03/2026",
@@ -563542,11 +563649,12 @@
     ]
   },
   "trigger/sendgrid_webhook": {
-    "hash": "e4b90c9a49ee7dc3416ad8105c807b24a2ab396a15444e9d7372231dc4a21701",
+    "hash": "b0a37c22da3b43263a9cb43d5234398d5e081c87c1365261044f4440eaf91132",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid Webhook Trigger",
     "description": "Triggers a flow when SendGrid reports an email event — delivered, bounced, opened, clicked, marked as spam, unsubscribed, and more. The event webhook is registered with SendGrid automatically and signed-event verification is enabled.",
+    "summary": "Start when an email is delivered, opened or bounces",
     "website": "https://www.flomation.co",
     "icon": "sendgrid+bolt",
     "date": "09/07/2026",
@@ -563770,11 +563878,12 @@
     ]
   },
   "trigger/shopify_webhook": {
-    "hash": "69ba416afe591a446f2a6255bdae1160691d1a56e69d1cfe191ad1c9c2358729",
+    "hash": "0735d269022b1e2f271050c721a1b0cc97ac72bf2d3a5bc0406f9961c4cc2480",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Shopify Webhook Trigger",
     "description": "Triggers a flow when a Shopify webhook event is received (orders, products, ...). Verify with your app's API secret key.",
+    "summary": "Start when an order or product changes in Shopify",
     "website": "https://www.flomation.co",
     "icon": "shopify",
     "date": "02/07/2026",
@@ -563861,11 +563970,12 @@
     ]
   },
   "trigger/slack": {
-    "hash": "0f5edef7c672363a5359d184ad03042f094087ef467b3a0574ee52d972bc446e",
+    "hash": "1ec76f21b44469b11ea67286f3e253a390545bac2eff32a79b95224bb47deb85",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Trigger",
     "description": "Triggers a flow when a Slack message or app mention is received",
+    "summary": "Start when someone messages or mentions you in Slack",
     "website": "https://www.flomation.co",
     "icon": "slack",
     "date": "03/04/2026",
@@ -564018,11 +564128,12 @@
     ]
   },
   "trigger/stripe_webhook": {
-    "hash": "1b2841a182234fd324bb457566e527e6afb9b9fb8aef5b0bcce30813cbf6dc84",
+    "hash": "80fc6f2559d624f80c52791837e2e24cd96c62de725b6fd60fb1b049eebf39be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Stripe Webhook Trigger",
     "description": "Triggers a flow when a Stripe webhook event is received (payment, subscription, invoice…)",
+    "summary": "Start when a payment or subscription changes in Stripe",
     "website": "https://www.flomation.co",
     "icon": "stripe",
     "date": "05/07/2026",
@@ -564130,11 +564241,12 @@
     ]
   },
   "trigger/surveymonkey_webhook": {
-    "hash": "fc3def3cd3c992df7d1d844135d24303cb8ce7107ee68a9fe003f9e2635d6978",
+    "hash": "f8471010a583126e4aec83f5f856beded664c36eb7271e9abc3e69ee0d59a967",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "SurveyMonkey Webhook Trigger",
     "description": "Triggers a flow when a SurveyMonkey webhook event is received.",
+    "summary": "Start when someone completes your SurveyMonkey survey",
     "website": "https://www.flomation.co",
     "icon": "clipboard-list",
     "date": "11/07/2026",
@@ -564213,11 +564325,12 @@
     ]
   },
   "trigger/teams": {
-    "hash": "ce02bcd95ebd9ebc45d9fa87058e35b7c1c81e526c989b31091228fc16d0fe14",
+    "hash": "65f5a569543cab77dc4c79a324bed064211ae1d32e14429022532ba25f75df12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Teams Trigger",
     "description": "Triggers a flow when a message is received in Microsoft Teams",
+    "summary": "Start when a message arrives in Microsoft Teams",
     "website": "https://www.flomation.co",
     "icon": "microsoft+comments",
     "date": "05/06/2026",
@@ -564347,11 +564460,12 @@
     ]
   },
   "trigger/telegram": {
-    "hash": "ef1aea6090d3f4ab7023bb2794a315ef39313a523bc42fc9139e65c2c7caa90d",
+    "hash": "59dea6d835f2e9a81d7135fa3d8e5ff435070b10521d1ca6d0ec22bcf33e0789",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Telegram Trigger",
     "description": "Triggers a flow when a Telegram message is received",
+    "summary": "Start when a Telegram message arrives",
     "website": "https://www.flomation.co",
     "icon": "paper-plane",
     "date": "03/04/2026",
@@ -564473,11 +564587,12 @@
     ]
   },
   "trigger/trello_webhook": {
-    "hash": "8e97be3f71f79222483db13389bc3648b84dbf453de251a177ab7400f365ea5c",
+    "hash": "e295c4f836d11d1b57767392615ffa4e489538c5a18e7eb780ed7f5705e69307",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Trello Webhook Trigger",
     "description": "Triggers a flow when something changes on a Trello board, list, or card you watch (a card is created, moved, commented on, and so on). The webhook is registered automatically for the model you choose; set the Trello API Secret to have each delivery's HMAC-SHA1 signature verified.",
+    "summary": "Start when a Trello card, list or board changes",
     "website": "https://www.flomation.co",
     "icon": "trello",
     "date": "07/07/2026",
@@ -564594,11 +564709,12 @@
     ]
   },
   "trigger/twilio_sms": {
-    "hash": "cfdc682bfd52b95c5c34d92c14a332c590868ab1dc37a07d6ac30f1cf950e3a6",
+    "hash": "7c117dcb54b3a8d48804b6e742a4dc75b78d043b3a50bbaa780b721091dfde0e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio SMS Trigger",
     "description": "Triggers a flow when an SMS message is received via Twilio",
+    "summary": "Start when a text message arrives",
     "website": "https://www.flomation.co",
     "icon": "comment-sms",
     "date": "29/05/2026",
@@ -564694,11 +564810,12 @@
     ]
   },
   "trigger/twilio_voice": {
-    "hash": "62b15e02d7d874ac793a5a8998f63147753293680d2cb0b98eca43d1dd0bd5e7",
+    "hash": "b979b4e772539160e5c0fb9a5fd9953e7f4620d14e99dd0a8c4401ebc290c905",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio Voice Trigger",
     "description": "Triggers a flow when a voice call is received via Twilio",
+    "summary": "Start when someone calls your phone number",
     "website": "https://www.flomation.co",
     "icon": "phone",
     "date": "29/05/2026",
@@ -564801,11 +564918,12 @@
     ]
   },
   "trigger/typeform_webhook": {
-    "hash": "b147b23d0de7fa3dad377769c58f2cbf09a45629f151fcba6492c09ac28e1b18",
+    "hash": "f55bf2c7bcc54abd05946c05b7e2924f9a46f5cdcedf6a9b7b81559010f18777",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Typeform Webhook Trigger",
     "description": "Triggers a flow when a Typeform form submission webhook is received.",
+    "summary": "Start when someone completes your Typeform",
     "website": "https://www.flomation.co",
     "icon": "clipboard-list",
     "date": "11/07/2026",
@@ -564892,11 +565010,12 @@
     ]
   },
   "trigger/web": {
-    "hash": "a67db57011da8f055238dcb0b4b8d61174d239f1456d16c2631be3e58ed8ecdd",
+    "hash": "d2edbb8e48b746fb54088ee089121b992947a1d51d916a30a41cae926acecd27",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Trigger",
     "description": "Triggers a flow from an HTTP request of any verb; pair with a Web Response action to return a body/status",
+    "summary": "Start when someone calls a web address you choose",
     "website": "https://www.flomation.co",
     "icon": "globe",
     "date": "13/07/2026",
@@ -565018,11 +565137,12 @@
     ]
   },
   "trigger/webhook": {
-    "hash": "195d2f0d929ea1d02d4c0d24cd7f13179836dfd08356ec37b555a8304a698572",
+    "hash": "1fac67977cf76ec729df77503d933c50267a581922bdf86cc16ae90f78824b2c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Webhook Trigger",
     "description": "Triggers a flow when an HTTP webhook is received",
+    "summary": "Start when another system sends you a webhook",
     "website": "https://www.flomation.co",
     "icon": "globe",
     "date": "23/03/2026",
@@ -565065,11 +565185,12 @@
     ]
   },
   "trigger/woocommerce_webhook": {
-    "hash": "95894a95315abf739bce97e9f2741310e7b5678b020d91be5b4044ea0d2a43ca",
+    "hash": "819356f0086b73d917a73d3a38d86579bc21f279e4a24ec098619c87d6cc97c1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce Webhook Trigger",
     "description": "Triggers a flow when a WooCommerce event occurs (order/product/customer/coupon created, updated or deleted). The webhook is registered and signature-verified automatically.",
+    "summary": "Start when something changes in your WooCommerce shop",
     "website": "https://www.flomation.co",
     "icon": "woocommerce",
     "date": "05/07/2026",
@@ -565244,11 +565365,12 @@
     ]
   },
   "trigger/xero_webhook": {
-    "hash": "35e9fff914eb37c59f4bb785b46474cd4c4b9dec80210cec0e82d9478a0e972a",
+    "hash": "dfd5b9f8f4a1d4caa973b1722c19da0d15feba82b5b749f59200275c7d879acf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Xero Webhook Trigger",
     "description": "Triggers a flow when a Xero record changes (contact or invoice created/updated)",
+    "summary": "Start when a Xero contact or invoice changes",
     "website": "https://www.flomation.co",
     "icon": "xero",
     "date": "10/07/2026",
@@ -565342,11 +565464,12 @@
     ]
   },
   "trigger/zendesk_webhook": {
-    "hash": "5e07c755e9e16afcd3399c6737466199fcfd02ca443d8ad7bf13781c1252043e",
+    "hash": "55eda7da3bf034d54c69db8ffdee4073cb91c800c338931cb777e6da0e1d28d7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Zendesk Webhook Trigger",
     "description": "Triggers a flow when a Zendesk ticket is created or updated. Flomation registers the Zendesk webhook and business rule automatically. Leave Conditions empty to fire on every ticket create/update, or supply Zendesk trigger conditions as JSON to narrow it.",
+    "summary": "Start when a Zendesk ticket is raised or updated",
     "website": "https://www.flomation.co",
     "icon": "zendesk",
     "date": "03/07/2026",

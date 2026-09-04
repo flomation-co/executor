@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Find Departure Time"
 	Description  = "Calculate when to leave to arrive by a given time, accounting for traffic at that hour."
+	Summary      = "Work out when to set off to arrive on time"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+hourglass-start"
 	Date         = "11/06/2026"

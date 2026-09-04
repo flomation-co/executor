@@ -23,6 +23,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Database Row Trigger"
 	Description  = "Triggers a flow when a new row is inserted into a SQL table. Polls on an interval, tracking a monotonic cursor column (id or timestamp)."
+	Summary      = "Start when a new row appears in your database"
 	Website      = "https://www.flomation.co"
 	Icon         = "database+plus"
 	Date         = "16/07/2026"
