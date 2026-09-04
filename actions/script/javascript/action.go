@@ -60,9 +60,16 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{
-		Name:        "outputs",
-		Type:        core.ConnectionTypeKeyValueArray,
-		Label:       "Outputs (name → type)",
+		Name:  "outputs",
+		Type:  core.ConnectionTypeKeyValueArray,
+		Label: "Outputs (name → type)",
+		Options: []core.ConnectionOption{
+			{Name: "String", Value: "string"},
+			{Name: "Number", Value: "number"},
+			{Name: "Boolean", Value: "boolean"},
+			{Name: "Array", Value: "array"},
+			{Name: "Object", Value: "object"},
+		},
 		Placeholder: "e.g. total → number, status → string. Leave empty to emit the whole return value under \"result\".",
 	},
 	{

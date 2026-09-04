@@ -1,7 +1,12 @@
 #
+# Aliases belong here too — Icon.tsx resolves them before lookup, so an action
+# iconAliases in automate/editor/app/components/icons/paths.ts.
+# icons that render perfectly well.
+# Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
+# Snapshot of the editor's renderable icon set: the union of iconPaths and
+# whose Icon is "stripe+search" renders via search -> magnifying-glass.
 acuity
 airtable
-# Aliases belong here too — Icon.tsx resolves them before lookup, so an action
 align-left
 ansible
 apollo
@@ -11,10 +16,10 @@ arrow-right
 arrow-right-arrow-left
 arrow-right-from-bracket
 arrow-rotate-right
-arrows-split-up-and-left
-arrows-up-down
 arrow-up
 arrow-up-right-from-square
+arrows-split-up-and-left
+arrows-up-down
 asana
 azure
 ban
@@ -64,8 +69,8 @@ code
 code-branch
 comment
 comment-dots
-comments
 comment-sms
+comments
 compact-disc
 compress
 copy
@@ -102,6 +107,7 @@ floppy-disk
 folder
 folder-open
 folder-tree
+freshworks
 gauge
 gear
 gears
@@ -121,8 +127,6 @@ helm
 hourglass-start
 house
 hubspot
-# iconAliases in automate/editor/app/components/icons/paths.ts.
-# icons that render perfectly well.
 i-cursor
 id-badge
 image
@@ -138,8 +142,8 @@ life-ring
 lightbulb
 linear
 link
-linkedin
 link-slash
+linkedin
 list
 list-check
 location-arrow
@@ -156,8 +160,8 @@ network-wired
 notion
 object-group
 oracle
-paperclip
 paper-plane
+paperclip
 pause
 pen
 pencil
@@ -176,7 +180,6 @@ qrcode
 quickbooks
 recycle
 refresh
-# Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
 repeat
 reply
 reply-all
@@ -185,6 +188,7 @@ rotate
 rotate-left
 rotate-right
 route
+salesforce
 save
 search
 sendgrid
@@ -194,7 +198,6 @@ shield-halved
 shield-virus
 shopify
 slack
-# Snapshot of the editor's renderable icon set: the union of iconPaths and
 spinner
 star
 star-outline
@@ -222,7 +225,6 @@ video
 warning
 webflow
 webhook
-# whose Icon is "stripe+search" renders via search -> magnifying-glass.
 wifi
 woocommerce
 wordpress
@@ -231,4 +233,3 @@ x-twitter
 xero
 xmark
 zendesk
-salesforce
