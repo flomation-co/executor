@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Make Call"
 	Description  = "Initiate an outbound Twilio voice call"
+	Summary      = "Place a phone call"
 	Website      = "https://www.flomation.co"
 	Icon         = "phone-arrow-up-right"
 	Date         = "31/05/2026"

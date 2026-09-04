@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Teams"
 	Description  = "List all Microsoft Teams the authenticated user has joined"
+	Summary      = "List the Teams you belong to"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+list"
 	Date         = "04/06/2026"

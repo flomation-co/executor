@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Add Reaction"
 	Description  = "Add an emoji reaction to a Slack message. Use emoji name without colons."
+	Summary      = "Add an emoji reaction to a Slack message"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+star"
 	Date         = "28/04/2026"

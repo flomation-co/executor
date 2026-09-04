@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Delete Post"
 	Description  = "Delete a LinkedIn post by its URN"
+	Summary      = "Delete a LinkedIn post"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+trash"
 	Date         = "21/05/2026"

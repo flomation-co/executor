@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Drive Files"
 	Description  = "List files and folders in Google Drive"
+	Summary      = "List files and folders in Google Drive"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledrive+list"
 	Date         = "01/06/2026"

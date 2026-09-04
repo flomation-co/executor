@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Presentation"
 	Description  = "Get metadata and slides for a Google Slides presentation"
+	Summary      = "Look up a presentation and its slides"
 	Website      = "https://www.flomation.co"
 	Icon         = "googleslides+eye"
 	Date         = "01/06/2026"

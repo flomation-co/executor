@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Discord Webhook"
 	Description  = "Send a message to a Discord channel via webhook"
+	Summary      = "Post a message to a Discord channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "comment-dots"
 	Date         = "23/03/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update List Item"
 	Description  = "Update fields on a SharePoint list item"
+	Summary      = "Change an item in a SharePoint list"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+pencil"
 	Date         = "04/06/2026"

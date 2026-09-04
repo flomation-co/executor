@@ -71,13 +71,32 @@ func TestSummariesAreShortEnoughToRead(t *testing.T) {
 	}
 }
 
-func TestSummariesAreNotCopiedDescriptions(t *testing.T) {
+// TestSummariesAreNotPastedPromptText catches the cheap wrong way to finish
+// this catalogue: pasting the Description into the Summary.
+//
+// An identical string is only a problem when the Description is the sort a
+// person should not have been shown — long, or written at the model. Plenty of
+// descriptions are already short plain English ("Upload a file to Google
+// Drive"), and repeating one is the honest answer: it pins the menu copy so a
+// later rewrite of the Description for the AI cannot quietly change what users
+// read.
+func TestSummariesAreNotPastedPromptText(t *testing.T) {
 	for id, a := range loadManifest(t) {
 		if a.Summary == "" {
 			continue
 		}
-		if strings.EqualFold(strings.TrimRight(a.Summary, "."), strings.TrimRight(a.Description, ".")) {
-			t.Errorf("%s: summary is just the description — write one for a person, or leave it empty and let the fallback do its job", id)
+		if !strings.EqualFold(strings.TrimRight(a.Summary, "."), strings.TrimRight(a.Description, ".")) {
+			continue
+		}
+		if n := len([]rune(a.Description)); n > maxSummaryRunes {
+			t.Errorf("%s: summary is a copy of a %d-character description — write one for a person", id, n)
+		}
+		lower := strings.ToLower(a.Description)
+		for _, phrase := range aiVoice {
+			if strings.Contains(lower, phrase) {
+				t.Errorf("%s: summary is a copy of a description that addresses the model (%q)", id, strings.TrimSpace(phrase))
+				break
+			}
 		}
 	}
 }

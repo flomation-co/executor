@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Presentation"
 	Description  = "Create a new empty PowerPoint presentation in OneDrive"
+	Summary      = "Create a PowerPoint presentation"
 	Website      = "https://www.flomation.co"
 	Icon         = "mspowerpoint+plus"
 	Date         = "04/06/2026"

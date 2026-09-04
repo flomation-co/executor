@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Post Analytics"
 	Description  = "Get engagement metrics (likes, comments, shares) for a LinkedIn post"
+	Summary      = "See the likes, comments and shares on a LinkedIn post"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+pie-chart"
 	Date         = "21/05/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Move Email"
 	Description  = "Move an Outlook email to a different folder"
+	Summary      = "Move an Outlook email to another folder"
 	Website      = "https://www.flomation.co"
 	Icon         = "folder-open"
 	Date         = "03/06/2026"

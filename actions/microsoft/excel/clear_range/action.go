@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Clear Range"
 	Description  = "Clear contents or formatting from a cell range in an Excel workbook"
+	Summary      = "Empty a range of cells in Excel"
 	Website      = "https://www.flomation.co"
 	Icon         = "msexcel+trash"
 	Date         = "04/06/2026"

@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Channels"
 	Description  = "List or search Slack channels. Returns channel names, IDs, topics, and member counts"
+	Summary      = "List or search your Slack channels"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+list"
 	Date         = "20/04/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Share Post"
 	Description  = "Publish a text or link post to LinkedIn as the authenticated user"
+	Summary      = "Publish a post to LinkedIn"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+paper-plane"
 	Date         = "21/05/2026"

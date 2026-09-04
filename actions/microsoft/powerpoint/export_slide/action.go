@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Export Slide Thumbnail"
 	Description  = "Export a presentation thumbnail as a PNG image from OneDrive"
+	Summary      = "Save a slide as an image"
 	Website      = "https://www.flomation.co"
 	Icon         = "mspowerpoint+image"
 	Date         = "04/06/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Channel"
 	Description  = "Create a new channel in a Microsoft Teams team"
+	Summary      = "Create a channel in a Teams team"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+plus"
 	Date         = "04/06/2026"

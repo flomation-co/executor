@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Get Database"
 	Description  = "Retrieve a Notion database schema and metadata"
+	Summary      = "Look up how a Notion database is set up"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+database"
 	Date         = "28/04/2026"

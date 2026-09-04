@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Get Pages"
 	Description  = "List Facebook Pages managed by the authenticated user with their access tokens"
+	Summary      = "List the Facebook Pages you manage"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+list"
 	Date         = "21/05/2026"

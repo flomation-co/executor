@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Delete Block"
 	Description  = "Delete (archive) a block from a Notion page"
+	Summary      = "Remove a block of content from Notion"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+trash"
 	Date         = "28/04/2026"

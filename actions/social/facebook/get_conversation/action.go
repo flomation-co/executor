@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Get Conversation"
 	Description  = "Fetch Messenger conversation history between a Page and a user"
+	Summary      = "Read a Facebook Messenger conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+comments"
 	Date         = "24/05/2026"

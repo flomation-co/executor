@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Drive Folder"
 	Description  = "Create a new folder in Google Drive"
+	Summary      = "Create a folder in Google Drive"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledrive+plus"
 	Date         = "01/06/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Sheet Tab"
 	Description  = "Add a new sheet tab to a Google Sheets spreadsheet"
+	Summary      = "Add a tab to a Google Sheet"
 	Website      = "https://www.flomation.co"
 	Icon         = "googlesheets+plus"
 	Date         = "01/06/2026"

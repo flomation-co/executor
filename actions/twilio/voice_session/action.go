@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Voice Session"
 	Description  = "Hold a Twilio voice call open for multi-turn conversation"
+	Summary      = "Keep a call open for a back-and-forth conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "phone+headset"
 	Date         = "29/05/2026"

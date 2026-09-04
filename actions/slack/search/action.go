@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Search Messages"
 	Description  = "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date"
+	Summary      = "Search your Slack messages"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+magnifying-glass"
 	Date         = "20/04/2026"

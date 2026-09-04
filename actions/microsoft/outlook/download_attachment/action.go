@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Download Attachment"
 	Description  = "Download an attachment from an Outlook email"
+	Summary      = "Download an attachment from an Outlook email"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-arrow-down"
 	Date         = "03/06/2026"

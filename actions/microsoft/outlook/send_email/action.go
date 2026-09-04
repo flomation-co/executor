@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Email"
 	Description  = "Send an email via Outlook"
+	Summary      = "Send an email from Outlook"
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "03/06/2026"

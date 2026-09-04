@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Drive File"
 	Description  = "Delete or trash a file in Google Drive"
+	Summary      = "Delete a file from Google Drive"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledrive+trash"
 	Date         = "01/06/2026"

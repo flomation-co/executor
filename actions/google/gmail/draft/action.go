@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gmail Draft"
 	Description  = "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove."
+	Summary      = "Create, list, update or send Gmail drafts"
 	Website      = "https://www.flomation.co"
 	Icon         = "gmail+file-pen"
 	Date         = "08/04/2026"

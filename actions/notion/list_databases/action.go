@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion List Databases"
 	Description  = "List all databases shared with the integration"
+	Summary      = "List the Notion databases you have shared"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+list"
 	Date         = "28/04/2026"

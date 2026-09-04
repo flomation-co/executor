@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Document Metadata"
 	Description  = "Get metadata for a Google Docs document"
+	Summary      = "Look up the details of a Google Doc"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledocs+eye"
 	Date         = "01/06/2026"

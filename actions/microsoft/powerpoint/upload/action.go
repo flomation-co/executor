@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Upload Presentation"
 	Description  = "Upload a PowerPoint presentation to OneDrive"
+	Summary      = "Upload a PowerPoint presentation"
 	Website      = "https://www.flomation.co"
 	Icon         = "mspowerpoint+arrow-up"
 	Date         = "04/06/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Attachments"
 	Description  = "List attachments on an Outlook email message"
+	Summary      = "List the attachments on an Outlook email"
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope-circle-check"
 	Date         = "03/06/2026"

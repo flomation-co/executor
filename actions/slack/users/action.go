@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Users"
 	Description  = "List or search Slack workspace members. Returns display names, real names, email addresses, and status"
+	Summary      = "List or search people in your Slack workspace"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+user-group"
 	Date         = "20/04/2026"

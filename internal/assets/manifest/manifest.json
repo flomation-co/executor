@@ -230698,11 +230698,12 @@
     ]
   },
   "document/fill_pdf": {
-    "hash": "54cf5abe2532ca4e6b4bd404f9230b6687f57551a05cfb983e83b8245a2c5bd1",
+    "hash": "9aed0f3639425109430f43f713d992fb7ed6f2f7ac7bc86ee087f7b1b7f97a0e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fill PDF Form",
     "description": "Populate an uploaded fillable PDF's form fields and output the completed PDF",
+    "summary": "Fill in a PDF form and save the finished copy",
     "website": "https://www.flomation.co",
     "icon": "file-export",
     "date": "04/08/2026",
@@ -236539,11 +236540,12 @@
     ]
   },
   "elevenlabs/list_voices": {
-    "hash": "1406ba75e40064caea35303c2de1b8ab6f8ac0a86810e7dc7058d5b1ca3c2b55",
+    "hash": "4525756ea8769ea874c5076c4df87403a586feccf9eb8bb3c4dd4f803e4d028e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Voices",
     "description": "List all available ElevenLabs voices with their IDs, names, and characteristics",
+    "summary": "Browse the voices you can speak with",
     "website": "https://www.flomation.co",
     "icon": "microphone+list",
     "date": "18/04/2026",
@@ -236602,11 +236604,12 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "ce2ed4d9fe69e7da3452e76808813de429a7932440726f2e0f437aa646f5ed54",
+    "hash": "22a759fdffd0d427f1c5173323d96d93f14c8a95501ec8ba30d13e59df5a5625",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
     "description": "Transcribe audio to text using ElevenLabs speech recognition",
+    "summary": "Turn recorded speech into text",
     "website": "https://www.flomation.co",
     "icon": "microphone+file-lines",
     "date": "18/04/2026",
@@ -236706,11 +236709,12 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "002cc5c3067ddc03ea463c505823f1cb1a2cc9d8fce8509f44609d8a1da9286e",
+    "hash": "743daba62460165bcd3af179de4880c63c077fea185e087b63dcb69f13f793e5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
     "description": "Convert text to spoken audio using ElevenLabs AI voices",
+    "summary": "Turn text into natural-sounding speech",
     "website": "https://www.flomation.co",
     "icon": "microphone+paper-plane",
     "date": "18/04/2026",
@@ -246550,11 +246554,12 @@
     ]
   },
   "google/accounts": {
-    "hash": "9947a58d47db9691a551b4f418f00e7dfa195c7fe0b28af485280491c64e10ca",
+    "hash": "4c3e1000b4e963ce13febfddcc4c38a6f8d988cde8b86eecda41a7c4fd3e3150",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manage Google Connections",
     "description": "Manage the user's Google account connections for calendar, email read, and email send. Lists which accounts are connected and for which purposes (calendar, email read, email send), provides OAuth links to connect new permissions, and can disconnect specific accounts/purposes. Use this when the user wants to connect or manage their Google accounts.",
+    "summary": "Connect or manage your Google accounts",
     "website": "https://www.flomation.co",
     "icon": "link",
     "date": "08/04/2026",
@@ -246651,11 +246656,12 @@
     ]
   },
   "google/calendar/create": {
-    "hash": "19c03e971e091ebc10141b39a03f60f6fca642462544576d28e6b79583b49b49",
+    "hash": "2e0e93c5f32e5350c4f49cdeb1d5c173b29e8741021ca631373565f724549e4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
     "description": "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location.",
+    "summary": "Put an event in a Google Calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+plus",
     "date": "08/04/2026",
@@ -246778,11 +246784,12 @@
     ]
   },
   "google/calendar/delete": {
-    "hash": "be496522438e3e8c9435e0855c3c33541bfdee7437b3589b287c16678644c51b",
+    "hash": "8564f74f827fd4a89cb4e802d9fe198f186b151df2163a1ec7b2da0d24f546da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Delete Event",
     "description": "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event.",
+    "summary": "Remove an event from a Google Calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+trash",
     "date": "08/04/2026",
@@ -246846,11 +246853,12 @@
     ]
   },
   "google/calendar/read": {
-    "hash": "c9a14bc953fa1e8c94639fbe67f8b13173400d5325fd96d67abca3ef66221513",
+    "hash": "dc2edabb7b9494e135ee7f1d85f67d66e377461520ca683cdb784234de77208f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
     "description": "Read events, check availability, or find free slots across all connected Google calendars",
+    "summary": "Look up events, or find when someone is free",
     "website": "https://www.flomation.co",
     "icon": "calendar+eye",
     "date": "08/04/2026",
@@ -246985,11 +246993,12 @@
     ]
   },
   "google/calendar/update": {
-    "hash": "72c425e977ceb1ff1c1ae49f1f4ec670c787ad04fcd470765a8c26e3993c9076",
+    "hash": "f22c269860c9730f78d1bea67c036a6142b602e100fcb25acb5e2da4d6a890ec",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
     "description": "Update an existing Google Calendar event. Requires the event_id from a previous calendar_read. Only the fields you provide will be changed; others remain untouched.",
+    "summary": "Change an event in a Google Calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+pencil",
     "date": "08/04/2026",
@@ -247116,11 +247125,12 @@
     ]
   },
   "google/docs/append_text": {
-    "hash": "3610de6b4a95e944fa9ca0047252fd37cf7827ac77686b89e0f23954ae80ae47",
+    "hash": "a016b7083b0236184dc4469b873fe8ed574a0aa30f02f6a53161b2503301499d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Document",
     "description": "Append text to the end of a Google Docs document",
+    "summary": "Add text to the end of a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+plus",
     "date": "01/06/2026",
@@ -247192,11 +247202,12 @@
     ]
   },
   "google/docs/create": {
-    "hash": "8bcb2de646602599c9dfad2dab7e5ecce7bfb5adc73621c74f6f7c1a21757637",
+    "hash": "71cd7ba1afc8ff0918cf52b21eb3e531235e5bace1be2c7615a90c24ee832edb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
     "description": "Create a new Google Docs document",
+    "summary": "Create a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+plus",
     "date": "01/06/2026",
@@ -247281,11 +247292,12 @@
     ]
   },
   "google/docs/fill_table": {
-    "hash": "72db14007898b91d6c00ead58db878faf10209526949c0d8cf405d0fd6162d31",
+    "hash": "3aed299ef1682b9d4b7ee46508e33cf43ba165e69cc1a0e0480207ffe83f8197",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fill Document Table",
     "description": "Write values into the cells of a table in a Google Doc (by row and column)",
+    "summary": "Fill in a table in a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+pencil",
     "date": "10/08/2026",
@@ -247378,11 +247390,12 @@
     ]
   },
   "google/docs/get_metadata": {
-    "hash": "916a676ba9bac09e989d2259b1aaa1e9d6af8aaaedc0cb9c519c11b3ad1318eb",
+    "hash": "eaa2f03f99ead9c3d23cd8f466beb91151870f9f25a956c73b5d80554504d593",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
     "description": "Get metadata for a Google Docs document",
+    "summary": "Look up the details of a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+eye",
     "date": "01/06/2026",
@@ -247467,11 +247480,12 @@
     ]
   },
   "google/docs/import_doc": {
-    "hash": "28f03de60133989b3e62a5484d9665d3ad3b55ee585d5692f9f34b492e3f089e",
+    "hash": "50f12532bef98a161da3c830082b1e1ec2cd49eed0d0755b874361ccecf1ba8d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Convert to Google Doc",
     "description": "Convert a Drive file (e.g. an uploaded .docx) into a native, editable Google Doc",
+    "summary": "Turn an uploaded Word file into an editable Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+arrow-right-arrow-left",
     "date": "10/08/2026",
@@ -247570,11 +247584,12 @@
     ]
   },
   "google/docs/insert_image": {
-    "hash": "171566bb2884d6b7ab8a4b95bc125b05691e3f631a1daf216c823d4fa34db24f",
+    "hash": "023a7167051bd75ec78ae259ac5f936fc4567ff6381bddd2c32efd776c9fa739",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Insert Image in Document",
     "description": "Insert an image into a Google Docs document",
+    "summary": "Put an image into a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+image",
     "date": "01/06/2026",
@@ -247660,11 +247675,12 @@
     ]
   },
   "google/docs/read": {
-    "hash": "3b7bdb2920094bb98586ae565bc871fd51ac912e1f33af6db32e66f472f61ef0",
+    "hash": "12c6134e6011614fab2a77195edfc105d2cfbe3afee6c04b14339ce77e6717a8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
     "description": "Read the content of a Google Docs document",
+    "summary": "Read what is in a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+eye",
     "date": "01/06/2026",
@@ -247756,11 +247772,12 @@
     ]
   },
   "google/docs/replace_text": {
-    "hash": "e43219592f086cfa81f5f5479ded8e943f7b65980e18af2559acf30e7d740018",
+    "hash": "52e11fb9d9406cd37c7957aa4b98c0c5f0f4f157351a8ead484dac3c3fa5f795",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text in Document",
     "description": "Find and replace text in a Google Docs document",
+    "summary": "Find and replace text in a Google Doc",
     "website": "https://www.flomation.co",
     "icon": "googledocs+pencil",
     "date": "01/06/2026",
@@ -247854,11 +247871,12 @@
     ]
   },
   "google/drive/copy": {
-    "hash": "748b2280424678cf1047e84e3366e54b150038a8b14f32732dfe00c9d03532d0",
+    "hash": "76838f4c1e700491ba876395157c3a2a11bdd8d266a4af2dec1df2514d22059f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Drive File",
     "description": "Copy a file in Google Drive",
+    "summary": "Make a copy of a file in Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+file-export",
     "date": "01/06/2026",
@@ -247950,11 +247968,12 @@
     ]
   },
   "google/drive/create_folder": {
-    "hash": "2c7cf9994e2f91be9e37a777d7319a420876b9a1356da2592ae5ed160f1ac87e",
+    "hash": "3094483b27e504367e62a967805a461f908419c33de926008e833ab7c31d498b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Drive Folder",
     "description": "Create a new folder in Google Drive",
+    "summary": "Create a folder in Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+plus",
     "date": "01/06/2026",
@@ -248039,11 +248058,12 @@
     ]
   },
   "google/drive/delete": {
-    "hash": "15acfe26621651d62d3510e40b2a57b1df96e19c21bf766ca117db706b86d790",
+    "hash": "2b9071db61cd6b70f1f260a7d6d4fd984eb8d6afe66352c2e09dc5bf293defd3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Drive File",
     "description": "Delete or trash a file in Google Drive",
+    "summary": "Delete a file from Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+trash",
     "date": "01/06/2026",
@@ -248114,11 +248134,12 @@
     ]
   },
   "google/drive/download": {
-    "hash": "e57a39273c4321fc23d0b47b62af018a1e904dccafe2ac7a0fae1194a5ed94ca",
+    "hash": "443daf15d89b270d80c510040c506d235bead07791b086ac87b6f83b9960c283",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
     "description": "Download or export a file from Google Drive",
+    "summary": "Download a file from Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+arrow-down",
     "date": "01/06/2026",
@@ -248236,11 +248257,12 @@
     ]
   },
   "google/drive/get_file": {
-    "hash": "315f4f90ff20a9ebede5adebbde54a7525dd3b56586b966756b9d9b60ee48a72",
+    "hash": "328edd0a8990dd7ba4b48e1b849159b8ca6e6d6d69a6064ccc75ee523688c8be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Drive File",
     "description": "Get metadata for a Google Drive file",
+    "summary": "Look up the details of a Drive file",
     "website": "https://www.flomation.co",
     "icon": "googledrive+eye",
     "date": "01/06/2026",
@@ -248339,11 +248361,12 @@
     ]
   },
   "google/drive/list_files": {
-    "hash": "aa246cfe4919ef8024b721c5584e3fd081ea22f32d0dcbd6a1f447d5993110cb",
+    "hash": "fb3da3725bd0b311726c77e883d4ca50e9ada8cf3f1096790c3037cbf7f5da8a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Drive Files",
     "description": "List files and folders in Google Drive",
+    "summary": "List files and folders in Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+list",
     "date": "01/06/2026",
@@ -248441,11 +248464,12 @@
     ]
   },
   "google/drive/move": {
-    "hash": "b67d5206ebc8fcb283882c565877ba7ac328d968d92dbbfc8735329f3cb9bbf8",
+    "hash": "b095c85794f74d5015833d4eb08ce1156e1073b71cc9a557da7fe5fc3a8d91fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Drive File",
     "description": "Move a file to a different folder in Google Drive",
+    "summary": "Move a file into another Drive folder",
     "website": "https://www.flomation.co",
     "icon": "googledrive+arrow-right",
     "date": "01/06/2026",
@@ -248524,11 +248548,12 @@
     ]
   },
   "google/drive/search": {
-    "hash": "d2db3b65c1e4028766ac5b7c5ff07cd7be6c5a4e84d8304465bed787cec8c552",
+    "hash": "31109032ffe72ed144516f6b757f6a4a44d91fd43674fda9360bb95cd5e4c6fc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Drive",
     "description": "Search for files in Google Drive",
+    "summary": "Search for files in Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+magnifying-glass",
     "date": "01/06/2026",
@@ -248677,11 +248702,12 @@
     ]
   },
   "google/drive/share": {
-    "hash": "c9da020f768a2cdcee55214eaf7799a45b0eea61135a08ce4e2780d7f4a40994",
+    "hash": "e11b4d2a2628c5a729bbf2afb2994320eb223a21b5fe8d987f9b85c9e42f98ee",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Share Drive File",
     "description": "Share a Google Drive file with a user or make it public",
+    "summary": "Share a Drive file with someone",
     "website": "https://www.flomation.co",
     "icon": "googledrive+share-from-square",
     "date": "01/06/2026",
@@ -248809,11 +248835,12 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "83854983215a5849d76e3714ecaa129aa3a5db8ac96dd63c22dcf8147c06afa2",
+    "hash": "ac865aa31866171ddb8372ad7b6af3ea686fe724962b26bee4051f5c4dbfc760",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
     "description": "Upload a file to Google Drive",
+    "summary": "Upload a file to Google Drive",
     "website": "https://www.flomation.co",
     "icon": "googledrive+arrow-up",
     "date": "01/06/2026",
@@ -248925,11 +248952,12 @@
     ]
   },
   "google/gmail/draft": {
-    "hash": "fcf81e6020317cd623475ff21160d373b7fd306a02c0f506e74e11d4c28312ea",
+    "hash": "7ebb260ccc72b0485c6a6701bba305e70bd0f23fcfbfb1d2041ef23177218bc1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Draft",
     "description": "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove.",
+    "summary": "Create, list, update or send Gmail drafts",
     "website": "https://www.flomation.co",
     "icon": "gmail+file-pen",
     "date": "08/04/2026",
@@ -249053,11 +249081,12 @@
     ]
   },
   "google/gmail/read": {
-    "hash": "58f7d2643696c09b170fea07f826a504effb7cc178adc1df4a5446bf07ccbfd0",
+    "hash": "5017e6476630fdfbb1b817d601619d1a0929c71fdc52167c92c2443eb9c880df",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Read",
     "description": "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message.",
+    "summary": "Search and read emails in Gmail",
     "website": "https://www.flomation.co",
     "icon": "gmail+eye",
     "date": "08/04/2026",
@@ -249148,11 +249177,12 @@
     ]
   },
   "google/gmail/reply": {
-    "hash": "28f1f3bc247a747060fd7718b81c4d61943449215cca15a8f278130e55cf1303",
+    "hash": "b5894556c918702abd4b54efbc90f9e24bf0070d281e2851610cac3823735017",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Reply",
     "description": "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation.",
+    "summary": "Reply to a Gmail email",
     "website": "https://www.flomation.co",
     "icon": "gmail+reply",
     "date": "08/04/2026",
@@ -249245,11 +249275,12 @@
     ]
   },
   "google/gmail/send": {
-    "hash": "2326bc3aea72d3f41df96d33586e5e9a63c6620cd698c9d81320dd5b74dbcf36",
+    "hash": "6efe9b9089334b7a81238a2b8dee38b63d69d39a6943daf367347a39543e076a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Send",
     "description": "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf.",
+    "summary": "Send an email from Gmail",
     "website": "https://www.flomation.co",
     "icon": "gmail+paper-plane",
     "date": "08/04/2026",
@@ -249364,11 +249395,12 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "950bf19861da1e34a75fabfb7f75aac61d72d938c561b04ac2374dcf3054abf5",
+    "hash": "99173ff0e5bd0783f306b83bc8d6a40881225ee6294398a78a3c03d88590f5ef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
     "description": "Append rows to a Google Sheet",
+    "summary": "Add rows to the bottom of a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+plus",
     "date": "01/06/2026",
@@ -249479,11 +249511,12 @@
     ]
   },
   "google/sheets/clear": {
-    "hash": "68246629e8ab489223e34c68483c9b4860b23055cb10cb64a6d58ca3de632787",
+    "hash": "40d37b0ba483ce1080e6f0c3830bdc09836dedf86a6b571f4db5b41822836b7a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Sheet Range",
     "description": "Clear a range of cells in a Google Sheet",
+    "summary": "Empty a range of cells in a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+trash",
     "date": "01/06/2026",
@@ -249562,11 +249595,12 @@
     ]
   },
   "google/sheets/create": {
-    "hash": "b07f6f33212020813a6d51c7847f799b0ec7a8e8bde0a06e41c355ea61c2cc73",
+    "hash": "0ee52d00eea844114547dc2afd6466d5ce822380c7d5d11ad9d05ee05e2ffd60",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Spreadsheet",
     "description": "Create a new Google Sheets spreadsheet",
+    "summary": "Create a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+plus",
     "date": "01/06/2026",
@@ -249651,11 +249685,12 @@
     ]
   },
   "google/sheets/create_sheet": {
-    "hash": "8ed460624bbe0b53ef805d7663fc950cc6bfe308d5e98ad5dbb20ea2dd9d27f3",
+    "hash": "72366a605518ab491c79ad032a54e991c0febc19aa12a87a97b5616193d5bd31",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Sheet Tab",
     "description": "Add a new sheet tab to a Google Sheets spreadsheet",
+    "summary": "Add a tab to a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+plus",
     "date": "01/06/2026",
@@ -249734,11 +249769,12 @@
     ]
   },
   "google/sheets/delete_sheet": {
-    "hash": "4306ee5166a9766b666bc9e49d00a58ec8351ec86fdc0b34c0b453c2337cedf6",
+    "hash": "19179e6270a4d36a4bb9ee9aed22e57beb7e2f742c622fa64b9ef411976cab6e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Sheet Tab",
     "description": "Delete a sheet tab from a Google Sheets spreadsheet",
+    "summary": "Remove a tab from a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+trash",
     "date": "01/06/2026",
@@ -249810,11 +249846,12 @@
     ]
   },
   "google/sheets/get_metadata": {
-    "hash": "b2f21300af80a67ce41751591d458bd00ac9705d1a03811ff444bbc131badb73",
+    "hash": "bcef04c09bfdb5be9bd458d0ac733083fd81044fe39063cd2f6f67852dfc200b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Sheet Metadata",
     "description": "Get metadata for a Google Sheets spreadsheet",
+    "summary": "Look up the details of a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+eye",
     "date": "01/06/2026",
@@ -249906,11 +249943,12 @@
     ]
   },
   "google/sheets/read": {
-    "hash": "6bfcf8e479fd379fef01b2c2ceeac893294f468685c266a25d13127ac91f6163",
+    "hash": "9741a96976cc56b69b7d912ba38551146786ad3fecefa02e3459b615b80643d1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Sheet",
     "description": "Read a range of cells from a Google Sheet",
+    "summary": "Read cells from a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+eye",
     "date": "01/06/2026",
@@ -250024,11 +250062,12 @@
     ]
   },
   "google/sheets/write": {
-    "hash": "a8e7ae9e46fde40f87e2b536ba747e59a4bdb5586512dc3c95531264e3e4ceaf",
+    "hash": "d18b0428bd30f734a40f326430f44f58a76827827704ef601914fe04163037eb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write to Sheet",
     "description": "Write data to a range in a Google Sheet",
+    "summary": "Write values into a Google Sheet",
     "website": "https://www.flomation.co",
     "icon": "googlesheets+pencil",
     "date": "01/06/2026",
@@ -250146,11 +250185,12 @@
     ]
   },
   "google/slides/add_image": {
-    "hash": "fef33f66cf2cde00d4f7605f5d0bd344e4c313ec83284cd56bfcb42e1c5d00b3",
+    "hash": "89729b3749c6b0eb10ed613fec431ee45785d20e5084927515f4caa97a472601",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Image to Slide",
     "description": "Add an image to a Google Slides slide",
+    "summary": "Put an image on a slide",
     "website": "https://www.flomation.co",
     "icon": "googleslides+image",
     "date": "01/06/2026",
@@ -250265,11 +250305,12 @@
     ]
   },
   "google/slides/add_slide": {
-    "hash": "8e3c2517b42188a3e3a35d1bdd2941969de998e9fac3796d6fb48747bfa8d6cf",
+    "hash": "6f1b1aeb3adbc7997b22a2d98258be86b0dd2a54556fc9af33cfdfb685747cd9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Slide",
     "description": "Add a new slide to a Google Slides presentation",
+    "summary": "Add a slide to a presentation",
     "website": "https://www.flomation.co",
     "icon": "googleslides+plus",
     "date": "01/06/2026",
@@ -250380,11 +250421,12 @@
     ]
   },
   "google/slides/add_text": {
-    "hash": "9c1f622b0f32e10b210f28327210011e90e7a4919fa089f8d2781d938690110e",
+    "hash": "96e7c10b3e9301858876e89e3e3e36530371a70b0a17ea5eab476d2c0e63d19d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Text to Slide",
     "description": "Insert text into a slide shape",
+    "summary": "Put text on a slide",
     "website": "https://www.flomation.co",
     "icon": "googleslides+pencil",
     "date": "01/06/2026",
@@ -250464,11 +250506,12 @@
     ]
   },
   "google/slides/create": {
-    "hash": "f4fcff23d685b42bc8f089cd4a18458fc87454a8651ea02409e9b112e5521f35",
+    "hash": "406cb8fecd4ab9ec1735387f2861baa5115c24f73ed252e2f9f5b2d46d046e59",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
     "description": "Create a new Google Slides presentation",
+    "summary": "Create a Google Slides presentation",
     "website": "https://www.flomation.co",
     "icon": "googleslides+plus",
     "date": "01/06/2026",
@@ -250546,11 +250589,12 @@
     ]
   },
   "google/slides/get": {
-    "hash": "14ed1fc5e699f21dd15bf491ee7c4c3e21cd83ab899ff4ab4d11f24fe3f38231",
+    "hash": "401508fb698507727427eb966835232c4020553caee604005ea12c2a70dfdc7c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
     "description": "Get metadata and slides for a Google Slides presentation",
+    "summary": "Look up a presentation and its slides",
     "website": "https://www.flomation.co",
     "icon": "googleslides+eye",
     "date": "01/06/2026",
@@ -250642,11 +250686,12 @@
     ]
   },
   "google/slides/get_slide": {
-    "hash": "8c6673b58d837acd23115b86a52f59e094d1883a1f75047c3a93db120afde2d6",
+    "hash": "f7f9c8c85b4cf83e746910e2a11cc201973dbad588ee217eee7c189f3638c7c9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Slide",
     "description": "Get the content and elements of a specific slide",
+    "summary": "Read what is on a single slide",
     "website": "https://www.flomation.co",
     "icon": "googleslides+eye",
     "date": "01/06/2026",
@@ -322549,11 +322594,12 @@
     ]
   },
   "messaging/discord/webhook": {
-    "hash": "3ec3a2edc15da5d2d15c4385695720cf9351b0d3cc85ffb71bea0608ba3339ee",
+    "hash": "a3191357f29b2cac1cbed87b6380066a27cb8cea733e58eda3ca205bbad3fbf9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Discord Webhook",
     "description": "Send a message to a Discord channel via webhook",
+    "summary": "Post a message to a Discord channel",
     "website": "https://www.flomation.co",
     "icon": "comment-dots",
     "date": "23/03/2026",
@@ -322625,11 +322671,12 @@
     ]
   },
   "messaging/email/send": {
-    "hash": "f5838101995bc24b7ca1caec4ad9b235b799b6f78930e80bc5a1888e292d763c",
+    "hash": "0ed65df81c4e117109bca3f928c255868c1f9611f34da9974b5e3832b6e33528",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Email",
     "description": "Send an email via SMTP with optional HTML body",
+    "summary": "Send an email from your own mail server",
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "03/04/2026",
@@ -322757,11 +322804,12 @@
     ]
   },
   "messaging/telegram/send_audio": {
-    "hash": "eef8920154970d7aa2dac25620ad622fb5e4150865490f21073d7a4ff8d56f28",
+    "hash": "1a2b932891325b639b6cf5ac0514209c33f1f2c4172711767846b8e78756742c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Audio",
     "description": "Send a music/audio file (MP3, M4A, WAV) via Telegram. Use send_voice for spoken-word voice notes. NEVER use for video files (incl. Gemini/Veo output) — use send_video instead so the visual track is preserved.",
+    "summary": "Send a music or audio file on Telegram",
     "website": "https://www.flomation.co",
     "icon": "telegram+microphone",
     "date": "21/06/2026",
@@ -322875,11 +322923,12 @@
     ]
   },
   "messaging/telegram/send_document": {
-    "hash": "b0181f2fad14a6b61d79ca450d04e1c2d67589aa29a980b062f49697e55b95bf",
+    "hash": "bd8aa7d74ba5dae010ee19e654e87544182f2dbd9c24350f7767106f1af4c278",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Document",
     "description": "Send a file via Telegram. Accepts a flo:blob token or base64.",
+    "summary": "Send a file on Telegram",
     "website": "https://www.flomation.co",
     "icon": "telegram+file",
     "date": "21/06/2026",
@@ -322979,11 +323028,12 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "9f2fb5e8219e42b345096c48218dcc743418e09eef4146bed4fd70e99647b4a7",
+    "hash": "678f49b5cd9e771a3273f33818fd4ac444d2e17d36c7b20c8f21e86c38169a9b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
     "description": "Send a message via the Telegram Bot API",
+    "summary": "Send a Telegram message",
     "website": "https://www.flomation.co",
     "icon": "paper-plane",
     "date": "03/04/2026",
@@ -323084,11 +323134,12 @@
     ]
   },
   "messaging/telegram/send_photo": {
-    "hash": "b2c957eb61d2ffcf38e93d5374d5e47f8d132661c13a075d519a14145fd2a551",
+    "hash": "eb185e8178cb5d7a79090d1f6ddfdcf310df81f7529456dedd01970782c94302",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Photo",
     "description": "Send a photo via Telegram. Accepts a flo:blob image token or base64.",
+    "summary": "Send a photo on Telegram",
     "website": "https://www.flomation.co",
     "icon": "telegram+image",
     "date": "21/06/2026",
@@ -323181,11 +323232,12 @@
     ]
   },
   "messaging/telegram/send_video": {
-    "hash": "6464b82bd575e5348ccadd9a070ede91aa79b05b901bf78c83b6d0906f6227e7",
+    "hash": "06c215bb2e1b5aed54467a226c85cf5398ec15c9267b0e73d2d44b4bb88b5aa1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Video",
     "description": "Send a video (MP4, with or without audio track) via Telegram. THE CORRECT CHOICE for output from Gemini Video / Veo and any other video file. Accepts a flo:blob token or base64. Do NOT use send_voice or send_audio for video files — those strip the visual track.",
+    "summary": "Send a video on Telegram",
     "website": "https://www.flomation.co",
     "icon": "telegram+video",
     "date": "21/06/2026",
@@ -323299,11 +323351,12 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "bf1628ae02931f137f7e0beeccdcda5d08869ffae7dfbe65b9252fa4763d2c1e",
+    "hash": "4c3ef2f1ac00685ed72b20af47167ca0d91f151b11aa69cd638a2b623766fcca",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
     "description": "Send a SHORT AUDIO-ONLY voice note via Telegram (OGG/OPUS, like a WhatsApp voice message). NEVER use for video files — Telegram strips the video track and only the audio will play. For video files (incl. Gemini/Veo video output) use send_video. For music files use send_audio.",
+    "summary": "Send a short voice note on Telegram",
     "website": "https://www.flomation.co",
     "icon": "telegram+microphone",
     "date": "18/04/2026",
@@ -323390,11 +323443,12 @@
     ]
   },
   "microsoft/calendar/create_event": {
-    "hash": "1e1062d4781f5e5f0dec4f0410e38b90403cdebc78cef52dabc534dd05368190",
+    "hash": "011516c60f031de59673bafea7ee7b6f022e84e903ef11f5a658f12a88a80fd2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Event",
     "description": "Create a new calendar event in Microsoft Outlook",
+    "summary": "Put an event in an Outlook calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+plus",
     "date": "04/06/2026",
@@ -323509,11 +323563,12 @@
     ]
   },
   "microsoft/calendar/delete_event": {
-    "hash": "e27e916740c7e3295878a3cc96c10555bcb0bd175bad2c3f2c65f07b2f03ca43",
+    "hash": "4c01d16e5a0decca10e25791ab1ae49f40c59c4efce8de6c57f8afeea90ab581",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Event",
     "description": "Delete a calendar event from Microsoft Outlook",
+    "summary": "Remove an event from an Outlook calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+trash",
     "date": "04/06/2026",
@@ -323577,11 +323632,12 @@
     ]
   },
   "microsoft/calendar/get_event": {
-    "hash": "9af1a2eaa52539455d3fde9d3dec07948212a89d7e576351eaa5969aacad2ec8",
+    "hash": "db07ca4272b9ae3847d4c6e4e23f82ebeef062a46014ca67b95dc24686b6a33b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Event",
     "description": "Retrieve details of a specific calendar event",
+    "summary": "Look up a single Outlook calendar event",
     "website": "https://www.flomation.co",
     "icon": "calendar+eye",
     "date": "04/06/2026",
@@ -323708,11 +323764,12 @@
     ]
   },
   "microsoft/calendar/list_events": {
-    "hash": "5545ac9acf0f75bc56b7d1d8aeba5c14e62de8fe59304b632c6c5b2ae8ef171c",
+    "hash": "ea9e5587dc6063c34038cdb618dd1c3cd88b2263eeb1de2a1cb4c6a06de5e29a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Events",
     "description": "List calendar events from a Microsoft Outlook calendar",
+    "summary": "List events from an Outlook calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+list",
     "date": "04/06/2026",
@@ -323803,11 +323860,12 @@
     ]
   },
   "microsoft/calendar/update_event": {
-    "hash": "dce0f10d071e271299100d1450ae16807be22ba1cf877c15e0afb00609a519fd",
+    "hash": "c1a61c66102db93a1f5615656ff7b65cb168b582694736a8ffe11d345530341b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Event",
     "description": "Update an existing calendar event in Microsoft Outlook",
+    "summary": "Change an event in an Outlook calendar",
     "website": "https://www.flomation.co",
     "icon": "calendar+pencil",
     "date": "04/06/2026",
@@ -323913,11 +323971,12 @@
     ]
   },
   "microsoft/excel/append_rows": {
-    "hash": "853402f4a8a47110ad0c9fbcaaefd60055c92ff8ae5c97626a1b02b7acd05933",
+    "hash": "44728407cb2996cfea7015a663289e9d63a3cbd86b2893847e937d63034ef0f7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append Rows",
     "description": "Append rows to a table in a Microsoft Excel Online workbook",
+    "summary": "Add rows to a table in Excel",
     "website": "https://www.flomation.co",
     "icon": "msexcel+plus",
     "date": "04/06/2026",
@@ -324004,11 +324063,12 @@
     ]
   },
   "microsoft/excel/clear_range": {
-    "hash": "54227b42bdfddc8195b55dc6a71368f527688f9c559b42ca0a6705e2b40899d8",
+    "hash": "b8f8ddfa06dc5fb8fc875063228593fed62b7158593e59ad6ed5196e71959ca6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Range",
     "description": "Clear contents or formatting from a cell range in an Excel workbook",
+    "summary": "Empty a range of cells in Excel",
     "website": "https://www.flomation.co",
     "icon": "msexcel+trash",
     "date": "04/06/2026",
@@ -324109,11 +324169,12 @@
     ]
   },
   "microsoft/excel/create_workbook": {
-    "hash": "dcf4361f4e7091f2ac4a1f07a4c97d4ba659f6fe1504e4bcc41898bc9b5a756e",
+    "hash": "ae3e6b7758f07a47c5c46cbcba55138dd2f2895c4087fde8e810ef5734db2411",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Workbook",
     "description": "Create a new Excel workbook in OneDrive",
+    "summary": "Create an Excel workbook",
     "website": "https://www.flomation.co",
     "icon": "msexcel+plus",
     "date": "04/06/2026",
@@ -324198,11 +324259,12 @@
     ]
   },
   "microsoft/excel/get_metadata": {
-    "hash": "8c4c961c9be2498d976e155678b4d20ee57a48e35bc8c37cfa39509114fca49d",
+    "hash": "92b3cad7e6b86f98255f3ff08517aa155ea8424ae2353a3f48bdd9e777bc42da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Workbook Metadata",
     "description": "Retrieve metadata for a Microsoft Excel Online workbook",
+    "summary": "Look up the details of an Excel workbook",
     "website": "https://www.flomation.co",
     "icon": "msexcel+eye",
     "date": "04/06/2026",
@@ -324273,11 +324335,12 @@
     ]
   },
   "microsoft/excel/list_worksheets": {
-    "hash": "b5958cbdfbea1f680bc25c65d46373e8023820269c75ea944d533bc3224d7dae",
+    "hash": "87aa5773ba845e23d322cdf09ee1064ae2b1660ffdc618a31f2ad73454f6ba46",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Worksheets",
     "description": "List all worksheets in a Microsoft Excel Online workbook",
+    "summary": "List the sheets in an Excel workbook",
     "website": "https://www.flomation.co",
     "icon": "msexcel+list",
     "date": "04/06/2026",
@@ -324355,11 +324418,12 @@
     ]
   },
   "microsoft/excel/read_range": {
-    "hash": "95f612a609dca43ce34635eada36444f0c293b9f21ff98776412729fdb520689",
+    "hash": "1b687475811c9fea90010fa873d5fb06902bfa36fa5d293dac86d66463efae91",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Range",
     "description": "Read a cell range from a Microsoft Excel Online workbook",
+    "summary": "Read cells from an Excel workbook",
     "website": "https://www.flomation.co",
     "icon": "msexcel+eye",
     "date": "04/06/2026",
@@ -324467,11 +324531,12 @@
     ]
   },
   "microsoft/excel/write_range": {
-    "hash": "96135c316b979cb5dc498140813d6cbca29fbf979ceb802033f7378e4d891af0",
+    "hash": "8c13dfdcb126da480bdebb57c782fb6c2e0f2f8ce681ed259d6f5c2f8c56ea18",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write Range",
     "description": "Write values to a cell range in a Microsoft Excel Online workbook",
+    "summary": "Write values into an Excel workbook",
     "website": "https://www.flomation.co",
     "icon": "msexcel+pencil",
     "date": "04/06/2026",
@@ -324559,11 +324624,12 @@
     ]
   },
   "microsoft/onedrive/copy_file": {
-    "hash": "546425e740c411f9ffbef598f4636e5207604ba92ff57f9f63a64ac951d65b10",
+    "hash": "869299cb32fa0d82c0d353b38cb8abb055ad1cad5dc0f36611190b872a78322b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Item",
     "description": "Copy a file or folder to a different OneDrive location",
+    "summary": "Make a copy of a file in OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+file-export",
     "date": "04/06/2026",
@@ -324642,11 +324708,12 @@
     ]
   },
   "microsoft/onedrive/create_folder": {
-    "hash": "cf36f4df7c49db17be70b803b59895205bedd15a6df1ff7a639421be6322aa69",
+    "hash": "7427003a8a9a934eb9e3a26a3ddf4dc09aba84f39a5eff756b8e9cc7fde390e4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Folder",
     "description": "Create a new folder in OneDrive",
+    "summary": "Create a folder in OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+plus",
     "date": "04/06/2026",
@@ -324731,11 +324798,12 @@
     ]
   },
   "microsoft/onedrive/delete_file": {
-    "hash": "18d00501359259344d1a03941ff42df139dff1abd1fef6cad7b66e9ed6b23377",
+    "hash": "1332960b2f6fff2094830bcc958332571351bab3a709d0dfbcbf03bd1e0b2727",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete File",
     "description": "Delete a file or folder from OneDrive",
+    "summary": "Delete a file from OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+trash",
     "date": "04/06/2026",
@@ -324799,11 +324867,12 @@
     ]
   },
   "microsoft/onedrive/download": {
-    "hash": "d08338efbd3c3378e79a94bf4bef99fbedebc8727e65511a5664f2776e754f0d",
+    "hash": "bf4bac9919c0d40439c3bcbafb283472df6e06167b778e83803d95c6b77a453f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download File",
     "description": "Download a file from OneDrive by item ID",
+    "summary": "Download a file from OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+arrow-down",
     "date": "04/06/2026",
@@ -324895,11 +324964,12 @@
     ]
   },
   "microsoft/onedrive/get_file": {
-    "hash": "9f70b1b144fe07d24aec5be1387142e281ed77b29567f671c2b58501f3a38374",
+    "hash": "92b3a972cbc4fea3b09a229bcd5ab01dc2cada2bc0085581558a156f55e902f6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get File Info",
     "description": "Retrieve metadata for a file or folder in OneDrive",
+    "summary": "Look up the details of a OneDrive file",
     "website": "https://www.flomation.co",
     "icon": "onedrive+eye",
     "date": "04/06/2026",
@@ -325012,11 +325082,12 @@
     ]
   },
   "microsoft/onedrive/list_files": {
-    "hash": "cfcc68179fae5f4e3987fe889a030d8f22bc517d08a8c4f4310caf685e880ee9",
+    "hash": "6e89fab025e0ced94e26cdbe30bff65b69671edcfdba9df728e9014f94279b80",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Files",
     "description": "List files and folders in a OneDrive directory",
+    "summary": "List files and folders in OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+list",
     "date": "04/06/2026",
@@ -325100,11 +325171,12 @@
     ]
   },
   "microsoft/onedrive/move": {
-    "hash": "ee313fc786bb5d491e27391360bd62a0cd529b5a006490803a6faf78eebc79f8",
+    "hash": "9bcef505037cce3884d69a8d48e19636f5902c56026147e329274f82dbedb559",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Item",
     "description": "Move a file or folder to a different OneDrive location",
+    "summary": "Move a file into another OneDrive folder",
     "website": "https://www.flomation.co",
     "icon": "onedrive+arrow-right",
     "date": "04/06/2026",
@@ -325183,11 +325255,12 @@
     ]
   },
   "microsoft/onedrive/search": {
-    "hash": "f4ca162e2f2f51e93464a0e7e082673c719516dd6fe6b252a34e0d3861f89ab0",
+    "hash": "f604b06e4dec7175920292b695514f8d2edfb8ca725d0bf5cbb4392016fa2af6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Files",
     "description": "Search for files and folders in OneDrive",
+    "summary": "Search for files in OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+magnifying-glass",
     "date": "04/06/2026",
@@ -325272,11 +325345,12 @@
     ]
   },
   "microsoft/onedrive/share": {
-    "hash": "7afd96f2c8ca88bea78cb6c200e8f259c96fa58368a72ae9428f68a10da14a1a",
+    "hash": "fff69a7b647d0dc622a9ab9f66ce608fe7024e23e8efb274e7332df94791cb09",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Sharing Link",
     "description": "Create a sharing link for a OneDrive file or folder",
+    "summary": "Create a link to share a OneDrive file",
     "website": "https://www.flomation.co",
     "icon": "onedrive+share-from-square",
     "date": "04/06/2026",
@@ -325392,11 +325466,12 @@
     ]
   },
   "microsoft/onedrive/upload": {
-    "hash": "3cc9f3fba6bdf2219c4bf02debb16d8dfc4bd28df3ebeeb489186550a6587cdc",
+    "hash": "91959b2c455b94b0f2b601990b274764edc4bea0dea4a7056ccd952849d80eb8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload File",
     "description": "Upload a file to OneDrive (simple upload, under 4 MB)",
+    "summary": "Upload a file to OneDrive",
     "website": "https://www.flomation.co",
     "icon": "onedrive+arrow-up",
     "date": "04/06/2026",
@@ -325496,11 +325571,12 @@
     ]
   },
   "microsoft/outlook/create_draft": {
-    "hash": "9356f6cfdd8294d1768c804851b0ad311078dda422e35c9b922518de7e5fbc1c",
+    "hash": "4aea3fc78db77f1c2b8cf569e6add5b53a716c44568e1b7f7e1bd856223019ca",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Draft",
     "description": "Create a draft email in Outlook",
+    "summary": "Create a draft email in Outlook",
     "website": "https://www.flomation.co",
     "icon": "file-pen",
     "date": "03/06/2026",
@@ -325611,11 +325687,12 @@
     ]
   },
   "microsoft/outlook/delete_email": {
-    "hash": "5f7ec881c7ee6f6c29ea0f8c8aeabcce6098ee8fc3314fbaf364728415863c20",
+    "hash": "7b2f3b17009ab3e17aeacdb418de5ff9ac22f0e03037e6f95fd5852106cf4e05",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Email",
     "description": "Delete an Outlook email message",
+    "summary": "Delete an Outlook email",
     "website": "https://www.flomation.co",
     "icon": "trash",
     "date": "03/06/2026",
@@ -325679,11 +325756,12 @@
     ]
   },
   "microsoft/outlook/download_attachment": {
-    "hash": "0828b8e336c995b5706529e176bc27afb70f2e4e676bcfda77988784857eec7a",
+    "hash": "a8cee287f5e0241aadea7ccd606d9befc3e8b70561bc6a235d8d557f60a7fc07",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Attachment",
     "description": "Download an attachment from an Outlook email",
+    "summary": "Download an attachment from an Outlook email",
     "website": "https://www.flomation.co",
     "icon": "file-arrow-down",
     "date": "03/06/2026",
@@ -325783,11 +325861,12 @@
     ]
   },
   "microsoft/outlook/forward": {
-    "hash": "b81b402e7fe5e89cf0694d06db680f50d74ee077886276b20f45fcdc8487d355",
+    "hash": "3e8155fd0194dc6e17986a37d5469512db685290a5cb9fefd03eb7bf33798107",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Forward Email",
     "description": "Forward an Outlook email to other recipients",
+    "summary": "Forward an Outlook email to someone else",
     "website": "https://www.flomation.co",
     "icon": "share-from-square",
     "date": "03/06/2026",
@@ -325866,11 +325945,12 @@
     ]
   },
   "microsoft/outlook/list_attachments": {
-    "hash": "b0ec875eb0ecf8e0a98bdb36b7b3b848ad5318ca579e25c0f1f8dd16b61fbbc9",
+    "hash": "6b0fe4865529579810f2d4a9a3251f02675cb5135c4ae91a815ce74f5e6fe2e0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Attachments",
     "description": "List attachments on an Outlook email message",
+    "summary": "List the attachments on an Outlook email",
     "website": "https://www.flomation.co",
     "icon": "envelope-circle-check",
     "date": "03/06/2026",
@@ -325948,11 +326028,12 @@
     ]
   },
   "microsoft/outlook/list_emails": {
-    "hash": "e8469c2973c32e1f3058038bf204a077b6de6b3fd7856bfce9e5bee96e5bac45",
+    "hash": "737b12c9159dcd3a21f6c763589d69a1f3c8b314455844d976e43c5f97046558",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Emails",
     "description": "List emails from an Outlook mailbox or folder",
+    "summary": "List emails from an Outlook mailbox or folder",
     "website": "https://www.flomation.co",
     "icon": "envelopes-bulk",
     "date": "03/06/2026",
@@ -326036,11 +326117,12 @@
     ]
   },
   "microsoft/outlook/list_folders": {
-    "hash": "ebe420dc689a5e838e83b63f3eddf8a1fc7a4913594378c9c8ea15ea8aae5e27",
+    "hash": "8d732bd5cdeee7468fe9198c729374fbfcd11794cc81be17fa505358801a4596",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Folders",
     "description": "List mail folders in an Outlook mailbox",
+    "summary": "List the folders in an Outlook mailbox",
     "website": "https://www.flomation.co",
     "icon": "folder-tree",
     "date": "03/06/2026",
@@ -326117,11 +326199,12 @@
     ]
   },
   "microsoft/outlook/move_email": {
-    "hash": "b262b5844edfe133c6d38708a7b59cf90dc47bb6d08928c87fd05af35acfcb0d",
+    "hash": "ee742c292c6a912166c3bb896844041e6745f0f3831a5ad982480eb80f6d2781",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Email",
     "description": "Move an Outlook email to a different folder",
+    "summary": "Move an Outlook email to another folder",
     "website": "https://www.flomation.co",
     "icon": "folder-open",
     "date": "03/06/2026",
@@ -326193,11 +326276,12 @@
     ]
   },
   "microsoft/outlook/read_email": {
-    "hash": "4b35c8f39854a9e9e7ba6751da4c281ad8043e5edec18a74a86f00593e06766d",
+    "hash": "ce3f6459372910b7edd02f06b2971e47d02b60b16e21b5b804debb0904d2bc4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Email",
     "description": "Read the full content of an Outlook email message",
+    "summary": "Read a full Outlook email",
     "website": "https://www.flomation.co",
     "icon": "envelope-open-text",
     "date": "03/06/2026",
@@ -326303,11 +326387,12 @@
     ]
   },
   "microsoft/outlook/reply": {
-    "hash": "5e0bc5ee60add6195889f9203608b9be1dc2c444fa648dd8eccb5f1c47495d18",
+    "hash": "f08d8575f2d6d9f08e8933ea8558574331d9841e6757ac9a6980683e6a73d999",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Email",
     "description": "Reply to an Outlook email message",
+    "summary": "Reply to an Outlook email",
     "website": "https://www.flomation.co",
     "icon": "reply-all",
     "date": "03/06/2026",
@@ -326379,11 +326464,12 @@
     ]
   },
   "microsoft/outlook/search_emails": {
-    "hash": "cd36c864fea0ecc2d9e5652cf75d826e4f194dccfd6d20122bdad6bdb1cddcfe",
+    "hash": "ae77570bf3fe7de14c988e59b993f74d1ae98a3e6dc993ee0bef2ed762754290",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Emails",
     "description": "Search for emails in an Outlook mailbox",
+    "summary": "Search for emails in Outlook",
     "website": "https://www.flomation.co",
     "icon": "magnifying-glass",
     "date": "03/06/2026",
@@ -326468,11 +326554,12 @@
     ]
   },
   "microsoft/outlook/send_email": {
-    "hash": "bc820a0c2eee0bb15630aa5c5df8ce080f785f12d325d9707d43e6a48ed8a17c",
+    "hash": "ebab837ab28ec4a35143f091d7efc5ae52d3b31d5be602c54a2b7259bd41b235",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Email",
     "description": "Send an email via Outlook",
+    "summary": "Send an email from Outlook",
     "website": "https://www.flomation.co",
     "icon": "paper-plane",
     "date": "03/06/2026",
@@ -326576,11 +326663,12 @@
     ]
   },
   "microsoft/powerpoint/create": {
-    "hash": "6d41a3eb09c0cd5bcfaebd37d66c87bcf40008c3fac7e036b55e84b99b05f734",
+    "hash": "ab9059a2c9e22e93cea79f15f3485c53b3df5cff57777a6bcdf905ff9d241ba5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
     "description": "Create a new empty PowerPoint presentation in OneDrive",
+    "summary": "Create a PowerPoint presentation",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+plus",
     "date": "04/06/2026",
@@ -326665,11 +326753,12 @@
     ]
   },
   "microsoft/powerpoint/download": {
-    "hash": "e0a8dd75fc0e1bcdbff73071698986119bb3d7f025e185132f087a457de4be61",
+    "hash": "6838198299a3b2e7e9a54f8e5e176b92031c1ca8bd2168fdf140423b7afe6b8c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Presentation",
     "description": "Download a PowerPoint presentation as PPTX or PDF from OneDrive",
+    "summary": "Download a presentation as PowerPoint or PDF",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+arrow-down",
     "date": "04/06/2026",
@@ -326778,11 +326867,12 @@
     ]
   },
   "microsoft/powerpoint/export_slide": {
-    "hash": "ba68f047161cb1eaaeb1fec587b2b889f0a3ac9f5808e5310945436f994fe2fe",
+    "hash": "fb54240241f9de367d1df67cefc77c3137d16317f25d359e688839b03ddc8601",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Export Slide Thumbnail",
     "description": "Export a presentation thumbnail as a PNG image from OneDrive",
+    "summary": "Save a slide as an image",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+image",
     "date": "04/06/2026",
@@ -326881,11 +326971,12 @@
     ]
   },
   "microsoft/powerpoint/get": {
-    "hash": "cfc1fefbbd436c4677eca605a30b150e6d3dc54fe0ccc5441724cab2e5d865a1",
+    "hash": "eca582cccf153dfe6bb2cafdeb50a29b5535cc48be7e5bcc08b49d44853b9a1e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
     "description": "Retrieve metadata for a PowerPoint presentation in OneDrive",
+    "summary": "Look up the details of a presentation",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+eye",
     "date": "04/06/2026",
@@ -326984,11 +327075,12 @@
     ]
   },
   "microsoft/powerpoint/list_slides": {
-    "hash": "ee4b3ebf34d9831e78c2b2346e776c6ab3574eb4f42c21d16ac2f0c560ad93ea",
+    "hash": "4e0ef94455f35bd83ef36f569018714917b05f04ddffb6f0b62c3f74daeeacc5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Preview Presentation",
     "description": "Get a preview URL and metadata for a PowerPoint presentation",
+    "summary": "Get a preview link for a presentation",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+list",
     "date": "04/06/2026",
@@ -327073,11 +327165,12 @@
     ]
   },
   "microsoft/powerpoint/upload": {
-    "hash": "ccff6cb39e3170a214c5a84a226cb324c846da06719bbddff8b9be38afb537ca",
+    "hash": "9b69a12bf433a373e69480f5d730c1905a68de492f8dac0ff431881d52dd76d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload Presentation",
     "description": "Upload a PowerPoint presentation to OneDrive",
+    "summary": "Upload a PowerPoint presentation",
     "website": "https://www.flomation.co",
     "icon": "mspowerpoint+arrow-up",
     "date": "04/06/2026",
@@ -327169,11 +327262,12 @@
     ]
   },
   "microsoft/sharepoint/create_list_item": {
-    "hash": "c719a38968200cbfaa0f8854dfed3fce5cf17b8736d4cfa2f127c66fe9699569",
+    "hash": "d667f7462372947669bfc373fd7759116938028df33e3b14cdafffb20c65205e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create List Item",
     "description": "Create a new item in a SharePoint list",
+    "summary": "Add an item to a SharePoint list",
     "website": "https://www.flomation.co",
     "icon": "globe+plus",
     "date": "04/06/2026",
@@ -327260,11 +327354,12 @@
     ]
   },
   "microsoft/sharepoint/delete_list_item": {
-    "hash": "85a2dc975df022ffd09ce35926b5e2866ade9ed4310b85b98db09f3047f21171",
+    "hash": "b9538fcd2762f11c7b2ac04155c308b4bd99c03472a154add2eda0f2cafc0533",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete List Item",
     "description": "Delete an item from a SharePoint list",
+    "summary": "Remove an item from a SharePoint list",
     "website": "https://www.flomation.co",
     "icon": "globe+trash",
     "date": "04/06/2026",
@@ -327344,11 +327439,12 @@
     ]
   },
   "microsoft/sharepoint/get_list_items": {
-    "hash": "e923409430096036052b49b3930437962cd4e7d9d223e46413fdc6064fc0bd5d",
+    "hash": "4a884cef7a811be61e753e26941f1f1fa8301fa1208323ca72ecaa04da495ff2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get List Items",
     "description": "Retrieve items from a SharePoint list",
+    "summary": "Read the items in a SharePoint list",
     "website": "https://www.flomation.co",
     "icon": "globe+eye",
     "date": "04/06/2026",
@@ -327441,11 +327537,12 @@
     ]
   },
   "microsoft/sharepoint/list_lists": {
-    "hash": "9c5fed2f4fa686f2bd6f565c7ef637a096769f9e161f1c15cd580fe8d4bf3433",
+    "hash": "72c9b4da960c6ea2fa1e9ad2e0ad89ca03c8d113f921a8e113b1c15b35e79639",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Lists",
     "description": "Retrieve all lists from a SharePoint site",
+    "summary": "List the lists on a SharePoint site",
     "website": "https://www.flomation.co",
     "icon": "globe+list",
     "date": "04/06/2026",
@@ -327523,11 +327620,12 @@
     ]
   },
   "microsoft/sharepoint/list_sites": {
-    "hash": "95f1246eb14a545efd0eb9d6bfe8f2eeca5951af6b09f7a8efc138d3827a5fbd",
+    "hash": "9341257fa95d6a3c71a75245c74ba7aef8669c4c4f52ac502da39b52e9ae2f89",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Sites",
     "description": "Search and list SharePoint sites",
+    "summary": "Find your SharePoint sites",
     "website": "https://www.flomation.co",
     "icon": "globe+list",
     "date": "04/06/2026",
@@ -327611,11 +327709,12 @@
     ]
   },
   "microsoft/sharepoint/update_list_item": {
-    "hash": "332892d9ac909ead76dbd567c315f8e87da162e5f08a8d35ddfe33856734113d",
+    "hash": "0e0eeecb2222131ef4502227ea661ff2cd0ed8d76d81cac168e7ff727bff13a1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update List Item",
     "description": "Update fields on a SharePoint list item",
+    "summary": "Change an item in a SharePoint list",
     "website": "https://www.flomation.co",
     "icon": "globe+pencil",
     "date": "04/06/2026",
@@ -327703,11 +327802,12 @@
     ]
   },
   "microsoft/teams/create_channel": {
-    "hash": "c9ba2dcd5e3761f2e64ba604178cba461283278e5ae4ba8ff70485c58ecadb4f",
+    "hash": "1c0570b63796c456c88a02375b175f89e84cb62f90cc494d15b1c851e9d8a762",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Channel",
     "description": "Create a new channel in a Microsoft Teams team",
+    "summary": "Create a channel in a Teams team",
     "website": "https://www.flomation.co",
     "icon": "microsoft+plus",
     "date": "04/06/2026",
@@ -327814,11 +327914,12 @@
     ]
   },
   "microsoft/teams/list_channel_messages": {
-    "hash": "2c4039ee38c7603aed6833d22a54f47affcf8c32d8c29cac0973d45a624302a2",
+    "hash": "cb802232933dd8f4dff3207dac4b1c25a2aad80c8f52c29bcf44d7f609deec15",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Channel Messages",
     "description": "Retrieve recent messages from a Microsoft Teams channel",
+    "summary": "Read recent messages from a Teams channel",
     "website": "https://www.flomation.co",
     "icon": "microsoft+eye",
     "date": "04/06/2026",
@@ -327911,11 +328012,12 @@
     ]
   },
   "microsoft/teams/list_channels": {
-    "hash": "cd0b02ba97b205716bbf2626fa72c7ffd6c31f56ea22322483ba2660e1cfdbe3",
+    "hash": "000446a046ad9de7d8b996a1a7460602c57ae3a46a612a7d58267983a0007047",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Channels",
     "description": "List all channels within a Microsoft Teams team",
+    "summary": "List the channels in a Teams team",
     "website": "https://www.flomation.co",
     "icon": "microsoft+list",
     "date": "04/06/2026",
@@ -327993,11 +328095,12 @@
     ]
   },
   "microsoft/teams/list_teams": {
-    "hash": "fd983fdec98ef236476b7b1dbb5e445d0a29a4ba0b43957221195464c5395894",
+    "hash": "2acd09ee33584aef271da80dcc1ba285233699ac3802fbbabf9a10410c8ed4e9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
     "description": "List all Microsoft Teams the authenticated user has joined",
+    "summary": "List the Teams you belong to",
     "website": "https://www.flomation.co",
     "icon": "microsoft+list",
     "date": "04/06/2026",
@@ -328067,11 +328170,12 @@
     ]
   },
   "microsoft/teams/reply": {
-    "hash": "3102bf8f934ff77b2ab656ac749cfa92c115799e54bab9884ac46da9e6ee4fd4",
+    "hash": "6773d248fa8c031d4358e55c2afd514bfd737cf54d8c5c15ab634f62154cbde9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Teams Message",
     "description": "Send a reply to a Teams conversation using the Bot Framework",
+    "summary": "Reply to a message in Teams",
     "website": "https://www.flomation.co",
     "icon": "microsoft+reply",
     "date": "05/06/2026",
@@ -328167,11 +328271,12 @@
     ]
   },
   "microsoft/teams/send_channel_message": {
-    "hash": "7dc68940571d08a7055067187aed65da4c61852ea4cab0af19bd19a19c96936c",
+    "hash": "b29c222b36c2f85858f5bb1447308d41c64544db68668680104d91fc1d81583a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Channel Message",
     "description": "Post a message to a Microsoft Teams channel",
+    "summary": "Post a message to a Teams channel",
     "website": "https://www.flomation.co",
     "icon": "microsoft+paper-plane",
     "date": "04/06/2026",
@@ -328275,11 +328380,12 @@
     ]
   },
   "microsoft/teams/send_chat_message": {
-    "hash": "89d028084207dda6c6e75b4b0bdee826442f49d0e3b13f70e7271a376be98e16",
+    "hash": "6547e44ef8d760b769b1bc14a36527f593f66cf811c9d30827d5b3016fdcdef2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Chat Message",
     "description": "Send a message to a Microsoft Teams chat conversation",
+    "summary": "Send a message in a Teams chat",
     "website": "https://www.flomation.co",
     "icon": "microsoft+paper-plane",
     "date": "04/06/2026",
@@ -328375,11 +328481,12 @@
     ]
   },
   "microsoft/word/create": {
-    "hash": "7cb59afc1fc66d9239191214f42b568c7f152bb3a4c46c4ee16caf1266bb49a4",
+    "hash": "d31dcb212a3f920aab3d5dff0927901db0a7c87f02ddc3636d646598cae33ad3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
     "description": "Create a new empty Word document in OneDrive",
+    "summary": "Create a Word document",
     "website": "https://www.flomation.co",
     "icon": "msword+plus",
     "date": "04/06/2026",
@@ -328464,11 +328571,12 @@
     ]
   },
   "microsoft/word/get_metadata": {
-    "hash": "e9ec1dae309e56e630bc8f40a865b46bc86c0a3c0c3ad50be52711bf3c51bf6a",
+    "hash": "d763e31c3b978a332415302669076d2cebcc5717ea24c9a7030fe52673537fac",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
     "description": "Retrieve metadata for a Word document in OneDrive",
+    "summary": "Look up the details of a Word document",
     "website": "https://www.flomation.co",
     "icon": "msword+eye",
     "date": "04/06/2026",
@@ -328595,11 +328703,12 @@
     ]
   },
   "microsoft/word/read": {
-    "hash": "c32afed55d507ad55442582124ab5198cb048fc6a348b11de7405a7d84d826f4",
+    "hash": "97545679238c5a284ba95eab9f85675f795fef7ae3e15d2c7f5daf899cc9e4f7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
     "description": "Download a Word document as HTML or PDF from OneDrive",
+    "summary": "Read a Word document, or save it as a PDF",
     "website": "https://www.flomation.co",
     "icon": "msword+eye",
     "date": "04/06/2026",
@@ -328701,11 +328810,12 @@
     ]
   },
   "microsoft/word/replace_text": {
-    "hash": "42f924acd8e09614ea4bb47d246d6c698d7e00a302735d4baf5efc9f6eaad9a5",
+    "hash": "ea893ca6f66914ecc6ba57879856ef2ddff868b682722d0fb42394c529f6a4d3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text",
     "description": "Find and replace text in a Word document (via HTML conversion)",
+    "summary": "Find and replace text in a Word document",
     "website": "https://www.flomation.co",
     "icon": "msword+pencil",
     "date": "04/06/2026",
@@ -330974,11 +331084,12 @@
     ]
   },
   "notion/add_comment": {
-    "hash": "70a72b48c681d6268da81b4e6b0470d70d96a1ab71e4eedf29384eeebb65694d",
+    "hash": "ddc8e391f064c0b5b147e2bb7d8118cf92d208eaef632d2cf6842fb685c91b00",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Add Comment",
     "description": "Add a comment to a Notion page or discussion thread",
+    "summary": "Add a comment to a Notion page",
     "website": "https://www.flomation.co",
     "icon": "notion+comments",
     "date": "28/04/2026",
@@ -331052,11 +331163,12 @@
     ]
   },
   "notion/append_block_children": {
-    "hash": "4520ae770f933bbe7656e106fcc7e3021da72391371ed3daf3a400e24a3b510b",
+    "hash": "09e7b1ef64db816b5bbac779213252d4970c0db0c4765eb8f6fad985d404cd31",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Append Content",
     "description": "Append content blocks to a Notion page or block",
+    "summary": "Add content to a Notion page",
     "website": "https://www.flomation.co",
     "icon": "notion+plus",
     "date": "28/04/2026",
@@ -331123,11 +331235,12 @@
     ]
   },
   "notion/create_page": {
-    "hash": "e5fab638668a4138512b3ec9cc806724f3c198fb5a880ba29aea9cf107790034",
+    "hash": "a407b057a8974af74b649b8dfa9064d7655014a8edfd0cd77e92b8b8afab0b09",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Create Page",
     "description": "Create a new page in a Notion database or as a child of another page",
+    "summary": "Create a Notion page",
     "website": "https://www.flomation.co",
     "icon": "notion+plus",
     "date": "28/04/2026",
@@ -331234,11 +331347,12 @@
     ]
   },
   "notion/delete_block": {
-    "hash": "b2b843a5e4f85cb8f637ecf8a6bc4e5142adecd08229d713312b10d8896acb59",
+    "hash": "1508b2292d3db3ab0fd78f3a536f9e3e53ba3e5e8d126c982b2f3815c30753e1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Delete Block",
     "description": "Delete (archive) a block from a Notion page",
+    "summary": "Remove a block of content from Notion",
     "website": "https://www.flomation.co",
     "icon": "notion+trash",
     "date": "28/04/2026",
@@ -331291,11 +331405,12 @@
     ]
   },
   "notion/get_block_children": {
-    "hash": "065d9ff1ea503de0a1756228594da9512c0435b5f7b603638c2a942faa175bab",
+    "hash": "6e1f62ada16dfad4d9756277b5158d78b70e911861d3cab9660cf233cd23384e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Block Children",
     "description": "Read the content blocks of a Notion page or block",
+    "summary": "Read the content of a Notion page",
     "website": "https://www.flomation.co",
     "icon": "notion+list",
     "date": "28/04/2026",
@@ -331376,11 +331491,12 @@
     ]
   },
   "notion/get_database": {
-    "hash": "dd2f746b85ff8ff7ff44b00400fd14b09c89640f8c2cd6fe8c1362b190e3e644",
+    "hash": "f038da1ff9041f6ac07ca80b216e7c04b907ade21fabfc7bfc650f8fdb57a67d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Database",
     "description": "Retrieve a Notion database schema and metadata",
+    "summary": "Look up how a Notion database is set up",
     "website": "https://www.flomation.co",
     "icon": "notion+database",
     "date": "28/04/2026",
@@ -331461,11 +331577,12 @@
     ]
   },
   "notion/get_page": {
-    "hash": "04d37e077297342a15388d6f796c1e2eed1d1467f19cb33f6469020963236804",
+    "hash": "9e01bc1b1b2b41b41958f4f56b01aeb8e513e05467ae40d4b01637eeeec5cff0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Page",
     "description": "Retrieve a Notion page's properties by ID",
+    "summary": "Read a Notion page's properties",
     "website": "https://www.flomation.co",
     "icon": "notion+eye",
     "date": "28/04/2026",
@@ -331546,11 +331663,12 @@
     ]
   },
   "notion/list_comments": {
-    "hash": "3d7a6b173e457e845dc3b56fe11e0533127fde215397e370d62636823dae9711",
+    "hash": "dd81ae4ad03eea4c75c62b115b4340aa4755ea93dd1638918872d7132148f246",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion List Comments",
     "description": "List comments on a Notion page or block",
+    "summary": "Read the comments on a Notion page",
     "website": "https://www.flomation.co",
     "icon": "notion+comments",
     "date": "28/04/2026",
@@ -331617,11 +331735,12 @@
     ]
   },
   "notion/list_databases": {
-    "hash": "ca82e68b4c2b9466e2790598ec1030ba8fa81ba9ebe19fb1bb8e993fe9bfb7cf",
+    "hash": "264c8a1f25dfcc125fd85d71b8a09c6658e73997d93a08feb1a8e1b4688e02a8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion List Databases",
     "description": "List all databases shared with the integration",
+    "summary": "List the Notion databases you have shared",
     "website": "https://www.flomation.co",
     "icon": "notion+list",
     "date": "28/04/2026",
@@ -331680,11 +331799,12 @@
     ]
   },
   "notion/query_database": {
-    "hash": "45954d1e601a3169bce5c7c10d1f382e3bcaf1a57e93e73a849214e66b4da64d",
+    "hash": "0f1371c011851fe42d5b5902e6fea4273d8784991255924083b1fdfea40ddad2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Query Database",
     "description": "Query a Notion database with optional filters and sorts",
+    "summary": "Find pages in a Notion database",
     "website": "https://www.flomation.co",
     "icon": "notion+magnifying-glass",
     "date": "28/04/2026",
@@ -331772,11 +331892,12 @@
     ]
   },
   "notion/search": {
-    "hash": "dfcfdec4588f2c86baf9a4e8f0fd54e6521c84b5102462396026340fab4a13a3",
+    "hash": "c5de56c749bcf4b8bcd103a52a139e081377b1d1e35ea3859b3405ec5955ca2b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Search",
     "description": "Search across all pages and databases in a Notion workspace",
+    "summary": "Search your Notion workspace",
     "website": "https://www.flomation.co",
     "icon": "notion+magnifying-glass",
     "date": "28/04/2026",
@@ -331871,11 +331992,12 @@
     ]
   },
   "notion/update_block": {
-    "hash": "b93b56f15099caba6a1d347ada70d6660e55e514f2ddcd8dade298aac25a9587",
+    "hash": "8dcbbb407c32bd6ebafd1190a99105cb0fcd329f5f6f5fa40445cd2dcce47dc7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Update Block",
     "description": "Edit a Notion block in place by its ID (rewrite its text or set raw fields)",
+    "summary": "Edit a block of content in Notion",
     "website": "https://www.flomation.co",
     "icon": "notion+pen",
     "date": "05/08/2026",
@@ -331949,11 +332071,12 @@
     ]
   },
   "notion/update_page": {
-    "hash": "04186dd7b921e487e62753722c6d9ac56da82ec750c602f23dc501d8f562ea42",
+    "hash": "ca9943d9ad9a45fe4c66317bd925fb84ba8157f42962c8bdb8a58639f5e8811b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Update Page",
     "description": "Update properties of an existing Notion page",
+    "summary": "Change a Notion page's properties",
     "website": "https://www.flomation.co",
     "icon": "notion+pencil",
     "date": "28/04/2026",
@@ -545138,11 +545261,12 @@
     ]
   },
   "slack/channel_action": {
-    "hash": "eddf1f7bbaff9d18a1d29cef6637a9f915f5fd5c005fd7f9edd02ace325efb73",
+    "hash": "62bfb0db576bc9bac8ffe2cdd5b10bf493087f467650d2b9c9cd5a5bb3116e21",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Channel Action",
     "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
+    "summary": "Show a typing indicator in a Slack channel",
     "website": "https://www.flomation.co",
     "icon": "hand",
     "date": "14/04/2026",
@@ -545239,11 +545363,12 @@
     ]
   },
   "slack/channels": {
-    "hash": "e3a2d1a67b244ff5e32474b484fa67a3b6ddb554454b38bd112541852d3d0ad6",
+    "hash": "28a2f2fd50fd7ffd143149bc1d54c1f55cb4b508c3a4f4d6fdcf07dd8f8e9736",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Channels",
     "description": "List or search Slack channels. Returns channel names, IDs, topics, and member counts",
+    "summary": "List or search your Slack channels",
     "website": "https://www.flomation.co",
     "icon": "slack+list",
     "date": "20/04/2026",
@@ -545323,11 +545448,12 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "a72fdcf60cf5e63419341953731f2fbba6495159837277fd9cfe3458a0b72438",
+    "hash": "29b3b722f69f46ff710aa8f35a8e74a74f72747b0db1f95283146cb01661fb27",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
     "description": "Upload a file to a Slack channel. Accepts a flo:blob token, base64, or text.",
+    "summary": "Upload a file to a Slack channel",
     "website": "https://www.flomation.co",
     "icon": "slack+arrow-up",
     "date": "21/06/2026",
@@ -545429,11 +545555,12 @@
     ]
   },
   "slack/history": {
-    "hash": "540173363356c018614a944a84116ab5e45fb6b935e6e488a4bc044cfecbb448",
+    "hash": "e73b6bb8dfcc5cb7e52eecde7f71d31637274837dab6fe05b0c0e5bba02cecfd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Channel History",
     "description": "Read recent messages from a Slack channel. Uses conversations.history API.",
+    "summary": "Read recent messages from a Slack channel",
     "website": "https://www.flomation.co",
     "icon": "slack+clock",
     "date": "28/04/2026",
@@ -545514,11 +545641,12 @@
     ]
   },
   "slack/react": {
-    "hash": "f1411bcc7aecfdecbf706fbac39d06b8030dfb2ede1d930e693dbf7f72705183",
+    "hash": "2197937143c47efb59526afa6b4382e9e7116291216f0b290b8382dca3fff35c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Add Reaction",
     "description": "Add an emoji reaction to a Slack message. Use emoji name without colons.",
+    "summary": "Add an emoji reaction to a Slack message",
     "website": "https://www.flomation.co",
     "icon": "slack+star",
     "date": "28/04/2026",
@@ -545587,11 +545715,12 @@
     ]
   },
   "slack/rich_message": {
-    "hash": "3de3e616444dded7735e5373fb298b1163e08e7ca7e60768859a7fe22ae703b9",
+    "hash": "f46edad3e25f6caa06707986f5ba167e8720a8474c03c6178b96a5e5661a1c22",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
     "description": "Send a rich Slack message with Block Kit layouts. Use this when you need structured formatting: sections with fields, images, buttons, dividers, or context blocks. For simple text replies, use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`). IMPORTANT: bot_token, channel_id, and thread_ts are pre-configured — do NOT provide them and do NOT ask the user for them. You only need to provide: text (fallback) and blocks (the Block Kit JSON array).",
+    "summary": "Post a Slack message with buttons, sections and images",
     "website": "https://www.flomation.co",
     "icon": "slack+file-lines",
     "date": "15/04/2026",
@@ -545679,11 +545808,12 @@
     ]
   },
   "slack/search": {
-    "hash": "2bf407929c22edbd3bd4376e518ee06849682bc0af60e1f63d5d49e2a8c0a54f",
+    "hash": "f71f84d2e7a74dd3f0dc68c6ec0ecd6bbacb9649d15d62e4dafecdfa66310d6c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Search Messages",
     "description": "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date",
+    "summary": "Search your Slack messages",
     "website": "https://www.flomation.co",
     "icon": "slack+magnifying-glass",
     "date": "20/04/2026",
@@ -545764,11 +545894,12 @@
     ]
   },
   "slack/send_message": {
-    "hash": "21a012b02ac9cd2dfffd26b25956d3923136ce1f6eb4ab389c2f678fa9a77aed",
+    "hash": "22011177f94d5182c3b1762c27d4cd0eb98cf9d7584e4362952451bfc4b3d36f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
     "description": "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts",
+    "summary": "Post a message to a Slack channel",
     "website": "https://www.flomation.co",
     "icon": "slack+paper-plane",
     "date": "03/04/2026",
@@ -545864,11 +545995,12 @@
     ]
   },
   "slack/thread": {
-    "hash": "77e0c51022c9d7807954905c6784dce54b40007d875f6399bb384bcb4cf3051d",
+    "hash": "1b2cf91308e2bb5c3d2794df3b1804d3a429e702c654d88f297a03f72696c38f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Thread Replies",
     "description": "Read replies in a Slack thread. Requires the channel ID and thread timestamp.",
+    "summary": "Read the replies in a Slack thread",
     "website": "https://www.flomation.co",
     "icon": "slack+comments",
     "date": "28/04/2026",
@@ -545950,11 +546082,12 @@
     ]
   },
   "slack/user_profile": {
-    "hash": "846f48aad9e906bc32f8dd1959cc0a1ef66a8ce50f3af74249cd38c7c458ad6e",
+    "hash": "6a59a926ad83448356082b101210855d0bc4d9695cc772dfee8a9e95b3110744",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack User Profile",
     "description": "Get a Slack user's full profile by user ID. Returns name, email, title, phone, timezone, status, and avatar",
+    "summary": "Look up a Slack member's profile",
     "website": "https://www.flomation.co",
     "icon": "slack+user",
     "date": "20/04/2026",
@@ -546056,11 +546189,12 @@
     ]
   },
   "slack/users": {
-    "hash": "bb58e3b24b0837c1cfc0065198e633065255faa93ed1ab2858a5ca9c3d3c3921",
+    "hash": "1d62b1a8a13ab96ac3a935c42733016d4e106037be6607a96eb1d6bb141f80b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Users",
     "description": "List or search Slack workspace members. Returns display names, real names, email addresses, and status",
+    "summary": "List or search people in your Slack workspace",
     "website": "https://www.flomation.co",
     "icon": "slack+user-group",
     "date": "20/04/2026",
@@ -546133,11 +546267,12 @@
     ]
   },
   "slack/webhook": {
-    "hash": "73328c9e7ad81becbe0dde28ca04ee333a4ea38024aa74d3849f0ea6ddbf7369",
+    "hash": "f18093e7a6538d79efdb3d710e98fc74cc8821856d6b68a5f9dfc7a7833be12b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Webhook",
     "description": "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts",
+    "summary": "Post to Slack using an incoming webhook",
     "website": "https://www.flomation.co",
     "icon": "slack+globe",
     "date": "23/03/2026",
@@ -546225,11 +546360,12 @@
     ]
   },
   "social/facebook/delete_post": {
-    "hash": "9e070e380b409d1b0015d4d1f218784c1c292a0171cb285a2157d9f2600120e3",
+    "hash": "626fddb7e8cbf3a4bd7e945ab9c4e010049311bc988e75de6af8765d59efe0ff",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Delete Post",
     "description": "Delete a Facebook Page post by ID",
+    "summary": "Delete a post from your Facebook Page",
     "website": "https://www.flomation.co",
     "icon": "facebook+trash",
     "date": "21/05/2026",
@@ -546294,11 +546430,12 @@
     ]
   },
   "social/facebook/get_conversation": {
-    "hash": "378a14d68d3ef2f0f477dae57fa0b01d20712060ddc13e15f989ecd57b101b62",
+    "hash": "cd3736863feed06190c12cb89f443677650eb9281f1a3bd73ec0165b309d6c45",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Conversation",
     "description": "Fetch Messenger conversation history between a Page and a user",
+    "summary": "Read a Facebook Messenger conversation",
     "website": "https://www.flomation.co",
     "icon": "facebook+comments",
     "date": "24/05/2026",
@@ -546406,11 +546543,12 @@
     ]
   },
   "social/facebook/get_page_insights": {
-    "hash": "cdf2de90d3239f38f3bce5c8435d586edf3e18ec9de46e92285e74dbf8432bcf",
+    "hash": "f52c94c3e1f3f98933527ba9c1803c601718138401d74af35203f88ac92f79cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Insights",
     "description": "Get engagement and reach metrics for a Facebook Page",
+    "summary": "See how your Facebook Page is performing",
     "website": "https://www.flomation.co",
     "icon": "facebook+pie-chart",
     "date": "21/05/2026",
@@ -546545,11 +546683,12 @@
     ]
   },
   "social/facebook/get_pages": {
-    "hash": "a236ae6bee0c52ee4352696b37417bbd1a324e7fc2cd74f7fd6b7578bb4bd43c",
+    "hash": "ff3875d3e9eb81de032b5bbd25842b56594783e395de5151bd261a810b88710f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Pages",
     "description": "List Facebook Pages managed by the authenticated user with their access tokens",
+    "summary": "List the Facebook Pages you manage",
     "website": "https://www.flomation.co",
     "icon": "facebook+list",
     "date": "21/05/2026",
@@ -546641,11 +546780,12 @@
     ]
   },
   "social/facebook/get_post": {
-    "hash": "ae635756f450e01a5954d8fbdc175af0c57690480efea82fefd3fc902be5e356",
+    "hash": "4c351c6ddf8ed1e57e5e193baa54add465c334997a78af24cc6b7023b9ae52ec",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Post",
     "description": "Retrieve a Facebook post by ID with engagement metrics",
+    "summary": "Look up a Facebook post and how it performed",
     "website": "https://www.flomation.co",
     "icon": "facebook+eye",
     "date": "21/05/2026",
@@ -546752,11 +546892,12 @@
     ]
   },
   "social/facebook/publish_post": {
-    "hash": "f7f403f3e47a3bba015821a455efde68f7e0bf5ac03d7b31f5f0aa6d86d5f993",
+    "hash": "e0899da3664a19927060bdcd39e24f85aaf124e059133333c71fabba7dc05072",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Publish Post",
     "description": "Publish a post to a Facebook Page",
+    "summary": "Publish a post to your Facebook Page",
     "website": "https://www.flomation.co",
     "icon": "facebook+paper-plane",
     "date": "21/05/2026",
@@ -546850,11 +546991,12 @@
     ]
   },
   "social/facebook/send_message": {
-    "hash": "4c899f9d3f868a041d87b1e552d75340ebf5624cefb988f9cecb1afd0b9c67d9",
+    "hash": "83fedf932d698386399de54f850ce8c8a5790f06cc0755444a91f93422012d4a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Send Message",
     "description": "Send a message to a user via Facebook Messenger",
+    "summary": "Reply to someone on Facebook Messenger",
     "website": "https://www.flomation.co",
     "icon": "facebook+paper-plane",
     "date": "24/05/2026",
@@ -546941,11 +547083,12 @@
     ]
   },
   "social/linkedin/delete_post": {
-    "hash": "eda2f42ba2d1b40a04fd8182addd09660187db4985b171366d45f7662b74fc83",
+    "hash": "2ce26689652ddfdacdba8f50f53036fe7e8a7f7daeb64e3c8c290edeb993a969",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Delete Post",
     "description": "Delete a LinkedIn post by its URN",
+    "summary": "Delete a LinkedIn post",
     "website": "https://www.flomation.co",
     "icon": "linkedin+trash",
     "date": "21/05/2026",
@@ -547003,11 +547146,12 @@
     ]
   },
   "social/linkedin/get_analytics": {
-    "hash": "038a254817bebb99aff44d7affc22c3b29e2c4cd84b72b805d333e38fb624e8c",
+    "hash": "927ea893ca859a7bd95ed38a2d0d91141e9067cb235942834893f56425984641",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Post Analytics",
     "description": "Get engagement metrics (likes, comments, shares) for a LinkedIn post",
+    "summary": "See the likes, comments and shares on a LinkedIn post",
     "website": "https://www.flomation.co",
     "icon": "linkedin+pie-chart",
     "date": "21/05/2026",
@@ -547093,11 +547237,12 @@
     ]
   },
   "social/linkedin/get_post": {
-    "hash": "ceb37ce06d32d9681d1565b1217ce8398d0c5524df7e5019ac901031c1985d27",
+    "hash": "1200138f6bb791a52c73b83c0ebca66543854b10386fe54171da87431d05bffc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Get Post",
     "description": "Retrieve a LinkedIn post by its URN with content and metadata",
+    "summary": "Look up a LinkedIn post",
     "website": "https://www.flomation.co",
     "icon": "linkedin+eye",
     "date": "21/05/2026",
@@ -547190,11 +547335,12 @@
     ]
   },
   "social/linkedin/get_profile": {
-    "hash": "97e35d74d71d5d4b9f54bb0a178ab0dd91844cafce43b47a9df802f476d4355f",
+    "hash": "01e759b002ae3445e5df1e3e0473744ae4fa6ac7c2e2fc65a9816ee78817ddfb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Get Profile",
     "description": "Get the authenticated user's LinkedIn profile and member URN",
+    "summary": "Look up your LinkedIn profile",
     "website": "https://www.flomation.co",
     "icon": "linkedin+user",
     "date": "21/05/2026",
@@ -547286,11 +547432,12 @@
     ]
   },
   "social/linkedin/list_posts": {
-    "hash": "162b0ce4510da8a37eb0bdabd4d3de90d8b87e30716c25356583fffe910d80eb",
+    "hash": "3406d5523d678abb2ca5b4ac7a7b9ff7eb3d4ddaccea457cf450eda1a66352c7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn List Posts",
     "description": "List recent posts by the authenticated user or a specified author",
+    "summary": "List recent LinkedIn posts",
     "website": "https://www.flomation.co",
     "icon": "linkedin+list",
     "date": "21/05/2026",
@@ -547369,11 +547516,12 @@
     ]
   },
   "social/linkedin/share_post": {
-    "hash": "deeab5f639b4cc83bfa902b5f3b20edc36b0f7b3aba160ee3864fe26f2d597c4",
+    "hash": "22599d027aced3e3a7a54ab203bad45dc81e2a78ff357a47234a3fb334f68cc2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Share Post",
     "description": "Publish a text or link post to LinkedIn as the authenticated user",
+    "summary": "Publish a post to LinkedIn",
     "website": "https://www.flomation.co",
     "icon": "linkedin+paper-plane",
     "date": "21/05/2026",
@@ -565598,11 +565746,12 @@
     ]
   },
   "twilio/end_call": {
-    "hash": "0f7981e0a7d63fe634bf5f6b99afff01dfe02a8dcea995adb1df37f13399919f",
+    "hash": "cebe8873a1ba380f64f884393c59353523a5f602c40bd5752f4e7f4b5dc05ba7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "End Call",
     "description": "Terminate an active Twilio voice call",
+    "summary": "Hang up a phone call",
     "website": "https://www.flomation.co",
     "icon": "phone",
     "date": "30/05/2026",
@@ -565640,11 +565789,12 @@
     ]
   },
   "twilio/make_call": {
-    "hash": "67db55a146fb24052c7c98cc697519d64702cd681a79080857ce32874c2bbd1b",
+    "hash": "8c8504f0c9cd62260aa978450ac8af5891c3c18c8bb2b9a2fd199670b1ac1ee6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Make Call",
     "description": "Initiate an outbound Twilio voice call",
+    "summary": "Place a phone call",
     "website": "https://www.flomation.co",
     "icon": "phone-arrow-up-right",
     "date": "31/05/2026",
@@ -565734,11 +565884,12 @@
     ]
   },
   "twilio/send_audio": {
-    "hash": "e5e33359cab159e2354974746bb2b4ea2948faff046e490f409d90220d23e70c",
+    "hash": "379f6d23f29cf62f995ce1e6c5035f0c141cf93a970a0f17c3e012afb87044bf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Audio",
     "description": "Send audio back to a Twilio voice call",
+    "summary": "Play audio to someone on a call",
     "website": "https://www.flomation.co",
     "icon": "phone+paper-plane",
     "date": "29/05/2026",
@@ -565798,11 +565949,12 @@
     ]
   },
   "twilio/send_sms": {
-    "hash": "187b1310f55d4d446117377b06aa1dc657900da98268ca1da2364cb0376b8d12",
+    "hash": "63db82c24e09fcfddef6bbce9f8191028ea435dd4c2bf4bc52f0db4ed292c85c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Twilio SMS",
     "description": "Send an SMS message via Twilio",
+    "summary": "Send a text message",
     "website": "https://www.flomation.co",
     "icon": "comment-sms",
     "date": "29/05/2026",
@@ -565893,11 +566045,12 @@
     ]
   },
   "twilio/voice_session": {
-    "hash": "61f4e73f653c10ad785548a99fe2d914df93bfb3b0d05d12f661531395c108da",
+    "hash": "e38e3be9fe22305173b03faac14994157c2c28268ad974906feefdb8c980f5a6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Voice Session",
     "description": "Hold a Twilio voice call open for multi-turn conversation",
+    "summary": "Keep a call open for a back-and-forth conversation",
     "website": "https://www.flomation.co",
     "icon": "phone+headset",
     "date": "29/05/2026",

@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Send Message"
 	Description  = "Send a message to a user via Facebook Messenger"
+	Summary      = "Reply to someone on Facebook Messenger"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+paper-plane"
 	Date         = "24/05/2026"

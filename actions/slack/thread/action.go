@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Thread Replies"
 	Description  = "Read replies in a Slack thread. Requires the channel ID and thread timestamp."
+	Summary      = "Read the replies in a Slack thread"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+comments"
 	Date         = "28/04/2026"

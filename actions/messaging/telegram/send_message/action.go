@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Telegram Message"
 	Description  = "Send a message via the Telegram Bot API"
+	Summary      = "Send a Telegram message"
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "03/04/2026"

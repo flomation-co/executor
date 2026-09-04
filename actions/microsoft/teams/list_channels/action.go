@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Channels"
 	Description  = "List all channels within a Microsoft Teams team"
+	Summary      = "List the channels in a Teams team"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+list"
 	Date         = "04/06/2026"

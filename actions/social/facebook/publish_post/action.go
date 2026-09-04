@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Publish Post"
 	Description  = "Publish a post to a Facebook Page"
+	Summary      = "Publish a post to your Facebook Page"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+paper-plane"
 	Date         = "21/05/2026"

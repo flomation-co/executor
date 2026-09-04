@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Twilio SMS"
 	Description  = "Send an SMS message via Twilio"
+	Summary      = "Send a text message"
 	Website      = "https://www.flomation.co"
 	Icon         = "comment-sms"
 	Date         = "29/05/2026"

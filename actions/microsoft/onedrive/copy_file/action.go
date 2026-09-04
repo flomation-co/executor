@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Copy Item"
 	Description  = "Copy a file or folder to a different OneDrive location"
+	Summary      = "Make a copy of a file in OneDrive"
 	Website      = "https://www.flomation.co"
 	Icon         = "onedrive+file-export"
 	Date         = "04/06/2026"

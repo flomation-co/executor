@@ -34,6 +34,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack File Upload"
 	Description  = "Upload a file to a Slack channel. Accepts a flo:blob token, base64, or text."
+	Summary      = "Upload a file to a Slack channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+arrow-up"
 	Date         = "21/06/2026"

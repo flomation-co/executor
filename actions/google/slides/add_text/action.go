@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Text to Slide"
 	Description  = "Insert text into a slide shape"
+	Summary      = "Put text on a slide"
 	Website      = "https://www.flomation.co"
 	Icon         = "googleslides+pencil"
 	Date         = "01/06/2026"

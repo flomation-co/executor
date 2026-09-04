@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Update Block"
 	Description  = "Edit a Notion block in place by its ID (rewrite its text or set raw fields)"
+	Summary      = "Edit a block of content in Notion"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+pen"
 	Date         = "05/08/2026"
