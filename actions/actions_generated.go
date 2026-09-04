@@ -1105,6 +1105,80 @@ import (
 	crm_apollo_sequences_sequence_update_contact_status "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_update_contact_status"
 	crm_apollo_sequences_task_create "flomation.app/automate/executor/actions/crm/apollo/sequences/task_create"
 	crm_apollo_sequences_user_list "flomation.app/automate/executor/actions/crm/apollo/sequences/user_list"
+	crm_freshsales_accounts_account_clone "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_clone"
+	crm_freshsales_accounts_account_create "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_create"
+	crm_freshsales_accounts_account_delete "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_delete"
+	crm_freshsales_accounts_account_get "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_get"
+	crm_freshsales_accounts_account_list_by_view "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_list_by_view"
+	crm_freshsales_accounts_account_list_fields "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_list_fields"
+	crm_freshsales_accounts_account_list_filters "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_list_filters"
+	crm_freshsales_accounts_account_update "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_update"
+	crm_freshsales_accounts_account_upsert "flomation.app/automate/executor/actions/crm/freshsales/accounts/account_upsert"
+	crm_freshsales_appointments_appointment_create "flomation.app/automate/executor/actions/crm/freshsales/appointments/appointment_create"
+	crm_freshsales_appointments_appointment_delete "flomation.app/automate/executor/actions/crm/freshsales/appointments/appointment_delete"
+	crm_freshsales_appointments_appointment_get "flomation.app/automate/executor/actions/crm/freshsales/appointments/appointment_get"
+	crm_freshsales_appointments_appointment_list "flomation.app/automate/executor/actions/crm/freshsales/appointments/appointment_list"
+	crm_freshsales_appointments_appointment_update "flomation.app/automate/executor/actions/crm/freshsales/appointments/appointment_update"
+	crm_freshsales_bulk_account_bulk_delete "flomation.app/automate/executor/actions/crm/freshsales/bulk/account_bulk_delete"
+	crm_freshsales_bulk_account_bulk_upsert "flomation.app/automate/executor/actions/crm/freshsales/bulk/account_bulk_upsert"
+	crm_freshsales_bulk_account_forget "flomation.app/automate/executor/actions/crm/freshsales/bulk/account_forget"
+	crm_freshsales_bulk_contact_bulk_delete "flomation.app/automate/executor/actions/crm/freshsales/bulk/contact_bulk_delete"
+	crm_freshsales_bulk_contact_bulk_upsert "flomation.app/automate/executor/actions/crm/freshsales/bulk/contact_bulk_upsert"
+	crm_freshsales_bulk_contact_forget "flomation.app/automate/executor/actions/crm/freshsales/bulk/contact_forget"
+	crm_freshsales_bulk_deal_bulk_delete "flomation.app/automate/executor/actions/crm/freshsales/bulk/deal_bulk_delete"
+	crm_freshsales_bulk_deal_bulk_upsert "flomation.app/automate/executor/actions/crm/freshsales/bulk/deal_bulk_upsert"
+	crm_freshsales_bulk_deal_forget "flomation.app/automate/executor/actions/crm/freshsales/bulk/deal_forget"
+	crm_freshsales_contacts_contact_clone "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_clone"
+	crm_freshsales_contacts_contact_create "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_create"
+	crm_freshsales_contacts_contact_delete "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_delete"
+	crm_freshsales_contacts_contact_get "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_get"
+	crm_freshsales_contacts_contact_list_by_view "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_list_by_view"
+	crm_freshsales_contacts_contact_list_fields "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_list_fields"
+	crm_freshsales_contacts_contact_list_filters "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_list_filters"
+	crm_freshsales_contacts_contact_lookup "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_lookup"
+	crm_freshsales_contacts_contact_update "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_update"
+	crm_freshsales_contacts_contact_upsert "flomation.app/automate/executor/actions/crm/freshsales/contacts/contact_upsert"
+	crm_freshsales_deals_deal_clone "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_clone"
+	crm_freshsales_deals_deal_create "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_create"
+	crm_freshsales_deals_deal_delete "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_delete"
+	crm_freshsales_deals_deal_get "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_get"
+	crm_freshsales_deals_deal_list_by_view "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_list_by_view"
+	crm_freshsales_deals_deal_list_fields "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_list_fields"
+	crm_freshsales_deals_deal_list_filters "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_list_filters"
+	crm_freshsales_deals_deal_update "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_update"
+	crm_freshsales_deals_deal_upsert "flomation.app/automate/executor/actions/crm/freshsales/deals/deal_upsert"
+	crm_freshsales_files_file_create_link "flomation.app/automate/executor/actions/crm/freshsales/files/file_create_link"
+	crm_freshsales_files_file_list "flomation.app/automate/executor/actions/crm/freshsales/files/file_list"
+	crm_freshsales_lists_list_add_contacts "flomation.app/automate/executor/actions/crm/freshsales/lists/list_add_contacts"
+	crm_freshsales_lists_list_all "flomation.app/automate/executor/actions/crm/freshsales/lists/list_all"
+	crm_freshsales_lists_list_copy_contacts "flomation.app/automate/executor/actions/crm/freshsales/lists/list_copy_contacts"
+	crm_freshsales_lists_list_create "flomation.app/automate/executor/actions/crm/freshsales/lists/list_create"
+	crm_freshsales_lists_list_get_contacts "flomation.app/automate/executor/actions/crm/freshsales/lists/list_get_contacts"
+	crm_freshsales_lists_list_move_contacts "flomation.app/automate/executor/actions/crm/freshsales/lists/list_move_contacts"
+	crm_freshsales_lists_list_remove_contacts "flomation.app/automate/executor/actions/crm/freshsales/lists/list_remove_contacts"
+	crm_freshsales_lists_list_update "flomation.app/automate/executor/actions/crm/freshsales/lists/list_update"
+	crm_freshsales_notes_note_create "flomation.app/automate/executor/actions/crm/freshsales/notes/note_create"
+	crm_freshsales_notes_note_delete "flomation.app/automate/executor/actions/crm/freshsales/notes/note_delete"
+	crm_freshsales_notes_note_update "flomation.app/automate/executor/actions/crm/freshsales/notes/note_update"
+	crm_freshsales_products_product_create "flomation.app/automate/executor/actions/crm/freshsales/products/product_create"
+	crm_freshsales_products_product_delete "flomation.app/automate/executor/actions/crm/freshsales/products/product_delete"
+	crm_freshsales_products_product_get "flomation.app/automate/executor/actions/crm/freshsales/products/product_get"
+	crm_freshsales_products_product_list "flomation.app/automate/executor/actions/crm/freshsales/products/product_list"
+	crm_freshsales_products_product_update "flomation.app/automate/executor/actions/crm/freshsales/products/product_update"
+	crm_freshsales_sales_activities_sales_activity_create "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_create"
+	crm_freshsales_sales_activities_sales_activity_delete "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_delete"
+	crm_freshsales_sales_activities_sales_activity_get "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_get"
+	crm_freshsales_sales_activities_sales_activity_list "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_list"
+	crm_freshsales_sales_activities_sales_activity_list_fields "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_list_fields"
+	crm_freshsales_sales_activities_sales_activity_update "flomation.app/automate/executor/actions/crm/freshsales/sales_activities/sales_activity_update"
+	crm_freshsales_search_search_records "flomation.app/automate/executor/actions/crm/freshsales/search/search_records"
+	crm_freshsales_settings_get_selector "flomation.app/automate/executor/actions/crm/freshsales/settings/get_selector"
+	crm_freshsales_tasks_task_create "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_create"
+	crm_freshsales_tasks_task_delete "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_delete"
+	crm_freshsales_tasks_task_get "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_get"
+	crm_freshsales_tasks_task_list "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_list"
+	crm_freshsales_tasks_task_mark_done "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_mark_done"
+	crm_freshsales_tasks_task_update "flomation.app/automate/executor/actions/crm/freshsales/tasks/task_update"
 	crm_salesforce_account_add_note "flomation.app/automate/executor/actions/crm/salesforce/account_add_note"
 	crm_salesforce_account_contact_relation_create "flomation.app/automate/executor/actions/crm/salesforce/account_contact_relation_create"
 	crm_salesforce_account_contact_relation_delete "flomation.app/automate/executor/actions/crm/salesforce/account_contact_relation_delete"
@@ -3393,6 +3467,7 @@ import (
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
 	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
 	trigger_form "flomation.app/automate/executor/actions/trigger/form"
+	trigger_freshsales_webhook "flomation.app/automate/executor/actions/trigger/freshsales_webhook"
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
@@ -4693,6 +4768,80 @@ var Actions = map[string]core.Action{
 	"crm/apollo/sequences/sequence_update_contact_status":                             crm_apollo_sequences_sequence_update_contact_status.Execute,
 	"crm/apollo/sequences/task_create":                                                crm_apollo_sequences_task_create.Execute,
 	"crm/apollo/sequences/user_list":                                                  crm_apollo_sequences_user_list.Execute,
+	"crm/freshsales/accounts/account_clone":                                           crm_freshsales_accounts_account_clone.Execute,
+	"crm/freshsales/accounts/account_create":                                          crm_freshsales_accounts_account_create.Execute,
+	"crm/freshsales/accounts/account_delete":                                          crm_freshsales_accounts_account_delete.Execute,
+	"crm/freshsales/accounts/account_get":                                             crm_freshsales_accounts_account_get.Execute,
+	"crm/freshsales/accounts/account_list_by_view":                                    crm_freshsales_accounts_account_list_by_view.Execute,
+	"crm/freshsales/accounts/account_list_fields":                                     crm_freshsales_accounts_account_list_fields.Execute,
+	"crm/freshsales/accounts/account_list_filters":                                    crm_freshsales_accounts_account_list_filters.Execute,
+	"crm/freshsales/accounts/account_update":                                          crm_freshsales_accounts_account_update.Execute,
+	"crm/freshsales/accounts/account_upsert":                                          crm_freshsales_accounts_account_upsert.Execute,
+	"crm/freshsales/appointments/appointment_create":                                  crm_freshsales_appointments_appointment_create.Execute,
+	"crm/freshsales/appointments/appointment_delete":                                  crm_freshsales_appointments_appointment_delete.Execute,
+	"crm/freshsales/appointments/appointment_get":                                     crm_freshsales_appointments_appointment_get.Execute,
+	"crm/freshsales/appointments/appointment_list":                                    crm_freshsales_appointments_appointment_list.Execute,
+	"crm/freshsales/appointments/appointment_update":                                  crm_freshsales_appointments_appointment_update.Execute,
+	"crm/freshsales/bulk/account_bulk_delete":                                         crm_freshsales_bulk_account_bulk_delete.Execute,
+	"crm/freshsales/bulk/account_bulk_upsert":                                         crm_freshsales_bulk_account_bulk_upsert.Execute,
+	"crm/freshsales/bulk/account_forget":                                              crm_freshsales_bulk_account_forget.Execute,
+	"crm/freshsales/bulk/contact_bulk_delete":                                         crm_freshsales_bulk_contact_bulk_delete.Execute,
+	"crm/freshsales/bulk/contact_bulk_upsert":                                         crm_freshsales_bulk_contact_bulk_upsert.Execute,
+	"crm/freshsales/bulk/contact_forget":                                              crm_freshsales_bulk_contact_forget.Execute,
+	"crm/freshsales/bulk/deal_bulk_delete":                                            crm_freshsales_bulk_deal_bulk_delete.Execute,
+	"crm/freshsales/bulk/deal_bulk_upsert":                                            crm_freshsales_bulk_deal_bulk_upsert.Execute,
+	"crm/freshsales/bulk/deal_forget":                                                 crm_freshsales_bulk_deal_forget.Execute,
+	"crm/freshsales/contacts/contact_clone":                                           crm_freshsales_contacts_contact_clone.Execute,
+	"crm/freshsales/contacts/contact_create":                                          crm_freshsales_contacts_contact_create.Execute,
+	"crm/freshsales/contacts/contact_delete":                                          crm_freshsales_contacts_contact_delete.Execute,
+	"crm/freshsales/contacts/contact_get":                                             crm_freshsales_contacts_contact_get.Execute,
+	"crm/freshsales/contacts/contact_list_by_view":                                    crm_freshsales_contacts_contact_list_by_view.Execute,
+	"crm/freshsales/contacts/contact_list_fields":                                     crm_freshsales_contacts_contact_list_fields.Execute,
+	"crm/freshsales/contacts/contact_list_filters":                                    crm_freshsales_contacts_contact_list_filters.Execute,
+	"crm/freshsales/contacts/contact_lookup":                                          crm_freshsales_contacts_contact_lookup.Execute,
+	"crm/freshsales/contacts/contact_update":                                          crm_freshsales_contacts_contact_update.Execute,
+	"crm/freshsales/contacts/contact_upsert":                                          crm_freshsales_contacts_contact_upsert.Execute,
+	"crm/freshsales/deals/deal_clone":                                                 crm_freshsales_deals_deal_clone.Execute,
+	"crm/freshsales/deals/deal_create":                                                crm_freshsales_deals_deal_create.Execute,
+	"crm/freshsales/deals/deal_delete":                                                crm_freshsales_deals_deal_delete.Execute,
+	"crm/freshsales/deals/deal_get":                                                   crm_freshsales_deals_deal_get.Execute,
+	"crm/freshsales/deals/deal_list_by_view":                                          crm_freshsales_deals_deal_list_by_view.Execute,
+	"crm/freshsales/deals/deal_list_fields":                                           crm_freshsales_deals_deal_list_fields.Execute,
+	"crm/freshsales/deals/deal_list_filters":                                          crm_freshsales_deals_deal_list_filters.Execute,
+	"crm/freshsales/deals/deal_update":                                                crm_freshsales_deals_deal_update.Execute,
+	"crm/freshsales/deals/deal_upsert":                                                crm_freshsales_deals_deal_upsert.Execute,
+	"crm/freshsales/files/file_create_link":                                           crm_freshsales_files_file_create_link.Execute,
+	"crm/freshsales/files/file_list":                                                  crm_freshsales_files_file_list.Execute,
+	"crm/freshsales/lists/list_add_contacts":                                          crm_freshsales_lists_list_add_contacts.Execute,
+	"crm/freshsales/lists/list_all":                                                   crm_freshsales_lists_list_all.Execute,
+	"crm/freshsales/lists/list_copy_contacts":                                         crm_freshsales_lists_list_copy_contacts.Execute,
+	"crm/freshsales/lists/list_create":                                                crm_freshsales_lists_list_create.Execute,
+	"crm/freshsales/lists/list_get_contacts":                                          crm_freshsales_lists_list_get_contacts.Execute,
+	"crm/freshsales/lists/list_move_contacts":                                         crm_freshsales_lists_list_move_contacts.Execute,
+	"crm/freshsales/lists/list_remove_contacts":                                       crm_freshsales_lists_list_remove_contacts.Execute,
+	"crm/freshsales/lists/list_update":                                                crm_freshsales_lists_list_update.Execute,
+	"crm/freshsales/notes/note_create":                                                crm_freshsales_notes_note_create.Execute,
+	"crm/freshsales/notes/note_delete":                                                crm_freshsales_notes_note_delete.Execute,
+	"crm/freshsales/notes/note_update":                                                crm_freshsales_notes_note_update.Execute,
+	"crm/freshsales/products/product_create":                                          crm_freshsales_products_product_create.Execute,
+	"crm/freshsales/products/product_delete":                                          crm_freshsales_products_product_delete.Execute,
+	"crm/freshsales/products/product_get":                                             crm_freshsales_products_product_get.Execute,
+	"crm/freshsales/products/product_list":                                            crm_freshsales_products_product_list.Execute,
+	"crm/freshsales/products/product_update":                                          crm_freshsales_products_product_update.Execute,
+	"crm/freshsales/sales_activities/sales_activity_create":                           crm_freshsales_sales_activities_sales_activity_create.Execute,
+	"crm/freshsales/sales_activities/sales_activity_delete":                           crm_freshsales_sales_activities_sales_activity_delete.Execute,
+	"crm/freshsales/sales_activities/sales_activity_get":                              crm_freshsales_sales_activities_sales_activity_get.Execute,
+	"crm/freshsales/sales_activities/sales_activity_list":                             crm_freshsales_sales_activities_sales_activity_list.Execute,
+	"crm/freshsales/sales_activities/sales_activity_list_fields":                      crm_freshsales_sales_activities_sales_activity_list_fields.Execute,
+	"crm/freshsales/sales_activities/sales_activity_update":                           crm_freshsales_sales_activities_sales_activity_update.Execute,
+	"crm/freshsales/search/search_records":                                            crm_freshsales_search_search_records.Execute,
+	"crm/freshsales/settings/get_selector":                                            crm_freshsales_settings_get_selector.Execute,
+	"crm/freshsales/tasks/task_create":                                                crm_freshsales_tasks_task_create.Execute,
+	"crm/freshsales/tasks/task_delete":                                                crm_freshsales_tasks_task_delete.Execute,
+	"crm/freshsales/tasks/task_get":                                                   crm_freshsales_tasks_task_get.Execute,
+	"crm/freshsales/tasks/task_list":                                                  crm_freshsales_tasks_task_list.Execute,
+	"crm/freshsales/tasks/task_mark_done":                                             crm_freshsales_tasks_task_mark_done.Execute,
+	"crm/freshsales/tasks/task_update":                                                crm_freshsales_tasks_task_update.Execute,
 	"crm/salesforce/account_add_note":                                                 crm_salesforce_account_add_note.Execute,
 	"crm/salesforce/account_contact_relation_create":                                  crm_salesforce_account_contact_relation_create.Execute,
 	"crm/salesforce/account_contact_relation_delete":                                  crm_salesforce_account_contact_relation_delete.Execute,
@@ -6981,6 +7130,7 @@ var Actions = map[string]core.Action{
 	"trigger/facebook_feed":                                                           trigger_facebook_feed.Execute,
 	"trigger/facebook_messenger":                                                      trigger_facebook_messenger.Execute,
 	"trigger/form":                                                                    trigger_form.Execute,
+	"trigger/freshsales_webhook":                                                      trigger_freshsales_webhook.Execute,
 	"trigger/git_poll":                                                                trigger_git_poll.Execute,
 	"trigger/github_webhook":                                                          trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":                                                          trigger_gitlab_webhook.Execute,
