@@ -3467,6 +3467,7 @@ import (
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
 	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
 	trigger_form "flomation.app/automate/executor/actions/trigger/form"
+	trigger_freshsales_webhook "flomation.app/automate/executor/actions/trigger/freshsales_webhook"
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
@@ -7129,6 +7130,7 @@ var Actions = map[string]core.Action{
 	"trigger/facebook_feed":                                                           trigger_facebook_feed.Execute,
 	"trigger/facebook_messenger":                                                      trigger_facebook_messenger.Execute,
 	"trigger/form":                                                                    trigger_form.Execute,
+	"trigger/freshsales_webhook":                                                      trigger_freshsales_webhook.Execute,
 	"trigger/git_poll":                                                                trigger_git_poll.Execute,
 	"trigger/github_webhook":                                                          trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":                                                          trigger_gitlab_webhook.Execute,

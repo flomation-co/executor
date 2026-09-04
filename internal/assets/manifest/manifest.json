@@ -559798,6 +559798,90 @@
       }
     ]
   },
+  "trigger/freshsales_webhook": {
+    "hash": "cfe9a6a4c51f9fd51e7872a6b2aa1f41043ebb819f664ded854af635602cf9f2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Freshsales Webhook Trigger",
+    "description": "Triggers a flow when a Freshsales workflow webhook fires (contact, account or deal changes).",
+    "website": "https://www.flomation.co",
+    "icon": "freshworks",
+    "date": "04/09/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "webhook_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Secret",
+        "placeholder": "A token you choose — paste it into the webhook's Token auth field in Freshsales",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated event names, e.g. contact.created,deal.won (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "entity_type",
+        "type": "string",
+        "value": null,
+        "label": "Entity Type",
+        "placeholder": ""
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Freshsales Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/git_poll": {
     "hash": "f2c4622b03c7358cd3173ecd37adc3161416663ed8a1984c3e955e98910073e4",
     "author": "Andy Esser",
