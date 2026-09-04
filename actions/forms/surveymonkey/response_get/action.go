@@ -16,7 +16,7 @@ const (
 	Name         = "Get Response"
 	Description  = "Retrieve a single SurveyMonkey survey response by its response ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope-open-text+eye"
+	Icon         = "surveymonkey+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

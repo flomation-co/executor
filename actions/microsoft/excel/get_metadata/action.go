@@ -14,7 +14,7 @@ const (
 	Name         = "Get Workbook Metadata"
 	Description  = "Retrieve metadata for a Microsoft Excel Online workbook"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+eye"
+	Icon         = "msexcel+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

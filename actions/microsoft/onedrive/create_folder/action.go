@@ -15,7 +15,7 @@ const (
 	Name         = "Create Folder"
 	Description  = "Create a new folder in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+plus"
+	Icon         = "onedrive+plus"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

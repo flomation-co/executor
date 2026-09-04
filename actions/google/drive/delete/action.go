@@ -15,7 +15,7 @@ const (
 	Name         = "Delete Drive File"
 	Description  = "Delete or trash a file in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+trash"
+	Icon         = "googledrive+trash"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

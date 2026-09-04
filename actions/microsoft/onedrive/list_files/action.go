@@ -16,7 +16,7 @@ const (
 	Name         = "List Files"
 	Description  = "List files and folders in a OneDrive directory"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+list"
+	Icon         = "onedrive+list"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

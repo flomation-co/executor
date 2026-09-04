@@ -21,7 +21,7 @@ const (
 	Name         = "Upload Presentation"
 	Description  = "Upload a PowerPoint presentation to OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+arrow-up"
+	Icon         = "mspowerpoint+arrow-up"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

@@ -116,6 +116,11 @@ gitlab
 globe
 gmail
 google
+googledocs
+googledrive
+googleforms
+googlesheets
+googleslides
 grid
 grip
 grip-vertical
@@ -133,6 +138,7 @@ image
 intercom
 jenkins
 jira
+jotform
 key
 kubernetes
 landmark
@@ -156,9 +162,13 @@ microphone
 microsoft
 minus
 monday
+msexcel
+mspowerpoint
+msword
 network-wired
 notion
 object-group
+onedrive
 oracle
 paper-plane
 paperclip
@@ -204,6 +214,7 @@ star-outline
 star-solid
 stop
 stripe
+surveymonkey
 sync
 table
 tag
@@ -216,6 +227,7 @@ trash
 trello
 triangle-exclamation
 truck-ramp-box
+typeform
 unlink
 user
 user-group

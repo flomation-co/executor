@@ -19,7 +19,7 @@ const (
 	Name         = "Read Document"
 	Description  = "Download a Word document as HTML or PDF from OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+eye"
+	Icon         = "msword+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

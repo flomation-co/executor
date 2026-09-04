@@ -16,7 +16,7 @@ const (
 	Name         = "Get Form"
 	Description  = "Retrieve a Google Form's definition, items and metadata by form ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+eye"
+	Icon         = "googleforms+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

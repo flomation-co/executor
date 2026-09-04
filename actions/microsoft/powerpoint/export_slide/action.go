@@ -18,7 +18,7 @@ const (
 	Name         = "Export Slide Thumbnail"
 	Description  = "Export a presentation thumbnail as a PNG image from OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+image"
+	Icon         = "mspowerpoint+image"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

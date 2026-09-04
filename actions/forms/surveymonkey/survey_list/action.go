@@ -17,7 +17,7 @@ const (
 	Name         = "List Surveys"
 	Description  = "List SurveyMonkey surveys in the account, with page and per-page paging."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+list"
+	Icon         = "surveymonkey+list"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

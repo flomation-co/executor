@@ -19,7 +19,7 @@ const (
 	Name         = "Create Document"
 	Description  = "Create a new empty Word document in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+plus"
+	Icon         = "msword+plus"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

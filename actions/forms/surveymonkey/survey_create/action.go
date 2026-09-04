@@ -17,7 +17,7 @@ const (
 	Name         = "Create Survey"
 	Description  = "Create a new SurveyMonkey survey with a title and optional JSON body override."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+plus"
+	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

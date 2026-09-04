@@ -15,7 +15,7 @@ const (
 	Name         = "Get Slide"
 	Description  = "Get the content and elements of a specific slide"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+eye"
+	Icon         = "googleslides+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

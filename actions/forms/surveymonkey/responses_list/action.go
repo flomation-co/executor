@@ -17,7 +17,7 @@ const (
 	Name         = "List Responses"
 	Description  = "Retrieve bulk responses for a SurveyMonkey survey, with page and per-page paging."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+envelope-open-text"
+	Icon         = "surveymonkey+envelope-open-text"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

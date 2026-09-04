@@ -19,7 +19,7 @@ const (
 	Name         = "Download Presentation"
 	Description  = "Download a PowerPoint presentation as PPTX or PDF from OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+arrow-down"
+	Icon         = "mspowerpoint+arrow-down"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

@@ -17,7 +17,7 @@ const (
 	Name         = "Create Webhook"
 	Description  = "Register a JotForm webhook that fires on each new submission of a form."
 	Website      = "https://www.flomation.co"
-	Icon         = "webhook+plus"
+	Icon         = "jotform+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

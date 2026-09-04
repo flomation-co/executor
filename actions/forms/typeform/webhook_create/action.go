@@ -17,7 +17,7 @@ const (
 	Name         = "Create Webhook"
 	Description  = "Register or update a Typeform webhook that fires on each form submission."
 	Website      = "https://www.flomation.co"
-	Icon         = "webhook+plus"
+	Icon         = "typeform+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

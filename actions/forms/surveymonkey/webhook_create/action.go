@@ -18,7 +18,7 @@ const (
 	Name         = "Create Webhook"
 	Description  = "Register a SurveyMonkey webhook that fires on survey or response events."
 	Website      = "https://www.flomation.co"
-	Icon         = "webhook+plus"
+	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

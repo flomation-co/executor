@@ -17,7 +17,7 @@ const (
 	Name         = "Search Drive"
 	Description  = "Search for files in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+magnifying-glass"
+	Icon         = "googledrive+magnifying-glass"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

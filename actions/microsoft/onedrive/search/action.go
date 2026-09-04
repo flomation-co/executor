@@ -17,7 +17,7 @@ const (
 	Name         = "Search Files"
 	Description  = "Search for files and folders in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+magnifying-glass"
+	Icon         = "onedrive+magnifying-glass"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

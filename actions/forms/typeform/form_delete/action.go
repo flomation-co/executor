@@ -16,7 +16,7 @@ const (
 	Name         = "Delete Form"
 	Description  = "Delete a Typeform form permanently by its form ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+trash"
+	Icon         = "typeform+trash"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )
