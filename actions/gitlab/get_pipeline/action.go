@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get Pipeline"
 	Description  = "Retrieve details of a specific GitLab pipeline"
+	Summary      = "Check whether a pipeline passed"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+eye"
 	Date         = "26/04/2026"

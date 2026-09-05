@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Run Command"
 	Description  = "Run a shell command on a desktop VM (targets the desktop session) and return its output."
+	Summary      = "Run a command on the desktop machine"
 	Website      = "https://www.flomation.co"
 	Icon         = "terminal"
 	Date         = "13/08/2026"

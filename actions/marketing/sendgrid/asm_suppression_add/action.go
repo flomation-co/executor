@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Add Group Suppressions"
 	Description  = "Add one or more email addresses to a SendGrid unsubscribe (ASM) group so they stop receiving email assigned to that group. Separate multiple addresses with commas."
+	Summary      = "Unsubscribe addresses from one group"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+ban"
 	Date         = "09/07/2026"

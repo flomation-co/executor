@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Archive/Unarchive List"
 	Description  = "Archive (close) a Trello list, or reopen it, with the Archive toggle."
+	Summary      = "Archive a list, or bring it back"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+box-archive"
 	Date         = "07/07/2026"

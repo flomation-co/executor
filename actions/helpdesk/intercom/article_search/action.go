@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Search Articles"
 	Description  = "Search your Intercom Help Center articles by phrase. Filter by state (published or draft) and optionally highlight the matching terms in the results. Just-published or freshly edited articles can take a few minutes to become searchable — fetch by ID for instant results."
+	Summary      = "Search the help centre by keyword"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

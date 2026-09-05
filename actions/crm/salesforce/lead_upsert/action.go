@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Lead"
 	Description  = "Update the lead that matches an ID from your own system, or create it if there is no match. Safe to re-run — it never makes a duplicate."
+	Summary      = "Add a lead, or update them if they exist"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

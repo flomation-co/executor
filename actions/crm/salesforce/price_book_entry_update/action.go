@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Change Product Price"
 	Description  = "Change what a product costs in a price book, or switch the price off so nobody can quote it. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a product's price in a price book"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

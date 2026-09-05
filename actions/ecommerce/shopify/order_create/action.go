@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify: Create Order"
 	Description  = "Create an order in your Shopify store. Provide line items as JSON; set common fields directly or add any other order field via Additional Fields."
+	Summary      = "Create an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify+plus"
 	Date         = "02/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run Query Including Deleted"
 	Description  = "Run a Salesforce query that also returns records in the Recycle Bin and archived activities — the records people think have vanished. Select IsDeleted in your query to see which ones are deleted, or add WHERE IsDeleted = true to see only those."
+	Summary      = "Run a query that also returns deleted records"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clock-rotate-left"
 	Date         = "25/07/2026"

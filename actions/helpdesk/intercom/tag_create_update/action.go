@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create or Update Tag"
 	Description  = "Create a tag in Intercom, or rename an existing one by also providing its Tag ID. Creating a name that already exists simply returns the existing tag."
+	Summary      = "Create a tag, or rename it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

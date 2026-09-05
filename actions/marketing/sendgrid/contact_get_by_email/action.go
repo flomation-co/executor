@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Contact by Email"
 	Description  = "Look up a single marketing contact by email address (primary or alternate) and return the full contact record. Note that a contact added moments ago may not be found yet — SendGrid applies contact changes asynchronously."
+	Summary      = "Look up a contact by email address"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+envelope"
 	Date         = "09/07/2026"

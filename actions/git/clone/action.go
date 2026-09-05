@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Clone"
 	Description  = "Clone a Git repository"
+	Summary      = "Download a copy of a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+arrow-down"
 	Date         = "06/03/2026"

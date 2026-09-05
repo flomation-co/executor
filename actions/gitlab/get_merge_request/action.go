@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get Merge Request"
 	Description  = "Retrieve details of a GitLab merge request by IID"
+	Summary      = "Read a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+eye"
 	Date         = "26/04/2026"

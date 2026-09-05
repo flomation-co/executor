@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Contact"
 	Description  = "Look up a single Intercom contact, either by their Intercom Contact ID or by the External ID you gave them."
+	Summary      = "Look up one contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+eye"
 	Date         = "08/07/2026"

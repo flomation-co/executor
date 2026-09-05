@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Case"
 	Description  = "Change an existing Salesforce case — reassign it, raise its priority, escalate it or move it to the next status. Fields you leave blank are left exactly as they are."
+	Summary      = "Change a case's status or details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

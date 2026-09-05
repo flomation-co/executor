@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Contacts"
 	Description  = "List the contacts in your Intercom workspace. Enable Return All to fetch every contact automatically; to narrow by field values use Search Contacts instead."
+	Summary      = "List contacts"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

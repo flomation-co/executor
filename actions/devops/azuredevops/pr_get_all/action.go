@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Pull Requests"
 	Description  = "List pull requests in a repository, filterable by status, creator, reviewer and target branch. \"PRs awaiting review\" is the classic use — set Status to Active and give a Reviewer ID."
+	Summary      = "List open pull requests"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Attachment (Classic)"
 	Description  = "Rename a Classic attachment, change its description, owner or privacy, or replace the file itself. Anything you leave blank is left as it was."
+	Summary      = "Rename an attachment (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pencil"
 	Date         = "25/07/2026"

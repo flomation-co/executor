@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Delete Company"
 	Description  = "Permanently delete a company from Intercom by its Intercom ID. This can't be undone."
+	Summary      = "Delete a company record"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+trash"
 	Date         = "08/07/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Reports"
 	Description  = "List the saved Salesforce reports you can run, with the ID that Run Report needs. Search by name or narrow it to one report folder."
+	Summary      = "List the reports you can run"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

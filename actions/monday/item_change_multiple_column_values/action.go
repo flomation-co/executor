@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Change Multiple Column Values"
 	Description  = "Set several column values on a Monday.com item at once, as a JSON object of column-id → value."
+	Summary      = "Set several columns on an item at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+pen"
 	Date         = "07/07/2026"

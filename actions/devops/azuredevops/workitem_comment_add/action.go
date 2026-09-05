@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Add Work Item Comment"
 	Description  = "Add a comment to a work item. Unlike creating or updating one, a comment is plain text on its own endpoint — no field map involved. Comments accept simple HTML for formatting."
+	Summary      = "Comment on a work item"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+comment"
 	Date         = "17/07/2026"

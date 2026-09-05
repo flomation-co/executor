@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Contact"
 	Description  = "Change one or more fields on an existing contact. Anything you leave blank is left exactly as it is in Salesforce, so you can update a single phone number without touching the rest."
+	Summary      = "Change a contact's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

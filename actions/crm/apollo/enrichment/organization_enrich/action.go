@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Company: Enrich"
 	Description  = "Enrich a company in Apollo by its domain. Returns the organisation object."
+	Summary      = "Fill in a company's details from its domain"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+bolt"
 	Date         = "01/08/2026"

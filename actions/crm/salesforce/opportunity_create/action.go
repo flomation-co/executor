@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Opportunity"
 	Description  = "Create a deal in Salesforce with its value, stage and expected close date. Use it when an enquiry turns into something worth quoting for."
+	Summary      = "Create a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

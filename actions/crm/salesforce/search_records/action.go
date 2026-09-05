@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Find Records"
 	Description  = "Search Salesforce for anything — a name, an email address, a phone number, a reference — and get back the matching records across whichever objects you choose. No query writing required."
+	Summary      = "Search across Salesforce for a word or phrase"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

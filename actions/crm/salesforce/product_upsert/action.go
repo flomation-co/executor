@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Product"
 	Description  = "Keep your Salesforce catalogue in step with a spreadsheet, shop or ERP: match a product on its name, code or your own reference and update it if it exists, or create it if it does not. Safe to run over and over - it will not create duplicates."
+	Summary      = "Add a product, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+rotate"
 	Date         = "26/07/2026"

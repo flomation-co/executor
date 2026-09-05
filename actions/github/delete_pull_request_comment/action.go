@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Delete PR Comment"
 	Description  = "Remove a comment from a GitHub pull request"
+	Summary      = "Delete a comment on a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+trash"
 	Date         = "26/04/2026"

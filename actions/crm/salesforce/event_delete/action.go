@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Event"
 	Description  = "Take a single appointment out of the Salesforce diary. It goes to the Recycle Bin rather than disappearing, so it can still be restored for the next 15 days."
+	Summary      = "Delete a calendar event"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

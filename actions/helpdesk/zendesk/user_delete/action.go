@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Delete User"
 	Description  = "Permanently delete (soft-delete) a Zendesk user by their ID."
+	Summary      = "Delete a user"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+trash"
 	Date         = "03/07/2026"

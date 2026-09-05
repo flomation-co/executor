@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab List MR Comments"
 	Description  = "List notes and comments on a GitLab merge request"
+	Summary      = "List the comments on a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+comments"
 	Date         = "26/04/2026"

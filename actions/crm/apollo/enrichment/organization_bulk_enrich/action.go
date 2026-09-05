@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Company: Bulk Enrich"
 	Description  = "Enrich up to 10 companies at once from a comma-separated list of domains."
+	Summary      = "Fill in details for many companies at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+bolt"
 	Date         = "01/08/2026"

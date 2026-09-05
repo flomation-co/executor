@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get Merge Request Diff"
 	Description  = "Retrieve the diff and changed files for a GitLab merge request"
+	Summary      = "See what a merge request changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+file-lines"
 	Date         = "26/04/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Enable Job"
 	Description  = "Enable a Jenkins job so it can be built again."
+	Summary      = "Allow a job to run again"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+check"
 	Date         = "04/07/2026"

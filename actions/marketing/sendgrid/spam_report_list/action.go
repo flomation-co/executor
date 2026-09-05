@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Spam Reports"
 	Description  = "Retrieve the addresses on your SendGrid spam report list — recipients who marked your email as spam. Optionally narrow the list to a date range."
+	Summary      = "List addresses that marked your mail as spam"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

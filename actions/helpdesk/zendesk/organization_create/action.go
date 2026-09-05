@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Create Organization"
 	Description  = "Create an organization in Zendesk. Set details, notes, domains and tags directly, add custom organization fields as JSON, or use Additional Fields."
+	Summary      = "Add an organisation"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+plus"
 	Date         = "03/07/2026"

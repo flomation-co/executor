@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Custom Object Record"
 	Description  = "Add a record to one of your organisation's own Salesforce objects — an Invoice, a Booking, a Property, whatever your administrator has built. Fill in the standard Name, Owner and Record Type, and supply the object's own fields as JSON."
+	Summary      = "Add a record to one of your own objects"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

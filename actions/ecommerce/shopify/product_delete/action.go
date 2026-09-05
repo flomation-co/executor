@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify: Delete Product"
 	Description  = "Permanently delete a product from your Shopify store by its ID."
+	Summary      = "Delete a product"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify+trash"
 	Date         = "02/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Create Commit"
 	Description  = "Commit one or more file changes to a branch in a single commit via the API (no git)"
+	Summary      = "Commit several file changes at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+code"
 	Date         = "29/07/2026"

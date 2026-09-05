@@ -36,6 +36,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Reject Request"
 	Description  = "Reject a Salesforce record that is waiting for approval, recording the reason against the decision."
+	Summary      = "Reject something waiting on you"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+xmark"
 	Date         = "25/07/2026"

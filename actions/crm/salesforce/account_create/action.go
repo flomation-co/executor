@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Account"
 	Description  = "Add a company to Salesforce as an Account, with its billing and shipping addresses, phone, website, owner and classification. Any field your org has added can be set through Additional Fields."
+	Summary      = "Add a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

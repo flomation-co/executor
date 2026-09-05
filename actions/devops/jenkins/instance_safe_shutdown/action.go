@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Safely Shutdown"
 	Description  = "Shut Jenkins down once all running builds have finished. Not all environments support this."
+	Summary      = "Shut Jenkins down once builds have finished"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+stop"
 	Date         = "04/07/2026"

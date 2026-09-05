@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Get Pull Request Diff"
 	Description  = "Retrieve changed files for a GitHub pull request"
+	Summary      = "See what a pull request changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+file-lines"
 	Date         = "26/04/2026"

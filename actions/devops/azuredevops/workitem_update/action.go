@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Update Work Item"
 	Description  = "Update a work item's fields. Give an ordinary name/value map — \"state\", \"assigned to\", \"priority\", or full reference names; set a value to null to clear that field. The JSON-Patch document Azure DevOps requires is built for you."
+	Summary      = "Change a work item's fields"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+pen"
 	Date         = "17/07/2026"

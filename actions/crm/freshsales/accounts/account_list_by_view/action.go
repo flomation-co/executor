@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: List By View"
 	Description  = "List sales_accounts in a saved view. Get the view ID from Account: List Views."
+	Summary      = "List the companies in a saved view"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

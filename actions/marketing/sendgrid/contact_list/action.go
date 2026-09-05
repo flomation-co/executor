@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Recent Contacts"
 	Description  = "Retrieve a sample of up to 50 most recently updated marketing contacts. SendGrid does not offer a way to page through every contact here — use \"SendGrid: Search Contacts\" to find specific contacts, or \"SendGrid: Count Contacts\" for the account total."
+	Summary      = "List the most recently added contacts"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

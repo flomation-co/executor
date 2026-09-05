@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Case Comment"
 	Description  = "Remove a comment from a Salesforce case — for a note posted in error, or one published to the customer portal by mistake. Give it the comment's ID, not the case's."
+	Summary      = "Delete a comment on a case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+xmark"
 	Date         = "25/07/2026"

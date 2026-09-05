@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run List View"
 	Description  = "Run one of the saved views your Salesforce administrator has already built and get its records back. No query writing at all — and because it uses the org's own view, the results stay right when the admin changes the filters."
+	Summary      = "Get the records in a saved view"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

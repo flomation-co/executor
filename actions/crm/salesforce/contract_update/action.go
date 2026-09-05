@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Contract"
 	Description  = "Change a contract in Salesforce - push the start date, extend the term, record the signatures, hand it to a new owner. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a contract's terms or dates"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

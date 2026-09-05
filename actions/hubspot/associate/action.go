@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Association: Link Records"
 	Description  = "Link two HubSpot records with the default association, e.g. attach a contact to a company or a deal. Direction is from -> to."
+	Summary      = "Link two records together"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+link"
 	Date         = "30/06/2026"

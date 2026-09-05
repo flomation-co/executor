@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Task Object Info"
 	Description  = "Return what your Salesforce org's Task object looks like, plus the tasks you last viewed. Handy for checking which status, priority and subject values your org actually uses, and as a quick test that the connection works."
+	Summary      = "List the fields available on a task"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

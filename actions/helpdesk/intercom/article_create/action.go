@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create Article"
 	Description  = "Create a Help Center article in Intercom. Articles start as drafts unless you set State to Published; the Body accepts HTML."
+	Summary      = "Publish a new help centre article"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

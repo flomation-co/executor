@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Person: Enrich"
 	Description  = "Enrich a single person in Apollo by email, name or LinkedIn URL."
+	Summary      = "Find someone's email and job title"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+bolt"
 	Date         = "01/08/2026"

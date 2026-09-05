@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Price Books"
 	Description  = "List your Salesforce price books and see which one is the standard list price. Use it to find the price book ID a deal or a price needs, without hunting through Setup."
+	Summary      = "List your price books"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+layer-group"
 	Date         = "26/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Merge Pull Request"
 	Description  = "Merge a GitHub pull request"
+	Summary      = "Merge a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+check"
 	Date         = "26/04/2026"

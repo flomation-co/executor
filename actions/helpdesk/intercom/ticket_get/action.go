@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Ticket"
 	Description  = "Look up a single Intercom ticket by its ID and return everything on it — state, attributes, assignees, and the linked contacts."
+	Summary      = "Read a ticket and its history"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+eye"
 	Date         = "08/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Account-Contact Relationships"
 	Description  = "List who is connected to a company and in what role — or, given a contact, every company they are connected to. Covers the related contacts a company has as well as its own direct ones."
+	Summary      = "List which contacts belong to which companies"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-group"
 	Date         = "25/07/2026"

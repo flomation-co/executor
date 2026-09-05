@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Campaign Member"
 	Description  = "Move someone along in a Salesforce campaign — Registered to Attended, or Sent to Responded. Give the campaign member's ID, or just the campaign plus the lead or contact and they will be found for you."
+	Summary      = "Change someone's status on a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "25/07/2026"

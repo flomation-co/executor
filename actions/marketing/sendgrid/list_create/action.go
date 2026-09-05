@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Create Contact List"
 	Description  = "Create a new contact list in SendGrid Marketing. Give the list a name (it must be unique in your account) — you can then add contacts to it with the contact actions."
+	Summary      = "Create a contact list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+plus"
 	Date         = "09/07/2026"

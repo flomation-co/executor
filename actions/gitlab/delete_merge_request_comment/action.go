@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Delete MR Comment"
 	Description  = "Remove a comment from a GitLab merge request"
+	Summary      = "Delete a comment on a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+trash"
 	Date         = "26/04/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Price Book Entries"
 	Description  = "Find what a product costs, and get the price book entry ID you need to put it on a deal. Pick a price book, a product, or both - this is the lookup Salesforce makes you write SOQL for."
+	Summary      = "List the products and prices in a price book"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+dollar-sign"
 	Date         = "26/07/2026"

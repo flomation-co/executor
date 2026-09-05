@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Many Records"
 	Description  = "Create a whole list of records on any Salesforce object in one go. Up to 200 records per API call, split automatically, so a big import does not eat your org's daily Salesforce allowance."
+	Summary      = "Create up to 200 records at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+layer-group"
 	Date         = "25/07/2026"

@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Describe Object"
 	Description  = "Look up everything about a Salesforce object — its fields, which are required, the values a dropdown field accepts, its record types and its related lists. Works for any standard or custom object."
+	Summary      = "List the fields available on any object"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

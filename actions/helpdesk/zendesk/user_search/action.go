@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Search Users"
 	Description  = "Search Zendesk users by name, email, phone, or external ID. Enable Return All to auto-paginate every match."
+	Summary      = "Find users by name, email or phone"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+magnifying-glass"
 	Date         = "03/07/2026"

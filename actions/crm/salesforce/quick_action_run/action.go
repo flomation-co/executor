@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run Quick Action"
 	Description  = "Create or update a record using one of your Salesforce quick actions, so it comes out exactly the way your administrator set the action up."
+	Summary      = "Run a quick action on a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

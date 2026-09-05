@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: Resend"
 	Description  = "Create a resend-to-non-openers version of a sent Mailchimp campaign. Returns the newly created campaign."
+	Summary      = "Send a campaign again to those who did not open it"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+repeat"
 	Date         = "01/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Add Tag to Contact"
 	Description  = "Apply a tag to a contact — handy for segmenting people. Pick from your workspace's existing tags (use Create/Update Tag to make a new one)."
+	Summary      = "Tag a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+hashtag"
 	Date         = "08/07/2026"

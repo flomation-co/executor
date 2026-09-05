@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Order"
 	Description  = "Raise an order against a customer's account in Salesforce - the record that turns a won deal or an online sale into something the warehouse and finance can work from. Add its product lines next, then activate it."
+	Summary      = "Create an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "26/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Update Organization"
 	Description  = "Update a Zendesk organization. Change details, notes, domains, tags, custom organization fields, or any other field via Additional Fields."
+	Summary      = "Change an organisation's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+pencil"
 	Date         = "03/07/2026"

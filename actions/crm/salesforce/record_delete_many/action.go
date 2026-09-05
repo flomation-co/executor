@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Many Records"
 	Description  = "Delete a list of Salesforce records in one go — up to 200 per API call, split automatically. Deleted records go to the Recycle Bin and can be restored for 15 days."
+	Summary      = "Delete up to 200 records at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Opportunity"
 	Description  = "Send a deal to the Salesforce Recycle Bin, where an administrator can restore it for 15 days."
+	Summary      = "Delete a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

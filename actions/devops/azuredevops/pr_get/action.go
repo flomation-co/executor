@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Pull Request"
 	Description  = "Get one pull request, including its merge status, reviewers and the last source commit. Merge Status is what tells you whether it can actually be completed."
+	Summary      = "Read a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

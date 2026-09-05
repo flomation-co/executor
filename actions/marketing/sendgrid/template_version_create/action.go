@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Create Template Version"
 	Description  = "Add a new version to a SendGrid transactional template. Provide the subject and HTML content, and tick Active to make this the version that is sent."
+	Summary      = "Add a new version of a template"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+plus"
 	Date         = "09/07/2026"

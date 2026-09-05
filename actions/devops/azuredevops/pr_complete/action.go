@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Complete Pull Request"
 	Description  = "Complete (merge) a pull request, with the usual options — squash, delete the source branch, resolve linked work items. Azure DevOps refuses to merge a PR that has moved since you last read it, so this action re-reads the PR first and echoes its latest commit back; no extra step needed."
+	Summary      = "Merge and close a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+check"
 	Date         = "17/07/2026"

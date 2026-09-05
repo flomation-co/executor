@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Builds"
 	Description  = "List builds across a project, filterable by definition, status, result and branch. This is the classic Build API rather than the Pipelines API — deliberately: the Pipelines API can only list runs of ONE pipeline, so a cross-pipeline view is only available here."
+	Summary      = "List recent builds"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

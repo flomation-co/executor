@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Update Pull Request"
 	Description  = "Update an existing GitHub pull request"
+	Summary      = "Change a pull request's title or state"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+pencil"
 	Date         = "26/04/2026"

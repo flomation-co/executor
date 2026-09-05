@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Team"
 	Description  = "Retrieve a single team by ID, including the admins in it."
+	Summary      = "Look up one team"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+eye"
 	Date         = "08/07/2026"

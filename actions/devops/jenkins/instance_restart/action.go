@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Restart"
 	Description  = "Restart Jenkins immediately, interrupting any running builds. Not all environments support this."
+	Summary      = "Restart Jenkins immediately"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+rotate-right"
 	Date         = "04/07/2026"

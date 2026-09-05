@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Segments"
 	Description  = "List the segments in your SendGrid Marketing account — the dynamic groups of contacts defined by a query. Optionally only return segments attached to specific parent lists."
+	Summary      = "List your contact segments"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

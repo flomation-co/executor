@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Count Organizations"
 	Description  = "Return the number of organizations in your Zendesk account."
+	Summary      = "Count your organisations"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+hashtag"
 	Date         = "03/07/2026"

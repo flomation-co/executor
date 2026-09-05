@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Quote"
 	Description  = "Create a quote on a deal in Salesforce, ready for product lines to be added and sent to the customer. Salesforce works out the quote number, the customer's account and the totals for you."
+	Summary      = "Create a quote"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "26/07/2026"

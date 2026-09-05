@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Delete Ticket"
 	Description  = "Permanently delete an Intercom ticket by its ID. This can't be undone."
+	Summary      = "Delete a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+trash"
 	Date         = "08/07/2026"

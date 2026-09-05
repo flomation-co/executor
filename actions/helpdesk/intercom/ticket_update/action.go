@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Update Ticket"
 	Description  = "Change an Intercom ticket — edit its title, description, or attributes, move it to another state, snooze or reopen it, or hand it to a different teammate or team."
+	Summary      = "Change a ticket's status or details"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+pen"
 	Date         = "08/07/2026"

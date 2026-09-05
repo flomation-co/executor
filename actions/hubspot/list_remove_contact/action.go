@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Remove Contacts"
 	Description  = "Remove contacts from a HubSpot static list by contact ID. Only works on static (not dynamic) lists."
+	Summary      = "Take contacts off a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+list"
 	Date         = "30/06/2026"

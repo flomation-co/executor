@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get User"
 	Description  = "Retrieve a single Zendesk user by their ID."
+	Summary      = "Look up one user"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+eye"
 	Date         = "03/07/2026"

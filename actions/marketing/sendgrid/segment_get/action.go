@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Segment"
 	Description  = "Look up one segment in SendGrid Marketing — its query, contact count, and a sample of the contacts currently in it."
+	Summary      = "Look up one segment"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

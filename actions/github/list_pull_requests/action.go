@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub List Pull Requests"
 	Description  = "List pull requests in a GitHub repository with optional filters"
+	Summary      = "List pull requests in a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+list"
 	Date         = "26/04/2026"

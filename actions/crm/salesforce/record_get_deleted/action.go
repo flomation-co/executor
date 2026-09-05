@@ -29,6 +29,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Deleted Records"
 	Description  = "List the records deleted on any Salesforce object between two times, with when each one went. Deletions are invisible to ordinary searches, so this is the only way a flow can keep another system in step."
+	Summary      = "List records deleted in a time window"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+xmark"
 	Date         = "25/07/2026"

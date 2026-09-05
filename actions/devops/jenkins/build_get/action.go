@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Get Build"
 	Description  = "Fetch a single Jenkins build's details — result, duration, cause, and timestamp. Accepts a build number or a keyword like lastBuild or lastSuccessfulBuild."
+	Summary      = "Check the result of one build"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+eye"
 	Date         = "04/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Email"
 	Description  = "Email a Xero invoice to its contact using the organisation's default template."
+	Summary      = "Email an invoice to the customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+paper-plane"
 	Date         = "05/07/2026"

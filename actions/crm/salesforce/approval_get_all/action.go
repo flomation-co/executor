@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Approval Processes"
 	Description  = "List the approval processes set up in your Salesforce org, and optionally the records currently waiting for approval in each."
+	Summary      = "List the approval processes set up"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Deactivate User"
 	Description  = "Switch off a leaver's Salesforce login and free up their licence. Salesforce users can never be deleted, only deactivated, and their records stay exactly where they are."
+	Summary      = "Switch off a user's access"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-minus"
 	Date         = "25/07/2026"

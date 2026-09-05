@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Custom Object Records"
 	Description  = "List records from one of your organisation's own Salesforce objects, narrowed by a filter and sorted however you like. Turn on Return All to page through every match."
+	Summary      = "List records from one of your own objects"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

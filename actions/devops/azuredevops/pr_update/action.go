@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Update Pull Request"
 	Description  = "Update a pull request's title, description or target branch — and this is also how you abandon one (set Status to Abandoned) or bring it back (Active). Publishing a draft is Draft = off. To merge, use Complete Pull Request."
+	Summary      = "Change a pull request's title or state"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+pen"
 	Date         = "17/07/2026"

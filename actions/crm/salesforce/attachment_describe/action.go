@@ -26,6 +26,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Describe Attachments (Classic)"
 	Description  = "Check what your org stores on a Classic attachment and list the attachments you opened most recently — handy for finding the right field names."
+	Summary      = "List the fields on attachments (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

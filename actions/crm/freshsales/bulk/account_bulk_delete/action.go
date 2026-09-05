@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bulk: Delete Accounts"
 	Description  = "Delete many accounts in one call by ID."
+	Summary      = "Delete many companies at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

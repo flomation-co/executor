@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Work Item Types"
 	Description  = "List the work item types available in a project — Bug, Task, User Story and whatever else the project's process template defines. Worth checking before Create Work Item: process templates are customisable, so the familiar names are not guaranteed."
+	Summary      = "List the kinds of work item available"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

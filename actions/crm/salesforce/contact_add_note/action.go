@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Note to Contact (Classic)"
 	Description  = "Attach a note to a contact using Salesforce's Classic Notes. If your org uses Lightning Enhanced Notes, notes added this way appear under Notes & Attachments rather than the Notes panel."
+	Summary      = "Attach a note to a contact (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"
 	Date         = "25/07/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Contact to Campaign"
 	Description  = "Sign a contact up to a Salesforce campaign with a member status such as Sent, Registered or Responded. Optionally update their status if they are already on the list."
+	Summary      = "Add a contact to a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-group"
 	Date         = "25/07/2026"

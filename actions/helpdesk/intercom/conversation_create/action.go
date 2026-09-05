@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create Conversation"
 	Description  = "Start a new conversation in Intercom on behalf of a contact — the message appears as if the user or lead wrote it themselves."
+	Summary      = "Start a conversation with a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

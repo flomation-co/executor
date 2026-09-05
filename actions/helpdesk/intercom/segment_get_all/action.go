@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Segments"
 	Description  = "List the segments in your Intercom workspace — the saved smart groups of people you define in Intercom. Segments are read-only via the API."
+	Summary      = "List your customer segments"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

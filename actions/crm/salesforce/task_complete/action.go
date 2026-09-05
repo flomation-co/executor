@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Mark Task Complete"
 	Description  = "Tick a Salesforce task off. No need to know which status value your org counts as done — it uses Completed unless you tell it otherwise."
+	Summary      = "Mark a task as done"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Build"
 	Description  = "Get one build by ID, including its status, result, requester and source branch."
+	Summary      = "Check the result of one build"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

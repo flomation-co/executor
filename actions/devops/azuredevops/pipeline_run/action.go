@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Run Pipeline"
 	Description  = "Queue a pipeline run — the headline action, and the reason to wire Azure DevOps into a flow at all. Returns immediately with the run in progress; pair it with Get Pipeline Run to wait for the outcome. Variables can be given as plain name/value pairs."
+	Summary      = "Start a pipeline"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+play"
 	Date         = "17/07/2026"

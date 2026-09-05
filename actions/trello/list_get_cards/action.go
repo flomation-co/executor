@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Cards in List"
 	Description  = "List all cards in a Trello list. Optionally narrow the returned Fields."
+	Summary      = "List the cards in a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+list"
 	Date         = "07/07/2026"

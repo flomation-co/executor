@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Segment"
 	Description  = "Fetch a single segment by its ID."
+	Summary      = "Look up one segment"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

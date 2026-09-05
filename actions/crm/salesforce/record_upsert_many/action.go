@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Many Records"
 	Description  = "Import a whole list of records on any Salesforce object, matching each one on a reference of your own — an order number, a customer code, an email. Re-running never creates duplicates. Up to 200 records per API call."
+	Summary      = "Add or update up to 200 records at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

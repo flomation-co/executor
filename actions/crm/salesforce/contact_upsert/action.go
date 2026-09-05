@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Contact"
 	Description  = "Create a contact, or update the one that already matches. Salesforce matches on a field you choose — usually Email — so re-running a flow updates the same person instead of adding a duplicate."
+	Summary      = "Add a contact, or update them if they exist"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

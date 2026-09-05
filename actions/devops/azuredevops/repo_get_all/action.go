@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Repositories"
 	Description  = "List the Git repositories in a project, with each one's ID, default branch and clone URLs."
+	Summary      = "List the repositories in a project"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

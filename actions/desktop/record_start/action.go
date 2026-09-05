@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Start Recording"
 	Description  = "Start recording the screen of a desktop VM (ffmpeg). Stop with Desktop Stop Recording."
+	Summary      = "Start recording the screen"
 	Website      = "https://www.flomation.co"
 	Icon         = "video"
 	Date         = "12/08/2026"

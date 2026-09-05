@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Email: Send Now"
 	Description  = "Send a drafted Apollo email immediately (async). Master key required."
+	Summary      = "Send an email straight away"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+paper-plane"
 	Date         = "01/08/2026"

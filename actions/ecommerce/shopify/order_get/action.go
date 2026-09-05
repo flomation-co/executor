@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify: Get Order"
 	Description  = "Retrieve a single order from your Shopify store by its ID."
+	Summary      = "Look up one order"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify+search"
 	Date         = "02/07/2026"

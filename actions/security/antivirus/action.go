@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Scan with Antivirus"
 	Description  = "Scan a file or URL for malware using ClamAV"
+	Summary      = "Scan a file for viruses"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-virus"
 	Date         = "20/03/2026"

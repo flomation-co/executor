@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Add Tag to Ticket"
 	Description  = "Add an existing tag to an Intercom ticket so it's easy to group, filter, and report on."
+	Summary      = "Tag a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+hashtag"
 	Date         = "08/07/2026"

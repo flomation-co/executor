@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invite Board Member by Email"
 	Description  = "Invite someone to a Trello board by email address, optionally setting their membership type and full name."
+	Summary      = "Invite someone to a board by email"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+user-plus"
 	Date         = "07/07/2026"

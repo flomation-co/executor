@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Push"
 	Description  = "Push local commits to a remote Git repository"
+	Summary      = "Send your commits to the remote"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+arrow-up"
 	Date         = "06/03/2026"

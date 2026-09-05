@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Repository"
 	Description  = "Get one Git repository by name or ID — its default branch, size, web URL and clone URLs."
+	Summary      = "Look up one repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

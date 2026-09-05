@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Asset"
 	Description  = "Change an asset in Salesforce - mark it Installed once the engineer has been, extend the warranty date, move it to a new owner, retire it as Obsolete. Anything you leave blank is left exactly as it was."
+	Summary      = "Change an owned-product record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

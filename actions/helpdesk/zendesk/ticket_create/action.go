@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Create Ticket"
 	Description  = "Create a support ticket in Zendesk. The Description becomes the ticket's first comment; set common fields directly or add any other ticket field via Additional Fields."
+	Summary      = "Raise a new ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+plus"
 	Date         = "03/07/2026"

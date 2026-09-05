@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Many Ticket Fields"
 	Description  = "List all system and custom ticket fields in your Zendesk account. Enable Return All to auto-paginate."
+	Summary      = "List the fields available on a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+list"
 	Date         = "03/07/2026"

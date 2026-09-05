@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bill: Query"
 	Description  = "Query QuickBooks Online bills with an optional SQL-like statement. Returns matching bills."
+	Summary      = "Search supplier bills"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

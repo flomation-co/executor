@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Void"
 	Description  = "Void a QuickBooks Online invoice. Requires ID and sync token."
+	Summary      = "Void an invoice, keeping it on record"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+ban"
 	Date         = "05/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Articles"
 	Description  = "List the Help Center articles in your Intercom workspace. Enable Return All to auto-paginate through every article."
+	Summary      = "List every help centre article"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

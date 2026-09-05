@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Add Global Unsubscribes"
 	Description  = "Add one or more email addresses to SendGrid's global unsubscribe list so they stop receiving all email from your account. Separate multiple addresses with commas."
+	Summary      = "Stop all mail to these addresses"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+ban"
 	Date         = "09/07/2026"

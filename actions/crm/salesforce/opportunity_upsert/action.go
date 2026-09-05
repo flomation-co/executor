@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Opportunity"
 	Description  = "Match a deal on one of your own reference numbers and update it if it exists, or create it if it does not. This is what stops a re-run from creating a second copy of every deal."
+	Summary      = "Create a deal, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

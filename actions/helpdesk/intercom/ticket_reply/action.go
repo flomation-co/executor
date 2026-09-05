@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Reply to Ticket"
 	Description  = "Add a reply to an Intercom ticket — a customer-visible comment or an internal note as an admin, or a comment on the contact's behalf."
+	Summary      = "Reply to a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+reply"
 	Date         = "08/07/2026"

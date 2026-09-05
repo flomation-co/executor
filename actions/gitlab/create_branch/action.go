@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Create Branch"
 	Description  = "Create a new branch in a GitLab project via the API (no git checkout)"
+	Summary      = "Create a branch"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+code-branch"
 	Date         = "29/07/2026"

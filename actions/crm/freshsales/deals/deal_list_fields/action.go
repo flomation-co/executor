@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: List Fields"
 	Description  = "List every deal field, including custom fields."
+	Summary      = "List the fields available on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create Note"
 	Description  = "Add a private note to a contact's timeline. Notes are only visible to your teammates — the contact never sees them."
+	Summary      = "Add a private note to a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

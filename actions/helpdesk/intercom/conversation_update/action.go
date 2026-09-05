@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Update Conversation"
 	Description  = "Change an Intercom conversation — mark it read, retitle it, link a company, or set custom attributes."
+	Summary      = "Change a conversation's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+pen"
 	Date         = "08/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Check Global Unsubscribe"
 	Description  = "Check whether an email address is on SendGrid's global unsubscribe list. Returns a clear yes or no — an address that is not on the list is a normal result, not an error."
+	Summary      = "Check whether an address has opted out entirely"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+check"
 	Date         = "09/07/2026"

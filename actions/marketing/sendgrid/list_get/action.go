@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Contact List"
 	Description  = "Look up one contact list in SendGrid Marketing — its name and how many contacts it holds, optionally with a sample of up to 50 of its contacts."
+	Summary      = "Look up one contact list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

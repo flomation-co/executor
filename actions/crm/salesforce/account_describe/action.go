@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Account Setup Info"
 	Description  = "Find out how the Account object is set up in your Salesforce org — the accounts you viewed most recently, and (in Full detail) every field, picklist choice and record type available to build flows against."
+	Summary      = "List the fields available on a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+layer-group"
 	Date         = "25/07/2026"

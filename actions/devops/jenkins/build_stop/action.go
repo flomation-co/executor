@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Stop Build"
 	Description  = "Abort a running Jenkins build. Accepts a build number or a keyword like lastBuild."
+	Summary      = "Stop a running build"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+circle-stop"
 	Date         = "04/07/2026"

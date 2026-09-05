@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Contact"
 	Description  = "Look up a single marketing contact by its SendGrid contact ID and return the full contact record. To find a contact by email address instead, use \"SendGrid: Get Contact by Email\"."
+	Summary      = "Look up one contact by ID"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Company"
 	Description  = "Look up a single company by its Intercom ID, by your own Company ID, or by its exact name. Recently created or changed companies can take a few minutes to appear in Name lookups — look up by ID for instant results."
+	Summary      = "Look up one company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

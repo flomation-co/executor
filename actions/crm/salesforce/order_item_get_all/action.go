@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Order Products"
 	Description  = "List the product lines on an order with their quantity, price each and line total - what you need to send a picking list to the warehouse, raise an invoice or check an order before activating it."
+	Summary      = "List the products on an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+box"
 	Date         = "26/07/2026"

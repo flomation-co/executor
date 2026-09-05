@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Article"
 	Description  = "Retrieve a single Help Center article from Intercom by its ID."
+	Summary      = "Read one help centre article"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+eye"
 	Date         = "08/07/2026"

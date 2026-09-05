@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Order"
 	Description  = "Change an order in Salesforce - correct the delivery address, add the customer's PO number, move the dates, or put an activated order back to Draft so its products can be edited. Anything you leave blank is left exactly as it was."
+	Summary      = "Change an order's status or details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

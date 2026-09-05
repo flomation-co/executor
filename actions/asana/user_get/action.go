@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get User"
 	Description  = "Fetch a single Asana user by ID (or 'me' for the authenticated user)."
+	Summary      = "Look up one user"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+user"
 	Date         = "07/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Estimate: Query"
 	Description  = "Query QuickBooks Online estimates with SQL-like syntax. Returns matching estimate rows."
+	Summary      = "Search quotes and estimates"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

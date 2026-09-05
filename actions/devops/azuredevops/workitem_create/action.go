@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Create Work Item"
 	Description  = "Create a work item (Bug, Task, User Story, …). Fields are given as an ordinary name/value map — \"title\", \"assigned to\", \"priority\" and the like, or full reference names such as System.AreaPath. The JSON-Patch document Azure DevOps actually requires is built for you."
+	Summary      = "Raise a new work item"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+plus"
 	Date         = "17/07/2026"

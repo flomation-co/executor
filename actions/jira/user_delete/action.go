@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete User"
 	Description  = "Remove a user from your Atlassian site by their account ID. This deletes the user from the site — requires organisation-admin permission."
+	Summary      = "Delete a user"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+user-minus"
 	Date         = "06/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Unapprove Merge Request"
 	Description  = "Remove your approval from a GitLab merge request"
+	Summary      = "Withdraw your approval of a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+xmark"
 	Date         = "26/04/2026"

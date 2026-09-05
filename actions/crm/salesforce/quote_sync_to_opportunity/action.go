@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Sync Quote to Opportunity"
 	Description  = "Make the deal match the quote the customer actually received. Salesforce copies the quote's product lines and total onto the deal and keeps the two in step from then on, so the forecast shows the quoted figure rather than an old estimate."
+	Summary      = "Copy a quote's products onto its deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "26/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Stop Recording"
 	Description  = "Stop a desktop VM screen recording and return the video file."
+	Summary      = "Stop recording and save the video"
 	Website      = "https://www.flomation.co"
 	Icon         = "circle-stop"
 	Date         = "12/08/2026"

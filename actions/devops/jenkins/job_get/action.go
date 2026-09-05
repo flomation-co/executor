@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Get Job"
 	Description  = "Fetch a Jenkins job's details — its description, buildability, health, and last build references."
+	Summary      = "Read a job's settings and last result"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+eye"
 	Date         = "04/07/2026"

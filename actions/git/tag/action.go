@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Tag"
 	Description  = "Create or list tags in a Git repository"
+	Summary      = "Create, list or delete tags"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+bookmark"
 	Date         = "19/03/2026"

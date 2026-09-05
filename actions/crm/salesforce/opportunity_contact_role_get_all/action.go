@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Opportunity Contacts"
 	Description  = "List everyone involved in a deal and the part each of them plays, so a flow can email the decision maker or check a deal actually has one."
+	Summary      = "List the contacts on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-group"
 	Date         = "25/07/2026"

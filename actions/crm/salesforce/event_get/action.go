@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Event"
 	Description  = "Look up one calendar event in Salesforce by its record ID and return everything on it — when it is, where it is, who it is with."
+	Summary      = "Look up one calendar event"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+eye"
 	Date         = "25/07/2026"

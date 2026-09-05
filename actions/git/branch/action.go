@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Branch"
 	Description  = "Create, list, or switch Git branches"
+	Summary      = "Create, list or delete branches"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+plus"
 	Date         = "19/03/2026"

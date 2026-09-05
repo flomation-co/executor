@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Update Order"
 	Description  = "Update an existing order in your WooCommerce store. Only the fields you set are changed; add any other order field via Additional Fields."
+	Summary      = "Change an order's status or details"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+pencil"
 	Date         = "05/07/2026"

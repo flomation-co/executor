@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Campaign Members"
 	Description  = "See who is signed up to a Salesforce campaign and where each of them has got to — invited, responded, registered, attended. Filter by status to pull just the people you need to chase."
+	Summary      = "List who is on a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-group"
 	Date         = "25/07/2026"

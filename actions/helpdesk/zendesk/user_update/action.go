@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Update User"
 	Description  = "Update a Zendesk user. Change profile fields, custom user fields, or any other field via Additional Fields."
+	Summary      = "Change a user's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+pencil"
 	Date         = "03/07/2026"

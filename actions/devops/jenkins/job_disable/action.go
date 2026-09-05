@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Disable Job"
 	Description  = "Disable a Jenkins job so it can't be triggered until re-enabled."
+	Summary      = "Stop a job running"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+ban"
 	Date         = "04/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Update Unsubscribe Group"
 	Description  = "Update an unsubscribe (ASM) group's name, description, or default setting in SendGrid. Only the fields you provide are changed."
+	Summary      = "Rename or edit an unsubscribe group"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+pencil"
 	Date         = "09/07/2026"

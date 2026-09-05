@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Many Users"
 	Description  = "List Zendesk users, optionally filtered by role. Enable Return All to auto-paginate every match."
+	Summary      = "List users"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+list"
 	Date         = "03/07/2026"

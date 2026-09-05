@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run Query (SOQL)"
 	Description  = "Run a Salesforce query you have written yourself and return the matching records. This is the advanced, power-user path — if you would rather not write a query, use Find Records or Find Record by Field instead."
+	Summary      = "Query Salesforce data with SOQL"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+bolt"
 	Date         = "25/07/2026"

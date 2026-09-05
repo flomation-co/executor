@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Contract"
 	Description  = "Set up a contract against a customer's account - when it starts, how many months it runs for and who signed it. Salesforce gives it its own contract number and works the end date out from the term, so this is the record to hang the signed PDF off. New contracts always start as a draft; add an Activate Contract step to make one live."
+	Summary      = "Create a contract"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "26/07/2026"

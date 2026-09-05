@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Task"
 	Description  = "Look up one Salesforce task by its record ID and return everything on it, so a later step can check who it is assigned to, when it is due or whether it is done."
+	Summary      = "Look up one task"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+eye"
 	Date         = "25/07/2026"

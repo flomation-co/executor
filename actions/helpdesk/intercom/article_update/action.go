@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Update Article"
 	Description  = "Update a Help Center article in Intercom — change its title, content, author, state, or the collection it lives in. Only the fields you fill in are changed."
+	Summary      = "Edit a help centre article"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+pen"
 	Date         = "08/07/2026"

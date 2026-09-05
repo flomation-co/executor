@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Remove Tag from Ticket"
 	Description  = "Take a tag off an Intercom ticket. The tag itself is kept — only its link to this ticket is removed."
+	Summary      = "Take a tag off a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+xmark"
 	Date         = "08/07/2026"

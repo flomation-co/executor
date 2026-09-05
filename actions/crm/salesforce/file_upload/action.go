@@ -37,6 +37,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Upload File"
 	Description  = "Upload a file to Salesforce Files and optionally attach it to a record, so it shows up in the Files related list your team actually looks at."
+	Summary      = "Upload a file to Salesforce"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+cloud-arrow-up"
 	Date         = "25/07/2026"

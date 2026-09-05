@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Report"
 	Description  = "Fetch a QuickBooks Online report (e.g. ProfitAndLoss, BalanceSheet) with an optional date range."
+	Summary      = "Run a QuickBooks report"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+chart-line"
 	Date         = "05/07/2026"

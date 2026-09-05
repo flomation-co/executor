@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get File"
 	Description  = "Read a single file's contents from a branch, tag or commit via the API (no git)"
+	Summary      = "Read a file from a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+file-lines"
 	Date         = "29/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Import Status"
 	Description  = "Check the progress of an asynchronous contact job — the job ID returned by \"SendGrid: Create or Update Contact\" or \"SendGrid: Delete Contacts\". The status is pending, completed, errored, or failed, with counts of what was processed and a link to any error details."
+	Summary      = "Check whether a contact import has finished"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+clock"
 	Date         = "09/07/2026"

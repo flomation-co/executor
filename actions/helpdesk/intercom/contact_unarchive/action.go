@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Unarchive Contact"
 	Description  = "Bring an archived contact back into your Intercom workspace, with all their conversations and details intact."
+	Summary      = "Restore an archived contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+rotate-right"
 	Date         = "08/07/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Commits"
 	Description  = "List commits in a repository, filterable by branch, author, date range and file path. Useful for building release notes or spotting what landed since a given date."
+	Summary      = "List commits in a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+code"
 	Date         = "17/07/2026"

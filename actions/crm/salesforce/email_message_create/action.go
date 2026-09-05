@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Log Email"
 	Description  = "Record an email sent or received against a Case or another Salesforce record, so the whole thread is visible on the record."
+	Summary      = "Record an email against a Salesforce record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"
 	Date         = "25/07/2026"

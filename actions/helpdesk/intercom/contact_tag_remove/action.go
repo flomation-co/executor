@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Remove Tag from Contact"
 	Description  = "Take a tag off a contact. The tag itself isn't deleted — it just no longer applies to this person."
+	Summary      = "Take a tag off a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+minus"
 	Date         = "08/07/2026"

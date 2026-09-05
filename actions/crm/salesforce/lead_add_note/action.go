@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Note to Lead (Classic)"
 	Description  = "Attach a Classic note to a lead. Note: in orgs using the newer Lightning notes, a Classic note will not show in the Notes panel."
+	Summary      = "Attach a note to a lead (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"
 	Date         = "25/07/2026"

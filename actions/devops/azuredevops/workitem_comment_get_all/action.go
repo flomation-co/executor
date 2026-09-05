@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Work Item Comments"
 	Description  = "List the comments on a work item, newest last. Note these are the discussion comments, not the field-change history."
+	Summary      = "List the comments on a work item"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+comments"
 	Date         = "17/07/2026"

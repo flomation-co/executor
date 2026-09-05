@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Teams"
 	Description  = "List the teams in your Intercom workspace, including which admins belong to each."
+	Summary      = "List your support teams"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+user-group"
 	Date         = "08/07/2026"

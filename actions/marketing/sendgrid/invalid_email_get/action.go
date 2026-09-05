@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Invalid Email"
 	Description  = "Look up a single email address on your SendGrid invalid email list. If the address is not on the list, the action reports that no invalid email was found."
+	Summary      = "See why an address was judged invalid"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

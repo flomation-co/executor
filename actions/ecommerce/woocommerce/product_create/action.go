@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Create Product"
 	Description  = "Create a product in your WooCommerce store. Set common fields directly, supply images/attributes/dimensions as JSON, or add any other product field via Additional Fields."
+	Summary      = "Add a product to the shop"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+plus"
 	Date         = "05/07/2026"

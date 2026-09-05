@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Custom Object Record"
 	Description  = "Change fields on an existing record of one of your organisation's own Salesforce objects. Only the fields you fill in are sent, so everything else on the record is left exactly as it was."
+	Summary      = "Change a record in one of your own objects"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

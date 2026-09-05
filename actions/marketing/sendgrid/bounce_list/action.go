@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Bounces"
 	Description  = "Retrieve the addresses on your SendGrid bounce list — emails that were rejected by the recipient's mail server. Optionally narrow the list to a date range."
+	Summary      = "List addresses your mail bounced from"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

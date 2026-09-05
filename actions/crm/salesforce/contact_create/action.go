@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Contact"
 	Description  = "Add a new contact to Salesforce. Last Name is the only field Salesforce insists on; link the contact to a company with Account, and use Additional Fields for anything custom to your org."
+	Summary      = "Add a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create Ticket"
 	Description  = "Create a new ticket in Intercom. Pick the ticket type, say who it's for (by Contact ID, email, or your external ID), and optionally add a title, description, and an assignee."
+	Summary      = "Raise a new ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

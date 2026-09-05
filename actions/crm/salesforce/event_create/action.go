@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Event"
 	Description  = "Put a meeting, site visit or call in the diary in Salesforce and link it to the person and the deal it is about — the step that turns an online booking into an appointment on the rep's calendar."
+	Summary      = "Put a meeting in the calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+calendar"
 	Date         = "25/07/2026"

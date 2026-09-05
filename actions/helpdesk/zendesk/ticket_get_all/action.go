@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Many Tickets"
 	Description  = "List Zendesk tickets. Regular tickets are fetched via the Search API (filter by status, group, or a raw query); Suspended lists the suspended queue. Enable Return All to auto-paginate."
+	Summary      = "List tickets"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+list"
 	Date         = "03/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Focus Window"
 	Description  = "Raise and focus a window on a desktop VM by title, so the next click or keypress targets it."
+	Summary      = "Bring a window to the front"
 	Website      = "https://www.flomation.co"
 	Icon         = "layer-group"
 	Date         = "13/08/2026"

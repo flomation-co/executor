@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Cancel Quiet Down"
 	Description  = "Cancel quiet-down mode so Jenkins resumes starting new builds."
+	Summary      = "Let Jenkins start new builds again"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+check"
 	Date         = "04/07/2026"

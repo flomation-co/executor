@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Receipt: Query"
 	Description  = "Query QuickBooks Online sales receipts with SQL-like syntax. Returns matching sales receipt rows."
+	Summary      = "Search sales receipts"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

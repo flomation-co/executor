@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Query"
 	Description  = "Run a raw QuickBooks Online SQL query against any entity. Returns the whole QueryResponse."
+	Summary      = "Run your own query against any record type"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

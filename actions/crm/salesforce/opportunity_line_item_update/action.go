@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Opportunity Product"
 	Description  = "Change the quantity, price or discount on a product line, and Salesforce recalculates the deal's value. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a product's price or quantity on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+file-pen"
 	Date         = "25/07/2026"
