@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ticket: Update"
 	Description  = "Update properties on an existing HubSpot ticket. Only the fields you set are changed."
+	Summary      = "Change a ticket in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+pencil"
 	Date         = "30/06/2026"

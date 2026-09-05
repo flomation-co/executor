@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Update to Item"
 	Description  = "Post an update (a comment) on a Monday.com item."
+	Summary      = "Add an update to an item in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+comment"
 	Date         = "07/07/2026"

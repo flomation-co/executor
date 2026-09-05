@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Creatives: Create"
 	Description  = "Create a Meta ad creative from a Page, image, message and link."
+	Summary      = "Add a creative in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+image"
 	Date         = "17/08/2026"

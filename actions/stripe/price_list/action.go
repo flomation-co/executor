@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Price: List"
 	Description  = "List Stripe prices, optionally filtered by product or active state."
+	Summary      = "List prices in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+list"
 	Date         = "05/07/2026"

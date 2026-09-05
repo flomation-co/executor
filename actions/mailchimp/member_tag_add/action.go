@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member Tag: Add"
 	Description  = "Add one or more tags to a Mailchimp audience member. Tags are matched or created by name and applied as active."
+	Summary      = "Add a member tag in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+plus"
 	Date         = "01/07/2026"

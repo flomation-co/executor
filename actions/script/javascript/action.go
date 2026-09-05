@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Run JavaScript"
 	Description  = "Execute a sandboxed JavaScript script (ES2020+, no network, no file system)"
+	Summary      = "Run a javascript in Script"
 	Website      = "https://www.flomation.co"
 	Icon         = "code"
 	Date         = "15/06/2026"

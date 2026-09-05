@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaigns: Create"
 	Description  = "Create a Meta ad campaign with an objective and optional budget."
+	Summary      = "Add a campaign in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+plus"
 	Date         = "17/08/2026"

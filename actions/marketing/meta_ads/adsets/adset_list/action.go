@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ad Sets: List"
 	Description  = "List ad sets in a Meta ad account, with targeting, budget and schedule."
+	Summary      = "List ad sets in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+list"
 	Date         = "17/08/2026"

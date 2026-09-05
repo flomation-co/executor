@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Attachment"
 	Description  = "Delete an attachment from a Trello card."
+	Summary      = "Delete an attachment in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+trash"
 	Date         = "07/07/2026"

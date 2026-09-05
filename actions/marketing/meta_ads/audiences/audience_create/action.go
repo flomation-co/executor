@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Audiences: Create"
 	Description  = "Create a Meta custom audience to populate with hashed customer data."
+	Summary      = "Add an audience in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+people-group"
 	Date         = "17/08/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: List"
 	Description  = "List Freshsales CPQ products."
+	Summary      = "List products in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

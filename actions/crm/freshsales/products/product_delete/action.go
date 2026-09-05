@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Delete"
 	Description  = "Delete a Freshsales CPQ product by ID."
+	Summary      = "Delete a product in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

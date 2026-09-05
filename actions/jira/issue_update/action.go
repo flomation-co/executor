@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Issue"
 	Description  = "Update an existing Jira issue. Change any of the standard fields, and optionally move the issue to a new status by choosing a transition. Leave a field blank to leave it unchanged."
+	Summary      = "Change an issue in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+pen"
 	Date         = "06/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bank Transaction: Create"
 	Description  = "Create a Xero spend or receive bank transaction. Returns the transaction ID and object."
+	Summary      = "Add a bank transaction in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

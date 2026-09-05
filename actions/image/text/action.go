@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Text to Image"
 	Description  = "Draw a text caption onto an image at a chosen position, size and colour"
+	Summary      = "Write text onto a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "pen"
 	Date         = "15/07/2026"

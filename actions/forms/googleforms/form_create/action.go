@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Form"
 	Description  = "Create a new Google Form with a title using a connected Google account."
+	Summary      = "Create a Google Form"
 	Website      = "https://www.flomation.co"
 	Icon         = "googleforms+plus"
 	Date         = "11/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Issue"
 	Description  = "Update a Linear issue. Accepts UUID or identifier (e.g. ENG-123). Omitted fields are unchanged."
+	Summary      = "Change an issue in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+pencil"
 	Date         = "15/04/2026"

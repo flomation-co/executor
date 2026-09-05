@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create User"
 	Description  = "Create a new user on your WordPress site. Set common fields directly (username, email, password, roles) or add any other user field via Additional Fields."
+	Summary      = "Add a user to your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

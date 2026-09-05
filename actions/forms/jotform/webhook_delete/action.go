@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Webhook"
 	Description  = "Remove a JotForm webhook from a form by its webhook ID (index)."
+	Summary      = "Stop being told about JotForm submissions"
 	Website      = "https://www.flomation.co"
 	Icon         = "jotform+trash"
 	Date         = "11/07/2026"

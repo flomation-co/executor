@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Promotion Code: Create"
 	Description  = "Create a customer-facing promotion code for a Stripe coupon."
+	Summary      = "Add a promotion code in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

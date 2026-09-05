@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Survey"
 	Description  = "Create a new SurveyMonkey survey with a title and optional JSON body override."
+	Summary      = "Create a SurveyMonkey survey"
 	Website      = "https://www.flomation.co"
 	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"

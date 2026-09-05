@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Get"
 	Description  = "Fetch a Freshsales CPQ product by ID."
+	Summary      = "Look up a product in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

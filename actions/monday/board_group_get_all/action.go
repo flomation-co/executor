@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Groups"
 	Description  = "List the groups of a Monday.com board."
+	Summary      = "List groups in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+list"
 	Date         = "07/07/2026"

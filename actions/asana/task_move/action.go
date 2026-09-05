@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Move Task to Section"
 	Description  = "Move an Asana task into a section (a column) of a project. Pick the project to load its sections."
+	Summary      = "Move a task to a section in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+arrow-right-arrow-left"
 	Date         = "07/07/2026"

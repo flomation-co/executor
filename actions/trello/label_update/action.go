@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Label"
 	Description  = "Change a Trello label's name or color."
+	Summary      = "Change a label in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+pen"
 	Date         = "07/07/2026"

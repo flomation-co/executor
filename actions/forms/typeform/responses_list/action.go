@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Responses"
 	Description  = "Retrieve submitted responses for a Typeform form, with date and completion filters."
+	Summary      = "Read the answers people gave on a Typeform"
 	Website      = "https://www.flomation.co"
 	Icon         = "typeform+envelope-open-text"
 	Date         = "11/07/2026"

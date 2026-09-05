@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Generate from Template"
 	Description  = "Render a video from a HeyGen template by filling its variables (avatar, scene and branding are baked in)."
+	Summary      = "Make a video by filling in a template"
 	Website      = "https://www.flomation.co"
 	Icon         = "copy+plus"
 	Date         = "11/08/2026"

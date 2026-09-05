@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "PSD Info"
 	Description  = "Read a PSD's canvas size, colour mode and layer names/positions"
+	Summary      = "Check a Photoshop file's size and layers"
 	Website      = "https://www.flomation.co"
 	Icon         = "layer-group"
 	Date         = "15/07/2026"

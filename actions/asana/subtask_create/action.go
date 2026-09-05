@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Subtask"
 	Description  = "Add a subtask to an Asana task."
+	Summary      = "Add a subtask in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

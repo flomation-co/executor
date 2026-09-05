@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Validate Postcode"
 	Description  = "Check whether a string is a valid UK postcode (postcodes.io)"
+	Summary      = "Check whether a UK postcode is real"
 	Website      = "https://www.flomation.co"
 	Icon         = "map+circle-check"
 	Date         = "05/07/2026"

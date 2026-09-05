@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Company: Search"
 	Description  = "Search HubSpot companies by free text or a property filter (e.g. domain EQ acme.com). Returns matching companies."
+	Summary      = "Search for companies in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+search"
 	Date         = "30/06/2026"

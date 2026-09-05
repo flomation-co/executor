@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Task"
 	Description  = "Create a task in Asana. Give it a name and workspace, then optionally assign it, set a due date, notes, and the projects it belongs to."
+	Summary      = "Add a task in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Checkout Session: Create"
 	Description  = "Create a Stripe Checkout Session and return its hosted payment URL."
+	Summary      = "Add a checkout session in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

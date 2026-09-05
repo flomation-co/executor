@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Appointment: Delete"
 	Description  = "Delete a Freshsales appointment by ID."
+	Summary      = "Delete an appointment in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Audience: List"
 	Description  = "List the Mailchimp audiences (lists) in the account. Use this to discover audience (list) IDs for the other actions."
+	Summary      = "List audiences in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+list"
 	Date         = "01/07/2026"

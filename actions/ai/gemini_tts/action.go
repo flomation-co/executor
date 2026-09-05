@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gemini Text-to-Speech"
 	Description  = "Generate audio from a text prompt using Gemini's TTS preview"
+	Summary      = "Read text aloud in a Google voice"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+microphone"
 	Date         = "25/06/2026"

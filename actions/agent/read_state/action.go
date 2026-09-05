@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read Agent State"
 	Description  = "Read a persistent state value from an agent's key-value store"
+	Summary      = "Read a value your agent saved earlier"
 	Website      = "https://www.flomation.co"
 	Icon         = "database"
 	Date         = "03/04/2026"

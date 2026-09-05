@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Create"
 	Description  = "Create a Xero invoice (sales ACCREC or bill ACCPAY) with line items. Returns the invoice ID."
+	Summary      = "Add an invoice in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

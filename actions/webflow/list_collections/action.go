@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Collections"
 	Description  = "List all CMS collections for a Webflow site"
+	Summary      = "List the content collections on a Webflow site"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+list"
 	Date         = "29/05/2026"

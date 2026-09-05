@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bank Transaction: Get"
 	Description  = "Fetch a single Xero bank transaction by ID. Returns the transaction object."
+	Summary      = "Look up a bank transaction in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

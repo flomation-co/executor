@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: Get"
 	Description  = "Retrieve a single Mailchimp campaign by its ID, including its settings, recipients, and delivery status."
+	Summary      = "Look up a campaign in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+eye"
 	Date         = "01/07/2026"

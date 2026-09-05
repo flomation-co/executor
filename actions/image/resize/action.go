@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Resize Image"
 	Description  = "Resize an image to a width and/or height with a chosen fit mode"
+	Summary      = "Resize a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "expand"
 	Date         = "15/07/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Montage / Grid"
 	Description  = "Arrange several images into a grid (contact sheet or collage)"
+	Summary      = "Arrange several pictures into a grid"
 	Website      = "https://www.flomation.co"
 	Icon         = "grip"
 	Date         = "15/07/2026"

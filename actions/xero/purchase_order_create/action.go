@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: Create"
 	Description  = "Create a Xero purchase order for a supplier. Returns the purchase order ID and object."
+	Summary      = "Add a purchase order in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

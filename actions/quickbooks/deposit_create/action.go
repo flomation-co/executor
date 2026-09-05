@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deposit: Create"
 	Description  = "Create a QuickBooks Online deposit into an account. Returns the deposit ID and object."
+	Summary      = "Add a deposit in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

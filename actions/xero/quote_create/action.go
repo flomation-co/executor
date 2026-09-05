@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Quote: Create"
 	Description  = "Create a Xero quote for a customer. Returns the quote ID and object."
+	Summary      = "Add a quote in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

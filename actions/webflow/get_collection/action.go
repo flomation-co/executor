@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Collection"
 	Description  = "Get a Webflow CMS collection with its field schema"
+	Summary      = "See the fields in a Webflow collection"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+eye"
 	Date         = "29/05/2026"

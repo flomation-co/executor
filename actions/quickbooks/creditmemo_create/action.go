@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Credit Memo: Create"
 	Description  = "Create a QuickBooks Online credit memo for a customer with line items. Returns the credit memo ID and object."
+	Summary      = "Add a credit memo in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

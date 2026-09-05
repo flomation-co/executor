@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Issue Changelog"
 	Description  = "Retrieve the full change history of a Jira issue — every field edit, status move and assignment, in order. Return all history entries, or cap them to a limit."
+	Summary      = "Look up an issue changelog in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+clock-rotate-left"
 	Date         = "06/07/2026"

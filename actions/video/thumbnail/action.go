@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Thumbnail"
 	Description  = "Capture a single frame from a video as a PNG or JPEG image"
+	Summary      = "Grab a still picture from a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "image"
 	Date         = "15/07/2026"

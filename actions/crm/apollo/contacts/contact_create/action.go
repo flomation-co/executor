@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Create"
 	Description  = "Create a contact in your Apollo CRM. Returns the contact ID and object."
+	Summary      = "Add a contact in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+plus"
 	Date         = "01/08/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Issues"
 	Description  = "List and filter Linear issues by team, project, state, assignee, priority, or label."
+	Summary      = "List issues in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+list"
 	Date         = "15/04/2026"

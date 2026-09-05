@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Stop and Search"
 	Description  = "List UK stop-and-search records near a latitude/longitude for a given month (Police UK)"
+	Summary      = "See stop-and-search records near a place"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-halved+magnifying-glass"
 	Date         = "05/07/2026"

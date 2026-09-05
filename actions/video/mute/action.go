@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Mute Video"
 	Description  = "Remove the audio track from a video (video is copied, not re-encoded)"
+	Summary      = "Take the sound off a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone+xmark"
 	Date         = "15/07/2026"

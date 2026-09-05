@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Food Establishments"
 	Description  = "Search UK food hygiene ratings by business name or address (Food Standards Agency)"
+	Summary      = "Search food hygiene ratings by name or address"
 	Website      = "https://www.flomation.co"
 	Icon         = "star+magnifying-glass"
 	Date         = "05/07/2026"

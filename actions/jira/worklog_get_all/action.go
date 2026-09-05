@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Many Worklogs"
 	Description  = "List the worklog entries logged against a Jira issue. Return every entry, or cap the count with a limit. Each entry includes who logged it, the time spent and any comment."
+	Summary      = "List worklogs in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+clock"
 	Date         = "06/07/2026"

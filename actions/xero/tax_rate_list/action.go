@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tax Rate: List"
 	Description  = "List Xero tax rates, optionally filtered by a where clause. Returns matching tax rates."
+	Summary      = "List tax rates in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

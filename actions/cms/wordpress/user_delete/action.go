@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Delete User"
 	Description  = "Delete a user from your WordPress site, reassigning their content to another user (required by WordPress)."
+	Summary      = "Remove a user from your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+trash"
 	Date         = "05/07/2026"

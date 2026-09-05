@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Officers"
 	Description  = "List a UK company's officers — directors and secretaries (Companies House)"
+	Summary      = "See who the directors of a UK company are"
 	Website      = "https://www.flomation.co"
 	Icon         = "people-group"
 	Date         = "05/07/2026"

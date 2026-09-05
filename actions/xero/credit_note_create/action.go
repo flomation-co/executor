@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Credit Note: Create"
 	Description  = "Create a Xero credit note for a contact. Returns the credit note ID and object."
+	Summary      = "Add a credit note in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

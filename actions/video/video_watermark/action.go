@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Watermark Video"
 	Description  = "Overlay an image (logo/watermark) onto a video at a chosen position"
+	Summary      = "Put a logo or watermark on a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "layer-group"
 	Date         = "15/07/2026"

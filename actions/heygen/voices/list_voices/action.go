@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Voices"
 	Description  = "List available HeyGen voices (their id is the voice_id for text-to-speech generation)."
+	Summary      = "Browse the voices your presenter can use"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone+list"
 	Date         = "11/08/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Schedules"
 	Description  = "List all scheduled tasks for the agent"
+	Summary      = "See what your agent is scheduled to do"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock+list"
 	Date         = "29/04/2026"

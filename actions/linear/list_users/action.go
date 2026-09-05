@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Users"
 	Description  = "List Linear workspace members. Returns user IDs, names, emails, and active status."
+	Summary      = "List users in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+user"
 	Date         = "20/04/2026"

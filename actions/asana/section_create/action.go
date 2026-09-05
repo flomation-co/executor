@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Section"
 	Description  = "Create a section (a column) in an Asana project."
+	Summary      = "Add a section in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

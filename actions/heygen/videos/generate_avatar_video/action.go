@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Generate Avatar Video"
 	Description  = "Create a HeyGen talking-head video from a script (text-to-speech) or an audio URL."
+	Summary      = "Make a video of a presenter reading your script"
 	Website      = "https://www.flomation.co"
 	Icon         = "film+plus"
 	Date         = "11/08/2026"

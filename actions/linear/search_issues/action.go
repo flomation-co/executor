@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Issues"
 	Description  = "Full-text search across Linear issues by keyword."
+	Summary      = "Search for issues in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+magnifying-glass"
 	Date         = "15/04/2026"

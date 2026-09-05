@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Interest Group: List"
 	Description  = "List the interests (groups) within an interest category of a Mailchimp audience. Use this to discover interest IDs."
+	Summary      = "List interest groups in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+list"
 	Date         = "01/07/2026"

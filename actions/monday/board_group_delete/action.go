@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Group"
 	Description  = "Delete a group from a Monday.com board."
+	Summary      = "Delete a group in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+trash"
 	Date         = "07/07/2026"

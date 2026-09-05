@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Webhook"
 	Description  = "Register a SurveyMonkey webhook that fires on survey or response events."
+	Summary      = "Get told when something happens on a survey"
 	Website      = "https://www.flomation.co"
 	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"

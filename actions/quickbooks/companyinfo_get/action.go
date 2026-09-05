@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Company Info: Get"
 	Description  = "Fetch the QuickBooks Online company information. Returns the company profile object."
+	Summary      = "Look up company info in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+book"
 	Date         = "05/07/2026"

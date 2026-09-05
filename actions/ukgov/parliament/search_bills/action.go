@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Bills"
 	Description  = "Search UK Parliament bills by keyword, with their current stage (UK Parliament)"
+	Summary      = "Find bills going through Parliament"
 	Website      = "https://www.flomation.co"
 	Icon         = "landmark+book"
 	Date         = "05/07/2026"

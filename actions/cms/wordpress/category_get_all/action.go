@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Many Categories"
 	Description  = "List categories from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching category."
+	Summary      = "List categories on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+list"
 	Date         = "05/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Create"
 	Description  = "Create a draft Stripe invoice for a customer. Returns the invoice ID and object."
+	Summary      = "Add an invoice in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

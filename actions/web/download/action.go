@@ -29,6 +29,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Download File"
 	Description  = "Download a file from a URL into the workspace as a reference you can upload or attach."
+	Summary      = "Download a file from a web address"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+arrow-down"
 	Date         = "11/08/2026"

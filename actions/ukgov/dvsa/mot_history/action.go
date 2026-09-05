@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "MOT History"
 	Description  = "Retrieve a UK vehicle's full MOT test history by registration (DVSA)"
+	Summary      = "See a vehicle's full MOT history"
 	Website      = "https://www.flomation.co"
 	Icon         = "wrench+list"
 	Date         = "05/07/2026"

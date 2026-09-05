@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Labels"
 	Description  = "List issue labels with their UUIDs. Use this to get the label UUIDs needed by update_issue."
+	Summary      = "List labels in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+list"
 	Date         = "03/08/2026"

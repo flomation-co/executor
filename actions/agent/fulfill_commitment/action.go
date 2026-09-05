@@ -26,6 +26,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Fulfil Commitment"
 	Description  = "Mark an agent commitment as fulfilled after the follow-up has been delivered"
+	Summary      = "Mark a promise your agent made as kept"
 	Website      = "https://www.flomation.co"
 	Icon         = "check-circle"
 	Date         = "06/04/2026"

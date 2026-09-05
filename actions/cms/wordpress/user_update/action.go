@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Update User"
 	Description  = "Update an existing user on your WordPress site. Only the fields you set are changed; add any other user field via Additional Fields."
+	Summary      = "Change a WordPress user's details or role"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+pencil"
 	Date         = "05/07/2026"

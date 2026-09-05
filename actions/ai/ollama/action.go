@@ -46,6 +46,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ollama Prompt"
 	Description  = "Send a prompt to a model running on your own Ollama server and return the response"
+	Summary      = "Ask a model running on your own server a question"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+server"
 	Date         = "02/07/2026"

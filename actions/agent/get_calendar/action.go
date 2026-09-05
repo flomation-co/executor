@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Calendar"
 	Description  = "Return the user's upcoming Google Calendar events. Use when the conversation hints at scheduling — where they are, where they need to be, whether they're running late."
+	Summary      = "Look at the person's upcoming calendar events"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+magnifying-glass"
 	Date         = "20/06/2026"

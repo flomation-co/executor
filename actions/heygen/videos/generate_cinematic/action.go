@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Generate Cinematic Video"
 	Description  = "Generate a HeyGen video from a scene prompt — describe the setting and the avatar's motion/gestures."
+	Summary      = "Make a video from a description of the scene"
 	Website      = "https://www.flomation.co"
 	Icon         = "film+star"
 	Date         = "11/08/2026"

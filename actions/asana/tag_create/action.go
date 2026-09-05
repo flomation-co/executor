@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Tag"
 	Description  = "Create a tag in an Asana workspace."
+	Summary      = "Add a tag in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

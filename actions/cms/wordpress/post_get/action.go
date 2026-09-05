@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Post"
 	Description  = "Retrieve a single post from your WordPress site by ID."
+	Summary      = "Look up a WordPress post"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+eye"
 	Date         = "05/07/2026"

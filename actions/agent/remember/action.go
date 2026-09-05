@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remember Fact"
 	Description  = "Store a durable fact, preference, or piece of feedback in an agent's memory"
+	Summary      = "Save something your agent should remember about a person"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+plus"
 	Date         = "05/04/2026"

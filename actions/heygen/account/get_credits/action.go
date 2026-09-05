@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Credit Balance"
 	Description  = "Get the HeyGen account's remaining credits and plan."
+	Summary      = "Check how many HeyGen credits you have left"
 	Website      = "https://www.flomation.co"
 	Icon         = "gauge"
 	Date         = "11/08/2026"

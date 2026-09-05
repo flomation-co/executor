@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Subscription: Create"
 	Description  = "Create a Stripe subscription for a customer from price/quantity items."
+	Summary      = "Add a subscription in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

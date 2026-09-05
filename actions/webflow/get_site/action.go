@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Site"
 	Description  = "Get details of a specific Webflow site by ID"
+	Summary      = "Look up a Webflow site"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+eye"
 	Date         = "29/05/2026"

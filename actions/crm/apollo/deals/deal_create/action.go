@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: Create"
 	Description  = "Create a deal (opportunity) in your Apollo CRM. Returns the deal ID and object."
+	Summary      = "Add a deal in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+plus"
 	Date         = "01/08/2026"

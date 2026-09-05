@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Get"
 	Description  = "Fetch a single Xero account by its ID. Returns the account object."
+	Summary      = "Look up an account in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: Update"
 	Description  = "Update properties on an existing HubSpot deal. Only the fields you set are changed."
+	Summary      = "Change a deal in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+pencil"
 	Date         = "30/06/2026"

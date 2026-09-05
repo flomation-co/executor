@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Templates"
 	Description  = "List available HeyGen Studio templates (avatar + scene + layout you can fill and render)."
+	Summary      = "Browse the video templates you can fill in"
 	Website      = "https://www.flomation.co"
 	Icon         = "copy+list"
 	Date         = "11/08/2026"

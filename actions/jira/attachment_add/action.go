@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Attachment"
 	Description  = "Attach a file to a Jira issue. Provide the issue key, a file name (e.g. report.pdf) and the file's bytes as base64 — Flomation uploads it to the issue. Returns the created attachment's details."
+	Summary      = "Add an attachment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+paperclip"
 	Date         = "06/07/2026"

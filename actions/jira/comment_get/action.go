@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Comment"
 	Description  = "Fetch a single comment from a Jira issue by its ID. Enter the issue key (e.g. SCRUM-1) and the comment ID to return the full comment."
+	Summary      = "Look up a comment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+comment"
 	Date         = "06/07/2026"

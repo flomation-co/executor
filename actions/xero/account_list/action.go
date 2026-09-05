@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: List"
 	Description  = "List Xero chart-of-accounts accounts, optionally filtered. Returns matching accounts."
+	Summary      = "List accounts in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

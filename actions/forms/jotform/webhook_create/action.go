@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Webhook"
 	Description  = "Register a JotForm webhook that fires on each new submission of a form."
+	Summary      = "Get told whenever someone completes a JotForm"
 	Website      = "https://www.flomation.co"
 	Icon         = "jotform+plus"
 	Date         = "11/07/2026"

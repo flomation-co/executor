@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Officers"
 	Description  = "Search UK company officers (directors, secretaries) by name (Companies House)"
+	Summary      = "Find UK company directors by name"
 	Website      = "https://www.flomation.co"
 	Icon         = "user+magnifying-glass"
 	Date         = "05/07/2026"

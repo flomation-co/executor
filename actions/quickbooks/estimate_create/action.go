@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Estimate: Create"
 	Description  = "Create a QuickBooks Online estimate for a customer with line items. Returns the estimate ID and object."
+	Summary      = "Add an estimate in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

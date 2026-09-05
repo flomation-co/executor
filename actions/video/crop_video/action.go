@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Crop Video"
 	Description  = "Crop a rectangular region from a video by position and size"
+	Summary      = "Cut a rectangle out of a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "object-group"
 	Date         = "15/07/2026"

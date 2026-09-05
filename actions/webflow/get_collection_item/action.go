@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Collection Item"
 	Description  = "Get a specific item from a Webflow CMS collection"
+	Summary      = "Look up one item in a Webflow collection"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+eye"
 	Date         = "29/05/2026"

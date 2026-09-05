@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Change Video Speed"
 	Description  = "Speed up or slow down a video (audio pitch is preserved)"
+	Summary      = "Speed a video up or slow it down"
 	Website      = "https://www.flomation.co"
 	Icon         = "gauge"
 	Date         = "15/07/2026"

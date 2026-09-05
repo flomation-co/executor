@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deposit: Get"
 	Description  = "Fetch a QuickBooks Online deposit by ID. Returns the deposit object."
+	Summary      = "Look up a deposit in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Page Content"
 	Description  = "Get the DOM content nodes of a Webflow page"
+	Summary      = "Read the content of a Webflow page"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+file-lines"
 	Date         = "29/05/2026"

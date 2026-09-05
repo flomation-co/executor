@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Tag to Task"
 	Description  = "Add a tag to an Asana task."
+	Summary      = "Add a tag to a task in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

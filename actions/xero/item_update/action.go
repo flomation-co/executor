@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Item: Update"
 	Description  = "Update an existing Xero item by its ID. Returns the updated item object."
+	Summary      = "Change an item in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+pencil"
 	Date         = "05/07/2026"

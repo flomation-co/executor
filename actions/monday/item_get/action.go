@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Item"
 	Description  = "Fetch a single Monday.com item by its ID, including its column values."
+	Summary      = "Look up an item in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+magnifying-glass"
 	Date         = "07/07/2026"

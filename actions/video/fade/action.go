@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Fade Video In / Out"
 	Description  = "Fade a video in from and/or out to black over a number of seconds"
+	Summary      = "Fade a video in or out"
 	Website      = "https://www.flomation.co"
 	Icon         = "film"
 	Date         = "15/07/2026"

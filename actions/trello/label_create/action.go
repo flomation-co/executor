@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Label"
 	Description  = "Create a new label on a Trello board with a name and color."
+	Summary      = "Add a label in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+plus"
 	Date         = "07/07/2026"

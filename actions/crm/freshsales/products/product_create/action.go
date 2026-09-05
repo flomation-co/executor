@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Create"
 	Description  = "Create a Freshsales CPQ product."
+	Summary      = "Add a product in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Refund: List"
 	Description  = "List Stripe refunds, optionally filtered by charge or payment intent."
+	Summary      = "List refunds in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+list"
 	Date         = "05/07/2026"

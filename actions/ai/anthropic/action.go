@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Anthropic Prompt"
 	Description  = "Send a prompt to the Anthropic Messages API and return the response"
+	Summary      = "Ask Claude a question and use its answer"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+paper-plane"
 	Date         = "04/04/2026"

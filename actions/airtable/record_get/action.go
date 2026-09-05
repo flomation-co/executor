@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: Get"
 	Description  = "Retrieve a single record from an Airtable table by its record ID. Returns the record and its fields."
+	Summary      = "Look up one Airtable record"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+eye"
 	Date         = "01/07/2026"

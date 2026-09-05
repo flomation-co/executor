@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Embed Text"
 	Description  = "Turn text into an embedding — the numeric fingerprint of its meaning, for storing in or searching a vector database"
+	Summary      = "Turn text into numbers a computer can compare for meaning"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+bolt"
 	Date         = "13/07/2026"

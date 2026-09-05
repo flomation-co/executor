@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: Send"
 	Description  = "Send a Mailchimp campaign immediately to its configured recipients."
+	Summary      = "Send a campaign in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+paper-plane"
 	Date         = "01/07/2026"

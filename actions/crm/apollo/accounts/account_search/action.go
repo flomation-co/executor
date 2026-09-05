@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Accounts: Search"
 	Description  = "Search the accounts saved in your Apollo CRM by name, stage and list."
+	Summary      = "Search for accounts in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+magnifying-glass"
 	Date         = "01/08/2026"

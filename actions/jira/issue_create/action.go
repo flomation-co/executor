@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Issue"
 	Description  = "Create a Jira issue. Pick the project and issue type, set a summary and description, and optionally assign it, set a priority, add labels or link a parent (for subtasks). Any other field can be set via Custom Fields or Additional Fields."
+	Summary      = "Add an issue in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+plus"
 	Date         = "06/07/2026"

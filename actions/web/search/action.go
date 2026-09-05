@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Web Search"
 	Description  = "Search the web using the Brave Search API"
+	Summary      = "Search the web"
 	Website      = "https://www.flomation.co"
 	Icon         = "magnifying-glass"
 	Date         = "07/04/2026"

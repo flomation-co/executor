@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Users: List"
 	Description  = "List the users (team members) in your Apollo account — handy for owner IDs."
+	Summary      = "List users in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+list"
 	Date         = "01/08/2026"

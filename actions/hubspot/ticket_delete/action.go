@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ticket: Delete"
 	Description  = "Archive (soft-delete) a HubSpot ticket by its ID."
+	Summary      = "Delete a ticket in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+trash"
 	Date         = "30/06/2026"

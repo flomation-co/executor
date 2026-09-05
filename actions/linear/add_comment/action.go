@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Comment"
 	Description  = "Add a Markdown comment to an existing Linear issue."
+	Summary      = "Add a comment in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+comments"
 	Date         = "15/04/2026"

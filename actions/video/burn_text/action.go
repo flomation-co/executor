@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Burn Text onto Video"
 	Description  = "Overlay a text caption onto a video, burned into the picture"
+	Summary      = "Write text onto a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor"
 	Date         = "15/07/2026"

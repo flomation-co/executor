@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update List"
 	Description  = "Change an existing Trello list — rename it, archive/reopen it, move it to another board, or reposition it."
+	Summary      = "Change a list in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+pen"
 	Date         = "07/07/2026"

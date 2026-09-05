@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Emails: Search"
 	Description  = "Search Apollo outreach emails by contact, sequence or keyword. Master key required."
+	Summary      = "Search for emails in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+magnifying-glass"
 	Date         = "01/08/2026"

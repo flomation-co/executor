@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Intent: Update"
 	Description  = "Update fields on an existing Stripe PaymentIntent."
+	Summary      = "Change a payment intent in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+pencil"
 	Date         = "05/07/2026"

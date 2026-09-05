@@ -34,6 +34,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "OpenRouter Prompt"
 	Description  = "Send a prompt to any AI model through the OpenRouter unified API and return the response"
+	Summary      = "Ask almost any AI model a question, through OpenRouter"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+route"
 	Date         = "02/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaigns: Get"
 	Description  = "Read a Meta campaign by ID, including objective, budget and bid strategy."
+	Summary      = "List campaigns in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+eye"
 	Date         = "18/08/2026"

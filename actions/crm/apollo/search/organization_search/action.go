@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Companies: Search"
 	Description  = "Search Apollo's company database by name, location and headcount."
+	Summary      = "Search for companies in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+magnifying-glass"
 	Date         = "01/08/2026"

@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Adjust Image"
 	Description  = "Apply an effect: grayscale, sepia, blur, sharpen, brightness or contrast"
+	Summary      = "Blur, sharpen, or change a picture's brightness and colour"
 	Website      = "https://www.flomation.co"
 	Icon         = "gauge"
 	Date         = "15/07/2026"

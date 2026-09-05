@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Comment"
 	Description  = "Retrieve a single Linear comment by ID with full body text."
+	Summary      = "Look up a comment in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+eye"
 	Date         = "28/04/2026"

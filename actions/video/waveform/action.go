@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Audio Waveform Image"
 	Description  = "Render an audio track as a waveform PNG image"
+	Summary      = "Draw a sound as a waveform picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "chart-line"
 	Date         = "15/07/2026"

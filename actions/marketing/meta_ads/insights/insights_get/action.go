@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Insights: Get"
 	Description  = "Get Meta ad performance (spend, impressions, clicks, conversions) for an account, campaign, ad set or ad."
+	Summary      = "List insights in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+chart-line"
 	Date         = "17/08/2026"

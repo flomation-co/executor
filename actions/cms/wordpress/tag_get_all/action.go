@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Many Tags"
 	Description  = "List tags from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching tag."
+	Summary      = "List tags on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+list"
 	Date         = "05/07/2026"

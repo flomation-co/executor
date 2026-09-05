@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ad Sets: Update"
 	Description  = "Rename, pause, activate or re-budget an existing Meta ad set."
+	Summary      = "Change an ad set in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+pen"
 	Date         = "17/08/2026"

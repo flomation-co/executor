@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Timeseries"
 	Description  = "Fetch an ONS economic timeseries (inflation, GDP, etc.) by series ID and dataset (ONS)"
+	Summary      = "Get official UK statistics like inflation or GDP"
 	Website      = "https://www.flomation.co"
 	Icon         = "chart-line"
 	Date         = "05/07/2026"

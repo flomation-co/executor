@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Tasks"
 	Description  = "Search for Asana tasks in a workspace by text in their name or notes."
+	Summary      = "Search for tasks in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+magnifying-glass"
 	Date         = "07/07/2026"

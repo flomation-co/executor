@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Convert Audio"
 	Description  = "Convert an audio file to mp3/aac/wav/ogg/flac at a chosen bitrate"
+	Summary      = "Save audio in a different format"
 	Website      = "https://www.flomation.co"
 	Icon         = "arrow-right-arrow-left"
 	Date         = "15/07/2026"

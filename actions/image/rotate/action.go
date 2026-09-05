@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Rotate / Flip Image"
 	Description  = "Rotate an image by 90/180/270° and/or flip it horizontally or vertically"
+	Summary      = "Turn or flip a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "rotate-right"
 	Date         = "15/07/2026"

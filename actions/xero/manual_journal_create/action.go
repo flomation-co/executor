@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Manual Journal: Create"
 	Description  = "Create a Xero manual journal from journal lines. Returns the journal ID and object."
+	Summary      = "Add a manual journal in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

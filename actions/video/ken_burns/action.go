@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ken Burns (Animate Image)"
 	Description  = "Animate a still image with a slow zoom and pan, producing a video clip"
+	Summary      = "Animate a still picture with a slow zoom"
 	Website      = "https://www.flomation.co"
 	Icon         = "magnifying-glass"
 	Date         = "15/07/2026"
