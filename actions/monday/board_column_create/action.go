@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Column"
 	Description  = "Add a column to a Monday.com board — choose its title and type (text, status, date, numbers, people, etc.)."
+	Summary      = "Add a column in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+plus"
 	Date         = "07/07/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Border"
 	Description  = "Add a solid colour border around an image"
+	Summary      = "Put a coloured border around a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "expand"
 	Date         = "15/07/2026"

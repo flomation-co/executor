@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Manual Journal: List"
 	Description  = "List Xero manual journals, optionally filtered by a where clause. Returns matching journals."
+	Summary      = "List manual journals in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

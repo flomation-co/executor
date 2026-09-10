@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Activate Order"
 	Description  = "Activate an order once its product lines are in place, so it counts as a real order rather than a draft. Salesforce stamps who activated it and when, and locks the product lines from further changes."
+	Summary      = "Make an order active"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "26/07/2026"

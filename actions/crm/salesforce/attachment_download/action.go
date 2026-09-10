@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Download Attachment (Classic)"
 	Description  = "Download a Classic attachment's contents so a later step can email it, save it to Drive or send it on."
+	Summary      = "Download an attached file (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+file-arrow-down"
 	Date         = "25/07/2026"

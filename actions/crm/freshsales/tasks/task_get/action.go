@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Task: Get"
 	Description  = "Fetch a single Freshsales task by ID."
+	Summary      = "Look up a task in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

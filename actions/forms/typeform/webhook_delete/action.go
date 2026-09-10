@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Webhook"
 	Description  = "Delete a Typeform webhook from a form by its tag."
+	Summary      = "Stop being told about Typeform submissions"
 	Website      = "https://www.flomation.co"
-	Icon         = "webhook+trash"
+	Icon         = "typeform+trash"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

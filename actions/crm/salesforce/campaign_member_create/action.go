@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Campaign Member"
 	Description  = "Sign a lead or a contact up to a Salesforce campaign and set where they have got to — Sent, Responded, Registered, whatever your campaign uses. Give either a Lead or a Contact, not both."
+	Summary      = "Add someone to a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

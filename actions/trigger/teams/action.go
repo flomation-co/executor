@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Teams Trigger"
 	Description  = "Triggers a flow when a message is received in Microsoft Teams"
+	Summary      = "Start when a message arrives in Microsoft Teams"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+comments"
 	Date         = "05/06/2026"

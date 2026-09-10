@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Many Comments"
 	Description  = "List the comments on a Jira issue. Enter the issue key (e.g. SCRUM-1) and either return everything or cap the number returned. Optionally order by newest or oldest first."
+	Summary      = "List comments in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+comments"
 	Date         = "06/07/2026"

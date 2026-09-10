@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Delete Job"
 	Description  = "Permanently delete a Jenkins job and all of its build history."
+	Summary      = "Delete a job"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+trash"
 	Date         = "04/07/2026"

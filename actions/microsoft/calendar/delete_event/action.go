@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Event"
 	Description  = "Delete a calendar event from Microsoft Outlook"
+	Summary      = "Remove an event from an Outlook calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+trash"
 	Date         = "04/06/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Products"
 	Description  = "List products from your Salesforce catalogue - everything you sell, one product family, or just the items that are still ready to sell. Turn on Return All to fetch every match."
+	Summary      = "List your products"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "26/07/2026"

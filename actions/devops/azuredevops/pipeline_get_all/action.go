@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Pipelines"
 	Description  = "List the pipelines in a project, returning each one's ID, name and folder. The IDs this returns are what Run Pipeline takes."
+	Summary      = "List the pipelines in a project"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

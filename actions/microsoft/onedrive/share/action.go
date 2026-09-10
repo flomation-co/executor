@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Sharing Link"
 	Description  = "Create a sharing link for a OneDrive file or folder"
+	Summary      = "Create a link to share a OneDrive file"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+share-from-square"
+	Icon         = "onedrive+share-from-square"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

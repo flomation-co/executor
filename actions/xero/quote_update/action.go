@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Quote: Update"
 	Description  = "Update an existing Xero quote by its ID. Returns the updated quote object."
+	Summary      = "Change a quote in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+pencil"
 	Date         = "05/07/2026"

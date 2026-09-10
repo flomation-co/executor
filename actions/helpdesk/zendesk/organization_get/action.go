@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Organization"
 	Description  = "Retrieve a single Zendesk organization by its ID."
+	Summary      = "Look up one organisation"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+eye"
 	Date         = "03/07/2026"

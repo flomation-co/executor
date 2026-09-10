@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Submission"
 	Description  = "Delete a JotForm submission permanently by its submission ID."
+	Summary      = "Delete a JotForm submission for good"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope-open-text+trash"
+	Icon         = "jotform+trash"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

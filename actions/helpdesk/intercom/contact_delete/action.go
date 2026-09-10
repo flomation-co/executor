@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Delete Contact"
 	Description  = "Permanently delete a contact from Intercom. This can't be undone — use Archive Contact instead if you might need them back."
+	Summary      = "Permanently delete a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+trash"
 	Date         = "08/07/2026"

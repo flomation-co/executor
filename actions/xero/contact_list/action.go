@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: List"
 	Description  = "List Xero contacts with optional filter, search and pagination. Returns matching contacts."
+	Summary      = "List contacts in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

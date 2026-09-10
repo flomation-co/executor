@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Note: Delete"
 	Description  = "Delete a Freshsales note by ID."
+	Summary      = "Delete a note in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

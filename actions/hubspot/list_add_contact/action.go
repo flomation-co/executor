@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Add Contacts"
 	Description  = "Add contacts to a HubSpot static list by contact ID and/or email address. Only works on static (not dynamic) lists."
+	Summary      = "Add contacts to a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+list"
 	Date         = "30/06/2026"

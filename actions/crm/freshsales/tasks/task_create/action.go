@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Task: Create"
 	Description  = "Create a Freshsales task."
+	Summary      = "Add a task in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

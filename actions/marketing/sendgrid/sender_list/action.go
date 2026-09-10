@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Verified Senders"
 	Description  = "Retrieve the verified single senders on your SendGrid account — the From addresses you can send from. A domain you have authenticated additionally allows any From address on that domain."
+	Summary      = "List the addresses you are allowed to send from"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

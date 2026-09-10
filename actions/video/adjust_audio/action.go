@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Adjust Audio"
 	Description  = "Change volume, loudness-normalise, or fade an audio or video's audio in/out"
+	Summary      = "Change the volume of a video or audio file"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone"
 	Date         = "15/07/2026"

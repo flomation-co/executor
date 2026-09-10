@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Download File"
 	Description  = "Download a Salesforce file's contents so a later step can email it, save it to Drive or send it on. Accepts a file ID or a specific version ID."
+	Summary      = "Download a file from Salesforce"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+file-arrow-down"
 	Date         = "25/07/2026"

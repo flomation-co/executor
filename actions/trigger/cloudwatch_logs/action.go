@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "CloudWatch Logs Trigger"
 	Description  = "Triggers a flow when log events match a filter pattern in a log group. Polls FilterLogEvents."
+	Summary      = "Start when matching text appears in your CloudWatch logs"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines+bell"
 	Date         = "22/07/2026"

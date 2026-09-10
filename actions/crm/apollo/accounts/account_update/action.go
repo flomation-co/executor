@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Update"
 	Description  = "Update an existing Apollo account by ID. Only supplied fields change."
+	Summary      = "Change an account in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+pen"
 	Date         = "01/08/2026"

@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Set Reminder"
 	Description  = "Schedule a follow-up. The platform resolves the timing and returns the exact date it stored."
+	Summary      = "Let your agent set a reminder and get the real date back"
 	Website      = "https://www.flomation.co"
 	Icon         = "bell+plus"
 	Date         = "10/09/2026"

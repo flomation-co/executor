@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Order"
 	Description  = "Send an order and its product lines to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Only draft orders can be deleted - an activated one has to be put back to Draft first."
+	Summary      = "Delete an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "26/07/2026"

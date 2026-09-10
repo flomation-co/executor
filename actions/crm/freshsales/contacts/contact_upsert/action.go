@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Upsert"
 	Description  = "Create or update a contact matched on a unique identifier."
+	Summary      = "Add or update a contact in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+copy"
 	Date         = "04/09/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Pull"
 	Description  = "Pull latest changes from a remote"
+	Summary      = "Fetch and merge the latest changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+arrow-down"
 	Date         = "06/03/2026"

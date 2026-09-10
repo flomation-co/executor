@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Send Email"
 	Description  = "Send an email through SendGrid. Provide a verified From address and one or more recipients, then either write the subject and content directly or send a dynamic template. SendGrid accepts the message for delivery and returns its message ID."
+	Summary      = "Send an email"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+paper-plane"
 	Date         = "09/07/2026"

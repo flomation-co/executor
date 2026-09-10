@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment: List"
 	Description  = "List Xero payments, optionally filtered with a where clause and paged."
+	Summary      = "List payments in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

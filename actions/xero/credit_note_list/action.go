@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Credit Note: List"
 	Description  = "List Xero credit notes, optionally filtered with a where clause and paged."
+	Summary      = "List credit notes in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

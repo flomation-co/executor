@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Calculate Route"
 	Description  = "Calculate a route between two locations with optional waypoints, returning distance, duration, polyline and turn-by-turn steps."
+	Summary      = "Work out a route between places, with distance and timings"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+arrow-right"
 	Date         = "11/06/2026"

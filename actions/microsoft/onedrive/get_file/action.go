@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get File Info"
 	Description  = "Retrieve metadata for a file or folder in OneDrive"
+	Summary      = "Look up the details of a OneDrive file"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+eye"
+	Icon         = "onedrive+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

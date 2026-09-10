@@ -23,6 +23,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Vehicle Enquiry"
 	Description  = "Look up a UK vehicle's tax, MOT status, make, colour and CO2 by registration (DVLA)"
+	Summary      = "Check a vehicle's tax, MOT and details from its number plate"
 	Website      = "https://www.flomation.co"
 	Icon         = "truck-ramp-box+magnifying-glass"
 	Date         = "05/07/2026"

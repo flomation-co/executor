@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Trigger"
 	Description  = "Triggers a flow when a Slack message or app mention is received"
+	Summary      = "Start when someone messages or mentions you in Slack"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack"
 	Date         = "03/04/2026"

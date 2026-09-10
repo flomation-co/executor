@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Delete Work Item"
 	Description  = "Delete a work item. By default it goes to the project's recycle bin and can be restored; turn on Destroy Permanently to erase it outright, which cannot be undone."
+	Summary      = "Delete a work item"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+trash"
 	Date         = "17/07/2026"

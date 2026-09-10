@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Dismiss PR Review"
 	Description  = "Dismiss a review on a GitHub pull request"
+	Summary      = "Dismiss a review on a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+xmark"
 	Date         = "26/04/2026"

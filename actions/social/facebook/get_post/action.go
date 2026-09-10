@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Get Post"
 	Description  = "Retrieve a Facebook post by ID with engagement metrics"
+	Summary      = "Look up a Facebook post and how it performed"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+eye"
 	Date         = "21/05/2026"

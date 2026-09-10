@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: Create or Update"
 	Description  = "Upsert a record: Airtable updates the record whose Match Fields equal the given values, or creates a new one if none match. Returns the record and whether it was created."
+	Summary      = "Add an Airtable record, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+rotate"
 	Date         = "01/07/2026"

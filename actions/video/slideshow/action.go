@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slideshow from Images"
 	Description  = "Build a video from a list of images, each shown for a set number of seconds"
+	Summary      = "Turn a set of pictures into a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "image+play"
 	Date         = "15/07/2026"

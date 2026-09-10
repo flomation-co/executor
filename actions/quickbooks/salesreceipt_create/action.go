@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Receipt: Create"
 	Description  = "Create a QuickBooks Online sales receipt for a customer with line items. Returns the sales receipt ID and object."
+	Summary      = "Record a sale paid for on the spot"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

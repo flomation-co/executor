@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Event"
 	Description  = "Create a new calendar event in Microsoft Outlook"
+	Summary      = "Put an event in an Outlook calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+plus"
 	Date         = "04/06/2026"

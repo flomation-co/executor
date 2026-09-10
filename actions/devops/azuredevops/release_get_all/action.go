@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Releases"
 	Description  = "List classic releases in a project. Note this is classic Release Management, which Microsoft has steered new work away from in favour of multi-stage YAML pipelines — if your project deploys from a pipeline, use List Pipeline Runs instead."
+	Summary      = "List recent releases"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

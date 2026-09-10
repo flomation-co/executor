@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Create"
 	Description  = "Create a QuickBooks Online invoice for a customer with line items."
+	Summary      = "Add an invoice in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

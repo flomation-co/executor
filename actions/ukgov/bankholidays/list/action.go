@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Bank Holidays"
 	Description  = "List UK bank holidays for a region, with the next upcoming date (GOV.UK)"
+	Summary      = "List UK bank holidays and the next one coming up"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar"
 	Date         = "05/07/2026"

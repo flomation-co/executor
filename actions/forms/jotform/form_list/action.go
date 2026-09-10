@@ -16,8 +16,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Forms"
 	Description  = "List JotForm forms in the account, with optional limit, offset and filter."
+	Summary      = "List the forms in your JotForm account"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+list"
+	Icon         = "jotform+list"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

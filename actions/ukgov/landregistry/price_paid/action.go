@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Price Paid"
 	Description  = "Look up UK sold-property prices by postcode (HM Land Registry Price Paid)"
+	Summary      = "See what houses sold for in a postcode"
 	Website      = "https://www.flomation.co"
 	Icon         = "house+dollar-sign"
 	Date         = "05/07/2026"

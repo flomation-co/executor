@@ -18,8 +18,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Download Drive File"
 	Description  = "Download or export a file from Google Drive"
+	Summary      = "Download a file from Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+arrow-down"
+	Icon         = "googledrive+arrow-down"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

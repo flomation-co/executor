@@ -18,8 +18,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read Document"
 	Description  = "Download a Word document as HTML or PDF from OneDrive"
+	Summary      = "Read a Word document, or save it as a PDF"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+eye"
+	Icon         = "msword+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

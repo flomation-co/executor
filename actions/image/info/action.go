@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Image Info"
 	Description  = "Read an image's width, height and format"
+	Summary      = "Check a picture's size and format"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "15/07/2026"

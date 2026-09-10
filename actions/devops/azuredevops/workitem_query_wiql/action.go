@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Query Work Items (WIQL)"
 	Description  = "Run a WIQL query and return the matching work items, fully populated. WIQL itself returns ONLY id references no matter what the SELECT clause lists, so this action hydrates them for you (in batches of 200) — otherwise the results would be unusable in a flow. Cap your query with a WHERE clause: large result sets are expensive and are trimmed at 2000 items."
+	Summary      = "Search work items with a WIQL query"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+magnifying-glass"
 	Date         = "17/07/2026"

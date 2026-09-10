@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Submission"
 	Description  = "Retrieve a single JotForm submission and its answers by submission ID."
+	Summary      = "Read one person's answers to a JotForm"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope-open-text+eye"
+	Icon         = "jotform+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

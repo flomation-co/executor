@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Create"
 	Description  = "Create a Xero contact (customer or supplier). Returns the contact ID and object."
+	Summary      = "Add a contact in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

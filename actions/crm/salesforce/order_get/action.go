@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Order"
 	Description  = "Look up one order by its Salesforce ID and return everything on it - the order number, its status, what it adds up to, the dates and the delivery address."
+	Summary      = "Look up one order"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "26/07/2026"

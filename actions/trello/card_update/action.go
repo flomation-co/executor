@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Card"
 	Description  = "Change an existing Trello card — rename it, edit the description, set a due date, move it to another list or board, or update members and labels."
+	Summary      = "Change a card in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+pen"
 	Date         = "07/07/2026"

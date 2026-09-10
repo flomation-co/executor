@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Personalise PSD Text"
 	Description  = "Replace a named text layer in a PSD and render the result as an image"
+	Summary      = "Swap the text in a Photoshop design and render it"
 	Website      = "https://www.flomation.co"
 	Icon         = "pen"
 	Date         = "15/07/2026"

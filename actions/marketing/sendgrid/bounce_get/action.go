@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Bounce"
 	Description  = "Look up a single email address on your SendGrid bounce list. If the address has not bounced, the action reports that no bounce was found."
+	Summary      = "See why mail to an address bounced"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

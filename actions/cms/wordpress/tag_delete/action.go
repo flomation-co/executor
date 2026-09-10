@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Delete Tag"
 	Description  = "Permanently delete a tag from your WordPress site by ID; taxonomy terms cannot be trashed, so this always removes it for good."
+	Summary      = "Delete a WordPress tag"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+trash"
 	Date         = "05/07/2026"

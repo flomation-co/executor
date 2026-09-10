@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Remove Contact from Opportunity"
 	Description  = "Unlink a contact from a deal. The contact record itself is untouched - only their involvement in this deal is removed."
+	Summary      = "Take a contact off a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-minus"
 	Date         = "25/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Delete"
 	Description  = "Archive (soft-delete) a HubSpot contact by its ID."
+	Summary      = "Delete a contact in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+trash"
 	Date         = "30/06/2026"

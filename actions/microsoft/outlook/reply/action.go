@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Reply to Email"
 	Description  = "Reply to an Outlook email message"
+	Summary      = "Reply to an Outlook email"
 	Website      = "https://www.flomation.co"
 	Icon         = "reply-all"
 	Date         = "03/06/2026"

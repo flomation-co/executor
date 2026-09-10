@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Checklist Item"
 	Description  = "Fetch a single item from a Trello card's checklist."
+	Summary      = "Look up a checklist item in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+magnifying-glass"
 	Date         = "07/07/2026"

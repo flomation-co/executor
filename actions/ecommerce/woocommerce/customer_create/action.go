@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Create Customer"
 	Description  = "Create a customer in your WooCommerce store. Set common fields directly or add any other customer field via Additional Fields."
+	Summary      = "Add a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+plus"
 	Date         = "05/07/2026"

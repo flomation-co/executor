@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion List Comments"
 	Description  = "List comments on a Notion page or block"
+	Summary      = "Read the comments on a Notion page"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+comments"
 	Date         = "28/04/2026"

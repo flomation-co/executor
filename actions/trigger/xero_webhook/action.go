@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Xero Webhook Trigger"
 	Description  = "Triggers a flow when a Xero record changes (contact or invoice created/updated)"
+	Summary      = "Start when a Xero contact or invoice changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero"
 	Date         = "10/07/2026"

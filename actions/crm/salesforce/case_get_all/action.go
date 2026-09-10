@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Cases"
 	Description  = "List Salesforce cases, optionally filtered — open cases, cases for one account, cases raised this week. Enable Return All to fetch every match rather than a single page."
+	Summary      = "List support cases"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

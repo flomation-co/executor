@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bank Transfer: Create"
 	Description  = "Transfer money between two Xero bank accounts. Returns the transfer ID and object."
+	Summary      = "Add a bank transfer in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+repeat"
 	Date         = "05/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "End Sub-Flow"
 	Description  = "Return point of a sub-flow. Outputs are returned to the Invoke node."
+	Summary      = "Mark where a reusable set of steps ends"
 	Website      = "https://www.flomation.co"
 	Icon         = "stop"
 	Date         = "19/04/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send SMTP Email"
 	Description  = "Send an HTML email via SMTP"
+	Summary      = "Send an email from your own mail server"
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope"
 	Date         = "27/11/2025"

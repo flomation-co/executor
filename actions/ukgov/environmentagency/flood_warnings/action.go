@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Flood Warnings"
 	Description  = "List current UK flood warnings and alerts, optionally by county (Environment Agency)"
+	Summary      = "Check current flood warnings"
 	Website      = "https://www.flomation.co"
 	Icon         = "leaf+triangle-exclamation"
 	Date         = "05/07/2026"

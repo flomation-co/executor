@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: List"
 	Description  = "List Xero invoices with optional filter, status and pagination. Returns matching invoices."
+	Summary      = "List invoices in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

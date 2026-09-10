@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Email: Create Draft"
 	Description  = "Create a one-off email draft to a contact (does not send). Master key required."
+	Summary      = "Draft an email without sending it"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+pen"
 	Date         = "01/08/2026"

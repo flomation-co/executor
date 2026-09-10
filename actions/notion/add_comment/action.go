@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Add Comment"
 	Description  = "Add a comment to a Notion page or discussion thread"
+	Summary      = "Add a comment to a Notion page"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+comments"
 	Date         = "28/04/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Cal.com Webhook Trigger"
 	Description  = "Triggers a flow when a Cal.com event occurs (booking created/rescheduled/cancelled, meeting ended, and more). The webhook subscription is registered with Cal.com automatically."
+	Summary      = "Start when a Cal.com booking is made or cancelled"
 	Website      = "https://www.flomation.co"
 	Icon         = "calcom"
 	Date         = "03/07/2026"

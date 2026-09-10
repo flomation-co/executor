@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Remove Product from Opportunity"
 	Description  = "Take a product line off a deal. Salesforce recalculates the deal's value straight away."
+	Summary      = "Take a product off a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+xmark"
 	Date         = "25/07/2026"

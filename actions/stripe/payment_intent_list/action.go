@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Intent: List"
 	Description  = "List Stripe PaymentIntents, optionally filtered by customer."
+	Summary      = "List payment intents in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+list"
 	Date         = "05/07/2026"

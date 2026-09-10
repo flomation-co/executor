@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GDPR: Forget Contact"
 	Description  = "Permanently erase a contact and its data for a GDPR request. Cannot be undone."
+	Summary      = "Erase a contact for a data request"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

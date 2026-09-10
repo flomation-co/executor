@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bank Transfer: List"
 	Description  = "List Xero bank transfers, optionally filtered with a where clause."
+	Summary      = "List bank transfers in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

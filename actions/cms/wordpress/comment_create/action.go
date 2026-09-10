@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create Comment"
 	Description  = "Create a comment on a post on your WordPress site. Set the author and body directly, or add any other comment field via Additional Fields."
+	Summary      = "Add a comment to a WordPress post"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

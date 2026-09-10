@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Update"
 	Description  = "Update an existing Freshsales contact. Only the fields you set are changed."
+	Summary      = "Change a contact in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

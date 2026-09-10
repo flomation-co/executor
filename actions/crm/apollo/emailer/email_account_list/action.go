@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Email Accounts: List"
 	Description  = "List the connected mailboxes in Apollo — use an id as the sequence sender. Master key."
+	Summary      = "List email accounts in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+list"
 	Date         = "01/08/2026"

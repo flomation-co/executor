@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Forms"
 	Description  = "List all forms for a Webflow site"
+	Summary      = "List the forms on a Webflow site"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+list"
 	Date         = "29/05/2026"

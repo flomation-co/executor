@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Switch"
 	Description  = "Route execution to one of multiple branches based on matching conditions"
+	Summary      = "Send the flow down one of several paths"
 	Website      = "https://www.flomation.co"
 	Icon         = "route"
 	Date         = "04/04/2026"

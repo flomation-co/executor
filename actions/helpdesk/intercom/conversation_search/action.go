@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Search Conversations"
 	Description  = "Find Intercom conversations matching a filter — by state, assignee, creation date, or any searchable field. Use Advanced Query (JSON) for AND/OR combinations."
+	Summary      = "Find conversations matching your conditions"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

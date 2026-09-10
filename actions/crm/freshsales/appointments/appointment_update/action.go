@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Appointment: Update"
 	Description  = "Update an existing Freshsales appointment."
+	Summary      = "Change an appointment in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

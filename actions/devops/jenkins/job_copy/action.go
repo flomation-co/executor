@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Copy Job"
 	Description  = "Create a new Jenkins job by copying the configuration of an existing one."
+	Summary      = "Copy a job to a new name"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+copy"
 	Date         = "04/07/2026"

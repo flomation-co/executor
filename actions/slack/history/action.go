@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Channel History"
 	Description  = "Read recent messages from a Slack channel. Uses conversations.history API."
+	Summary      = "Read recent messages from a Slack channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+clock"
 	Date         = "28/04/2026"

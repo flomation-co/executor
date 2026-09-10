@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Schedule"
 	Description  = "Delete a scheduled task by name"
+	Summary      = "Stop one of your agent's scheduled tasks"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock+trash"
 	Date         = "29/04/2026"

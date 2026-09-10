@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Draft"
 	Description  = "Create a draft email in Outlook"
+	Summary      = "Create a draft email in Outlook"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-pen"
 	Date         = "03/06/2026"

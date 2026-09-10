@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Create"
 	Description  = "Create a new contact in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the contact ID."
+	Summary      = "Add a contact in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+plus"
 	Date         = "30/06/2026"

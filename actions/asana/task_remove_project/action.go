@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remove Task from Project"
 	Description  = "Remove an Asana task from a project."
+	Summary      = "Remove a task from a project in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+xmark"
 	Date         = "07/07/2026"

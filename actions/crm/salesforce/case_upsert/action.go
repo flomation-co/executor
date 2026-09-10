@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Case"
 	Description  = "Create a Salesforce case, or update the existing one with the same reference. Use it to sync tickets from another system without ever creating a duplicate, however many times the flow re-runs."
+	Summary      = "Raise a case, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

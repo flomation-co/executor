@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Get Issue"
 	Description  = "Retrieve details of a GitHub issue by number"
+	Summary      = "Read one issue"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+eye"
 	Date         = "26/04/2026"

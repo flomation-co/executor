@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Trim Video"
 	Description  = "Cut a clip from a video by start time and duration"
+	Summary      = "Cut a clip out of a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock"
 	Date         = "15/07/2026"

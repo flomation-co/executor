@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Replace"
 	Description  = "Replace all occurrences of a substring with another string"
+	Summary      = "Swap one piece of text for another"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+pencil"
 	Date         = "19/04/2026"

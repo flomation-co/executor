@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create Category"
 	Description  = "Create a category (a hierarchical taxonomy term) on your WordPress site. Set the name, description, slug and parent, or add any other field via Additional Fields."
+	Summary      = "Create a category on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

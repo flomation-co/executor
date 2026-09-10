@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Form"
 	Description  = "Retrieve a single JotForm form's details by its form ID."
+	Summary      = "Look up a JotForm and its questions"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+eye"
+	Icon         = "jotform+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

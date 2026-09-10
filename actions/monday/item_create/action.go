@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Item"
 	Description  = "Create an item (a row) on a Monday.com board. Optionally place it in a group and set column values."
+	Summary      = "Add an item in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+plus"
 	Date         = "07/07/2026"

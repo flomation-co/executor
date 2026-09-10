@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Companies"
 	Description  = "Search the UK Companies House register by company name or number (Companies House)"
+	Summary      = "Search UK companies by name or number"
 	Website      = "https://www.flomation.co"
 	Icon         = "briefcase+magnifying-glass"
 	Date         = "05/07/2026"

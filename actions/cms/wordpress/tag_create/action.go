@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create Tag"
 	Description  = "Create a tag on your WordPress site with a name and optional description and slug, or add any other tag field via Additional Fields."
+	Summary      = "Create a tag on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

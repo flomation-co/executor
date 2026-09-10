@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Custom Fields"
 	Description  = "List the custom field definitions in your SendGrid Marketing account. Use each field's ID (for example e1_T) as the key when setting custom field values on a contact. Optionally include SendGrid's built-in reserved fields too."
+	Summary      = "List the custom fields on your contacts"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

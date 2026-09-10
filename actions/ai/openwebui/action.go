@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Open WebUI Prompt"
 	Description  = "Send a prompt to an Open WebUI (or any OpenAI-compatible) Chat Completions endpoint and return the response"
+	Summary      = "Ask a model on your Open WebUI server a question"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+globe"
 	Date         = "11/06/2026"

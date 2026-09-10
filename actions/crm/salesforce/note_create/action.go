@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Note"
 	Description  = "Log a note against any Salesforce record — a call summary, a handover note — so it appears in the Notes related list your team reads."
+	Summary      = "Write a note against a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+file-pen"
 	Date         = "25/07/2026"

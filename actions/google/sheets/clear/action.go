@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Clear Sheet Range"
 	Description  = "Clear a range of cells in a Google Sheet"
+	Summary      = "Empty a range of cells in a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+trash"
+	Icon         = "googlesheets+trash"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

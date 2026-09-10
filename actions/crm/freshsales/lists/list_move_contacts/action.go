@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Move Contacts"
 	Description  = "Move contacts from one Freshsales marketing list to another."
+	Summary      = "Move contacts to another list"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+arrow-right"
 	Date         = "04/09/2026"

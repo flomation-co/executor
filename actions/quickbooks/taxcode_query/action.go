@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tax Code: Query"
 	Description  = "Query QuickBooks Online tax codes. Supply a WHERE clause or a full SQL query."
+	Summary      = "Search your tax codes"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

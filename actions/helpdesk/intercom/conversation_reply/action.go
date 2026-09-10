@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Reply to Conversation"
 	Description  = "Add a reply to an Intercom conversation — a public comment or internal note as an admin, or a reply on the contact's behalf."
+	Summary      = "Reply to a customer conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+reply"
 	Date         = "08/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Event"
 	Description  = "Retrieve details of a specific calendar event"
+	Summary      = "Look up a single Outlook calendar event"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+eye"
 	Date         = "04/06/2026"

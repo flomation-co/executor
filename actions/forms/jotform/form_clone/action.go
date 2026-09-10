@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Clone Form"
 	Description  = "Clone an existing JotForm form, returning the new form's ID."
+	Summary      = "Make a copy of a JotForm"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+copy"
+	Icon         = "jotform+copy"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sleep"
 	Description  = "Pause execution for a specified duration"
+	Summary      = "Wait a while before carrying on"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock+pause"
 	Date         = "03/04/2026"

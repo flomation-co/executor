@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Create Release"
 	Description  = "Create a classic release from a release pipeline. Note this is classic Release Management, which Microsoft has steered new work away from in favour of multi-stage YAML pipelines — if your project deploys from a pipeline, use Run Pipeline instead."
+	Summary      = "Start a release"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+plus"
 	Date         = "17/07/2026"

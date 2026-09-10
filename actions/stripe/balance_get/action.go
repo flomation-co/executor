@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Balance: Get"
 	Description  = "Retrieve the current Stripe account balance."
+	Summary      = "Look up a balance in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+search"
 	Date         = "05/07/2026"

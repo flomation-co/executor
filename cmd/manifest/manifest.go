@@ -37,10 +37,16 @@ type ManifestEntry struct {
 	Organisation string `json:"organisation"`
 	Name         string `json:"name"`
 	Description  string `json:"description"`
-	Website      string `json:"website"`
-	Icon         string `json:"icon"`
-	Date         string `json:"date"`
-	Type         int64  `json:"type"`
+	// Summary is the human-facing one-liner shown in the Add Node menu.
+	// Description is written for the AI and reads like a prompt fragment, so a
+	// person browsing the palette should see this instead. Optional: the editor
+	// falls back to Description, so an action without one is not broken, just
+	// not yet written.
+	Summary string `json:"summary,omitempty"`
+	Website string `json:"website"`
+	Icon    string `json:"icon"`
+	Date    string `json:"date"`
+	Type    int64  `json:"type"`
 
 	Category       *CategoryMeta `json:"category,omitempty"`
 	SubCategory    *CategoryMeta `json:"sub_category,omitempty"`
@@ -460,6 +466,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 							meUpdated = true
 						case "Description":
 							me.Description = strVal
+						case "Summary":
+							me.Summary = strVal
 							meUpdated = true
 						case "Website":
 							me.Website = strVal

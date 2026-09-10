@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Filing History"
 	Description  = "List a UK company's filing history — accounts, confirmations, changes (Companies House)"
+	Summary      = "See what a UK company has filed, and when"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "05/07/2026"

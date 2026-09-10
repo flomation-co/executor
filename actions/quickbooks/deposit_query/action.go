@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deposit: Query"
 	Description  = "Query QuickBooks Online deposits. Supply a WHERE clause or a full SQL query."
+	Summary      = "Search bank deposits"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

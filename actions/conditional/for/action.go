@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "For"
 	Description  = "Loop a fixed number of times"
+	Summary      = "Repeat the steps below a set number of times"
 	Website      = "https://www.flomation.co"
 	Icon         = "arrow-rotate-right"
 	Date         = "25/03/2026"

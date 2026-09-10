@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: Create"
 	Description  = "Create a record in an Airtable table. Set fields as simple key/value rows or as a JSON object for typed values (arrays, linked records, attachments). Returns the new record and its ID."
+	Summary      = "Add a record to an Airtable table"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+plus"
 	Date         = "01/07/2026"

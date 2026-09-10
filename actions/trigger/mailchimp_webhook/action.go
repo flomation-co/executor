@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Mailchimp Trigger"
 	Description  = "Triggers a flow on Mailchimp audience events (subscribe, unsubscribe, profile update, cleaned, email changed, campaign sent) via a webhook."
+	Summary      = "Start when someone subscribes or unsubscribes in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp"
 	Date         = "01/07/2026"

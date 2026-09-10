@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Channel Messages"
 	Description  = "Retrieve recent messages from a Microsoft Teams channel"
+	Summary      = "Read recent messages from a Teams channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+eye"
 	Date         = "04/06/2026"

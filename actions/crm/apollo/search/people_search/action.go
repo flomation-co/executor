@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "People: Search"
 	Description  = "Search Apollo's people database by title, seniority, location and keywords."
+	Summary      = "Search for peoples in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+magnifying-glass"
 	Date         = "01/08/2026"

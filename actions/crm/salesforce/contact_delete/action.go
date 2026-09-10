@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Contact"
 	Description  = "Send a contact to the Salesforce Recycle Bin, where an administrator can restore it for the next 15 days."
+	Summary      = "Delete a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

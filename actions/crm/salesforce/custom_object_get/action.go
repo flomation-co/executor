@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Custom Object Record"
 	Description  = "Read a single record from one of your organisation's own Salesforce objects using its record ID. Returns every field the connected Salesforce user can see, or just the ones you name."
+	Summary      = "Look up a record in one of your own objects"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Collection Item"
 	Description  = "Create a new item in a Webflow CMS collection"
+	Summary      = "Add an item to a Webflow collection"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+plus"
 	Date         = "29/05/2026"

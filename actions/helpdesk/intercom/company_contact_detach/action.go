@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Detach Contact from Company"
 	Description  = "Detach a contact from a company they're currently linked to. The contact and the company both stay in Intercom — only the link between them is removed."
+	Summary      = "Remove a person from a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+link-slash"
 	Date         = "08/07/2026"

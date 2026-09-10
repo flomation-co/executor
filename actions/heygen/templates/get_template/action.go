@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Template"
 	Description  = "Get a HeyGen template and its variable schema (the fields you fill to generate a video)."
+	Summary      = "See what a video template needs you to fill in"
 	Website      = "https://www.flomation.co"
 	Icon         = "copy+circle-info"
 	Date         = "11/08/2026"

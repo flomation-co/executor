@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Email Trigger"
 	Description  = "Triggers a flow when a new email arrives in a connected Gmail account"
+	Summary      = "Start when a new email arrives in Gmail"
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope"
 	Date         = "08/04/2026"

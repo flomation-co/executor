@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Concatenate Videos"
 	Description  = "Join several videos end to end into one (given as a list of references)"
+	Summary      = "Join videos together end to end"
 	Website      = "https://www.flomation.co"
 	Icon         = "link"
 	Date         = "15/07/2026"

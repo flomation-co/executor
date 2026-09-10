@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Template"
 	Description  = "Look up a single transactional template in SendGrid, including every version of the template."
+	Summary      = "Read an email template"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

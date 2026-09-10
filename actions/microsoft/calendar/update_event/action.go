@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Event"
 	Description  = "Update an existing calendar event in Microsoft Outlook"
+	Summary      = "Change an event in an Outlook calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+pencil"
 	Date         = "04/06/2026"

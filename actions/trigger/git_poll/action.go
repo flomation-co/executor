@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Poll Trigger"
 	Description  = "Triggers a flow when changes are detected in a Git repository"
+	Summary      = "Start when a Git repository changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "22/03/2026"

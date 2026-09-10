@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Tag"
 	Description  = "Retrieve a single tag from your WordPress site by ID."
+	Summary      = "Look up a WordPress tag"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+eye"
 	Date         = "05/07/2026"

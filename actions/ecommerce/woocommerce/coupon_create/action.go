@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Create Coupon"
 	Description  = "Create a discount coupon in your WooCommerce store, setting its code, discount type and amount plus any usage or product restrictions."
+	Summary      = "Create a discount coupon"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+plus"
 	Date         = "05/07/2026"

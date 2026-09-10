@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab List MR Approvals"
 	Description  = "View current approvals on a GitLab merge request"
+	Summary      = "See who has approved a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+check"
 	Date         = "26/04/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get User Related Data"
 	Description  = "Get counts of data related to a Zendesk user (assigned tickets, requested tickets, organization subscriptions, etc.)."
+	Summary      = "Count a user's tickets and organisations"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+list"
 	Date         = "03/07/2026"

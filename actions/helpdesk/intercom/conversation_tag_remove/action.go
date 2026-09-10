@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Remove Tag from Conversation"
 	Description  = "Remove a tag from an Intercom conversation."
+	Summary      = "Take a tag off a conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+minus"
 	Date         = "08/07/2026"

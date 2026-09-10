@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Groq Prompt"
 	Description  = "Send a prompt to the Groq Chat Completions API and return the response"
+	Summary      = "Ask a model on Groq a question and use its answer"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+bolt"
 	Date         = "30/06/2026"

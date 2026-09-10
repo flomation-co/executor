@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tracking Category: List"
 	Description  = "List Xero tracking categories, optionally filtered by a where clause. Returns matching categories."
+	Summary      = "List tracking categories in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

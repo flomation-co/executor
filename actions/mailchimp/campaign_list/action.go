@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: List"
 	Description  = "List Mailchimp campaigns, optionally filtered by audience, status, and send/create time. Sort and paginate the results."
+	Summary      = "List campaigns in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+magnifying-glass"
 	Date         = "01/07/2026"

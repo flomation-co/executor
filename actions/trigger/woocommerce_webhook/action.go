@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce Webhook Trigger"
 	Description  = "Triggers a flow when a WooCommerce event occurs (order/product/customer/coupon created, updated or deleted). The webhook is registered and signature-verified automatically."
+	Summary      = "Start when something changes in your WooCommerce shop"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce"
 	Date         = "05/07/2026"

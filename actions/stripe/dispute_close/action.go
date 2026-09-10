@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Dispute: Close"
 	Description  = "Close a Stripe dispute, acknowledging it as lost. Irreversible."
+	Summary      = "Close a dispute in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+trash"
 	Date         = "05/07/2026"

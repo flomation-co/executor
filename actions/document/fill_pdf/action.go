@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Fill PDF Form"
 	Description  = "Populate an uploaded fillable PDF's form fields and output the completed PDF"
+	Summary      = "Fill in a PDF form and save the finished copy"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-export"
 	Date         = "04/08/2026"

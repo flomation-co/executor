@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Form"
 	Description  = "Retrieve a single Typeform form definition by its form ID."
+	Summary      = "Look up a Typeform and its questions"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+eye"
+	Icon         = "typeform+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

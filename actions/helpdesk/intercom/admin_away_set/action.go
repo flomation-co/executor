@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Set Admin Away Mode"
 	Description  = "Turn an admin's away mode on or off, and choose whether their new conversations are reassigned to the rest of the team while they're away."
+	Summary      = "Mark a teammate as away or back"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+clock"
 	Date         = "08/07/2026"

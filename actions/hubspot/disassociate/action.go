@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Association: Unlink Records"
 	Description  = "Remove the association between two HubSpot records. Direction is from -> to."
+	Summary      = "Unlink two records"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+unlink"
 	Date         = "30/06/2026"

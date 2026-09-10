@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Sheet Metadata"
 	Description  = "Get metadata for a Google Sheets spreadsheet"
+	Summary      = "Look up the details of a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+eye"
+	Icon         = "googlesheets+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

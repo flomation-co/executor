@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Station Readings"
 	Description  = "Get the latest river level, flow or rainfall readings for a monitoring station (Environment Agency)"
+	Summary      = "Check river levels and rainfall at a monitoring station"
 	Website      = "https://www.flomation.co"
 	Icon         = "leaf+gauge"
 	Date         = "05/07/2026"

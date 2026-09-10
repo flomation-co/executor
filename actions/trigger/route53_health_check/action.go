@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Route 53 Health Check Trigger"
 	Description  = "Triggers a flow when a Route 53 health check goes unhealthy (or recovers). Polls GetHealthCheckStatus."
+	Summary      = "Start when a Route 53 health check fails or recovers"
 	Website      = "https://www.flomation.co"
 	Icon         = "gauge+bell"
 	Date         = "22/07/2026"

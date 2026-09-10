@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Issue"
 	Description  = "Permanently delete a Jira issue by its key. Optionally delete the issue's subtasks along with it. This cannot be undone."
+	Summary      = "Delete an issue in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+trash"
 	Date         = "06/07/2026"

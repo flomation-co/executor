@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get Issue"
 	Description  = "Retrieve details of a GitLab issue by IID"
+	Summary      = "Read one issue"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+eye"
 	Date         = "26/04/2026"

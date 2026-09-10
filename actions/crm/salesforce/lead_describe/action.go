@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Describe Lead Object"
 	Description  = "Check what your Salesforce connection is allowed to do with leads, and list the leads this user has viewed recently. Useful for confirming a connection works."
+	Summary      = "List the fields available on a lead"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Worksheets"
 	Description  = "List all worksheets in a Microsoft Excel Online workbook"
+	Summary      = "List the sheets in an Excel workbook"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+list"
+	Icon         = "msexcel+list"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

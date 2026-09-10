@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ticket: Search"
 	Description  = "Search HubSpot tickets by free text or a property filter (e.g. hs_ticket_priority EQ HIGH). Returns matching tickets."
+	Summary      = "Search for tickets in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+search"
 	Date         = "30/06/2026"

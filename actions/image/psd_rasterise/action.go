@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Rasterise PSD"
 	Description  = "Flatten a PSD to a PNG, JPEG or WebP image (from its embedded composite)"
+	Summary      = "Turn a Photoshop file into a flat picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "image"
 	Date         = "15/07/2026"

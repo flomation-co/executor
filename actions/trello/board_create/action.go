@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Board"
 	Description  = "Create a new Trello board. Give it a name and an optional description; use Additional Fields for board preferences (visibility, background, etc.)."
+	Summary      = "Add a board in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+plus"
 	Date         = "07/07/2026"

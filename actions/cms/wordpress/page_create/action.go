@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create Page"
 	Description  = "Create a page on your WordPress site. Set common fields directly (title, content, status, parent, menu order) or add any other page field via Additional Fields."
+	Summary      = "Create a page on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

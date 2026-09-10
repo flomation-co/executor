@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Food Business Types"
 	Description  = "List the food business type categories used by the FHRS scheme (Food Standards Agency)"
+	Summary      = "List the kinds of food business you can search"
 	Website      = "https://www.flomation.co"
 	Icon         = "star+list"
 	Date         = "05/07/2026"

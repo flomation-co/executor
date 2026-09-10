@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Delete Product"
 	Description  = "Delete a product from your WooCommerce store. Deletes permanently by default; turn off Force Delete to move it to the trash instead."
+	Summary      = "Delete a product"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+trash"
 	Date         = "05/07/2026"

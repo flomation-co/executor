@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Page Content"
 	Description  = "Update the DOM content nodes of a Webflow page"
+	Summary      = "Change the content of a Webflow page"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+pencil"
 	Date         = "29/05/2026"

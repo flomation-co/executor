@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify: Update Order"
 	Description  = "Update an existing order in your Shopify store. Only the fields you set are changed."
+	Summary      = "Change an order's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify+pencil"
 	Date         = "02/07/2026"

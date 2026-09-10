@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Mix Audio"
 	Description  = "Mix two audio tracks into one (e.g. background music under a voiceover)"
+	Summary      = "Mix two sounds together, like music under a voiceover"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone"
 	Date         = "15/07/2026"

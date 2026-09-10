@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add to Conversation"
 	Description  = "Store a message and return conversation history"
+	Summary      = "Add a message to the conversation and get the history back"
 	Website      = "https://www.flomation.co"
 	Icon         = "comments"
 	Date         = "29/05/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Report: Balance Sheet"
 	Description  = "Run the Xero Balance Sheet report as at an optional date. Returns the full report."
+	Summary      = "Get a balance sheet"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+chart-line"
 	Date         = "05/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Update Page"
 	Description  = "Update properties of an existing Notion page"
+	Summary      = "Change a Notion page's properties"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+pencil"
 	Date         = "28/04/2026"

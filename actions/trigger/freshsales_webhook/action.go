@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Freshsales Webhook Trigger"
 	Description  = "Triggers a flow when a Freshsales workflow webhook fires (contact, account or deal changes)."
+	Summary      = "Start when a Freshsales contact, account or deal changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks"
 	Date         = "04/09/2026"

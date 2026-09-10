@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Update Tag"
 	Description  = "Update an existing tag on your WordPress site. Only the fields you set are changed; add any other tag field via Additional Fields."
+	Summary      = "Rename or edit a WordPress tag"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+pencil"
 	Date         = "05/07/2026"

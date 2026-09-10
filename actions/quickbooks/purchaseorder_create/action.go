@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: Create"
 	Description  = "Create a QuickBooks Online purchase order for a vendor with line items. Returns the purchase order ID and object."
+	Summary      = "Add a purchase order in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

@@ -19,8 +19,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Replace Text"
 	Description  = "Find and replace text in a Word document (via HTML conversion)"
+	Summary      = "Find and replace text in a Word document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+pencil"
+	Icon         = "msword+pencil"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

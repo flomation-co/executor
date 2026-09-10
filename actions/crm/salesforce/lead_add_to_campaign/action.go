@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Lead to Campaign"
 	Description  = "Sign a lead up to a campaign — an event, a webinar, a mailshot — and set how they are taking part, such as Sent, Registered or Responded."
+	Summary      = "Add a lead to a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-group"
 	Date         = "25/07/2026"

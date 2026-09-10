@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Contact List"
 	Description  = "Delete a contact list from SendGrid Marketing, optionally deleting its contacts too. The contacts survive unless you tick Also Delete Contacts; when they are deleted SendGrid processes the removal in the background and returns a job ID."
+	Summary      = "Delete a contact list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

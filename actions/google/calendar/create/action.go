@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Calendar Create Event"
 	Description  = "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location."
+	Summary      = "Put an event in a Google Calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+plus"
 	Date         = "08/04/2026"

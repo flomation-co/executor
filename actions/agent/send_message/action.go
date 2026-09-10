@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Agent Message"
 	Description  = "Send a message through an agent's communication channel and record it"
+	Summary      = "Send a message as your agent"
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "03/04/2026"

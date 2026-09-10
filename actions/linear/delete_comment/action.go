@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Comment"
 	Description  = "Delete a comment from a Linear issue by comment ID."
+	Summary      = "Delete a comment in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+trash"
 	Date         = "28/04/2026"

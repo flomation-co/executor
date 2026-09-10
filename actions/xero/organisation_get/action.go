@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Organisation: Get"
 	Description  = "Fetch the connected Xero organisation's details. Returns the organisation object."
+	Summary      = "Look up an organisation in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+book"
 	Date         = "05/07/2026"

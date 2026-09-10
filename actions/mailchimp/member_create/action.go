@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member: Create"
 	Description  = "Add a member (subscriber) to a Mailchimp audience. Set status, merge fields (FNAME/LNAME/…), tags, interests, and location. Returns the created member."
+	Summary      = "Add a member in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+plus"
 	Date         = "01/07/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Emails"
 	Description  = "Search for emails in an Outlook mailbox"
+	Summary      = "Search for emails in Outlook"
 	Website      = "https://www.flomation.co"
 	Icon         = "magnifying-glass"
 	Date         = "03/06/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Product to Quote"
 	Description  = "Put a product line on a quote. Pick the product and we find its price book entry, read the list price and put the quote on the right price book for you - a quote with no product lines totals nothing and cannot be sent."
+	Summary      = "Add a product to a quote"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+cart-shopping"
 	Date         = "26/07/2026"

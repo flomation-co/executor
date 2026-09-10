@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run Report"
 	Description  = "Run one of your saved Salesforce reports and get its totals back, optionally overriding the report's filters just for this run."
+	Summary      = "Run a Salesforce report"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+chart-bar"
 	Date         = "25/07/2026"

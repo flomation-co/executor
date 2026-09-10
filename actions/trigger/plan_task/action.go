@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan Task Trigger"
 	Description  = "Fires when a plan task is dispatched. Carries task framing into the agent's orchestrator without flow amendment."
+	Summary      = "Start when a plan hands the agent its next task"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+bolt"
 	Date         = "22/06/2026"

@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Write to Sheet"
 	Description  = "Write data to a range in a Google Sheet"
+	Summary      = "Write values into a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+pencil"
+	Icon         = "googlesheets+pencil"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

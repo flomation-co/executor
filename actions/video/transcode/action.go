@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Transcode Video"
 	Description  = "Re-encode a video to a chosen format (codec + container) and quality"
+	Summary      = "Save a video in a different format or quality"
 	Website      = "https://www.flomation.co"
 	Icon         = "gears"
 	Date         = "15/07/2026"

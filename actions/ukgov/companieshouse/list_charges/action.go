@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Charges"
 	Description  = "List a UK company's registered charges — mortgages and debentures (Companies House)"
+	Summary      = "See what a UK company has borrowed against"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines+dollar-sign"
 	Date         = "05/07/2026"

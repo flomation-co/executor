@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Copy Contacts"
 	Description  = "Copy contacts from one Freshsales marketing list into another."
+	Summary      = "Copy contacts into another list"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+copy"
 	Date         = "04/09/2026"

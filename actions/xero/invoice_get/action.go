@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Get"
 	Description  = "Fetch a single Xero invoice by its ID. Returns the invoice object."
+	Summary      = "Look up an invoice in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

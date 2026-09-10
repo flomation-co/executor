@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Opportunity Metadata"
 	Description  = "Return how the Opportunity object is set up in your Salesforce org, along with the deals the connected user looked at most recently."
+	Summary      = "List the fields available on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

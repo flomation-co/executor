@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create User"
 	Description  = "Invite a new user to your Atlassian site by email address. Optionally set a display name and choose which products to grant access to (leave products empty to invite the user to every product). Requires organisation-admin permission on the site."
+	Summary      = "Add a user"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+user-plus"
 	Date         = "06/07/2026"

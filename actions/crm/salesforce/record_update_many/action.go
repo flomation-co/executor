@@ -23,6 +23,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Many Records"
 	Description  = "Update a whole list of existing records on any Salesforce object in one go. Each record needs its Salesforce ID. Up to 200 per API call, split automatically, with an optional roll-everything-back checkbox."
+	Summary      = "Update up to 200 records at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Video Info"
 	Description  = "Read a video's duration, resolution, codecs and bitrate (ffprobe)"
+	Summary      = "Check a video's length, size and format"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "15/07/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "File Asset"
 	Description  = "Reference an uploaded file (logo, image, PSD) from other nodes"
+	Summary      = "Use a file you have uploaded, like a logo or image"
 	Website      = "https://www.flomation.co"
 	Icon         = "paperclip"
 	Date         = "15/07/2026"

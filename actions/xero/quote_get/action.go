@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Quote: Get"
 	Description  = "Fetch a single Xero quote by its ID. Returns the quote object."
+	Summary      = "Look up a quote in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

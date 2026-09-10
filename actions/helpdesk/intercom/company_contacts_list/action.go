@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: List Company Contacts"
 	Description  = "List the contacts (users and leads) attached to a company. Enable Return All to auto-paginate every contact. A contact attached moments ago can take a few minutes to show up here."
+	Summary      = "List everyone at a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+user-group"
 	Date         = "08/07/2026"

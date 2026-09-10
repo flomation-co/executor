@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Work Item"
 	Description  = "Get a work item by ID. Expand pulls in relations, links or every field; Fields narrows the response to the reference names you list. The two cannot be combined — Azure DevOps rejects that pairing."
+	Summary      = "Read one work item"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

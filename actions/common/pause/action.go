@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Pause"
 	Description  = "Suspend execution until manually resumed"
+	Summary      = "Stop here until somebody resumes the flow by hand"
 	Website      = "https://www.flomation.co"
 	Icon         = "pause"
 	Date         = "01/06/2026"

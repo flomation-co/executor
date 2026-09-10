@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Generate Talking Photo"
 	Description  = "Create a HeyGen video from a still photo (talking photo) speaking a script or audio."
+	Summary      = "Make a photo talk"
 	Website      = "https://www.flomation.co"
 	Icon         = "image+plus"
 	Date         = "12/08/2026"

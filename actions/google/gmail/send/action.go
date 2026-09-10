@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gmail Send"
 	Description  = "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf."
+	Summary      = "Send an email from Gmail"
 	Website      = "https://www.flomation.co"
 	Icon         = "gmail+paper-plane"
 	Date         = "08/04/2026"

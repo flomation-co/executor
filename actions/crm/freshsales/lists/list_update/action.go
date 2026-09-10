@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Update"
 	Description  = "Rename an existing Freshsales marketing list."
+	Summary      = "Change a list in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

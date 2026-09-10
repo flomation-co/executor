@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Event"
 	Description  = "Move, shorten or amend an appointment already in Salesforce — a reschedule, a change of room, a different attendee. Anything left blank stays as it is."
+	Summary      = "Change a calendar event"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pencil"
 	Date         = "25/07/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Lead"
 	Description  = "Change one or more fields on an existing lead. Anything you leave blank is left exactly as it is in Salesforce."
+	Summary      = "Change a lead's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

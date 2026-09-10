@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Create"
 	Description  = "Create a QuickBooks Online chart-of-accounts account. Returns the account ID and object."
+	Summary      = "Add an account in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Upload to Drive"
 	Description  = "Upload a file to Google Drive"
+	Summary      = "Upload a file to Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+arrow-up"
+	Icon         = "googledrive+arrow-up"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

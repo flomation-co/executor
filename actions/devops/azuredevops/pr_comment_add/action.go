@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Comment on Pull Request"
 	Description  = "Comment on a pull request. Azure DevOps models PR comments as threads, so a new comment starts a thread; give a Thread ID to reply inside an existing one instead."
+	Summary      = "Comment on a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+comment"
 	Date         = "17/07/2026"

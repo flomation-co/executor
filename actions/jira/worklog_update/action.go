@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Worklog"
 	Description  = "Change an existing worklog entry on a Jira issue. Update the time spent, the comment or when the work started — supply only the fields you want to change. Returns the updated worklog."
+	Summary      = "Change a worklog in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+pen"
 	Date         = "06/07/2026"

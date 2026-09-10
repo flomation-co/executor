@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sequence: Update Contact Status"
 	Description  = "Mark finished / remove / stop contacts in an Apollo sequence. Master key required."
+	Summary      = "Pause or resume someone in a sequence"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+circle-check"
 	Date         = "01/08/2026"

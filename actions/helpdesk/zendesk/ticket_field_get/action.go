@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Ticket Field"
 	Description  = "Retrieve a single Zendesk ticket field (system or custom) by its ID."
+	Summary      = "Look up one ticket field"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+magnifying-glass"
 	Date         = "03/07/2026"

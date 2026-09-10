@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tax Code: Get"
 	Description  = "Fetch a QuickBooks Online tax code by ID. Returns the tax code object."
+	Summary      = "Look up a tax code in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

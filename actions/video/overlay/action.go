@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Overlay Video / Graphic"
 	Description  = "Composite an animated or static graphic onto a video (picture-in-picture)"
+	Summary      = "Layer a graphic or clip on top of a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "layer-group"
 	Date         = "15/07/2026"

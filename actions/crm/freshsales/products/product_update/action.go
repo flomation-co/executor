@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Update"
 	Description  = "Update a Freshsales CPQ product."
+	Summary      = "Change a product in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

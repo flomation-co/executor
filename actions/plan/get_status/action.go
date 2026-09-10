@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan / Get Status"
 	Description  = "Read a plan's current state: status, task counts, and full task list."
+	Summary      = "Check how a plan is getting on"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+magnifying-glass"
 	Date         = "23/06/2026"

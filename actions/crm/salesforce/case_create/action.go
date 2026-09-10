@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Case"
 	Description  = "Raise a support case in Salesforce from an email, phone call or web form, and link it to the customer's account or contact. Every field is optional — Salesforce accepts a case with nothing but a subject."
+	Summary      = "Raise a support case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

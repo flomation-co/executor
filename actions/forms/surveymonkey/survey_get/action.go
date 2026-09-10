@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Survey"
 	Description  = "Retrieve a single SurveyMonkey survey by its survey ID."
+	Summary      = "Look up a SurveyMonkey survey"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+eye"
+	Icon         = "surveymonkey+eye"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

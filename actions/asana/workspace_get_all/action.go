@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Workspaces"
 	Description  = "List the Asana workspaces you can access. Use this to find the workspace ID other actions need."
+	Summary      = "List workspaces in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+list"
 	Date         = "07/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member: List"
 	Description  = "List members (subscribers) in a Mailchimp audience. Filter by status, email type, and change/creation timestamps. Returns all matching members or a single page."
+	Summary      = "List members in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+magnifying-glass"
 	Date         = "01/07/2026"

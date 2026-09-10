@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Comment"
 	Description  = "Permanently delete a comment from a Jira issue. Enter the issue key (e.g. SCRUM-1) and the comment ID to remove. This cannot be undone."
+	Summary      = "Delete a comment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+trash"
 	Date         = "06/07/2026"

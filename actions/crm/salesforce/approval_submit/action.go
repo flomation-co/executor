@@ -36,6 +36,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Submit for Approval"
 	Description  = "Send a Salesforce record into an approval process so the right person is asked to approve it."
+	Summary      = "Send a record for approval"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+share-from-square"
 	Date         = "25/07/2026"

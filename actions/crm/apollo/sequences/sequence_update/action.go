@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sequence: Update"
 	Description  = "Update an Apollo sequence by ID (name, active, visibility…). Master key required."
+	Summary      = "Change a sequence in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+pen"
 	Date         = "01/08/2026"

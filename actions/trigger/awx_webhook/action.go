@@ -60,6 +60,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "AWX Job Trigger"
 	Description  = "Triggers a flow when an AWX / AAP job starts, succeeds, fails or is canceled. Flomation registers the notification in AWX automatically. Note that AWX sends each notification once and never retries, so an event raised while Flomation is unreachable is lost."
+	Summary      = "Start when an AWX or AAP job finishes"
 	Website      = "https://www.flomation.co"
 	// The bare base, no badge — the trigger convention (cf. woocommerce, monday).
 	Icon = "ansible"

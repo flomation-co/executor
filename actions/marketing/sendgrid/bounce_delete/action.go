@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Bounce"
 	Description  = "Remove addresses from your SendGrid bounce list so mail can be sent to them again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list."
+	Summary      = "Clear a bounce so the address can be mailed again"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: List All"
 	Description  = "List every Freshsales marketing list."
+	Summary      = "List your contact lists"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

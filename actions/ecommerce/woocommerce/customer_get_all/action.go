@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Get Many Customers"
 	Description  = "List customers from your WooCommerce store, with optional filters. Enable Return All to auto-paginate every matching customer."
+	Summary      = "List your customers"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+list"
 	Date         = "05/07/2026"

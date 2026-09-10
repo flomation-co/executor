@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: Update"
 	Description  = "Update fields on an existing Airtable record by its record ID. Only the supplied fields change. Returns the updated record."
+	Summary      = "Change a record in Airtable"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+pencil"
 	Date         = "01/07/2026"

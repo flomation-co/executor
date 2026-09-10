@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Schedule Trigger"
 	Description  = "Triggers a flow on a recurring schedule"
+	Summary      = "Start on a repeating schedule"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock"
 	Date         = "22/03/2026"

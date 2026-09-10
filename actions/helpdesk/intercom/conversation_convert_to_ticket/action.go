@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Convert Conversation to Ticket"
 	Description  = "Turn an Intercom conversation into a ticket of the type you choose. The conversation itself becomes the ticket (they share the same ID) — deleting the ticket also deletes the conversation."
+	Summary      = "Turn a conversation into a tracked ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+arrow-right-arrow-left"
 	Date         = "08/07/2026"

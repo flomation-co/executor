@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SurveyMonkey Webhook Trigger"
 	Description  = "Triggers a flow when a SurveyMonkey webhook event is received."
+	Summary      = "Start when someone completes your SurveyMonkey survey"
 	Website      = "https://www.flomation.co"
 	Icon         = "clipboard-list"
 	Date         = "11/07/2026"

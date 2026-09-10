@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Response"
 	Description  = "Retrieve a single submitted response from a Google Form by response ID."
+	Summary      = "Read one person's answers to a Google Form"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+magnifying-glass"
+	Icon         = "googleforms+magnifying-glass"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

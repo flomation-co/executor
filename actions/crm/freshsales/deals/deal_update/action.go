@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: Update"
 	Description  = "Update an existing Freshsales deal. Only the fields you set are changed."
+	Summary      = "Change a deal in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

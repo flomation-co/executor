@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: Query"
 	Description  = "Query QuickBooks Online purchase orders with SQL-like syntax. Returns matching purchase order rows."
+	Summary      = "Search purchase orders"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

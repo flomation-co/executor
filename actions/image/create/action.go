@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Image"
 	Description  = "Create a new blank image of a given size and colour"
+	Summary      = "Create a blank picture to draw on"
 	Website      = "https://www.flomation.co"
 	Icon         = "image+plus"
 	Date         = "15/07/2026"

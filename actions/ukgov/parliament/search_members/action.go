@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Members"
 	Description  = "Search UK Parliament members (MPs and Lords) by name (UK Parliament)"
+	Summary      = "Find an MP or member of the Lords by name"
 	Website      = "https://www.flomation.co"
 	Icon         = "landmark+magnifying-glass"
 	Date         = "05/07/2026"

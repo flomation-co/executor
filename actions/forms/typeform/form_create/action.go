@@ -16,8 +16,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Form"
 	Description  = "Create a new Typeform form with a title and a JSON array of fields."
+	Summary      = "Create a Typeform"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+plus"
+	Icon         = "typeform+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

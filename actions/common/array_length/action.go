@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Array Length"
 	Description  = "Returns the number of items in an array. Optionally walk a dotted path into a JSON object first (e.g. path=\"data.items\")."
+	Summary      = "Count how many items are in a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "list+hashtag"
 	Date         = "19/04/2026"

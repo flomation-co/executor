@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Lead"
 	Description  = "Add a new lead to Salesforce from a web form, phone enquiry or spreadsheet row. Company Name and Last Name are the only fields Salesforce insists on; everything else is optional."
+	Summary      = "Add a lead"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Format Date"
 	Description  = "Format a date/time value or the current time into a string"
+	Summary      = "Format a date or time into whatever layout you need"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar"
 	Date         = "19/04/2026"

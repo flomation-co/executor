@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Search Tickets"
 	Description  = "Find Intercom tickets matching a filter — for example every ticket in a given state, assigned to a teammate, or created after a date. Use the advanced JSON query for AND/OR combinations."
+	Summary      = "Find tickets matching your conditions"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

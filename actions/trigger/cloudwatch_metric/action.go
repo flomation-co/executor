@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "CloudWatch Metric Threshold Trigger"
 	Description  = "Triggers a flow when a CloudWatch metric crosses a threshold (edge-triggered). Polls GetMetricStatistics."
+	Summary      = "Start when a CloudWatch metric crosses a threshold"
 	Website      = "https://www.flomation.co"
 	Icon         = "gauge+bell"
 	Date         = "22/07/2026"

@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Media: Upload Image"
 	Description  = "Upload an image to a Meta ad account and return the image hash for use in a creative."
+	Summary      = "Upload an image to use in adverts"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+cloud-arrow-up"
 	Date         = "17/08/2026"

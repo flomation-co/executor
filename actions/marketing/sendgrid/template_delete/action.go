@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Template"
 	Description  = "Permanently delete a transactional template from SendGrid, including all of its versions. This cannot be undone."
+	Summary      = "Delete an email template"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

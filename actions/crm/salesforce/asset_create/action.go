@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Asset"
 	Description  = "Record something a customer owns - which product it is, its serial number, when it was installed and when the warranty runs out. It is what turns \"they bought a boiler two years ago\" into something the person answering the phone can actually look up."
+	Summary      = "Record a product a customer owns"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+box"
 	Date         = "26/07/2026"

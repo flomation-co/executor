@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Slack Webhook"
 	Description  = "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts"
+	Summary      = "Post to Slack using an incoming webhook"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+globe"
 	Date         = "23/03/2026"

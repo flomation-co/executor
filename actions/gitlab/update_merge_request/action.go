@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Update Merge Request"
 	Description  = "Update an existing merge request in a GitLab project"
+	Summary      = "Change a merge request's title or state"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+pencil"
 	Date         = "26/04/2026"

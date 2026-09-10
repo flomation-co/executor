@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Webhooks"
 	Description  = "List the SurveyMonkey webhooks registered on the account."
+	Summary      = "List your SurveyMonkey webhooks"
 	Website      = "https://www.flomation.co"
-	Icon         = "webhook+list"
+	Icon         = "surveymonkey+list"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

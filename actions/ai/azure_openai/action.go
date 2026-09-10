@@ -35,6 +35,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure OpenAI Prompt"
 	Description  = "Send a prompt to an Azure OpenAI deployment and return the response"
+	Summary      = "Ask your Azure OpenAI deployment a question"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+cloud"
 	Date         = "16/07/2026"

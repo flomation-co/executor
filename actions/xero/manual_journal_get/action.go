@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Manual Journal: Get"
 	Description  = "Fetch a single Xero manual journal by its ID. Returns the journal object."
+	Summary      = "Look up a manual journal in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

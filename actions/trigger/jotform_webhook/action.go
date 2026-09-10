@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "JotForm Webhook Trigger"
 	Description  = "Triggers a flow when a JotForm form submission webhook is received."
+	Summary      = "Start when someone completes your JotForm"
 	Website      = "https://www.flomation.co"
 	Icon         = "clipboard-list"
 	Date         = "11/07/2026"

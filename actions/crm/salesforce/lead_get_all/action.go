@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Leads"
 	Description  = "List leads, optionally filtered and sorted. Turn on Return All to fetch every match, page by page, instead of just the first batch."
+	Summary      = "List leads"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

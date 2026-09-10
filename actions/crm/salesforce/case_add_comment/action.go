@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Case Comment"
 	Description  = "Post a comment onto a Salesforce case — an internal note for the team, or a reply the customer can see in the portal."
+	Summary      = "Comment on a support case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"
 	Date         = "25/07/2026"

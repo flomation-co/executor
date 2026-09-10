@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Crop Image"
 	Description  = "Crop a rectangular region from an image by position and size"
+	Summary      = "Cut a rectangle out of a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "object-group"
 	Date         = "15/07/2026"

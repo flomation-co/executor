@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Task"
 	Description  = "Change an existing Asana task — rename it, edit notes, reassign it, set a due date, or mark it complete."
+	Summary      = "Change a task in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+pen"
 	Date         = "07/07/2026"

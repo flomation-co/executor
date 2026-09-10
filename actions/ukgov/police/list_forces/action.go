@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Police Forces"
 	Description  = "List UK territorial police forces and their IDs (Police UK)"
+	Summary      = "List the UK police forces"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-halved+list"
 	Date         = "05/07/2026"

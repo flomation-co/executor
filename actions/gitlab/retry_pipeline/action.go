@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Retry Pipeline"
 	Description  = "Retry all failed jobs in a GitLab pipeline"
+	Summary      = "Run a failed pipeline again"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+refresh"
 	Date         = "26/04/2026"

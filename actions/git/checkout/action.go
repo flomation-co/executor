@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Checkout"
 	Description  = "Check out a branch or commit in a Git repository"
+	Summary      = "Switch to a branch, tag or commit"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+arrow-right"
 	Date         = "06/03/2026"

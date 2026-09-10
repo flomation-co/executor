@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete List Item"
 	Description  = "Delete an item from a SharePoint list"
+	Summary      = "Remove an item from a SharePoint list"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+trash"
 	Date         = "04/06/2026"

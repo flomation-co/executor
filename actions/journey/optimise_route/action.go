@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Optimise Route"
 	Description  = "Find the shortest visit order for a set of stops, with optional fixed start and end anchors."
+	Summary      = "Put a list of stops in the quickest order"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+rotate"
 	Date         = "11/06/2026"

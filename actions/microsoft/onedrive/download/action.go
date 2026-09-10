@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Download File"
 	Description  = "Download a file from OneDrive by item ID"
+	Summary      = "Download a file from OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+arrow-down"
+	Icon         = "onedrive+arrow-down"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

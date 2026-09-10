@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Cancel Workflow Run"
 	Description  = "Cancel a running GitHub Actions workflow run"
+	Summary      = "Stop a running workflow"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+xmark"
 	Date         = "26/04/2026"

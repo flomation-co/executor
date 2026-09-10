@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Approve Request"
 	Description  = "Approve a Salesforce record that is waiting for approval, with an optional comment recorded against the decision."
+	Summary      = "Approve something waiting on you"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "25/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Status"
 	Description  = "Show the working tree status of a Git repository"
+	Summary      = "See which files have changed"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+eye"
 	Date         = "19/03/2026"

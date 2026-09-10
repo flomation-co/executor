@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Campaign"
 	Description  = "Set up a marketing campaign in Salesforce — a webinar, open day, trade show or email blast — so people can be added to it and its results tracked. Leave a box blank to let Salesforce use its own default."
+	Summary      = "Create a marketing campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Avatars"
 	Description  = "List available HeyGen avatars (their look id is the avatar_id for generating a video)."
+	Summary      = "Browse the presenters you can use"
 	Website      = "https://www.flomation.co"
 	Icon         = "user+list"
 	Date         = "11/08/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Food Establishment"
 	Description  = "Look up a UK food hygiene rating by FHRS establishment ID (Food Standards Agency)"
+	Summary      = "Look up one place's food hygiene rating"
 	Website      = "https://www.flomation.co"
 	Icon         = "star"
 	Date         = "05/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Comment"
 	Description  = "Add a comment to a Jira issue. Enter the issue key (e.g. SCRUM-1) and the comment text — it is posted as a plain-text comment on the issue."
+	Summary      = "Add a comment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+comment"
 	Date         = "06/07/2026"

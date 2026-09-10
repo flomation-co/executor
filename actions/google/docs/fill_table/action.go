@@ -18,8 +18,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Fill Document Table"
 	Description  = "Write values into the cells of a table in a Google Doc (by row and column)"
+	Summary      = "Fill in a table in a Google Doc"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+pencil"
+	Icon         = "googledocs+pencil"
 	Date         = "10/08/2026"
 	Type         = core.ActionTypeAction
 

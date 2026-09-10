@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Create Pull Request"
 	Description  = "Create a new pull request in a GitHub repository"
+	Summary      = "Open a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+plus"
 	Date         = "26/04/2026"

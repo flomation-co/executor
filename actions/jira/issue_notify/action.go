@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notify About Issue"
 	Description  = "Send an email notification about a Jira issue. Set a subject and message body, and choose who receives it — the reporter, assignee, watchers, voters, or named users and groups."
+	Summary      = "Email people about an issue"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+bell"
 	Date         = "06/07/2026"

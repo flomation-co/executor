@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Block"
 	Description  = "Remove addresses from your SendGrid block list so mail can be sent to them again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list."
+	Summary      = "Unblock an address so it can receive mail again"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

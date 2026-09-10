@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Run Bash Script"
 	Description  = "Execute a Bash script in the current working directory"
+	Summary      = "Run a bash script in Script"
 	Website      = "https://www.flomation.co"
 	Icon         = "terminal"
 	Date         = "23/03/2026"

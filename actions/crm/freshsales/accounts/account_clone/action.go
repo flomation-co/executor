@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Clone"
 	Description  = "Duplicate an existing Freshsales account."
+	Summary      = "Duplicate an account in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+copy"
 	Date         = "04/09/2026"

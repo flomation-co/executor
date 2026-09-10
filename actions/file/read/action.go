@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read File"
 	Description  = "Read the contents of a file"
+	Summary      = "Read what is inside a file"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "23/03/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Scroll"
 	Description  = "Scroll the mouse wheel up or down on a desktop VM."
+	Summary      = "Scroll the window under the pointer"
 	Website      = "https://www.flomation.co"
 	Icon         = "arrows-up-down"
 	Date         = "12/08/2026"

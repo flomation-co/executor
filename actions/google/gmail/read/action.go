@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gmail Read"
 	Description  = "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message."
+	Summary      = "Search and read emails in Gmail"
 	Website      = "https://www.flomation.co"
 	Icon         = "gmail+eye"
 	Date         = "08/04/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Attachment"
 	Description  = "Attach a URL to a Trello card, optionally naming it."
+	Summary      = "Add an attachment in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+paperclip"
 	Date         = "07/07/2026"

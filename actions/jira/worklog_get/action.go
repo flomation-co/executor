@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Worklog"
 	Description  = "Fetch a single worklog entry from a Jira issue by its issue key and worklog ID. Returns the full worklog, including who logged it, the time spent and any comment."
+	Summary      = "Look up a worklog in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+clock"
 	Date         = "06/07/2026"

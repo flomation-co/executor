@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Notes"
 	Description  = "List the private notes on a contact's timeline, newest first. Enable Return All to fetch every note."
+	Summary      = "List the private notes on a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

@@ -23,6 +23,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Conversation History"
 	Description  = "Full-text search your entire message history with this user (all channels) to recall something outside your current context. Provide a search query."
+	Summary      = "Search everything this person has said to your agent"
 	Website      = "https://www.flomation.co"
 	Icon         = "comments+magnifying-glass"
 	Date         = "13/08/2026"

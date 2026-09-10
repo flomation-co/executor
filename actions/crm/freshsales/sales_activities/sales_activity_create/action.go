@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Activity: Create"
 	Description  = "Create a Freshsales sales activity."
+	Summary      = "Log a call, meeting or other activity"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

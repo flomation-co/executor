@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Vendor: Create"
 	Description  = "Create a QuickBooks Online vendor. Returns the vendor ID and object."
+	Summary      = "Add a vendor in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

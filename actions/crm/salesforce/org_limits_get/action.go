@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Org Limits"
 	Description  = "Check how much of your Salesforce allowance is left — daily API calls, data storage, file storage — so a flow can stop or warn before it uses it all up."
+	Summary      = "Check how much of your API quota is left"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+gauge"
 	Date         = "25/07/2026"

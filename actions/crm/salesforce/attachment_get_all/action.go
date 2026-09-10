@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Attachments (Classic)"
 	Description  = "List Classic attachments, optionally filtered and sorted — for example every attachment on one record, or everything added since yesterday."
+	Summary      = "List attachments (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

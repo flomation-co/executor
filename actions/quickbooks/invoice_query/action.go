@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Query"
 	Description  = "Query QuickBooks Online invoices with SQL-like syntax. Returns matching rows."
+	Summary      = "Search invoices"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

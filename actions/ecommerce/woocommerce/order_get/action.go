@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Get Order"
 	Description  = "Retrieve a single order from your WooCommerce store by ID."
+	Summary      = "Look up one order"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+eye"
 	Date         = "05/07/2026"

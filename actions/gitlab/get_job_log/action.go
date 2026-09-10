@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Get Job Log"
 	Description  = "Retrieve the log/trace output of a GitLab CI/CD job"
+	Summary      = "Read a CI job's log output"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+file-lines"
 	Date         = "27/04/2026"

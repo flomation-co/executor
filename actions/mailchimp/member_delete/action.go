@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member: Delete"
 	Description  = "Remove a member (subscriber) from a Mailchimp audience. By default archives the member (reversible); optionally permanently delete them (irreversible)."
+	Summary      = "Delete a member in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+trash"
 	Date         = "01/07/2026"

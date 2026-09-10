@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Templates"
 	Description  = "Retrieve the transactional templates on your SendGrid account. Shows dynamic (handlebars) templates unless you also ask for legacy ones; tick Return All to fetch every page."
+	Summary      = "List your email templates"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

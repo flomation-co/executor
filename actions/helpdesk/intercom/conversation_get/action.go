@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Conversation"
 	Description  = "Fetch a single Intercom conversation with its full message history. Tick Plain Text to strip HTML from the message bodies."
+	Summary      = "Read a conversation and its messages"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+eye"
 	Date         = "08/07/2026"

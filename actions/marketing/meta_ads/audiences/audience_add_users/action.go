@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Audiences: Add People"
 	Description  = "Add people to a Meta custom audience. Emails and phones are hashed locally before sending."
+	Summary      = "Add people to a custom audience"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+user-plus"
 	Date         = "17/08/2026"

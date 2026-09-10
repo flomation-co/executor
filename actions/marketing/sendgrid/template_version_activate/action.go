@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Activate Template Version"
 	Description  = "Make a specific version of a SendGrid transactional template the active one — the version that is used whenever the template is sent."
+	Summary      = "Make a template version the live one"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+play"
 	Date         = "09/07/2026"

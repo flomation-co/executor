@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Get Build Console Output"
 	Description  = "Fetch the console log (build output) of a Jenkins build as plain text. Accepts a build number or a keyword like lastBuild."
+	Summary      = "Read a build's console output"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+terminal"
 	Date         = "04/07/2026"

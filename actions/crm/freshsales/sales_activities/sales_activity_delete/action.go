@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Activity: Delete"
 	Description  = "Delete a Freshsales sales activity by ID."
+	Summary      = "Delete a logged activity"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

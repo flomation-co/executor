@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment: Delete"
 	Description  = "Delete (reverse) a Xero payment by setting its status to DELETED."
+	Summary      = "Delete a payment in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+trash"
 	Date         = "05/07/2026"

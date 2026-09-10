@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Animated Counter"
 	Description  = "Generate a number counting from one value to another as a transparent video"
+	Summary      = "Make a number that counts up, to lay over a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "hashtag"
 	Date         = "15/07/2026"

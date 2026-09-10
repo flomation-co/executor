@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Category"
 	Description  = "Retrieve a single category from your WordPress site by ID."
+	Summary      = "Look up a WordPress category"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+eye"
 	Date         = "05/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ticket: Create"
 	Description  = "Create a new support ticket in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the ticket ID."
+	Summary      = "Add a ticket in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+plus"
 	Date         = "30/06/2026"

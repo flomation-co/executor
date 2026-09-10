@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Contract"
 	Description  = "Send a contract to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Activated contracts can be deleted too, so use this carefully on anything live."
+	Summary      = "Delete a contract"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "26/07/2026"

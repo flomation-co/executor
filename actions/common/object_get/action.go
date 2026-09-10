@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Object Get Field"
 	Description  = "Extract a field from an object by name, with dot-notation for nested access"
+	Summary      = "Pull a single field out of a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "magnifying-glass"
 	Date         = "22/05/2026"

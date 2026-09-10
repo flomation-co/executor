@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List: Add Contacts"
 	Description  = "Add contacts to a Freshsales marketing list."
+	Summary      = "Add contacts to a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

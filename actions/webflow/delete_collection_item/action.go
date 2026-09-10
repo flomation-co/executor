@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Collection Item"
 	Description  = "Delete an item from a Webflow CMS collection"
+	Summary      = "Remove an item from a Webflow collection"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+trash"
 	Date         = "29/05/2026"

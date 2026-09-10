@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop List Recordings"
 	Description  = "List the ids of screen recordings currently running on a desktop VM."
+	Summary      = "List the screen recordings taken"
 	Website      = "https://www.flomation.co"
 	Icon         = "film"
 	Date         = "13/08/2026"

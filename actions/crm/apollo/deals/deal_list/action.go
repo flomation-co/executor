@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deals: List"
 	Description  = "List the deals (opportunities) in your Apollo CRM, sorted by amount or status."
+	Summary      = "List deals in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+list"
 	Date         = "01/08/2026"

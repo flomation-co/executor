@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Create User"
 	Description  = "Create a user in Zendesk. Set common profile fields directly, add custom user fields as JSON, or add any other field via Additional Fields."
+	Summary      = "Add a user"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+plus"
 	Date         = "03/07/2026"

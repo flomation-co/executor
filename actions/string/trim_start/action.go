@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Trim Start"
 	Description  = "Remove whitespace from the start of a string"
+	Summary      = "Remove spaces from the start of some text"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+arrow-right"
 	Date         = "19/04/2026"

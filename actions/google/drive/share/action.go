@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Share Drive File"
 	Description  = "Share a Google Drive file with a user or make it public"
+	Summary      = "Share a Drive file with someone"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+share-from-square"
+	Icon         = "googledrive+share-from-square"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

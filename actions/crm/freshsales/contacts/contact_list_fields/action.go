@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: List Fields"
 	Description  = "List every contact field, including custom fields, with its type and options."
+	Summary      = "List the fields available on a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

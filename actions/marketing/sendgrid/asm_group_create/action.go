@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Create Unsubscribe Group"
 	Description  = "Create an unsubscribe (ASM) group in SendGrid. Recipients who opt out of a group stop receiving email assigned to that group without unsubscribing from everything. Provide a name and a short description."
+	Summary      = "Create a group people can unsubscribe from"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+plus"
 	Date         = "09/07/2026"

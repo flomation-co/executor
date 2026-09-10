@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Comment"
 	Description  = "Change the text of an existing comment on a Trello card."
+	Summary      = "Change a comment in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+pen"
 	Date         = "07/07/2026"

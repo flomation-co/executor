@@ -16,8 +16,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Submissions"
 	Description  = "Retrieve the submissions for a JotForm form, with limit, offset and filter."
+	Summary      = "Read the answers people gave on a JotForm"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+envelope-open-text"
+	Icon         = "jotform+envelope-open-text"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

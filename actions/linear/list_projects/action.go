@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Projects"
 	Description  = "List projects with their UUIDs. Use this to get the project UUID needed by create/update_issue."
+	Summary      = "List projects in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+list"
 	Date         = "03/08/2026"

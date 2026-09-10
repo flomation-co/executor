@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Case"
 	Description  = "Look up a single Salesforce case by its record ID and return its details. Leave Fields blank to get everything the connected user can see."
+	Summary      = "Look up one support case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

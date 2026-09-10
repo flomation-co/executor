@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Remove Tag from Company"
 	Description  = "Remove a tag from a company in Intercom. The tag itself is kept, so it stays available for other companies and contacts."
+	Summary      = "Take a tag off a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+minus"
 	Date         = "08/07/2026"

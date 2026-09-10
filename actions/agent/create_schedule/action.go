@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Schedule"
 	Description  = "Create a recurring scheduled task for the agent"
+	Summary      = "Give your agent something to do on a repeating schedule"
 	Website      = "https://www.flomation.co"
 	Icon         = "clock+plus"
 	Date         = "29/04/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Journal Entry: Create"
 	Description  = "Create a QuickBooks Online journal entry from debit/credit lines. Returns the entry ID and object."
+	Summary      = "Add a journal entry in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Click"
 	Description  = "Move the mouse to (x, y) on a desktop VM and click a button."
+	Summary      = "Click somewhere on the desktop"
 	Website      = "https://www.flomation.co"
 	Icon         = "hand"
 	Date         = "12/08/2026"

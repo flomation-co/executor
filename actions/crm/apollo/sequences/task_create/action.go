@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Task: Create"
 	Description  = "Create Apollo tasks for one or more contacts, assigned to a user."
+	Summary      = "Add a task in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+list-check"
 	Date         = "01/08/2026"

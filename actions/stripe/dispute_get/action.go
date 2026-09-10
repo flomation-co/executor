@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Dispute: Get"
 	Description  = "Retrieve a Stripe dispute by ID."
+	Summary      = "Look up a dispute in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+search"
 	Date         = "05/07/2026"

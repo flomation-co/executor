@@ -46,6 +46,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Process Extraction Output"
 	Description  = "Parse a structured extraction JSON payload and write memories, pending actions, and commitments"
+	Summary      = "Turn what an agent noticed into memories and follow-ups"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+filter"
 	Date         = "05/04/2026"

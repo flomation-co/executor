@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Create"
 	Description  = "Create a contact in Freshsales. Returns the new record and its ID."
+	Summary      = "Add a contact in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

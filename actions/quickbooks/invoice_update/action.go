@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Update"
 	Description  = "Update a QuickBooks Online invoice (sparse). Requires ID and sync token."
+	Summary      = "Change an invoice in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+pencil"
 	Date         = "05/07/2026"

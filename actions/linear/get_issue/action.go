@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Issue"
 	Description  = "Fetch a Linear issue by UUID or identifier (e.g. ENG-123). Returns full details."
+	Summary      = "Look up an issue in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+eye"
 	Date         = "15/04/2026"

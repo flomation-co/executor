@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Delete Customer"
 	Description  = "Delete a customer from your WooCommerce store permanently (customers cannot be moved to the trash)."
+	Summary      = "Delete a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+trash"
 	Date         = "05/07/2026"

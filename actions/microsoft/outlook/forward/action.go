@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Forward Email"
 	Description  = "Forward an Outlook email to other recipients"
+	Summary      = "Forward an Outlook email to someone else"
 	Website      = "https://www.flomation.co"
 	Icon         = "share-from-square"
 	Date         = "03/06/2026"

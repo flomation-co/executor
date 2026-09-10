@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Base: List"
 	Description  = "List the Airtable bases the token can access, with their IDs and permission levels. Optionally filter by permission level. Requires the schema.bases:read scope."
+	Summary      = "List the Airtable bases you can reach"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+list"
 	Date         = "01/07/2026"

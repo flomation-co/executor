@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Current User"
 	Description  = "Get the user the API key belongs to (id, name, email) — use for self-assignment."
+	Summary      = "Look up a current user in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+user"
 	Date         = "03/08/2026"

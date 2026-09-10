@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Intent: Cancel"
 	Description  = "Cancel a Stripe PaymentIntent that has not yet completed."
+	Summary      = "Cancel a payment intent in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+trash"
 	Date         = "05/07/2026"

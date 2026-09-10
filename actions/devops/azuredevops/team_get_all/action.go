@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Teams"
 	Description  = "List the teams in a project. Mostly useful for scoping a WIQL query to one team's backlog, or for resolving a team ID to feed another tool."
+	Summary      = "List the teams in a project"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+user-group"
 	Date         = "17/07/2026"

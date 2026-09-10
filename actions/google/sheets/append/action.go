@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Append to Sheet"
 	Description  = "Append rows to a Google Sheet"
+	Summary      = "Add rows to the bottom of a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+plus"
+	Icon         = "googlesheets+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

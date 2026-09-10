@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Current User"
 	Description  = "Check the Salesforce connection and see who it is signed in as — the username, email, org and time zone the rest of your flow will run under."
+	Summary      = "Look up whoever the connection belongs to"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "25/07/2026"

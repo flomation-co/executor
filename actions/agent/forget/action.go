@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Forget Memory"
 	Description  = "Delete a specific memory from an agent's store"
+	Summary      = "Make your agent forget one thing it remembered"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+trash"
 	Date         = "05/04/2026"

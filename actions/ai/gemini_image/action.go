@@ -34,6 +34,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gemini Image"
 	Description  = "Generate an image from a text prompt using Gemini 2.5 Flash Image"
+	Summary      = "Create a picture from a written description"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+image"
 	Date         = "25/06/2026"

@@ -18,8 +18,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Convert to Google Doc"
 	Description  = "Convert a Drive file (e.g. an uploaded .docx) into a native, editable Google Doc"
+	Summary      = "Turn an uploaded Word file into an editable Google Doc"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+arrow-right-arrow-left"
+	Icon         = "googledocs+arrow-right-arrow-left"
 	Date         = "10/08/2026"
 	Type         = core.ActionTypeAction
 

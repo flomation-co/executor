@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Get by ID"
 	Description  = "Fetch a single Apollo contact by its ID (Apollo master key required)."
+	Summary      = "Look up one contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+eye"
 	Date         = "01/08/2026"

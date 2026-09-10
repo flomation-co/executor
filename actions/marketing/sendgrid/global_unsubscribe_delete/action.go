@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Global Unsubscribe"
 	Description  = "Remove an email address from SendGrid's global unsubscribe list so it can receive email from your account again."
+	Summary      = "Allow mail to an address again"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

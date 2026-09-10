@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Opportunity Contact"
 	Description  = "Change what part a contact plays in a deal, or make them the primary contact. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a contact's role on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pencil"
 	Date         = "25/07/2026"

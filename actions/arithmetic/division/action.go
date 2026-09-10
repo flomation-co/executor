@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Division"
 	Description  = "Divide one number by another and return the quotient. Accepts integers or decimals."
+	Summary      = "Divide one number by another"
 	Website      = "https://www.flomation.co"
 	Icon         = "divide"
 	Date         = "05/03/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Projects"
 	Description  = "List the projects in an Azure DevOps organisation. Every other action needs a project, so this is the natural first step — and the connection test: it validates the Organisation URL and the Personal Access Token without touching anything else."
+	Summary      = "List the projects in your organisation"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

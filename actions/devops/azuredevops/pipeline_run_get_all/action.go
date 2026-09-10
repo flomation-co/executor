@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Pipeline Runs"
 	Description  = "List the recent runs of one pipeline, newest first — for \"did today's build pass?\" style flows. The service returns its own recent window and takes no paging parameters, so Limit trims the list on our side."
+	Summary      = "List recent pipeline runs"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "17/07/2026"

@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Contact Metadata"
 	Description  = "Fetch details about the Contact object in your org — what it is called, what the connected user may do with it, and the contacts they viewed recently. Useful as a quick connection check."
+	Summary      = "List the fields available on a contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

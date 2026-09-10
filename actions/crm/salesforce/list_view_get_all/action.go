@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many List Views"
 	Description  = "List the saved views your Salesforce administrator has already built on a record type — 'My Open Opportunities', 'Hot Leads This Week'. Use the ID of the one you want with Run List View."
+	Summary      = "List the saved views on an object"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Account"
 	Description  = "Send a Salesforce account to the Recycle Bin, where it can be restored for 15 days. Contacts, opportunities and cases under the account go with it."
+	Summary      = "Delete a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

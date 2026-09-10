@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Calendar Delete Event"
 	Description  = "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event."
+	Summary      = "Remove an event from a Google Calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+trash"
 	Date         = "08/04/2026"

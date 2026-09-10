@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Account"
 	Description  = "Keep Salesforce in step with another system: match an account on your own reference (an External ID field) and update it if it exists, or create it if it does not. Safe to run over and over — it will not create duplicates."
+	Summary      = "Add a company, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+rotate"
 	Date         = "25/07/2026"

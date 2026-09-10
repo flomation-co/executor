@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan / Revise"
 	Description  = "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans."
+	Summary      = "Add, remove or change the steps in a plan"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+pencil"
 	Date         = "24/06/2026"

@@ -42,6 +42,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gemini Prompt"
 	Description  = "Send a prompt to Google's Gemini API and return the response"
+	Summary      = "Ask Google Gemini a question and use its answer"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+play"
 	Date         = "25/06/2026"

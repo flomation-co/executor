@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Attachment (Classic)"
 	Description  = "Delete a Classic attachment from the record it is on. It goes to the Recycle Bin, so it can be restored for 15 days."
+	Summary      = "Delete an attachment (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

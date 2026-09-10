@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Block"
 	Description  = "Look up a single email address on your SendGrid block list. If the address is not blocked, the action reports that no block was found."
+	Summary      = "See why an address was blocked"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

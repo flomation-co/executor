@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Get"
 	Description  = "Fetch a QuickBooks Online invoice by ID. Returns the invoice object."
+	Summary      = "Look up an invoice in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

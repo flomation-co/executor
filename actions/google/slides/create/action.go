@@ -14,8 +14,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Presentation"
 	Description  = "Create a new Google Slides presentation"
+	Summary      = "Create a Google Slides presentation"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+plus"
+	Icon         = "googleslides+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

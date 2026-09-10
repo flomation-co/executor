@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Get Post"
 	Description  = "Retrieve a LinkedIn post by its URN with content and metadata"
+	Summary      = "Look up a LinkedIn post"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+eye"
 	Date         = "21/05/2026"

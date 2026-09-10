@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Open URL"
 	Description  = "Open a URL in the default browser on a desktop VM."
+	Summary      = "Open a web page on the desktop"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe"
 	Date         = "12/08/2026"

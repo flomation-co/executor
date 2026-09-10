@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Record"
 	Description  = "Create a record, or update the existing one that matches — on any Salesforce object. Salesforce matches on a field you choose (an order number, a customer reference, an email), so re-running the flow never creates a duplicate."
+	Summary      = "Add a record, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+rotate"
 	Date         = "25/07/2026"

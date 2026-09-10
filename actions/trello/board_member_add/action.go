@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Board Member"
 	Description  = "Add an existing Trello member to a board and set their membership type (normal, admin, or observer)."
+	Summary      = "Add a board member in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+user-plus"
 	Date         = "07/07/2026"

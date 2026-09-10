@@ -26,6 +26,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update User"
 	Description  = "Change a Salesforce user's profile, role, manager, job title or contact details. Only the fields you fill in are changed — the rest are left alone."
+	Summary      = "Change a user's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

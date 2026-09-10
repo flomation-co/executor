@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Assign Conversation"
 	Description  = "Assign an Intercom conversation to a teammate or a team, or unassign it."
+	Summary      = "Hand a conversation to a teammate or team"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+user-plus"
 	Date         = "08/07/2026"

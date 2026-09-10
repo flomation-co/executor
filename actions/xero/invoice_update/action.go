@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Update"
 	Description  = "Update an existing Xero invoice by ID. Returns the updated invoice object."
+	Summary      = "Change an invoice in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+pencil"
 	Date         = "05/07/2026"

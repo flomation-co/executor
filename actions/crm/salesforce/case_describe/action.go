@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Describe Case Object"
 	Description  = "Check what your Salesforce connection is allowed to do with cases, and list the cases this user has viewed recently. Optionally list the Status, Priority, Type, Origin and Reason values your org actually accepts."
+	Summary      = "List the fields available on a case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

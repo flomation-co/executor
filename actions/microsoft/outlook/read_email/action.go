@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read Email"
 	Description  = "Read the full content of an Outlook email message"
+	Summary      = "Read a full Outlook email"
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope-open-text"
 	Date         = "03/06/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Activity: Get"
 	Description  = "Fetch a single Freshsales sales activity by ID."
+	Summary      = "Read one logged activity"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

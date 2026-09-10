@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Addition"
 	Description  = "Add two numbers together and return the sum. Accepts integers or decimals."
+	Summary      = "Add two numbers together"
 	Website      = "https://www.flomation.co"
 	Icon         = "plus"
 	Date         = "05/03/2026"

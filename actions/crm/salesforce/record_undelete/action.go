@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Restore Deleted Record"
 	Description  = "Bring a record back from the Salesforce Recycle Bin after it was deleted by mistake. Works for 15 days after the deletion, on any object."
+	Summary      = "Restore a record from the recycle bin"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+rotate-left"
 	Date         = "25/07/2026"

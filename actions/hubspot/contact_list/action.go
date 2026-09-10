@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: List"
 	Description  = "List HubSpot contacts a page at a time. Pass the returned After cursor to fetch the next page."
+	Summary      = "List contacts in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+list"
 	Date         = "30/06/2026"

@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Files"
 	Description  = "List files and folders in a OneDrive directory"
+	Summary      = "List files and folders in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+list"
+	Icon         = "onedrive+list"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

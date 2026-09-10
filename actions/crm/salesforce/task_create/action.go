@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Task"
 	Description  = "Add a to-do to Salesforce — a call to make, an email to send or a follow-up to chase — and link it to the person and the record it is about. Set it to repeat if it happens on a schedule."
+	Summary      = "Create a task"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "25/07/2026"

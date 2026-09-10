@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Pipeline Run"
 	Description  = "Get a pipeline run's state and result — the polling half of run, wait, report. State and Result are SEPARATE: a run is only finished when State is \"completed\", and until then Result reads \"unknown\", which does not mean it failed."
+	Summary      = "Check how a pipeline run went"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Find Nearby Places"
 	Description  = "Find points of interest (restaurants, hotels, petrol stations etc.) around a location."
+	Summary      = "Find places nearby, like petrol stations or restaurants"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+map"
 	Date         = "11/06/2026"

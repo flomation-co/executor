@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Channel Message"
 	Description  = "Post a message to a Microsoft Teams channel"
+	Summary      = "Post a message to a Teams channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+paper-plane"
 	Date         = "04/06/2026"

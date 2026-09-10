@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Repeat"
 	Description  = "Repeat a string a given number of times"
+	Summary      = "Repeat a piece of text several times"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor+repeat"
 	Date         = "19/04/2026"

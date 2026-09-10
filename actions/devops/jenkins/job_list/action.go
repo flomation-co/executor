@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: List Jobs"
 	Description  = "List the jobs on the Jenkins instance with their name, URL, and status colour."
+	Summary      = "List the jobs on the server"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+list"
 	Date         = "04/07/2026"

@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Twilio SMS Trigger"
 	Description  = "Triggers a flow when an SMS message is received via Twilio"
+	Summary      = "Start when a text message arrives"
 	Website      = "https://www.flomation.co"
 	Icon         = "comment-sms"
 	Date         = "29/05/2026"

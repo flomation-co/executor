@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Current Admin"
 	Description  = "Look up the admin (teammate) your access token belongs to — an easy way to test the connection and find your own admin ID."
+	Summary      = "Look up whoever the API key belongs to"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+user"
 	Date         = "08/07/2026"

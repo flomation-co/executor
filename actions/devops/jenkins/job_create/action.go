@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Create Job"
 	Description  = "Create a new Jenkins job from a config.xml definition. Tip: to get the XML of an existing job, add ‘config.xml’ to the end of its URL."
+	Summary      = "Create a job from an XML definition"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+plus"
 	Date         = "04/07/2026"

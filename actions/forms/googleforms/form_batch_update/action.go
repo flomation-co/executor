@@ -17,8 +17,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Batch Update Form"
 	Description  = "Add items or questions to a Google Form via a batchUpdate requests JSON array."
+	Summary      = "Add questions to a Google Form"
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+pencil"
+	Icon         = "googleforms+pencil"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

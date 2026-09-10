@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Board"
 	Description  = "Permanently delete a Trello board by its ID. This cannot be undone."
+	Summary      = "Delete a board in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+trash"
 	Date         = "07/07/2026"

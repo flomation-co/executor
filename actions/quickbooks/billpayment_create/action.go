@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bill Payment: Create"
 	Description  = "Record a QuickBooks Online bill payment to a vendor. Returns the bill payment ID and object."
+	Summary      = "Add a bill payment in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"

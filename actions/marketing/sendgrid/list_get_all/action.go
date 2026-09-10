@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Contact Lists"
 	Description  = "List the contact lists in your SendGrid Marketing account, with each list's name and contact count."
+	Summary      = "List your contact lists"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

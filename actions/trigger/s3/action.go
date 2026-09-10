@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "S3 Trigger"
 	Description  = "Triggers a flow when objects are created or deleted in an S3 bucket"
+	Summary      = "Start when a file is added to or removed from S3"
 	Website      = "https://www.flomation.co"
 	Icon         = "bucket"
 	Date         = "23/03/2026"

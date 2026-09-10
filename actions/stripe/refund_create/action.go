@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Refund: Create"
 	Description  = "Refund a Stripe charge or payment intent, in full or part."
+	Summary      = "Add a refund in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

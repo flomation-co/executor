@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment: Get"
 	Description  = "Fetch a single Xero payment by ID. Returns the payment object."
+	Summary      = "Look up a payment in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Publish Site"
 	Description  = "Publish a Webflow site to its subdomain or specified custom domains"
+	Summary      = "Publish your Webflow site"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+play"
 	Date         = "29/05/2026"

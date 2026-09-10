@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Search Contacts"
 	Description  = "Search your marketing contacts with a SendGrid query (SGQL), e.g. email LIKE 'jane%' AND CONTAINS(list_ids, 'your-list-id'). SendGrid returns at most the first 50 matches; the count output reports the total number matched. Emails are stored lower-case, so compare against lower-case addresses."
+	Summary      = "Find contacts matching your conditions"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+magnifying-glass"
 	Date         = "09/07/2026"

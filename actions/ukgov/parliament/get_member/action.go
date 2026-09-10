@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Member"
 	Description  = "Retrieve a UK Parliament member (MP or Lord) by ID (UK Parliament)"
+	Summary      = "Look up an MP or member of the Lords"
 	Website      = "https://www.flomation.co"
 	Icon         = "landmark+user"
 	Date         = "05/07/2026"

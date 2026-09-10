@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Contract"
 	Description  = "Look up one contract by its Salesforce ID and return everything on it - its contract number, status, start date, term, the end date Salesforce works out for you, who signed it and every custom field."
+	Summary      = "Look up one contract"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "26/07/2026"

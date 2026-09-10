@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payout: Create"
 	Description  = "Create a Stripe payout to your bank account or debit card."
+	Summary      = "Add a payout in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

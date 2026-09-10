@@ -15,8 +15,9 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read Document"
 	Description  = "Read the content of a Google Docs document"
+	Summary      = "Read what is in a Google Doc"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+eye"
+	Icon         = "googledocs+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

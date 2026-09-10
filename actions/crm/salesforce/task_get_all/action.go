@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Tasks"
 	Description  = "Find Salesforce tasks — everything due this week, everything still open for one rep, everything logged against a customer. Fill in the simple filters, or add your own for anything more involved."
+	Summary      = "List tasks"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

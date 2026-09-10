@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Update Ticket"
 	Description  = "Update a Zendesk ticket. Add a public reply or an internal note, change status/priority/assignee, and set any other ticket field via Additional Fields."
+	Summary      = "Change a ticket's status or details"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+pencil"
 	Date         = "03/07/2026"

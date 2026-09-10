@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Archive Contact"
 	Description  = "Archive a contact to hide them from your Intercom workspace without deleting their data. Bring them back any time with Unarchive Contact."
+	Summary      = "Archive a contact without deleting them"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+box-archive"
 	Date         = "08/07/2026"

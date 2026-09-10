@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Account"
 	Description  = "Change details on an existing Salesforce account. Only the fields you fill in are changed — everything you leave blank is left exactly as it is."
+	Summary      = "Change a company's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Webhook Trigger"
 	Description  = "Triggers a flow when an HTTP webhook is received"
+	Summary      = "Start when another system sends you a webhook"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe"
 	Date         = "23/03/2026"

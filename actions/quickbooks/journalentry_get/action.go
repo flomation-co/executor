@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Journal Entry: Get"
 	Description  = "Fetch a QuickBooks Online journal entry by ID. Returns the entry object."
+	Summary      = "Look up a journal entry in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

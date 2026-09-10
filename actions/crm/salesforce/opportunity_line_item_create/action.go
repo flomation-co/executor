@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Product to Opportunity"
 	Description  = "Put a product line on a deal. Pick the product and we work out its price book entry and list price for you - a deal with no product lines has no real value and never reaches the forecast."
+	Summary      = "Add a product to a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+cart-shopping"
 	Date         = "25/07/2026"

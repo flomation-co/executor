@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub List Workflow Jobs"
 	Description  = "List jobs for a GitHub Actions workflow run"
+	Summary      = "List the jobs in a workflow run"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+list"
 	Date         = "26/04/2026"

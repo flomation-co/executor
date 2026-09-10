@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Activate Contract"
 	Description  = "Mark a signed contract as Activated so it counts as live. Salesforce stamps who activated it and when. Activating is one-way, so this is the step to run once the signature is actually in."
+	Summary      = "Make a contract active"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "26/07/2026"

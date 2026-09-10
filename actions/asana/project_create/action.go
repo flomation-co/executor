@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Project"
 	Description  = "Create a project in an Asana workspace. In an organization, also choose a team."
+	Summary      = "Add a project in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+plus"
 	Date         = "07/07/2026"

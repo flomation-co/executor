@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Query Database"
 	Description  = "Query a Notion database with optional filters and sorts"
+	Summary      = "Find pages in a Notion database"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+magnifying-glass"
 	Date         = "28/04/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Create"
 	Description  = "Create an account (company) in your Apollo CRM. Needs a name or domain."
+	Summary      = "Add an account in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+plus"
 	Date         = "01/08/2026"

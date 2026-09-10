@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Create Issue"
 	Description  = "Create a new issue in a GitHub repository"
+	Summary      = "Raise a new issue"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+plus"
 	Date         = "26/04/2026"

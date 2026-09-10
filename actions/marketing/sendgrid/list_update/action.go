@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Update Contact List"
 	Description  = "Rename a contact list in SendGrid Marketing. Choose the list and provide its new name."
+	Summary      = "Rename a contact list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+pencil"
 	Date         = "09/07/2026"

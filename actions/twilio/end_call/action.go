@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "End Call"
 	Description  = "Terminate an active Twilio voice call"
+	Summary      = "Hang up a phone call"
 	Website      = "https://www.flomation.co"
 	Icon         = "phone"
 	Date         = "30/05/2026"

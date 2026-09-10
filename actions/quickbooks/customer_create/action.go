@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Customer: Create"
 	Description  = "Create a QuickBooks Online customer. Returns the customer ID and object."
+	Summary      = "Add a customer in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+plus"
 	Date         = "05/07/2026"
