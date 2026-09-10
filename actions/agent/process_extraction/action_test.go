@@ -663,3 +663,123 @@ func TestExecute_CommitmentWithDueIn_ResolvedToDueAt(t *testing.T) {
 	Expect(hasDueAt).To(BeTrue(), "due_in should have been resolved to due_at")
 	Expect(dueAt).NotTo(BeEmpty())
 }
+
+// --- Timing: the platform resolves it, not the model ---
+
+func TestCommitmentWithAPastDueAtIsParkedNotFired(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	// The shape that broke live: the model was never told the year, so
+	// it dated a promise made in 2026 to September 2025.
+	extraction := `{
+		"memories": [],
+		"proposed_actions": [],
+		"commitments": [
+			{"kind":"followup","description":"Check back with before/after comparison","trigger_type":"absolute_time","due_at":"2025-09-13T09:00:00Z","evidence":"I'll check back in 72 hours","confidence":0.9,"made_by":"assistant"}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	out, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(out["commitments_written"]).To(Equal(1))
+	Expect(api.commitmentCalls).To(HaveLen(1))
+
+	_, hasDueAt := api.commitmentCalls[0]["due_at"]
+	Expect(hasDueAt).To(BeFalse(), "a reminder dated before it was made must never become due")
+	Expect(api.commitmentCalls[0]["status"]).To(Equal("needs_attention"))
+}
+
+func TestDueInBeatsTheModelsOwnArithmetic(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	// Both fields present and disagreeing: the phrase is right, the
+	// model's calendar date is a year out.
+	extraction := `{
+		"memories": [],
+		"proposed_actions": [],
+		"commitments": [
+			{"kind":"followup","description":"Pull the numbers","trigger_type":"time_elapsed","due_in":"72 hours","due_at":"2025-09-13T09:00:00Z","evidence":"I'll check back in 72 hours","confidence":0.9,"made_by":"assistant"}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	_, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(api.commitmentCalls).To(HaveLen(1))
+
+	dueAt, ok := api.commitmentCalls[0]["due_at"].(string)
+	Expect(ok).To(BeTrue())
+	when, parseErr := time.Parse(time.RFC3339, dueAt)
+	Expect(parseErr).NotTo(HaveOccurred())
+	Expect(when).To(BeTemporally("~", time.Now().Add(72*time.Hour), time.Minute))
+	Expect(api.commitmentCalls[0]).ToNot(HaveKey("status"))
+}
+
+func TestACalendarDateTheUserNamedIsResolvedByThePlatform(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	extraction := `{
+		"memories": [],
+		"proposed_actions": [],
+		"commitments": [
+			{"kind":"reminder","description":"Renew the certificate","trigger_type":"absolute_time","due_in":"1 October at 9am","evidence":"I'll remind you on 1 October","confidence":0.95,"made_by":"assistant"}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	_, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(api.commitmentCalls).To(HaveLen(1))
+
+	dueAt, ok := api.commitmentCalls[0]["due_at"].(string)
+	Expect(ok).To(BeTrue(), "a named calendar date must still be schedulable")
+	when, parseErr := time.Parse(time.RFC3339, dueAt)
+	Expect(parseErr).NotTo(HaveOccurred())
+	Expect(when.Month()).To(Equal(time.October))
+	Expect(when.Day()).To(Equal(1))
+	Expect(when.After(time.Now())).To(BeTrue())
+}
+
+func TestAFutureDueAtTheResolverCannotReadIsKept(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	future := time.Now().Add(96 * time.Hour).UTC().Format(time.RFC3339)
+	extraction := `{
+		"memories": [],
+		"proposed_actions": [],
+		"commitments": [
+			{"kind":"followup","description":"After the sprint review","trigger_type":"absolute_time","due_in":"after the sprint review","due_at":"` + future + `","evidence":"I'll follow up then","confidence":0.8,"made_by":"assistant"}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	_, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(api.commitmentCalls).To(HaveLen(1))
+	Expect(api.commitmentCalls[0]["due_at"]).To(Equal(future))
+}
