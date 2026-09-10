@@ -17,7 +17,7 @@ const (
 	Name         = "List Responses"
 	Description  = "Retrieve submitted responses for a Typeform form, with date and completion filters."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+envelope-open-text"
+	Icon         = "typeform+envelope-open-text"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

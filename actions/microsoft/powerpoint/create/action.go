@@ -19,7 +19,7 @@ const (
 	Name         = "Create Presentation"
 	Description  = "Create a new empty PowerPoint presentation in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+plus"
+	Icon         = "mspowerpoint+plus"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

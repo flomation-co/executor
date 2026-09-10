@@ -237257,13 +237257,13 @@
     ]
   },
   "forms/googleforms/form_batch_update": {
-    "hash": "128f8feb4bf0732b42dd9515021746806a1b58508d2466ff2db28aee95321a4b",
+    "hash": "89e4aafbdff2f3a07729681f7e0771a46bfcfb48bcedf43e5ca9548396aac54d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Batch Update Form",
     "description": "Add items or questions to a Google Form via a batchUpdate requests JSON array.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+pencil",
+    "icon": "googleforms+pencil",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237347,13 +237347,13 @@
     ]
   },
   "forms/googleforms/form_create": {
-    "hash": "262a0af9fbf7e153b857ea7c6a8ca77d0ffadf06416af416c4d5a371b1df21ad",
+    "hash": "3c10ce4321534f2348e61ff6506aa50f1e44c98d78f96827a0f60504e106308f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Form",
     "description": "Create a new Google Form with a title using a connected Google account.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+plus",
+    "icon": "googleforms+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237436,13 +237436,13 @@
     ]
   },
   "forms/googleforms/form_get": {
-    "hash": "e70dd755351b6d8db745b609eb6be02876ff6d450f3d0cfbf2a4c73910c9859c",
+    "hash": "71c7fd3357a717f767a601f3aff586be2f81d47ac0deec82a92b9b8b1c2988b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Form",
     "description": "Retrieve a Google Form's definition, items and metadata by form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+eye",
+    "icon": "googleforms+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237525,13 +237525,13 @@
     ]
   },
   "forms/googleforms/response_get": {
-    "hash": "1d2be84934d7f3b1a070bf7f1f5e43dba71984a7c19e24af54f3a899298b960b",
+    "hash": "11792ee185b2aba91be0371bb47c2a54c92e0a3aa4823f7bef66a5ee97b01281",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Response",
     "description": "Retrieve a single submitted response from a Google Form by response ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+magnifying-glass",
+    "icon": "googleforms+magnifying-glass",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237615,13 +237615,13 @@
     ]
   },
   "forms/googleforms/responses_list": {
-    "hash": "23bdeb6c0f38452a21decca4e82c9988c908751c6d0fb6e2664e8ac8a90e75ac",
+    "hash": "920fbb2d25297aed91ff4058e9dcb134004145a03f30809236fb91e265472000",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Responses",
     "description": "Retrieve the submitted responses for a Google Form by form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+envelope-open-text",
+    "icon": "googleforms+envelope-open-text",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237697,13 +237697,13 @@
     ]
   },
   "forms/jotform/form_clone": {
-    "hash": "6fa539ff1c1579bab0fbd8ed2e99eb1f17d083f79c9aec08cb6e4c0bd81c1dbb",
+    "hash": "74094639c68552c4124445e070b19a4a64bc6ffec35958efce92aad32a72a1e0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clone Form",
     "description": "Clone an existing JotForm form, returning the new form's ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+copy",
+    "icon": "jotform+copy",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237794,13 +237794,13 @@
     ]
   },
   "forms/jotform/form_create": {
-    "hash": "711b71fc79c8aeee290fa9ff31d38d55935024fc1fed7cb37be82586a2490f5f",
+    "hash": "67a25698c0fae294d1e2193d5ba0c94503501ef70abeb52e95c87d4a07b3d837",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Form",
     "description": "Create a new JotForm form from a JSON questions array and properties object.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+plus",
+    "icon": "jotform+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237897,13 +237897,13 @@
     ]
   },
   "forms/jotform/form_delete": {
-    "hash": "6d82c330869f9cdd6fb042d3ae76afb4b3857fe76ffec27f0c660fa3b3c660e5",
+    "hash": "ddbdf01cc3a032e9dbd7a805d80595ff787ed7b4fd2735de917b61ac6ad3ccd0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Form",
     "description": "Delete a JotForm form permanently by its form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+trash",
+    "icon": "jotform+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -237987,13 +237987,13 @@
     ]
   },
   "forms/jotform/form_get": {
-    "hash": "c386a71c754822bcfdb108288c3a036d774cf8b315d3764204cc1d4f1dd1131c",
+    "hash": "5af1e783ffaf1ba3b4890294b0decd61afaa5f9d76c5f12f603f062ff5cb17a9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Form",
     "description": "Retrieve a single JotForm form's details by its form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+eye",
+    "icon": "jotform+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238084,13 +238084,13 @@
     ]
   },
   "forms/jotform/form_list": {
-    "hash": "ba64d58b1636495050bfda089d9e7401a343e15f1dc5ea92e4218acd690f4dac",
+    "hash": "7f9ca7c496216a280ab272781dafe3ff86f56520fa7b6bc1bd322b11fc4d782b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Forms",
     "description": "List JotForm forms in the account, with optional limit, offset and filter.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+list",
+    "icon": "jotform+list",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238194,13 +238194,13 @@
     ]
   },
   "forms/jotform/submission_delete": {
-    "hash": "a24e4787efdfe0ff3641cc1cb32ac2eeed167eb55ca2ef5b49e3418e1c4d57c6",
+    "hash": "c621f241b280e05cdbb697e65612d065b44ecca9aeeefca148498f33bcf9233b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Submission",
     "description": "Delete a JotForm submission permanently by its submission ID.",
     "website": "https://www.flomation.co",
-    "icon": "envelope-open-text+trash",
+    "icon": "jotform+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238284,13 +238284,13 @@
     ]
   },
   "forms/jotform/submission_get": {
-    "hash": "5894f814dde6e7eb43486b451e26b3dccd353707d9330c73fb34c1bb5f790308",
+    "hash": "d2a9d38ed458fc2b4dba707f634b5b000e67ebca635b64f15a25185fe29ee772",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Submission",
     "description": "Retrieve a single JotForm submission and its answers by submission ID.",
     "website": "https://www.flomation.co",
-    "icon": "envelope-open-text+eye",
+    "icon": "jotform+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238381,13 +238381,13 @@
     ]
   },
   "forms/jotform/submissions_list": {
-    "hash": "aa3fe8569c5f86b32cf6a82da88b67b85f3184395be7e694c9ab102c775ad6ba",
+    "hash": "67037a6fe65fbcb530a4b824485c134064f2257fc14c373b5063f827af82ead7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Submissions",
     "description": "Retrieve the submissions for a JotForm form, with limit, offset and filter.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+envelope-open-text",
+    "icon": "jotform+envelope-open-text",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238499,13 +238499,13 @@
     ]
   },
   "forms/jotform/webhook_create": {
-    "hash": "77cfebdc8e9fd108cd4cce51dbcb03b32dff587efa5e1f5d1e263bc37b9e5b9c",
+    "hash": "85b584f9d6bc4a8d717177e55f5b1ca4ed3f8f1795ac719f5012fcb4155edc04",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Webhook",
     "description": "Register a JotForm webhook that fires on each new submission of a form.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+plus",
+    "icon": "jotform+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238604,13 +238604,13 @@
     ]
   },
   "forms/jotform/webhook_delete": {
-    "hash": "a2b8f9ca36cab2f8547afc37ebe98ac466d511207f1bb97119f335a9e3f7e5fd",
+    "hash": "f4b6b9b3a08af699306fe18ce765e9ed975dbaf81904fdf59fd1b622d1092ae0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Webhook",
     "description": "Remove a JotForm webhook from a form by its webhook ID (index).",
     "website": "https://www.flomation.co",
-    "icon": "webhook+trash",
+    "icon": "jotform+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238709,13 +238709,13 @@
     ]
   },
   "forms/surveymonkey/collector_create": {
-    "hash": "057515449ab916363d99777bbe9deec28d949e05f008da93eee066198d837865",
+    "hash": "3f3827ba1a0f82ef22fd49836bee393c8b9ff6dc3b38d6649c7919cbd7727006",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Collector",
     "description": "Create a collector (e.g. weblink) that distributes a SurveyMonkey survey.",
     "website": "https://www.flomation.co",
-    "icon": "link+plus",
+    "icon": "surveymonkey+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238823,13 +238823,13 @@
     ]
   },
   "forms/surveymonkey/collector_list": {
-    "hash": "aa33382043abbfc518e4f1bc8b459d13c2b15ed0521b7e4857598bce4abd9f93",
+    "hash": "c861affc66bad4ed5a794c0d55d56e3fe64b6ad22c294dd875d9d7f4ca142bd6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Collectors",
     "description": "List the collectors (distribution channels) attached to a SurveyMonkey survey.",
     "website": "https://www.flomation.co",
-    "icon": "link+list",
+    "icon": "surveymonkey+list",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238906,13 +238906,13 @@
     ]
   },
   "forms/surveymonkey/response_get": {
-    "hash": "a2e6409d69c901995549ab007024754e9e9b949cd10be26ba551f8bae3993eb8",
+    "hash": "ff297a15a745a898b8b49d2e4414568b4a257d68ff9cea46708915444dda07ef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Response",
     "description": "Retrieve a single SurveyMonkey survey response by its response ID.",
     "website": "https://www.flomation.co",
-    "icon": "envelope-open-text+eye",
+    "icon": "surveymonkey+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -238990,13 +238990,13 @@
     ]
   },
   "forms/surveymonkey/responses_list": {
-    "hash": "9be1be8b7fa154fd03393775ef3f3f9f8230f4574e710818fe67d3362d8a4c8e",
+    "hash": "fd8a7ae7532db889ace759566ca9ef43e0e61b6601d4f617e29963fbc2345548",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Responses",
     "description": "Retrieve bulk responses for a SurveyMonkey survey, with page and per-page paging.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+envelope-open-text",
+    "icon": "surveymonkey+envelope-open-text",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239087,13 +239087,13 @@
     ]
   },
   "forms/surveymonkey/survey_create": {
-    "hash": "ae84657fae76592f3bd6b2659f70ead241252ba9050bfc3efce2b604942f77cb",
+    "hash": "2e8fc0b643652b5dce407cab85024785d8618e40778f897b332a864261d6a375",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Survey",
     "description": "Create a new SurveyMonkey survey with a title and optional JSON body override.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+plus",
+    "icon": "surveymonkey+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239177,13 +239177,13 @@
     ]
   },
   "forms/surveymonkey/survey_get": {
-    "hash": "f3a37f996ac9707cfabd772305b68a04d4ffb2ea4dca2a9cef8fd475551a8772",
+    "hash": "d136b9f7c730c5fe5c91e90e55403e00026864b6e3738d73fa2a2e2478f1330a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Survey",
     "description": "Retrieve a single SurveyMonkey survey by its survey ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+eye",
+    "icon": "surveymonkey+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239260,13 +239260,13 @@
     ]
   },
   "forms/surveymonkey/survey_list": {
-    "hash": "40575725d30ca0e2895faa9f4946eb26cce54e901f7c4304176dc6f99277a347",
+    "hash": "bb3f2fd920f5af9be36cfdb52df7d9c6eb112a52dff3b6ee6bf94e98753e3c16",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Surveys",
     "description": "List SurveyMonkey surveys in the account, with page and per-page paging.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+list",
+    "icon": "surveymonkey+list",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239349,13 +239349,13 @@
     ]
   },
   "forms/surveymonkey/webhook_create": {
-    "hash": "5e7da517ace7c58af2a8bf62d7576cc3070e28c45a8250815511181383ed0329",
+    "hash": "21fea68318405c38a48c3c5c8f3b645b05695c2339f4052ce7a43c70feb6580f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Webhook",
     "description": "Register a SurveyMonkey webhook that fires on survey or response events.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+plus",
+    "icon": "surveymonkey+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239517,13 +239517,13 @@
     ]
   },
   "forms/surveymonkey/webhook_delete": {
-    "hash": "3f2d91eb88551dd180939eb1486a718691065c223dede44608ab19c52ac7b795",
+    "hash": "3e8c76b8bcb0ca91ea808719de1ba58b5a080dcf5b64776c4e08a033a53155fb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Webhook",
     "description": "Delete a SurveyMonkey webhook by its webhook ID.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+trash",
+    "icon": "surveymonkey+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239586,13 +239586,13 @@
     ]
   },
   "forms/surveymonkey/webhook_list": {
-    "hash": "c26d9a4d43a89fe0ad7b9c13784ed8b45708a64b2fc7da7c36697f6a0b339189",
+    "hash": "84044730f0db2aabfa1afc527230ff0063d5e3cd5311aec06032c665c2c19427",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Webhooks",
     "description": "List the SurveyMonkey webhooks registered on the account.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+list",
+    "icon": "surveymonkey+list",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239661,13 +239661,13 @@
     ]
   },
   "forms/typeform/form_create": {
-    "hash": "132a73f6c3317061534d8cde1bdb9ae76d21140db0b52286385215be6542700c",
+    "hash": "bef223d3f1335bea3bab0dd5c13c9c5f2c8082c1bfb0e9efe074db9c578f6c79",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Form",
     "description": "Create a new Typeform form with a title and a JSON array of fields.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+plus",
+    "icon": "typeform+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239758,13 +239758,13 @@
     ]
   },
   "forms/typeform/form_delete": {
-    "hash": "79e17062d020d2b4aa5c62397697bd9a25d0e67e54909b09a9d4e344396d6338",
+    "hash": "2c906bd150019fed33c601e17945c8b13e5175828849c5a847bea58c7756fcf5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Form",
     "description": "Delete a Typeform form permanently by its form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+trash",
+    "icon": "typeform+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239827,13 +239827,13 @@
     ]
   },
   "forms/typeform/form_get": {
-    "hash": "2ac772c04631ed4a024b8461143736a24796cafd96a8ec757d2d07fdf80e6949",
+    "hash": "425113257ad6e3d40d0ab388b12feccb1bc58705a79278789859fefd4052395b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Form",
     "description": "Retrieve a single Typeform form definition by its form ID.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+eye",
+    "icon": "typeform+eye",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239910,13 +239910,13 @@
     ]
   },
   "forms/typeform/form_list": {
-    "hash": "925d0e9b191f47fc661ba64e727b0fd5580b3aed988fa916c5f9aae9a4444cce",
+    "hash": "7c92476b164aea01067eaa3f6d3c7b380c2a2bc83a11284c832b2687da534033",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Forms",
     "description": "List Typeform forms in the account, with optional search and page size.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+list",
+    "icon": "typeform+list",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -239999,13 +239999,13 @@
     ]
   },
   "forms/typeform/form_update": {
-    "hash": "a405ad91939a2a8bc4518f144973a3464e672e4f1e2c2b0803be8335c670ea25",
+    "hash": "60c010e156771f282f3f0994400629ceeefa27952d8d1bbf48e1baab72b50e95",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Form",
     "description": "Replace a Typeform form definition with a full form JSON object.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+file-pen",
+    "icon": "typeform+file-pen",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -240090,13 +240090,13 @@
     ]
   },
   "forms/typeform/responses_list": {
-    "hash": "b57836735f2a85efeb1e5ef0abbc9e024a20c61bc356aa79cb32815d227c5a3b",
+    "hash": "7b7b5666b0f3b465b30291355269757176af58a3bfe10d524c3c55b5b07771c0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Responses",
     "description": "Retrieve submitted responses for a Typeform form, with date and completion filters.",
     "website": "https://www.flomation.co",
-    "icon": "clipboard-list+envelope-open-text",
+    "icon": "typeform+envelope-open-text",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -240215,13 +240215,13 @@
     ]
   },
   "forms/typeform/webhook_create": {
-    "hash": "437243cfdf3c1c812e5e24522d4a2a892bcd679211612643e77b2336ef0c2d17",
+    "hash": "674212d7bced75721ba8fb6dc629e62653cb22c45393a6ebf7a7bd0893bd5fb8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Webhook",
     "description": "Register or update a Typeform webhook that fires on each form submission.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+plus",
+    "icon": "typeform+plus",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -240321,13 +240321,13 @@
     ]
   },
   "forms/typeform/webhook_delete": {
-    "hash": "707e2150aecdad000549e33bd0a72d1c2c2037934364693b3618bd7421f6b6ac",
+    "hash": "0907a981c33709b502751a38207d29b4699d56617f5fad91da4b79baaf0486c6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Webhook",
     "description": "Delete a Typeform webhook from a form by its tag.",
     "website": "https://www.flomation.co",
-    "icon": "webhook+trash",
+    "icon": "typeform+trash",
     "date": "11/07/2026",
     "type": 2,
     "category": {
@@ -247090,13 +247090,13 @@
     ]
   },
   "google/docs/append_text": {
-    "hash": "7ea7d68ec141d0046a75e56476a874f055aa49691ca7d721bd0a173d12a551d7",
+    "hash": "3610de6b4a95e944fa9ca0047252fd37cf7827ac77686b89e0f23954ae80ae47",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Document",
     "description": "Append text to the end of a Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+plus",
+    "icon": "googledocs+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247166,13 +247166,13 @@
     ]
   },
   "google/docs/create": {
-    "hash": "b40fcc25aedfa751a777c484ab70c5bc263ef4182a1c1fd5d0321ddf17bf9bfd",
+    "hash": "8bcb2de646602599c9dfad2dab7e5ecce7bfb5adc73621c74f6f7c1a21757637",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
     "description": "Create a new Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+plus",
+    "icon": "googledocs+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247255,13 +247255,13 @@
     ]
   },
   "google/docs/fill_table": {
-    "hash": "49bc30188252d07e96416123ee9511a1ee5d37f0d22feeb6255fc71370715595",
+    "hash": "72db14007898b91d6c00ead58db878faf10209526949c0d8cf405d0fd6162d31",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fill Document Table",
     "description": "Write values into the cells of a table in a Google Doc (by row and column)",
     "website": "https://www.flomation.co",
-    "icon": "table+pencil",
+    "icon": "googledocs+pencil",
     "date": "10/08/2026",
     "type": 2,
     "category": {
@@ -247352,13 +247352,13 @@
     ]
   },
   "google/docs/get_metadata": {
-    "hash": "a1291787bce7101d5f84c69df69470f01727c651348a8da1e2625f7a677c657f",
+    "hash": "916a676ba9bac09e989d2259b1aaa1e9d6af8aaaedc0cb9c519c11b3ad1318eb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
     "description": "Get metadata for a Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+eye",
+    "icon": "googledocs+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247441,13 +247441,13 @@
     ]
   },
   "google/docs/import_doc": {
-    "hash": "97bd9f22167988afda1103b8d47eafad5a920ec41dafb564e65d87aa5a33f8d8",
+    "hash": "28f03de60133989b3e62a5484d9665d3ad3b55ee585d5692f9f34b492e3f089e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Convert to Google Doc",
     "description": "Convert a Drive file (e.g. an uploaded .docx) into a native, editable Google Doc",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+arrow-right-arrow-left",
+    "icon": "googledocs+arrow-right-arrow-left",
     "date": "10/08/2026",
     "type": 2,
     "category": {
@@ -247544,13 +247544,13 @@
     ]
   },
   "google/docs/insert_image": {
-    "hash": "db3af0ed2b9cbc6a7856141383b01e9ed2b6939765184903e046b88c8511a0ef",
+    "hash": "171566bb2884d6b7ab8a4b95bc125b05691e3f631a1daf216c823d4fa34db24f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Insert Image in Document",
     "description": "Insert an image into a Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+image",
+    "icon": "googledocs+image",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247634,13 +247634,13 @@
     ]
   },
   "google/docs/read": {
-    "hash": "f72779c1677e25582531f3ed7a32003c2e7ddf1ce2bfb25ac4ea31670c04960b",
+    "hash": "3b7bdb2920094bb98586ae565bc871fd51ac912e1f33af6db32e66f472f61ef0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
     "description": "Read the content of a Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+eye",
+    "icon": "googledocs+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247730,13 +247730,13 @@
     ]
   },
   "google/docs/replace_text": {
-    "hash": "b987f8fa62dfe25e5ec0746e13eeb6b1c5bc0bb2d7df78a95cabc6658322c95d",
+    "hash": "e43219592f086cfa81f5f5479ded8e943f7b65980e18af2559acf30e7d740018",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text in Document",
     "description": "Find and replace text in a Google Docs document",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+pencil",
+    "icon": "googledocs+pencil",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247828,13 +247828,13 @@
     ]
   },
   "google/drive/copy": {
-    "hash": "101effa52be6ae5c5c8881f14beb01d35c615932ba95099fca2c08a72921cab2",
+    "hash": "748b2280424678cf1047e84e3366e54b150038a8b14f32732dfe00c9d03532d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Drive File",
     "description": "Copy a file in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+file-export",
+    "icon": "googledrive+file-export",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -247924,13 +247924,13 @@
     ]
   },
   "google/drive/create_folder": {
-    "hash": "99e37d72219d03012f3f1431b954f4795c884e56242ac6deb4abe872448b8cd5",
+    "hash": "2c7cf9994e2f91be9e37a777d7319a420876b9a1356da2592ae5ed160f1ac87e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Drive Folder",
     "description": "Create a new folder in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+plus",
+    "icon": "googledrive+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248013,13 +248013,13 @@
     ]
   },
   "google/drive/delete": {
-    "hash": "99b6fd4f03d771f2d5bc7ee65b95d1cb60974611396b89e951f22385c83cdf53",
+    "hash": "15acfe26621651d62d3510e40b2a57b1df96e19c21bf766ca117db706b86d790",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Drive File",
     "description": "Delete or trash a file in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+trash",
+    "icon": "googledrive+trash",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248088,13 +248088,13 @@
     ]
   },
   "google/drive/download": {
-    "hash": "f0c44f19f533a77672d7c34bca9f4e51c5172e6d3ab0ecfa3115d5f1ff9b166f",
+    "hash": "e57a39273c4321fc23d0b47b62af018a1e904dccafe2ac7a0fae1194a5ed94ca",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
     "description": "Download or export a file from Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-down",
+    "icon": "googledrive+arrow-down",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248210,13 +248210,13 @@
     ]
   },
   "google/drive/get_file": {
-    "hash": "e2c90ef0262c97e9e46c86dfd4c30561a41b7f9c30a922c0fb0b0a3976e62f48",
+    "hash": "315f4f90ff20a9ebede5adebbde54a7525dd3b56586b966756b9d9b60ee48a72",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Drive File",
     "description": "Get metadata for a Google Drive file",
     "website": "https://www.flomation.co",
-    "icon": "folder+eye",
+    "icon": "googledrive+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248313,13 +248313,13 @@
     ]
   },
   "google/drive/list_files": {
-    "hash": "4c639fa5e2935fb60c55351e3c5c4d378fb6623abca8f19b3d3593be96ea3d70",
+    "hash": "aa246cfe4919ef8024b721c5584e3fd081ea22f32d0dcbd6a1f447d5993110cb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Drive Files",
     "description": "List files and folders in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+list",
+    "icon": "googledrive+list",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248415,13 +248415,13 @@
     ]
   },
   "google/drive/move": {
-    "hash": "7285026e830d883555b68bfb3a63a71b8a8cefbb46a79a6cd7f27f2bba3928ed",
+    "hash": "b67d5206ebc8fcb283882c565877ba7ac328d968d92dbbfc8735329f3cb9bbf8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Drive File",
     "description": "Move a file to a different folder in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-right",
+    "icon": "googledrive+arrow-right",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248498,13 +248498,13 @@
     ]
   },
   "google/drive/search": {
-    "hash": "009f40e7afab8fae533223a7b09b1220bac0da1870c53e1374476160f47be516",
+    "hash": "d2db3b65c1e4028766ac5b7c5ff07cd7be6c5a4e84d8304465bed787cec8c552",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Drive",
     "description": "Search for files in Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+magnifying-glass",
+    "icon": "googledrive+magnifying-glass",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248651,13 +248651,13 @@
     ]
   },
   "google/drive/share": {
-    "hash": "b838e0ab6a92422fc08d976ca58947bb62d7083a6697b2cf0b650a9f6da45faa",
+    "hash": "c9da020f768a2cdcee55214eaf7799a45b0eea61135a08ce4e2780d7f4a40994",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Share Drive File",
     "description": "Share a Google Drive file with a user or make it public",
     "website": "https://www.flomation.co",
-    "icon": "folder+share-from-square",
+    "icon": "googledrive+share-from-square",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -248783,13 +248783,13 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "f5875794df284fbc29586ed5c2c0f9891eb8eb08d24762c682a0a3b97a2431d7",
+    "hash": "83854983215a5849d76e3714ecaa129aa3a5db8ac96dd63c22dcf8147c06afa2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
     "description": "Upload a file to Google Drive",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-up",
+    "icon": "googledrive+arrow-up",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249338,13 +249338,13 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "0806a666cc307a4232b3173fb7fb26923d25a7f0540caf5bde9f42ba8f8440c1",
+    "hash": "950bf19861da1e34a75fabfb7f75aac61d72d938c561b04ac2374dcf3054abf5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
     "description": "Append rows to a Google Sheet",
     "website": "https://www.flomation.co",
-    "icon": "table+plus",
+    "icon": "googlesheets+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249453,13 +249453,13 @@
     ]
   },
   "google/sheets/clear": {
-    "hash": "566a0a07360cb08754d82696f5de5c6ae451458941acc1e0f185197c6d4ab898",
+    "hash": "68246629e8ab489223e34c68483c9b4860b23055cb10cb64a6d58ca3de632787",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Sheet Range",
     "description": "Clear a range of cells in a Google Sheet",
     "website": "https://www.flomation.co",
-    "icon": "table+trash",
+    "icon": "googlesheets+trash",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249536,13 +249536,13 @@
     ]
   },
   "google/sheets/create": {
-    "hash": "794615f0b2ff1bc8be46ecf2707689d0375e76d3caf5953708ed259c93533cd3",
+    "hash": "b07f6f33212020813a6d51c7847f799b0ec7a8e8bde0a06e41c355ea61c2cc73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Spreadsheet",
     "description": "Create a new Google Sheets spreadsheet",
     "website": "https://www.flomation.co",
-    "icon": "table+plus",
+    "icon": "googlesheets+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249625,13 +249625,13 @@
     ]
   },
   "google/sheets/create_sheet": {
-    "hash": "0187ce03f59ef55eea2ab078193792f5218317b3acade035aeb79bc7aad4f915",
+    "hash": "8ed460624bbe0b53ef805d7663fc950cc6bfe308d5e98ad5dbb20ea2dd9d27f3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Sheet Tab",
     "description": "Add a new sheet tab to a Google Sheets spreadsheet",
     "website": "https://www.flomation.co",
-    "icon": "table+plus",
+    "icon": "googlesheets+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249708,13 +249708,13 @@
     ]
   },
   "google/sheets/delete_sheet": {
-    "hash": "b95cad376d155f4a8d91e76391bb93f6d116339b6b8218919103c88ccc0ee69a",
+    "hash": "4306ee5166a9766b666bc9e49d00a58ec8351ec86fdc0b34c0b453c2337cedf6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Sheet Tab",
     "description": "Delete a sheet tab from a Google Sheets spreadsheet",
     "website": "https://www.flomation.co",
-    "icon": "table+trash",
+    "icon": "googlesheets+trash",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249784,13 +249784,13 @@
     ]
   },
   "google/sheets/get_metadata": {
-    "hash": "40e67526d2151a2d52966e3bee56241c33f51327fb7aafc39368b020161cb9f7",
+    "hash": "b2f21300af80a67ce41751591d458bd00ac9705d1a03811ff444bbc131badb73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Sheet Metadata",
     "description": "Get metadata for a Google Sheets spreadsheet",
     "website": "https://www.flomation.co",
-    "icon": "table+eye",
+    "icon": "googlesheets+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249880,13 +249880,13 @@
     ]
   },
   "google/sheets/read": {
-    "hash": "7eda628969b09de1a176fbce7865f71e24461dca478fd47644c0c470e28c78fa",
+    "hash": "6bfcf8e479fd379fef01b2c2ceeac893294f468685c266a25d13127ac91f6163",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Sheet",
     "description": "Read a range of cells from a Google Sheet",
     "website": "https://www.flomation.co",
-    "icon": "table+eye",
+    "icon": "googlesheets+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -249998,13 +249998,13 @@
     ]
   },
   "google/sheets/write": {
-    "hash": "99e1691f096ac8dadcf60d8f733be336620a66f9722ee8fa8eb689e0f975e29f",
+    "hash": "a8e7ae9e46fde40f87e2b536ba747e59a4bdb5586512dc3c95531264e3e4ceaf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write to Sheet",
     "description": "Write data to a range in a Google Sheet",
     "website": "https://www.flomation.co",
-    "icon": "table+pencil",
+    "icon": "googlesheets+pencil",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250120,13 +250120,13 @@
     ]
   },
   "google/slides/add_image": {
-    "hash": "116cb443e2d83e80b5137a3eb6967ee53e185024f8fe4d3f443de478a237f67f",
+    "hash": "fef33f66cf2cde00d4f7605f5d0bd344e4c313ec83284cd56bfcb42e1c5d00b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Image to Slide",
     "description": "Add an image to a Google Slides slide",
     "website": "https://www.flomation.co",
-    "icon": "display+image",
+    "icon": "googleslides+image",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250239,13 +250239,13 @@
     ]
   },
   "google/slides/add_slide": {
-    "hash": "f58ab0c0ff7ca8719b4c950e46dc8f824b8b932f590ed0c97735e9ab909646bc",
+    "hash": "8e3c2517b42188a3e3a35d1bdd2941969de998e9fac3796d6fb48747bfa8d6cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Slide",
     "description": "Add a new slide to a Google Slides presentation",
     "website": "https://www.flomation.co",
-    "icon": "display+plus",
+    "icon": "googleslides+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250354,13 +250354,13 @@
     ]
   },
   "google/slides/add_text": {
-    "hash": "d2a91b77ffdb75c5beb6c4508efd6f06674d781785cf4423794d3086bb8f0794",
+    "hash": "9c1f622b0f32e10b210f28327210011e90e7a4919fa089f8d2781d938690110e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Text to Slide",
     "description": "Insert text into a slide shape",
     "website": "https://www.flomation.co",
-    "icon": "display+pencil",
+    "icon": "googleslides+pencil",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250438,13 +250438,13 @@
     ]
   },
   "google/slides/create": {
-    "hash": "0382f446b0915e99ea1f89d3b67e1ad8f323d252c31155eaef7fa2c01889f01a",
+    "hash": "f4fcff23d685b42bc8f089cd4a18458fc87454a8651ea02409e9b112e5521f35",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
     "description": "Create a new Google Slides presentation",
     "website": "https://www.flomation.co",
-    "icon": "display+plus",
+    "icon": "googleslides+plus",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250520,13 +250520,13 @@
     ]
   },
   "google/slides/get": {
-    "hash": "450cd61037cd78d92e13f5971bc1e4a06848d215e834b71ec8649cc579a329e8",
+    "hash": "14ed1fc5e699f21dd15bf491ee7c4c3e21cd83ab899ff4ab4d11f24fe3f38231",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
     "description": "Get metadata and slides for a Google Slides presentation",
     "website": "https://www.flomation.co",
-    "icon": "display+eye",
+    "icon": "googleslides+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -250616,13 +250616,13 @@
     ]
   },
   "google/slides/get_slide": {
-    "hash": "a5ef52d423fa10932effd5832f5a68b0296c8e758530dfeba308b79363573b22",
+    "hash": "8c6673b58d837acd23115b86a52f59e094d1883a1f75047c3a93db120afde2d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Slide",
     "description": "Get the content and elements of a specific slide",
     "website": "https://www.flomation.co",
-    "icon": "display+eye",
+    "icon": "googleslides+eye",
     "date": "01/06/2026",
     "type": 2,
     "category": {
@@ -323869,13 +323869,13 @@
     ]
   },
   "microsoft/excel/append_rows": {
-    "hash": "d3f9692d75c7c7c8801036f6b77f2ae401f20d14153a28ff1574143db27c404e",
+    "hash": "853402f4a8a47110ad0c9fbcaaefd60055c92ff8ae5c97626a1b02b7acd05933",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append Rows",
     "description": "Append rows to a table in a Microsoft Excel Online workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+plus",
+    "icon": "msexcel+plus",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -323960,13 +323960,13 @@
     ]
   },
   "microsoft/excel/clear_range": {
-    "hash": "565831634cefc71fd6e74c6c0a6fecfa888f91b0d6c19200b1ba06ad305f0e72",
+    "hash": "54227b42bdfddc8195b55dc6a71368f527688f9c559b42ca0a6705e2b40899d8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Range",
     "description": "Clear contents or formatting from a cell range in an Excel workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+trash",
+    "icon": "msexcel+trash",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324065,13 +324065,13 @@
     ]
   },
   "microsoft/excel/create_workbook": {
-    "hash": "c74cc54ac67c79f8a18d39294962935d448ea90e4e800006d207af96b2471178",
+    "hash": "dcf4361f4e7091f2ac4a1f07a4c97d4ba659f6fe1504e4bcc41898bc9b5a756e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Workbook",
     "description": "Create a new Excel workbook in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "table+plus",
+    "icon": "msexcel+plus",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324154,13 +324154,13 @@
     ]
   },
   "microsoft/excel/get_metadata": {
-    "hash": "1dbf4b77b66e66351ee262d436702e040b98e82fbfb5b0a0dd151f3d995a1f24",
+    "hash": "8c4c961c9be2498d976e155678b4d20ee57a48e35bc8c37cfa39509114fca49d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Workbook Metadata",
     "description": "Retrieve metadata for a Microsoft Excel Online workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+eye",
+    "icon": "msexcel+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324229,13 +324229,13 @@
     ]
   },
   "microsoft/excel/list_worksheets": {
-    "hash": "41944921686b303ccdd6146328aed9e49bfa105a35f871a4395fe94a93950185",
+    "hash": "b5958cbdfbea1f680bc25c65d46373e8023820269c75ea944d533bc3224d7dae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Worksheets",
     "description": "List all worksheets in a Microsoft Excel Online workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+list",
+    "icon": "msexcel+list",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324311,13 +324311,13 @@
     ]
   },
   "microsoft/excel/read_range": {
-    "hash": "605a3cf05136d06f2cc63e40d9bcc869c84c09076aa92fd864fea9471fcb38d3",
+    "hash": "95f612a609dca43ce34635eada36444f0c293b9f21ff98776412729fdb520689",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Range",
     "description": "Read a cell range from a Microsoft Excel Online workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+eye",
+    "icon": "msexcel+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324423,13 +324423,13 @@
     ]
   },
   "microsoft/excel/write_range": {
-    "hash": "7352ea7a8fc2e8752a47805ad24cd55052b548116b0e791181a67832a8209315",
+    "hash": "96135c316b979cb5dc498140813d6cbca29fbf979ceb802033f7378e4d891af0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write Range",
     "description": "Write values to a cell range in a Microsoft Excel Online workbook",
     "website": "https://www.flomation.co",
-    "icon": "table+pencil",
+    "icon": "msexcel+pencil",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324515,13 +324515,13 @@
     ]
   },
   "microsoft/onedrive/copy_file": {
-    "hash": "f741a22cfe292fbe9a3798fb77e0ccdc0e999fa2dd402a04b83d54db735f8df6",
+    "hash": "546425e740c411f9ffbef598f4636e5207604ba92ff57f9f63a64ac951d65b10",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Item",
     "description": "Copy a file or folder to a different OneDrive location",
     "website": "https://www.flomation.co",
-    "icon": "folder+file-export",
+    "icon": "onedrive+file-export",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324598,13 +324598,13 @@
     ]
   },
   "microsoft/onedrive/create_folder": {
-    "hash": "740c725a9c907e8bf31d6f293dda927be9a110b8ae13f104d3ae2685397c4ec0",
+    "hash": "cf36f4df7c49db17be70b803b59895205bedd15a6df1ff7a639421be6322aa69",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Folder",
     "description": "Create a new folder in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "folder+plus",
+    "icon": "onedrive+plus",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324687,13 +324687,13 @@
     ]
   },
   "microsoft/onedrive/delete_file": {
-    "hash": "e0c068d3348c2a72a3951d56da1d09315860299360f0849c2e1f1eaca5c903da",
+    "hash": "18d00501359259344d1a03941ff42df139dff1abd1fef6cad7b66e9ed6b23377",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete File",
     "description": "Delete a file or folder from OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "folder+trash",
+    "icon": "onedrive+trash",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324755,13 +324755,13 @@
     ]
   },
   "microsoft/onedrive/download": {
-    "hash": "ec585852698b434e449b131508e8b0cf738f20efa0eb665907d1bd3e7c9412db",
+    "hash": "d08338efbd3c3378e79a94bf4bef99fbedebc8727e65511a5664f2776e754f0d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download File",
     "description": "Download a file from OneDrive by item ID",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-down",
+    "icon": "onedrive+arrow-down",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324851,13 +324851,13 @@
     ]
   },
   "microsoft/onedrive/get_file": {
-    "hash": "241403c771893596bed09305eaaeccfcdad5205559977ea409455b647b6a8fab",
+    "hash": "9f70b1b144fe07d24aec5be1387142e281ed77b29567f671c2b58501f3a38374",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get File Info",
     "description": "Retrieve metadata for a file or folder in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "folder+eye",
+    "icon": "onedrive+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -324968,13 +324968,13 @@
     ]
   },
   "microsoft/onedrive/list_files": {
-    "hash": "abd0961321f4cc3565779340afb45f335e4a89222bd9bd5bfea767fdca86c533",
+    "hash": "cfcc68179fae5f4e3987fe889a030d8f22bc517d08a8c4f4310caf685e880ee9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Files",
     "description": "List files and folders in a OneDrive directory",
     "website": "https://www.flomation.co",
-    "icon": "folder+list",
+    "icon": "onedrive+list",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -325056,13 +325056,13 @@
     ]
   },
   "microsoft/onedrive/move": {
-    "hash": "fe9db14927ccbe72eba36b52f6e694bca848fec1fdb06bf913be03a787ebfca2",
+    "hash": "ee313fc786bb5d491e27391360bd62a0cd529b5a006490803a6faf78eebc79f8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Item",
     "description": "Move a file or folder to a different OneDrive location",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-right",
+    "icon": "onedrive+arrow-right",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -325139,13 +325139,13 @@
     ]
   },
   "microsoft/onedrive/search": {
-    "hash": "601888764a5a6ed737314f0a2f2e9f508ae486f4a4c62475bd6a3737c76b1944",
+    "hash": "f4ca162e2f2f51e93464a0e7e082673c719516dd6fe6b252a34e0d3861f89ab0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Files",
     "description": "Search for files and folders in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "folder+magnifying-glass",
+    "icon": "onedrive+magnifying-glass",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -325228,13 +325228,13 @@
     ]
   },
   "microsoft/onedrive/share": {
-    "hash": "e3e355148260dade3ed15b0f8746595e04b9f27676910d6978d2a0d1488bb90a",
+    "hash": "7afd96f2c8ca88bea78cb6c200e8f259c96fa58368a72ae9428f68a10da14a1a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Sharing Link",
     "description": "Create a sharing link for a OneDrive file or folder",
     "website": "https://www.flomation.co",
-    "icon": "folder+share-from-square",
+    "icon": "onedrive+share-from-square",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -325348,13 +325348,13 @@
     ]
   },
   "microsoft/onedrive/upload": {
-    "hash": "900f1d3f79b71397d2d8a77ac1c6d2f77b1e88f0031f186678c55b1c81fb1639",
+    "hash": "3cc9f3fba6bdf2219c4bf02debb16d8dfc4bd28df3ebeeb489186550a6587cdc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload File",
     "description": "Upload a file to OneDrive (simple upload, under 4 MB)",
     "website": "https://www.flomation.co",
-    "icon": "folder+arrow-up",
+    "icon": "onedrive+arrow-up",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -326532,13 +326532,13 @@
     ]
   },
   "microsoft/powerpoint/create": {
-    "hash": "ce764afb1c7b8ee789b40ff28dce717a9c918d2f89c86831ce057d71ee34fc0b",
+    "hash": "6d41a3eb09c0cd5bcfaebd37d66c87bcf40008c3fac7e036b55e84b99b05f734",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
     "description": "Create a new empty PowerPoint presentation in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "display+plus",
+    "icon": "mspowerpoint+plus",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -326621,13 +326621,13 @@
     ]
   },
   "microsoft/powerpoint/download": {
-    "hash": "7871a030f36fb4d4f4aa0101595e4a2cedbc1dca565a3aa6aac58ccd4ba94bf0",
+    "hash": "e0a8dd75fc0e1bcdbff73071698986119bb3d7f025e185132f087a457de4be61",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Presentation",
     "description": "Download a PowerPoint presentation as PPTX or PDF from OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "display+arrow-down",
+    "icon": "mspowerpoint+arrow-down",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -326734,13 +326734,13 @@
     ]
   },
   "microsoft/powerpoint/export_slide": {
-    "hash": "e2db458280b4ecc0088757ae8f765a2b34efbe98bc1de587ec72f97f9b232c39",
+    "hash": "ba68f047161cb1eaaeb1fec587b2b889f0a3ac9f5808e5310945436f994fe2fe",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Export Slide Thumbnail",
     "description": "Export a presentation thumbnail as a PNG image from OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "display+image",
+    "icon": "mspowerpoint+image",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -326837,13 +326837,13 @@
     ]
   },
   "microsoft/powerpoint/get": {
-    "hash": "274b3f802cd7eb32739bcbcdb19efa9a6255719f0056a4363d891313d8396097",
+    "hash": "cfc1fefbbd436c4677eca605a30b150e6d3dc54fe0ccc5441724cab2e5d865a1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
     "description": "Retrieve metadata for a PowerPoint presentation in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "display+eye",
+    "icon": "mspowerpoint+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -326940,13 +326940,13 @@
     ]
   },
   "microsoft/powerpoint/list_slides": {
-    "hash": "1d3403ec14151f789e913ba5bcfef77183a5d7f5aae5870bf68a75da0f8415ce",
+    "hash": "ee4b3ebf34d9831e78c2b2346e776c6ab3574eb4f42c21d16ac2f0c560ad93ea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Preview Presentation",
     "description": "Get a preview URL and metadata for a PowerPoint presentation",
     "website": "https://www.flomation.co",
-    "icon": "display+list",
+    "icon": "mspowerpoint+list",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -327029,13 +327029,13 @@
     ]
   },
   "microsoft/powerpoint/upload": {
-    "hash": "039687ce80f74e5c6ff47adef3de6eaab35a84e9daedd17a2953e67cc8c67b0a",
+    "hash": "ccff6cb39e3170a214c5a84a226cb324c846da06719bbddff8b9be38afb537ca",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload Presentation",
     "description": "Upload a PowerPoint presentation to OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "display+arrow-up",
+    "icon": "mspowerpoint+arrow-up",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -328331,13 +328331,13 @@
     ]
   },
   "microsoft/word/create": {
-    "hash": "1fbf3311e8c098e8d06185d202af483553ea85c22c391cef1e8506da4ff85a40",
+    "hash": "7cb59afc1fc66d9239191214f42b568c7f152bb3a4c46c4ee16caf1266bb49a4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
     "description": "Create a new empty Word document in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+plus",
+    "icon": "msword+plus",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -328420,13 +328420,13 @@
     ]
   },
   "microsoft/word/get_metadata": {
-    "hash": "547c0fff8c25ad4c1286658f4f27f719d75751946e7444c0423a5000ffb5e82f",
+    "hash": "e9ec1dae309e56e630bc8f40a865b46bc86c0a3c0c3ad50be52711bf3c51bf6a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
     "description": "Retrieve metadata for a Word document in OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+eye",
+    "icon": "msword+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -328551,13 +328551,13 @@
     ]
   },
   "microsoft/word/read": {
-    "hash": "5d3396f3ee4c85aa490385b310d49dcdb78a198ef03cf3d21697600bbf87c7f0",
+    "hash": "c32afed55d507ad55442582124ab5198cb048fc6a348b11de7405a7d84d826f4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
     "description": "Download a Word document as HTML or PDF from OneDrive",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+eye",
+    "icon": "msword+eye",
     "date": "04/06/2026",
     "type": 2,
     "category": {
@@ -328657,13 +328657,13 @@
     ]
   },
   "microsoft/word/replace_text": {
-    "hash": "ed78f4a0db16dbb6cae7ebc7331da65bad8bfd5bbdccc40a5308a1ec2584cd7b",
+    "hash": "42f924acd8e09614ea4bb47d246d6c698d7e00a302735d4baf5efc9f6eaad9a5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text",
     "description": "Find and replace text in a Word document (via HTML conversion)",
     "website": "https://www.flomation.co",
-    "icon": "file-lines+pencil",
+    "icon": "msword+pencil",
     "date": "04/06/2026",
     "type": 2,
     "category": {

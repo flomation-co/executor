@@ -15,7 +15,7 @@ const (
 	Name         = "Insert Image in Document"
 	Description  = "Insert an image into a Google Docs document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+image"
+	Icon         = "googledocs+image"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

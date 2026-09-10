@@ -19,7 +19,7 @@ const (
 	Name         = "Upload File"
 	Description  = "Upload a file to OneDrive (simple upload, under 4 MB)"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+arrow-up"
+	Icon         = "onedrive+arrow-up"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

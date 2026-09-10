@@ -15,7 +15,7 @@ const (
 	Name         = "Get Presentation"
 	Description  = "Retrieve metadata for a PowerPoint presentation in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+eye"
+	Icon         = "mspowerpoint+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

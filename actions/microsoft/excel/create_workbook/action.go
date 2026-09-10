@@ -19,7 +19,7 @@ const (
 	Name         = "Create Workbook"
 	Description  = "Create a new Excel workbook in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+plus"
+	Icon         = "msexcel+plus"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

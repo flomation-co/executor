@@ -15,7 +15,7 @@ const (
 	Name         = "Write Range"
 	Description  = "Write values to a cell range in a Microsoft Excel Online workbook"
 	Website      = "https://www.flomation.co"
-	Icon         = "table+pencil"
+	Icon         = "msexcel+pencil"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

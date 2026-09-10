@@ -16,7 +16,7 @@ const (
 	Name         = "List Collectors"
 	Description  = "List the collectors (distribution channels) attached to a SurveyMonkey survey."
 	Website      = "https://www.flomation.co"
-	Icon         = "link+list"
+	Icon         = "surveymonkey+list"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

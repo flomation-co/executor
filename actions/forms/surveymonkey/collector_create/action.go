@@ -17,7 +17,7 @@ const (
 	Name         = "Create Collector"
 	Description  = "Create a collector (e.g. weblink) that distributes a SurveyMonkey survey."
 	Website      = "https://www.flomation.co"
-	Icon         = "link+plus"
+	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

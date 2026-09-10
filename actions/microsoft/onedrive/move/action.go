@@ -15,7 +15,7 @@ const (
 	Name         = "Move Item"
 	Description  = "Move a file or folder to a different OneDrive location"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder+arrow-right"
+	Icon         = "onedrive+arrow-right"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

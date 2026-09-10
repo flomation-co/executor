@@ -15,7 +15,7 @@ const (
 	Name         = "Preview Presentation"
 	Description  = "Get a preview URL and metadata for a PowerPoint presentation"
 	Website      = "https://www.flomation.co"
-	Icon         = "display+list"
+	Icon         = "mspowerpoint+list"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 )

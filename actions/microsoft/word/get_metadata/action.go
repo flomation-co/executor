@@ -15,7 +15,7 @@ const (
 	Name         = "Get Document Metadata"
 	Description  = "Retrieve metadata for a Word document in OneDrive"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines+eye"
+	Icon         = "msword+eye"
 	Date         = "04/06/2026"
 	Type         = core.ActionTypeAction
 

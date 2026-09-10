@@ -16,7 +16,7 @@ const (
 	Name         = "List Responses"
 	Description  = "Retrieve the submitted responses for a Google Form by form ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+envelope-open-text"
+	Icon         = "googleforms+envelope-open-text"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )

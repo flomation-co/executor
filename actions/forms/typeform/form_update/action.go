@@ -17,7 +17,7 @@ const (
 	Name         = "Update Form"
 	Description  = "Replace a Typeform form definition with a full form JSON object."
 	Website      = "https://www.flomation.co"
-	Icon         = "clipboard-list+file-pen"
+	Icon         = "typeform+file-pen"
 	Date         = "11/07/2026"
 	Type         = core.ActionTypeAction
 )
