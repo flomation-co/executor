@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Trigger Job with Parameters"
 	Description  = "Start a build of a parameterised Jenkins job, passing name/value build parameters. The job must be set up to accept parameters."
+	Summary      = "Start a build with your own parameters"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+play"
 	Date         = "04/07/2026"

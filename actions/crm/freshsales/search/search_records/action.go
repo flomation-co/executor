@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Records"
 	Description  = "Search across Freshsales contacts, accounts, deals and users by keyword."
+	Summary      = "Search for records in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

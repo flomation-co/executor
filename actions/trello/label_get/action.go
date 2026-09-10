@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Label"
 	Description  = "Fetch a single Trello label by its ID."
+	Summary      = "Look up a label in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+magnifying-glass"
 	Date         = "07/07/2026"

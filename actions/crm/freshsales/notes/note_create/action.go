@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Note: Create"
 	Description  = "Attach a note to a Freshsales contact, account or deal."
+	Summary      = "Add a note in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

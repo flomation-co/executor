@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Watermark Image"
 	Description  = "Overlay a watermark image onto another image at a chosen position and opacity"
+	Summary      = "Put a logo or watermark on a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "layer-group"
 	Date         = "15/07/2026"

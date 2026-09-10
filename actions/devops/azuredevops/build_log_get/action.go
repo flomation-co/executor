@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Build Log"
 	Description  = "Fetch a build's logs as text — the payload to paste into a chat message when a build fails. Leave Log ID blank to concatenate every log for the build in order; set it to fetch just one. Very large logs are truncated and flagged rather than silently clipped."
+	Summary      = "Read a build's log output"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+file-lines"
 	Date         = "17/07/2026"

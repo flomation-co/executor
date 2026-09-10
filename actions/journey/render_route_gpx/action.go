@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Export Route as GPX"
 	Description  = "Convert a route polyline into GPX XML for import into Garmin, Strava, Komoot and other GPS apps."
+	Summary      = "Export a route for Garmin, Strava or Komoot"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+file-export"
 	Date         = "11/06/2026"

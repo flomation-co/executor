@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Animated Title"
 	Description  = "Generate an animated text title as a transparent video for overlaying"
+	Summary      = "Make an animated title to lay over a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "pen"
 	Date         = "15/07/2026"

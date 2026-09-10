@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Report: Aged Payables"
 	Description  = "Run the Xero Aged Payables report for a contact. Returns the full report."
+	Summary      = "See how long you have owed each supplier"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+chart-line"
 	Date         = "05/07/2026"

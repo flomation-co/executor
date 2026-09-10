@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tracking Category: Create"
 	Description  = "Create a Xero tracking category. Returns the tracking category ID and object."
+	Summary      = "Add a tracking category in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

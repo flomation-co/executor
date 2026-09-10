@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get Ticket"
 	Description  = "Retrieve a single Zendesk ticket by its ID. Choose Regular for a normal ticket or Suspended for one held in the suspended queue."
+	Summary      = "Read a ticket and its history"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+eye"
 	Date         = "03/07/2026"

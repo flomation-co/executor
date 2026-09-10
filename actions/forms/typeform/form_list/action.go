@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Forms"
 	Description  = "List Typeform forms in the account, with optional search and page size."
+	Summary      = "List the Typeforms in your account"
 	Website      = "https://www.flomation.co"
 	Icon         = "typeform+list"
 	Date         = "11/07/2026"

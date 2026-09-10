@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Close Case"
 	Description  = "Close a Salesforce case and record why. Leave Status blank and Flomation uses whichever status your own org treats as closed, so the flow keeps working in an org that renamed it."
+	Summary      = "Close a support case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+circle-check"
 	Date         = "25/07/2026"

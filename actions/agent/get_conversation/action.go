@@ -29,6 +29,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Conversation"
 	Description  = "Fetch the full message history of a previous conversation the agent has had with this user. Use when a summary in your Recent Conversations section looks relevant."
+	Summary      = "Read an earlier conversation with this person"
 	Website      = "https://www.flomation.co"
 	Icon         = "comments+magnifying-glass"
 	Date         = "20/06/2026"

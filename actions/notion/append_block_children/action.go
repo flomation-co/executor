@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Append Content"
 	Description  = "Append content blocks to a Notion page or block"
+	Summary      = "Add content to a Notion page"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+plus"
 	Date         = "28/04/2026"

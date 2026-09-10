@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Many Attachments"
 	Description  = "List every attachment on a Jira issue. Provide the issue key; the attachments are read from the issue itself. Turn on Return All to get them all, or set a Limit to cap how many are returned."
+	Summary      = "List attachments in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+paperclip"
 	Date         = "06/07/2026"

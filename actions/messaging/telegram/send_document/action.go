@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Telegram Document"
 	Description  = "Send a file via Telegram. Accepts a flo:blob token or base64."
+	Summary      = "Send a file on Telegram"
 	Website      = "https://www.flomation.co"
 	Icon         = "telegram+file"
 	Date         = "21/06/2026"

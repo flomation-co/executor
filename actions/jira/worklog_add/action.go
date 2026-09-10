@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Worklog"
 	Description  = "Log time spent on a Jira issue. Give the issue key and how long was spent (e.g. \"1h 30m\"), optionally add a comment and set when the work started. Returns the new worklog entry."
+	Summary      = "Add a worklog in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+clock"
 	Date         = "06/07/2026"

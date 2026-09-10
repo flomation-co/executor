@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Company: Get"
 	Description  = "Retrieve a HubSpot company by its ID. Optionally request specific properties and associated object types."
+	Summary      = "Look up a company in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+search"
 	Date         = "30/06/2026"

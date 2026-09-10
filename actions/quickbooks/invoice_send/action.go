@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Send"
 	Description  = "Email a QuickBooks Online invoice to the customer or a given address."
+	Summary      = "Send an invoice in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+paper-plane"
 	Date         = "05/07/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Voices"
 	Description  = "List all available ElevenLabs voices with their IDs, names, and characteristics"
+	Summary      = "Browse the voices you can speak with"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone+list"
 	Date         = "18/04/2026"

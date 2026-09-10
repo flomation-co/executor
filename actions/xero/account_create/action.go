@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Create"
 	Description  = "Create a Xero chart-of-accounts account. Returns the account ID and object."
+	Summary      = "Add an account in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

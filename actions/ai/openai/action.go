@@ -34,6 +34,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "OpenAI Prompt"
 	Description  = "Send a prompt to the OpenAI Chat Completions API and return the response"
+	Summary      = "Ask OpenAI a question and use its answer"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+play"
 	Date         = "04/04/2026"

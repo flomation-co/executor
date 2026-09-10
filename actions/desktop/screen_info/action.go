@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Screen Info"
 	Description  = "Report a desktop VM's screen size and active window, and whether screenshot coordinates match."
+	Summary      = "Check the screen size before clicking"
 	Website      = "https://www.flomation.co"
 	Icon         = "expand"
 	Date         = "14/08/2026"

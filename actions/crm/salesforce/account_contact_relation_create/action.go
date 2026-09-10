@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Relate Contact to Account"
 	Description  = "Link a contact to another company they work with, and say what their role is there — a consultant who advises three of your customers, or a buyer who also sits on a parent company's board. The contact keeps their own main account."
+	Summary      = "Link a contact to a second company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

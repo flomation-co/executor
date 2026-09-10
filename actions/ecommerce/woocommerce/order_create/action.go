@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Create Order"
 	Description  = "Create an order in your WooCommerce store. Provide line items as JSON; set common fields directly or add any other order field via Additional Fields."
+	Summary      = "Create an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+plus"
 	Date         = "05/07/2026"

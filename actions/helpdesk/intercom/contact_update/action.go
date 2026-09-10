@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Update Contact"
 	Description  = "Update a contact's details in Intercom. Only the fields you fill in change; switching Role from Lead to User converts the lead into a full user."
+	Summary      = "Change a contact's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+pencil"
 	Date         = "08/07/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Document"
 	Description  = "Create a new empty Word document in OneDrive"
+	Summary      = "Create a Word document"
 	Website      = "https://www.flomation.co"
 	Icon         = "msword+plus"
 	Date         = "04/06/2026"

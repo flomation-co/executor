@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Webhook"
 	Description  = "Create a webhook for a Webflow site to receive event notifications"
+	Summary      = "Get told when something happens on a Webflow site"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+globe"
 	Date         = "29/05/2026"

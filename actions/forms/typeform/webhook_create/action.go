@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Webhook"
 	Description  = "Register or update a Typeform webhook that fires on each form submission."
+	Summary      = "Get told whenever someone completes a Typeform"
 	Website      = "https://www.flomation.co"
 	Icon         = "typeform+plus"
 	Date         = "11/07/2026"

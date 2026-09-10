@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get User"
 	Description  = "Look up a single Atlassian user by their account ID and return their profile. Optionally expand extra details (e.g. groups, applicationRoles) via the Expand field."
+	Summary      = "Look up one user"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+user"
 	Date         = "06/07/2026"

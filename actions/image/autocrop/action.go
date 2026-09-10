@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Auto-crop Image"
 	Description  = "Automatically trim a uniform (e.g. whitespace) border from an image"
+	Summary      = "Trim the empty border off a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "object-group"
 	Date         = "15/07/2026"

@@ -37,6 +37,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Send Email"
 	Description  = "Send an email through Salesforce, optionally from an email template and logged against a record so it shows in the timeline."
+	Summary      = "Send an email from Salesforce"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+envelope"
 	Date         = "25/07/2026"

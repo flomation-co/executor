@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: List Fields"
 	Description  = "List every sales account field, including custom fields."
+	Summary      = "List the fields available on a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

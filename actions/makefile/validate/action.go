@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Validate Makefile"
 	Description  = "Check a Makefile for syntax errors"
+	Summary      = "Check a Makefile for mistakes"
 	Website      = "https://www.flomation.co"
 	Icon         = "gears+check"
 	Date         = "31/05/2026"

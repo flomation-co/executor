@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Upload File"
 	Description  = "Upload a file to OneDrive (simple upload, under 4 MB)"
+	Summary      = "Upload a file to OneDrive"
 	Website      = "https://www.flomation.co"
 	Icon         = "onedrive+arrow-up"
 	Date         = "04/06/2026"

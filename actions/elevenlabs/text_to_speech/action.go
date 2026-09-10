@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Text to Speech"
 	Description  = "Convert text to spoken audio using ElevenLabs AI voices"
+	Summary      = "Turn text into natural-sounding speech"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone+paper-plane"
 	Date         = "18/04/2026"

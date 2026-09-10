@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Pay"
 	Description  = "Attempt to collect payment on a Stripe invoice out of the normal schedule."
+	Summary      = "Charge a customer for an invoice"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Apollo Webhook Trigger"
 	Description  = "Triggers a flow when an Apollo.io webhook fires (contact/account created, sequence engagement…)"
+	Summary      = "Start when something changes in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo"
 	Date         = "01/08/2026"

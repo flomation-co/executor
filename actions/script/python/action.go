@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Run Python"
 	Description  = "Execute a sandboxed Python 3.12 script (CPython-WASI, no network, /work only)"
+	Summary      = "Run a python in Script"
 	Website      = "https://www.flomation.co"
 	Icon         = "code"
 	Date         = "15/06/2026"

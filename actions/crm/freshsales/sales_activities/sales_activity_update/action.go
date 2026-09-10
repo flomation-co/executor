@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Activity: Update"
 	Description  = "Update an existing Freshsales sales activity."
+	Summary      = "Change a logged activity"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

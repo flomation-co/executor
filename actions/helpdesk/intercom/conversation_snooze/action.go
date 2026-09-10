@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Snooze Conversation"
 	Description  = "Snooze an Intercom conversation until a date and time you choose — it reopens automatically then."
+	Summary      = "Snooze a conversation until later"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+clock"
 	Date         = "08/07/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Insolvency"
 	Description  = "Retrieve a UK company's insolvency case history (Companies House)"
+	Summary      = "Check whether a UK company has been insolvent"
 	Website      = "https://www.flomation.co"
 	Icon         = "triangle-exclamation"
 	Date         = "05/07/2026"

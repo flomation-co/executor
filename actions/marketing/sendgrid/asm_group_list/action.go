@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Unsubscribe Groups"
 	Description  = "Retrieve all unsubscribe (ASM) groups in your SendGrid account, including each group's name, description, and unsubscribe count."
+	Summary      = "List your unsubscribe groups"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

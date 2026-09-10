@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sequences: List"
 	Description  = "List Apollo sequences (emailer campaigns), optionally filtered by name."
+	Summary      = "List sequences in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+list"
 	Date         = "01/08/2026"

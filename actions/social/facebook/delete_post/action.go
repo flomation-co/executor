@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Delete Post"
 	Description  = "Delete a Facebook Page post by ID"
+	Summary      = "Delete a post from your Facebook Page"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+trash"
 	Date         = "21/05/2026"

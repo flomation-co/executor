@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sequence: Create"
 	Description  = "Create an Apollo sequence (emailer campaign). Needs a name. Master key required."
+	Summary      = "Add a sequence in Apollo"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+plus"
 	Date         = "01/08/2026"

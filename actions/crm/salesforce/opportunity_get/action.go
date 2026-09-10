@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Opportunity"
 	Description  = "Look up one deal by its Salesforce ID and return everything on it - value, stage, close date, owner and every custom field."
+	Summary      = "Look up one deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

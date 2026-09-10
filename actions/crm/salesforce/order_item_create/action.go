@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Product to Order"
 	Description  = "Put a product line on an order. Pick the product and we find its price book entry, read the list price and put the order on the right price book for you - an order needs at least one product line before it can be activated."
+	Summary      = "Add a product to an order"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+cart-shopping"
 	Date         = "26/07/2026"

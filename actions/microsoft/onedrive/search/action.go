@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Files"
 	Description  = "Search for files and folders in OneDrive"
+	Summary      = "Search for files in OneDrive"
 	Website      = "https://www.flomation.co"
 	Icon         = "onedrive+magnifying-glass"
 	Date         = "04/06/2026"

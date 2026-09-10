@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member: Get"
 	Description  = "Retrieve a single member (subscriber) from a Mailchimp audience by email. Optionally include or exclude specific fields. Returns the member."
+	Summary      = "Look up a member in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+eye"
 	Date         = "01/07/2026"

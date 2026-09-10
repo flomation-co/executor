@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Finalize"
 	Description  = "Finalise a draft Stripe invoice, making it ready to pay or send."
+	Summary      = "Finalise a draft invoice ready to send"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

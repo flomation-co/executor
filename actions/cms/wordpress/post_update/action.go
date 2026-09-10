@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Update Post"
 	Description  = "Update an existing post on your WordPress site. Only the fields you set are changed; add any other post field via Additional Fields."
+	Summary      = "Edit a WordPress post"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+pencil"
 	Date         = "05/07/2026"

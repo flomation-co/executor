@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Invalid Email"
 	Description  = "Remove addresses from your SendGrid invalid email list so delivery can be attempted again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list."
+	Summary      = "Clear an address from the invalid list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

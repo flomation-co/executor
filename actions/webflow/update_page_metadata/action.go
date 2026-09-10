@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Page Metadata"
 	Description  = "Update the title, slug, SEO, and Open Graph metadata of a Webflow page"
+	Summary      = "Change a Webflow page's title, address and preview"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+pencil"
 	Date         = "29/05/2026"

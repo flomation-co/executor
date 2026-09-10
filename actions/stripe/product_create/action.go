@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Create"
 	Description  = "Create a Stripe product. Returns the product ID and object."
+	Summary      = "Add a product in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

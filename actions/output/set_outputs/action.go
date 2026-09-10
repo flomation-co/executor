@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Set Outputs"
 	Description  = "Set all parent outputs as flow outputs"
+	Summary      = "Send everything from the previous step back out"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check"
 	Date         = "25/03/2026"

@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Add"
 	Description  = "Stage files for commit in a Git repository"
+	Summary      = "Stage files ready to be committed"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+plus"
 	Date         = "06/03/2026"

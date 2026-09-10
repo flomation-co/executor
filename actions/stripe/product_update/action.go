@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Product: Update"
 	Description  = "Update fields on an existing Stripe product."
+	Summary      = "Change a product in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+pencil"
 	Date         = "05/07/2026"

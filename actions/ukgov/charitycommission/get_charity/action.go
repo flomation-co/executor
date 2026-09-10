@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Charity"
 	Description  = "Retrieve full register details for a charity by registered number (Charity Commission)"
+	Summary      = "Look up a charity's official record"
 	Website      = "https://www.flomation.co"
 	Icon         = "hand"
 	Date         = "05/07/2026"

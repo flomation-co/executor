@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Close Conversation"
 	Description  = "Close an Intercom conversation as an admin, optionally posting a final message to the customer."
+	Summary      = "Close a conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+xmark"
 	Date         = "08/07/2026"

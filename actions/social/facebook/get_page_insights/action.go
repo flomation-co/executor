@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Page Insights"
 	Description  = "Get engagement and reach metrics for a Facebook Page"
+	Summary      = "See how your Facebook Page is performing"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+pie-chart"
 	Date         = "21/05/2026"

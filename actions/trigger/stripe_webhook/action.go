@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Stripe Webhook Trigger"
 	Description  = "Triggers a flow when a Stripe webhook event is received (payment, subscription, invoice…)"
+	Summary      = "Start when a payment or subscription changes in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

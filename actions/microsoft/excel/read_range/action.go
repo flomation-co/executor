@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Read Range"
 	Description  = "Read a cell range from a Microsoft Excel Online workbook"
+	Summary      = "Read cells from an Excel workbook"
 	Website      = "https://www.flomation.co"
 	Icon         = "msexcel+eye"
 	Date         = "04/06/2026"

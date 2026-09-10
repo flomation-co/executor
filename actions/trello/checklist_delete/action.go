@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Checklist"
 	Description  = "Delete a checklist from a Trello card."
+	Summary      = "Delete a checklist in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+trash"
 	Date         = "07/07/2026"

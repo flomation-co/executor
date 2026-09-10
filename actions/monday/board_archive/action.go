@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Archive Board"
 	Description  = "Archive a Monday.com board by its ID."
+	Summary      = "Archive a board in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+box-archive"
 	Date         = "07/07/2026"

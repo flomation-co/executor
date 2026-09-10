@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Send"
 	Description  = "Manually send a Stripe invoice to the customer by email."
+	Summary      = "Send an invoice in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

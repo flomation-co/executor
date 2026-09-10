@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Spreadsheet"
 	Description  = "Create a new Google Sheets spreadsheet"
+	Summary      = "Create a Google Sheet"
 	Website      = "https://www.flomation.co"
 	Icon         = "googlesheets+plus"
 	Date         = "01/06/2026"

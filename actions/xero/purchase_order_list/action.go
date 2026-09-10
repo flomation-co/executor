@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: List"
 	Description  = "List Xero purchase orders, optionally filtered by status. Returns matching purchase orders."
+	Summary      = "List purchase orders in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

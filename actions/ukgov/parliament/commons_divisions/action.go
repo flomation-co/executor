@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Commons Divisions"
 	Description  = "Search recorded House of Commons division (vote) results (UK Parliament)"
+	Summary      = "See how MPs voted"
 	Website      = "https://www.flomation.co"
 	Icon         = "landmark+check"
 	Date         = "05/07/2026"

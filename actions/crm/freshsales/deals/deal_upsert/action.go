@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: Upsert"
 	Description  = "Create or update a deal matched on a unique identifier."
+	Summary      = "Add or update a deal in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+copy"
 	Date         = "04/09/2026"

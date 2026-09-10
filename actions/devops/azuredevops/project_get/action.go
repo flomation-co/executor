@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Project"
 	Description  = "Get one Azure DevOps project by name or ID, including its description, visibility and state. Turn on Include Capabilities to also return the process template and version-control type."
+	Summary      = "Look up one project"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+eye"
 	Date         = "17/07/2026"

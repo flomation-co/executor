@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Airtable Trigger"
 	Description  = "Triggers a flow when records are created or updated in an Airtable table. Polls the table on an interval using a Created Time or Last Modified Time field."
+	Summary      = "Start when an Airtable record is added or changed"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable"
 	Date         = "01/07/2026"

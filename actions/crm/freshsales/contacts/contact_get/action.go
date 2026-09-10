@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Get"
 	Description  = "Fetch a single Freshsales contact by ID."
+	Summary      = "Look up a contact in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Create Issue"
 	Description  = "Create a new issue in a GitLab project"
+	Summary      = "Raise a new issue"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+plus"
 	Date         = "26/04/2026"

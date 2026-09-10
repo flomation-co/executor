@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub List Workflow Runs"
 	Description  = "List GitHub Actions workflow runs for a repository"
+	Summary      = "List recent workflow runs"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+list"
 	Date         = "26/04/2026"

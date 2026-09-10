@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Link: Attach"
 	Description  = "Attach a web link to a Freshsales contact, account or deal."
+	Summary      = "Attach a web link to a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+plus"
 	Date         = "04/09/2026"

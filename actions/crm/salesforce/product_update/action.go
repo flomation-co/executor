@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Product"
 	Description  = "Change a product in your Salesforce catalogue - rename it, correct its code, or retire it so nobody can put it on a new deal. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a product's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

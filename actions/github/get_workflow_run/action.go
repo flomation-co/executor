@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Get Workflow Run"
 	Description  = "Retrieve details of a specific GitHub Actions workflow run"
+	Summary      = "Check whether a workflow passed"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+play"
 	Date         = "26/04/2026"

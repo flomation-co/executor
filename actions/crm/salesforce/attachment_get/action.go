@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Attachment (Classic)"
 	Description  = "Look up a Classic attachment's details — its name, size, type, owner and which record it belongs to. Use Download Attachment to get the file itself."
+	Summary      = "Look up one attachment (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+eye"
 	Date         = "25/07/2026"

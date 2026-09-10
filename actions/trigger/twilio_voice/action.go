@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Twilio Voice Trigger"
 	Description  = "Triggers a flow when a voice call is received via Twilio"
+	Summary      = "Start when someone calls your phone number"
 	Website      = "https://www.flomation.co"
 	Icon         = "phone"
 	Date         = "29/05/2026"

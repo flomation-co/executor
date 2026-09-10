@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Move Item to Group"
 	Description  = "Move a Monday.com item into a different group on its board."
+	Summary      = "Move an item to a group in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+arrow-right-arrow-left"
 	Date         = "07/07/2026"

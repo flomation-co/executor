@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Animated Lower-Third"
 	Description  = "Generate an animated lower-third (title + subtitle bar) as a transparent video"
+	Summary      = "Make a name-and-title bar to lay over a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "align-left"
 	Date         = "15/07/2026"

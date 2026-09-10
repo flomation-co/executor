@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Safely Restart"
 	Description  = "Restart Jenkins once all running builds have finished. Not all environments support this."
+	Summary      = "Restart Jenkins once builds have finished"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+clock"
 	Date         = "04/07/2026"

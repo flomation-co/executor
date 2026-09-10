@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create or Update Company"
 	Description  = "Create a company in Intercom, or update the existing one that matches your Company ID. A company only shows up in Intercom once at least one contact is attached to it."
+	Summary      = "Add a company, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: Delete"
 	Description  = "Delete a record from an Airtable table by its record ID. Returns the deleted record ID."
+	Summary      = "Delete a record from Airtable"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+trash"
 	Date         = "01/07/2026"

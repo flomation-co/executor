@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: List Builds"
 	Description  = "List a Jenkins job's builds with their number, result, timestamp, and duration."
+	Summary      = "List recent builds for a job"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+list"
 	Date         = "04/07/2026"

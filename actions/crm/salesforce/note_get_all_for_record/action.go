@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Notes On A Record"
 	Description  = "Read the notes logged against a Salesforce record — call summaries and handover notes — with a preview of each, or the full text on request."
+	Summary      = "List the notes on a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

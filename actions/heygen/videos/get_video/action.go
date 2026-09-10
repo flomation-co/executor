@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Video"
 	Description  = "Get a HeyGen video's status and, when ready, its download URL."
+	Summary      = "Check whether a video is ready, and get the link"
 	Website      = "https://www.flomation.co"
 	Icon         = "film+circle-info"
 	Date         = "11/08/2026"

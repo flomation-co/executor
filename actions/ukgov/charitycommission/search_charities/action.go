@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Charities"
 	Description  = "Search the England & Wales register of charities by name (Charity Commission)"
+	Summary      = "Search registered charities in England and Wales"
 	Website      = "https://www.flomation.co"
 	Icon         = "hand+magnifying-glass"
 	Date         = "05/07/2026"

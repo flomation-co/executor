@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Identities"
 	Description  = "List all known channel identities for the current user"
+	Summary      = "See how this person reaches your agent, across channels"
 	Website      = "https://www.flomation.co"
 	Icon         = "user-group"
 	Date         = "29/04/2026"

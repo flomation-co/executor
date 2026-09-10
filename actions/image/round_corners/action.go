@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Round Corners"
 	Description  = "Round the corners of an image (transparent PNG output)"
+	Summary      = "Round off the corners of a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "image"
 	Date         = "15/07/2026"

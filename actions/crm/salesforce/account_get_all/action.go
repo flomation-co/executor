@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Accounts"
 	Description  = "List accounts from Salesforce, optionally narrowed by a filter such as Industry or Billing City. Turn on Return All to fetch every match, page by page."
+	Summary      = "List companies"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

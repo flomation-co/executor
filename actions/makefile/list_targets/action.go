@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Make Targets"
 	Description  = "List all targets defined in a Makefile"
+	Summary      = "List everything a Makefile can run"
 	Website      = "https://www.flomation.co"
 	Icon         = "gears+list"
 	Date         = "31/05/2026"

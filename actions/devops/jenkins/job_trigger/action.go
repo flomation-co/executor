@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Trigger Job"
 	Description  = "Start a build of a Jenkins job. Returns the queue item URL so a later step can track it."
+	Summary      = "Start a build"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+play"
 	Date         = "04/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Quotes"
 	Description  = "List quotes from Salesforce, optionally filtered - everything expiring this month, every quote on one deal, everything still waiting to be accepted. Turn on Return All to fetch every match."
+	Summary      = "List quotes"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "26/07/2026"

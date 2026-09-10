@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Cancel Build"
 	Description  = "Cancel an in-flight build. Cancellation is a request, not an instruction: the build moves to \"cancelling\" and finishes tearing down, so its final result arrives shortly afterwards. This is a Build API action because the Pipelines API has no cancel verb at all."
+	Summary      = "Stop a running build"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+circle-stop"
 	Date         = "17/07/2026"

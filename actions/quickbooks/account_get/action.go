@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Get"
 	Description  = "Fetch a QuickBooks Online account by ID. Returns the account object."
+	Summary      = "Look up an account in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

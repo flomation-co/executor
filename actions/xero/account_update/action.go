@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Update"
 	Description  = "Update an existing Xero account by its ID. Returns the updated account object."
+	Summary      = "Change an account in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+pencil"
 	Date         = "05/07/2026"

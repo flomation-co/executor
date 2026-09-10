@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Calendly Webhook Trigger"
 	Description  = "Triggers a flow when a Calendly event occurs (invitee created/canceled, no-shows, routing form submissions). The webhook subscription is registered with Calendly automatically."
+	Summary      = "Start when a Calendly booking is made or cancelled"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendly"
 	Date         = "03/07/2026"

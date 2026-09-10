@@ -27,6 +27,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Users"
 	Description  = "List the people in your Salesforce org, with optional filters such as active users only. Enable Return All to fetch every match."
+	Summary      = "List Salesforce users"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

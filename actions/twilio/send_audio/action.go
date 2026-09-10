@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Audio"
 	Description  = "Send audio back to a Twilio voice call"
+	Summary      = "Play audio to someone on a call"
 	Website      = "https://www.flomation.co"
 	Icon         = "phone+paper-plane"
 	Date         = "29/05/2026"

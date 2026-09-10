@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Flows"
 	Description  = "List the Salesforce flows that can be run from an automation, with the exact name to use in Run Flow."
+	Summary      = "List the Salesforce flows you can run"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

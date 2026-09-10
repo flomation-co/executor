@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Checkout Session: Get"
 	Description  = "Retrieve a Stripe Checkout Session by ID."
+	Summary      = "Look up a checkout session in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+search"
 	Date         = "05/07/2026"

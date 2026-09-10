@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Add PR Comment"
 	Description  = "Add a comment to a GitHub pull request"
+	Summary      = "Comment on a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+pencil"
 	Date         = "26/04/2026"

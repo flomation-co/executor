@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sales Receipt: Get"
 	Description  = "Fetch a QuickBooks Online sales receipt by ID. Returns the sales receipt object."
+	Summary      = "Read one sales receipt"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

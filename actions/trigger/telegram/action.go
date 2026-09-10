@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Telegram Trigger"
 	Description  = "Triggers a flow when a Telegram message is received"
+	Summary      = "Start when a Telegram message arrives"
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "03/04/2026"

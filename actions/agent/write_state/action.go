@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Write Agent State"
 	Description  = "Write a persistent state value to an agent's key-value store"
+	Summary      = "Save a value for your agent to use later"
 	Website      = "https://www.flomation.co"
 	Icon         = "floppy-disk"
 	Date         = "03/04/2026"

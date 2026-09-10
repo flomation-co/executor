@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Credit Memo: Get"
 	Description  = "Fetch a QuickBooks Online credit memo by ID. Returns the credit memo object."
+	Summary      = "Look up a credit memo in QuickBooks Online"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+eye"
 	Date         = "05/07/2026"

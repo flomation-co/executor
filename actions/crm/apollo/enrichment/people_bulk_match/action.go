@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Person: Bulk Enrich"
 	Description  = "Enrich up to 10 people at once from a JSON array of match criteria."
+	Summary      = "Fill in details for many people at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+bolt"
 	Date         = "01/08/2026"

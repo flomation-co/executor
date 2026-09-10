@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Method: Detach"
 	Description  = "Detach a Stripe payment method from its customer."
+	Summary      = "Remove a saved card from a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+trash"
 	Date         = "05/07/2026"

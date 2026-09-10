@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Comments"
 	Description  = "List comments on a Linear issue. Returns comment IDs, authors, and body text."
+	Summary      = "List comments in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+comments"
 	Date         = "28/04/2026"

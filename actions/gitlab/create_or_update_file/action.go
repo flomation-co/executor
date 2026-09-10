@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Create or Update File"
 	Description  = "Create or update a single file on a branch and commit it via the API (no git)"
+	Summary      = "Write a file into a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+pencil"
 	Date         = "29/07/2026"

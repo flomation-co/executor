@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Task"
 	Description  = "Remove a task from Salesforce. It goes to the Recycle Bin rather than disappearing, so it can still be restored for the next 15 days."
+	Summary      = "Delete a task"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

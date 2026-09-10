@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Remove Contacts from List"
 	Description  = "Remove contacts from a SendGrid Marketing list without deleting them — they stay in your account and in any other lists. SendGrid processes the removal in the background and returns a job ID."
+	Summary      = "Take contacts off a list"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

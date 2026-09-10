@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Intent: Create"
 	Description  = "Create a Stripe PaymentIntent to collect a payment. Returns the intent ID and object."
+	Summary      = "Add a payment intent in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+plus"
 	Date         = "05/07/2026"

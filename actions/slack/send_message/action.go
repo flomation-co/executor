@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Send Slack Message"
 	Description  = "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts"
+	Summary      = "Post a message to a Slack channel"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+paper-plane"
 	Date         = "03/04/2026"
@@ -34,7 +35,7 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "channel_id",
+		Name: "channel_id",
 		// Not a secret: a channel ID is in every Slack URL, and the four other
 		// Slack actions already type it as a string. Typed as a secret it was
 		// masked in the execution view, hiding the one value you need to see

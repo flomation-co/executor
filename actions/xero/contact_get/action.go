@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Get"
 	Description  = "Fetch a single Xero contact by its ID. Returns the contact object."
+	Summary      = "Look up a contact in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

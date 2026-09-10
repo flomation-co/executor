@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Add Tag to Conversation"
 	Description  = "Add a tag to an Intercom conversation so it's easy to filter and report on."
+	Summary      = "Tag a conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

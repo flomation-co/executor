@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Work Items (Batch)"
 	Description  = "Fetch many work items by ID in one go — paste a list of IDs and get the full items back. Azure DevOps caps a batch at 200, so longer lists are split automatically. Fields and Expand cannot be combined."
+	Summary      = "Read several work items at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+layer-group"
 	Date         = "17/07/2026"

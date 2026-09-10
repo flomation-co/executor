@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Get Page"
 	Description  = "Retrieve a Notion page's properties by ID"
+	Summary      = "Read a Notion page's properties"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+eye"
 	Date         = "28/04/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Approve Merge Request"
 	Description  = "Add your approval to a GitLab merge request"
+	Summary      = "Approve a merge request"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+check"
 	Date         = "26/04/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Disqualified Officers"
 	Description  = "Search the UK register of disqualified company directors by name (Companies House)"
+	Summary      = "Check whether someone is banned from being a director"
 	Website      = "https://www.flomation.co"
 	Icon         = "user+ban"
 	Date         = "05/07/2026"

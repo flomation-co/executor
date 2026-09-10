@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Attachment"
 	Description  = "Fetch a Jira attachment's details by its ID. Optionally download the file itself — when Download File is on, the file's bytes are returned base64-encoded on the File Content output."
+	Summary      = "Look up an attachment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+paperclip"
 	Date         = "06/07/2026"

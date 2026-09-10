@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Merge Contacts"
 	Description  = "Merge a lead into a user so their conversations and details live on one contact. Intercom only supports merging a lead into a user — not the other way round."
+	Summary      = "Merge two records for the same person"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+compress"
 	Date         = "08/07/2026"

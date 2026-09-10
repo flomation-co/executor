@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Translate Video"
 	Description  = "Translate/dub an existing video into another language with HeyGen."
+	Summary      = "Dub a video into another language"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+plus"
 	Date         = "12/08/2026"

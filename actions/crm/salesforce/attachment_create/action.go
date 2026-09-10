@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Attachment (Classic)"
 	Description  = "Attach a file to a record using Salesforce's older Attachment object. For most orgs Upload File is the better choice — Classic attachments do not show in the Lightning Files list."
+	Summary      = "Attach a file to a record (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+paperclip"
 	Date         = "25/07/2026"

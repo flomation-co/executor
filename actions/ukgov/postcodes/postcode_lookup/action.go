@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Postcode Lookup"
 	Description  = "Resolve a UK postcode to coordinates, region and administrative areas (postcodes.io)"
+	Summary      = "Look up a UK postcode's location and area"
 	Website      = "https://www.flomation.co"
 	Icon         = "map+magnifying-glass"
 	Date         = "05/07/2026"

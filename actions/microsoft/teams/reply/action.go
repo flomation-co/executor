@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Reply to Teams Message"
 	Description  = "Send a reply to a Teams conversation using the Bot Framework"
+	Summary      = "Reply to a message in Teams"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+reply"
 	Date         = "05/06/2026"

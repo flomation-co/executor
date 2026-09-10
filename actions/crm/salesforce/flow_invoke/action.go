@@ -23,6 +23,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Run Flow"
 	Description  = "Run one of your Salesforce flows and pass it the values it asks for. Use this to trigger automation your Salesforce administrator has already built."
+	Summary      = "Run a Salesforce flow"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+bolt"
 	Date         = "25/07/2026"

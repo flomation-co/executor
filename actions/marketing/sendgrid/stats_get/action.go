@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Stats"
 	Description  = "Retrieve your SendGrid email statistics — requests, delivered, opens, clicks, bounces, and more — for a date range, optionally aggregated by day, week, or month. Dates use YYYY-MM-DD format."
+	Summary      = "Get delivery, open and click figures"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+pie-chart"
 	Date         = "09/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Append to Document"
 	Description  = "Append text to the end of a Google Docs document"
+	Summary      = "Add text to the end of a Google Doc"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledocs+plus"
 	Date         = "01/06/2026"

@@ -38,6 +38,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Plan"
 	Description  = "Generate a multi-step plan with dependent tasks the agent will autonomously progress over time."
+	Summary      = "Give an agent a multi-step plan to work through"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check"
 	Date         = "22/06/2026"

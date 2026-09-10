@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Company"
 	Description  = "Retrieve a UK company's profile by company number (Companies House)"
+	Summary      = "Look up a UK company's official record"
 	Website      = "https://www.flomation.co"
 	Icon         = "briefcase"
 	Date         = "05/07/2026"

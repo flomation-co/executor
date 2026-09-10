@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Search Issues"
 	Description  = "Search Jira issues using a JQL query. Leave the query blank to list every issue, or narrow the search and choose which fields to return. Return everything, or cap the results to a limit."
+	Summary      = "Search for issues in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+magnifying-glass"
 	Date         = "06/07/2026"

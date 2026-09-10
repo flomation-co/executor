@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Add Tag to Company"
 	Description  = "Tag a company in Intercom. If a tag with this name doesn't exist yet, it's created automatically."
+	Summary      = "Tag a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

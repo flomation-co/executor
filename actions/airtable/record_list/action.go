@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Record: List"
 	Description  = "List or search records in an Airtable table. Filter with a formula, sort, restrict to a view, project fields, and page through results (or return all). Returns matching records."
+	Summary      = "List or search records in an Airtable table"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+magnifying-glass"
 	Date         = "01/07/2026"

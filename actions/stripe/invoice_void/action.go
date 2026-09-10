@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Void"
 	Description  = "Void a finalised Stripe invoice. This cannot be undone."
+	Summary      = "Void an invoice, keeping it on record"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+trash"
 	Date         = "05/07/2026"

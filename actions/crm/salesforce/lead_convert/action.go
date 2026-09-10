@@ -33,6 +33,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Convert Lead"
 	Description  = "Turn a qualified lead into an account, a contact and an opportunity in one step. This cannot be undone, so run it only once the lead is genuinely qualified."
+	Summary      = "Turn a lead into a contact and opportunity"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+diagram-project"
 	Date         = "25/07/2026"

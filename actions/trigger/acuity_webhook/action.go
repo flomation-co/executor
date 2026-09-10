@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Acuity Scheduling Trigger"
 	Description  = "Triggers a flow when an Acuity Scheduling event occurs (appointment scheduled/rescheduled/canceled/changed, or order completed). The webhook subscription is registered with Acuity automatically."
+	Summary      = "Start when an Acuity appointment is booked or changed"
 	Website      = "https://www.flomation.co"
 	Icon         = "acuity"
 	Date         = "04/07/2026"

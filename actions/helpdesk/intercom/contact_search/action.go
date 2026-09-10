@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Search Contacts"
 	Description  = "Find contacts matching a filter — e.g. everyone whose email ends with @acme.com. Date filters match at day granularity, and brand-new contacts can take a few minutes to become searchable."
+	Summary      = "Find contacts matching your conditions"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+magnifying-glass"
 	Date         = "08/07/2026"

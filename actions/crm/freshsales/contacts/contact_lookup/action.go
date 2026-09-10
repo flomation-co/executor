@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Contact: Look Up"
 	Description  = "Find a contact by a unique field such as email, mobile or external ID."
+	Summary      = "Find a contact by email or phone number"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+magnifying-glass"
 	Date         = "04/09/2026"

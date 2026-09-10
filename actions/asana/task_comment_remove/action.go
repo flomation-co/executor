@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remove Comment"
 	Description  = "Delete a comment (story) from an Asana task."
+	Summary      = "Remove a comment in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+trash"
 	Date         = "07/07/2026"

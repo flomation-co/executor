@@ -31,6 +31,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Related Records"
 	Description  = "List the records linked to a parent record — the contacts at an account, the deals on a company, the cases for a customer. Pick the parent and the relationship; no query writing needed."
+	Summary      = "List the records linked to one record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+diagram-project"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Method: List"
 	Description  = "List a customer's Stripe payment methods by type."
+	Summary      = "List payment methods in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+list"
 	Date         = "05/07/2026"

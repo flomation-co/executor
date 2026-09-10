@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Create Template"
 	Description  = "Create a new dynamic transactional template in SendGrid. A template starts with no content — add a subject and body with \"SendGrid: Create Template Version\", then send it with \"SendGrid: Send Email\"."
+	Summary      = "Create an email template"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+plus"
 	Date         = "09/07/2026"

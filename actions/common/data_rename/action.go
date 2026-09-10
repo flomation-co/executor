@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Data Rename"
 	Description  = "Rename an input key to a different output key"
+	Summary      = "Give a value a different name"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor"
 	Date         = "21/03/2026"

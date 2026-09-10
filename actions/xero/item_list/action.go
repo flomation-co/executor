@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Item: List"
 	Description  = "List Xero items, optionally filtered by a where clause. Returns matching items."
+	Summary      = "List items in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

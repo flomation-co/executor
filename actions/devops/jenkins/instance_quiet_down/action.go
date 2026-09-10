@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Jenkins: Quiet Down"
 	Description  = "Put Jenkins into quiet-down mode: no new builds start, and the instance prepares for a safe shutdown."
+	Summary      = "Stop Jenkins taking on new builds"
 	Website      = "https://www.flomation.co"
 	Icon         = "jenkins+ban"
 	Date         = "04/07/2026"

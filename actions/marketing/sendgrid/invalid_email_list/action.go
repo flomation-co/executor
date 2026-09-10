@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Invalid Emails"
 	Description  = "Retrieve the addresses on your SendGrid invalid email list — addresses that could not be delivered because they are malformed or the mailbox does not exist. Optionally narrow the list to a date range."
+	Summary      = "List addresses that were not valid"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

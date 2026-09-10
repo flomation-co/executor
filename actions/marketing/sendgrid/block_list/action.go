@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Blocks"
 	Description  = "Retrieve the addresses on your SendGrid block list — emails the receiving server refused, for example because of an IP block or content filtering. Optionally narrow the list to a date range."
+	Summary      = "List addresses currently blocked"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"

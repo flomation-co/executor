@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Reverse Geocode"
 	Description  = "Find the nearest UK postcodes to a latitude/longitude (postcodes.io)"
+	Summary      = "Find the nearest postcodes to a set of coordinates"
 	Website      = "https://www.flomation.co"
 	Icon         = "map+location-arrow"
 	Date         = "05/07/2026"

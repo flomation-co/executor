@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Delete Ticket"
 	Description  = "Permanently delete a Zendesk ticket by its ID. Choose Regular for a normal ticket or Suspended for one held in the suspended queue."
+	Summary      = "Delete a ticket"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+trash"
 	Date         = "03/07/2026"

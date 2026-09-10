@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab List Projects"
 	Description  = "List projects accessible to the authenticated user"
+	Summary      = "List the projects you can see"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+list"
 	Date         = "26/04/2026"

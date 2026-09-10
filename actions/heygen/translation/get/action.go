@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Translation"
 	Description  = "Get the status and output URL of a HeyGen video translation job."
+	Summary      = "Check whether a dubbed video is ready"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+magnifying-glass"
 	Date         = "12/08/2026"

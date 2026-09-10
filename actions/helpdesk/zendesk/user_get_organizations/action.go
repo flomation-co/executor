@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Get User's Organizations"
 	Description  = "List the organizations a Zendesk user belongs to."
+	Summary      = "List the organisations a user belongs to"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+user-group"
 	Date         = "03/07/2026"

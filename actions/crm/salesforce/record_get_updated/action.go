@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Updated Records"
 	Description  = "List the records on any Salesforce object that were created or changed between two times. One cheap call instead of re-reading the whole object, so a scheduled flow can act on just what moved."
+	Summary      = "List records changed in a time window"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clock-rotate-left"
 	Date         = "25/07/2026"

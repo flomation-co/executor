@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Extract Frames"
 	Description  = "Extract still frames from a video as images at a chosen rate"
+	Summary      = "Pull out stills from a video as pictures"
 	Website      = "https://www.flomation.co"
 	Icon         = "copy"
 	Date         = "15/07/2026"

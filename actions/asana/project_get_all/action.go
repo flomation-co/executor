@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Projects"
 	Description  = "List projects in an Asana workspace, optionally filtered by team or archived state."
+	Summary      = "List projects in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+list"
 	Date         = "07/07/2026"

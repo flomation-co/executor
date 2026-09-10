@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Cancel Pipeline"
 	Description  = "Cancel a running GitLab pipeline"
+	Summary      = "Stop a running pipeline"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+xmark"
 	Date         = "26/04/2026"

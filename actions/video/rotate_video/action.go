@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Rotate / Flip Video"
 	Description  = "Rotate a video by 90/180/270° and/or flip it horizontally or vertically"
+	Summary      = "Turn or flip a video"
 	Website      = "https://www.flomation.co"
 	Icon         = "rotate-right"
 	Date         = "15/07/2026"

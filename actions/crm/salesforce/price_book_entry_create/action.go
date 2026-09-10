@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Product to Price Book"
 	Description  = "Give a product a price in one of your price books, so it can be quoted and put on deals. Add it to the standard price book first - Salesforce insists on a list price before it will accept any other."
+	Summary      = "Put a product in a price book"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+tag"
 	Date         = "26/07/2026"

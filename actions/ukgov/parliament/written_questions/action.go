@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Written Questions"
 	Description  = "Search UK Parliament written questions and answers by keyword (UK Parliament)"
+	Summary      = "Search written questions and answers in Parliament"
 	Website      = "https://www.flomation.co"
 	Icon         = "landmark+comment"
 	Date         = "05/07/2026"

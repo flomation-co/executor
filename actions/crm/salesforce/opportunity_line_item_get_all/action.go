@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Opportunity Products"
 	Description  = "List the product lines on a deal with their quantity, price each and line total - what you need to build a quote, an invoice or an order from the deal."
+	Summary      = "List the products on a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+box"
 	Date         = "25/07/2026"

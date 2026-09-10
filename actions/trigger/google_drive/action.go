@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Google Drive Trigger"
 	Description  = "Triggers when files change in a Google Drive folder"
+	Summary      = "Start when files change in a Google Drive folder"
 	Website      = "https://www.flomation.co"
 	Icon         = "google"
 	Date         = "01/06/2026"

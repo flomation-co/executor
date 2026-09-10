@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab Trigger Pipeline"
 	Description  = "Create and trigger a new pipeline for a branch or tag"
+	Summary      = "Start a pipeline on a branch"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+play"
 	Date         = "26/04/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Bulk: Upsert Contacts"
 	Description  = "Create or update many contacts in one call. Cheaper against the hourly rate limit."
+	Summary      = "Add or update many contacts at once"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+copy"
 	Date         = "04/09/2026"

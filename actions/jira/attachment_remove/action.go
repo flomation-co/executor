@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Attachment"
 	Description  = "Permanently delete a Jira attachment by its ID. This removes the file from its issue and cannot be undone."
+	Summary      = "Delete an attachment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+trash"
 	Date         = "06/07/2026"

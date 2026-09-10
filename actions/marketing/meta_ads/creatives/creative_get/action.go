@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Creatives: Get"
 	Description  = "Read a Meta ad creative by ID, including its full object_story_spec."
+	Summary      = "List creatives in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+eye"
 	Date         = "18/08/2026"

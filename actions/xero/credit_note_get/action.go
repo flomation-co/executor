@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Credit Note: Get"
 	Description  = "Fetch a single Xero credit note by ID. Returns the credit note object."
+	Summary      = "Look up a credit note in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

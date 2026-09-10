@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Subscription: Update"
 	Description  = "Update a Stripe subscription (cancel at period end, metadata)."
+	Summary      = "Change a subscription in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+pencil"
 	Date         = "05/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Folders"
 	Description  = "List mail folders in an Outlook mailbox"
+	Summary      = "List the folders in an Outlook mailbox"
 	Website      = "https://www.flomation.co"
 	Icon         = "folder-tree"
 	Date         = "03/06/2026"

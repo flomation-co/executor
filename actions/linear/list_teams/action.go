@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Teams"
 	Description  = "List all Linear teams with workflow states, labels, and members. Call first to get team_id."
+	Summary      = "List teams in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+user-group"
 	Date         = "15/04/2026"

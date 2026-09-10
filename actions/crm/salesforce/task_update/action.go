@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Task"
 	Description  = "Change an existing Salesforce task — hand it to someone else, move the due date, raise the priority or record how a call went. Anything left blank is left exactly as it is."
+	Summary      = "Change a task's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pencil"
 	Date         = "25/07/2026"

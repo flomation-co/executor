@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Attach Contact to Company"
 	Description  = "Attach a contact to a company so Intercom links the person to that business. Attaching the first contact is also what makes a new company visible in Intercom."
+	Summary      = "Add a person to a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+link"
 	Date         = "08/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Delete"
 	Description  = "Delete a Freshsales account by ID."
+	Summary      = "Delete an account in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+trash"
 	Date         = "04/09/2026"

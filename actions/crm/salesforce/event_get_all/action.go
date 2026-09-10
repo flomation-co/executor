@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Events"
 	Description  = "See what is in the diary — every Salesforce event in a date range, on one person's calendar, or booked against a particular customer or deal."
+	Summary      = "List calendar events"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

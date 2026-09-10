@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Open Conversation"
 	Description  = "Reopen a closed or snoozed Intercom conversation."
+	Summary      = "Reopen a closed conversation"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+rotate-right"
 	Date         = "08/07/2026"

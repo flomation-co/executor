@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Case"
 	Description  = "Send a Salesforce case to the Recycle Bin. It is recoverable there for 15 days, so this is not permanent — but the case disappears from list views and reports straight away."
+	Summary      = "Delete a support case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

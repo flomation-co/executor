@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Checkout Session: Expire"
 	Description  = "Expire an open Stripe Checkout Session so it can no longer be completed."
+	Summary      = "Cancel a checkout link before it is used"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

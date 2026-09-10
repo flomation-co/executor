@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab List Pipeline Jobs"
 	Description  = "List jobs within a GitLab pipeline"
+	Summary      = "List the jobs in a pipeline"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+list"
 	Date         = "26/04/2026"

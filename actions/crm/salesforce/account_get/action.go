@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Account"
 	Description  = "Look up one Salesforce account by its record ID and return its details. Leave Fields blank to get everything the connected Salesforce user is allowed to see."
+	Summary      = "Look up one company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

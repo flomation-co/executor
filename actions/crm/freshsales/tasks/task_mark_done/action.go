@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Task: Mark Done"
 	Description  = "Mark a Freshsales task as completed."
+	Summary      = "Mark a task as done"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+circle-check"
 	Date         = "04/09/2026"

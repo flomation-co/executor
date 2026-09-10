@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "HeyGen Webhook Trigger"
 	Description  = "Triggers a flow when a HeyGen video is ready (avatar_video.success / .fail, translation events)."
+	Summary      = "Start when a HeyGen video has finished rendering"
 	Website      = "https://www.flomation.co"
 	Icon         = "film+bolt"
 	Date         = "12/08/2026"

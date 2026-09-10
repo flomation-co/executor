@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Delete Article"
 	Description  = "Permanently delete a Help Center article from Intercom by its ID. This cannot be undone."
+	Summary      = "Remove a help centre article"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+trash"
 	Date         = "08/07/2026"

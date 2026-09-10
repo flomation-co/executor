@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Group"
 	Description  = "Rename a Monday.com group or change its colour."
+	Summary      = "Change a group in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+pen"
 	Date         = "07/07/2026"

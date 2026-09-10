@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Extract Audio"
 	Description  = "Extract the audio track from a video as mp3/aac/wav/ogg"
+	Summary      = "Take the sound out of a video as an audio file"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone"
 	Date         = "15/07/2026"

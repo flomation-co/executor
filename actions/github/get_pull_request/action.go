@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Get Pull Request"
 	Description  = "Retrieve details of a GitHub pull request by number"
+	Summary      = "Read a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+eye"
 	Date         = "26/04/2026"

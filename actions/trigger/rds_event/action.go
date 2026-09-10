@@ -21,6 +21,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "RDS Event Trigger"
 	Description  = "Triggers a flow on AWS RDS/Aurora events (failover, backup complete, low storage, availability change). Polls DescribeEvents on an interval."
+	Summary      = "Start on an AWS database event, such as a failover or backup"
 	Website      = "https://www.flomation.co"
 	Icon         = "database+bell"
 	Date         = "21/07/2026"

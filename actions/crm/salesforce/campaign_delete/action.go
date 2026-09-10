@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Campaign"
 	Description  = "Send a Salesforce campaign to the Recycle Bin. Everyone who was signed up to it goes with it, and restoring the campaign from the Recycle Bin within 15 days brings them all back."
+	Summary      = "Delete a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

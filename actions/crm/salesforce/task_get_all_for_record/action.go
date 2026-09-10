@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Tasks On a Record"
 	Description  = "List the tasks logged against one contact, lead, account, opportunity or case — open and completed alike. This is what a follow-up chaser needs: point it at the customer and get back everything outstanding."
+	Summary      = "List the tasks against a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

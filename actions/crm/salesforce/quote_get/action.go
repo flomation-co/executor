@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Quote"
 	Description  = "Look up one quote by its Salesforce ID and return everything on it - the quote number, its status, what it adds up to, when it expires and who it was sent to."
+	Summary      = "Look up one quote"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "26/07/2026"

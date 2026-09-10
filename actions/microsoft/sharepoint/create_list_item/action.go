@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create List Item"
 	Description  = "Create a new item in a SharePoint list"
+	Summary      = "Add an item to a SharePoint list"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+plus"
 	Date         = "04/06/2026"

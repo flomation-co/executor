@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Card"
 	Description  = "Create a new card in a Trello list. Pick a board to load its lists, choose the list, and give the card a name plus optional description, due date, members, and labels."
+	Summary      = "Add a card in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+plus"
 	Date         = "07/07/2026"

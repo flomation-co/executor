@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Quick Actions"
 	Description  = "List the quick actions your Salesforce administrator has set up, either across the whole org or on one type of record."
+	Summary      = "List the quick actions you can run"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+clipboard-list"
 	Date         = "25/07/2026"

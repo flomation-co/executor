@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Note to Opportunity (Classic)"
 	Description  = "Attach a Classic note to a deal. Orgs on Lightning Enhanced Notes should use the Files and Notes actions instead - a Classic note does not appear in the Lightning Notes list."
+	Summary      = "Attach a note to a deal (older orgs)"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"
 	Date         = "25/07/2026"

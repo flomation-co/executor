@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Quote: List"
 	Description  = "List Xero quotes, optionally filtered by status. Returns matching quotes."
+	Summary      = "List quotes in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+list"
 	Date         = "05/07/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Notion Get Block Children"
 	Description  = "Read the content blocks of a Notion page or block"
+	Summary      = "Read the content of a Notion page"
 	Website      = "https://www.flomation.co"
 	Icon         = "notion+list"
 	Date         = "28/04/2026"

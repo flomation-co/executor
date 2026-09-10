@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete File"
 	Description  = "Delete a file from Salesforce Files, including every version of it and every record it was shared with. It goes to the Recycle Bin for 15 days."
+	Summary      = "Delete a file"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

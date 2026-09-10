@@ -36,6 +36,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Plan / Cancel"
 	Description  = "Cancel a plan you created. Stops all pending and in-progress tasks. Idempotent on already-terminal plans."
+	Summary      = "Stop a plan and everything still to do in it"
 	Website      = "https://www.flomation.co"
 	Icon         = "list-check+circle-xmark"
 	Date         = "23/06/2026"

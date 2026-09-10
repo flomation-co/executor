@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Images to PDF"
 	Description  = "Combine one or more images into a single PDF, one image per page"
+	Summary      = "Turn pictures into a PDF, one per page"
 	Website      = "https://www.flomation.co"
 	Icon         = "file-lines"
 	Date         = "15/07/2026"

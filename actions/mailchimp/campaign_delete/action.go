@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: Delete"
 	Description  = "Permanently delete a Mailchimp campaign by its ID. This cannot be undone."
+	Summary      = "Delete a campaign in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+trash"
 	Date         = "01/07/2026"

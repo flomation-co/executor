@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Human Approval"
 	Description  = "Ask a human to choose an option, then branch on their answer. Suspends until a reply or timeout."
+	Summary      = "Ask a person to decide, then continue based on their answer"
 	Website      = "https://www.flomation.co"
 	Icon         = "user+check"
 	Date         = "04/07/2026"

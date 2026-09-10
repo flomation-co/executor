@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Files: List For Record"
 	Description  = "List the files and links attached to a Freshsales record."
+	Summary      = "List the files attached to a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+list"
 	Date         = "04/09/2026"

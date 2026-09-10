@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Microsoft Outlook Trigger"
 	Description  = "Triggers a flow when a new email arrives in a connected Microsoft 365 account"
+	Summary      = "Start when a new email arrives in Outlook"
 	Website      = "https://www.flomation.co"
 	Icon         = "microsoft+envelope"
 	Date         = "04/06/2026"

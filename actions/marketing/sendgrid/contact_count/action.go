@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Count Contacts"
 	Description  = "Return the total number of marketing contacts in your SendGrid account, along with the billable contact count."
+	Summary      = "Count how many contacts you have"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+hashtag"
 	Date         = "09/07/2026"

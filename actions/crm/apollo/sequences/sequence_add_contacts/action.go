@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Sequence: Add Contacts"
 	Description  = "Add contacts to an Apollo sequence from a sending mailbox."
+	Summary      = "Add contacts to an email sequence"
 	Website      = "https://www.flomation.co"
 	Icon         = "apollo+user-plus"
 	Date         = "01/08/2026"

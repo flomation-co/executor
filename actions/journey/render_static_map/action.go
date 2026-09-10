@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Render Static Map"
 	Description  = "Generate a PNG of a route from an encoded polyline, sized for inline display or PDF embedding."
+	Summary      = "Draw a route as a picture you can share or print"
 	Website      = "https://www.flomation.co"
 	Icon         = "route+image"
 	Date         = "11/06/2026"

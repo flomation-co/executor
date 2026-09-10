@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Get Profile"
 	Description  = "Get the authenticated user's LinkedIn profile and member URN"
+	Summary      = "Look up your LinkedIn profile"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+user"
 	Date         = "21/05/2026"

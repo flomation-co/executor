@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn List Posts"
 	Description  = "List recent posts by the authenticated user or a specified author"
+	Summary      = "List recent LinkedIn posts"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin+list"
 	Date         = "21/05/2026"

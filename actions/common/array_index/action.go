@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Array Index"
 	Description  = "Extract a single item from an array by its index (0-based)"
+	Summary      = "Take a single item out of a list by its position"
 	Website      = "https://www.flomation.co"
 	Icon         = "list+magnifying-glass"
 	Date         = "19/04/2026"

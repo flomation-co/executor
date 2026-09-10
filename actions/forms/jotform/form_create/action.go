@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Form"
 	Description  = "Create a new JotForm form from a JSON questions array and properties object."
+	Summary      = "Create a JotForm"
 	Website      = "https://www.flomation.co"
 	Icon         = "jotform+plus"
 	Date         = "11/07/2026"

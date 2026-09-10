@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Web Fetch"
 	Description  = "Fetch a URL and extract the text content"
+	Summary      = "Fetch a web page and read its text"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+arrow-down"
 	Date         = "07/04/2026"

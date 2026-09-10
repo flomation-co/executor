@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Update Template"
 	Description  = "Rename a transactional template in SendGrid. The template's versions and content are unchanged."
+	Summary      = "Rename an email template"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+pencil"
 	Date         = "09/07/2026"

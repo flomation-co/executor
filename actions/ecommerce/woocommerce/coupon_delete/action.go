@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Delete Coupon"
 	Description  = "Delete a coupon from your WooCommerce store. Deletes permanently by default; turn off Force Delete to move it to the trash instead."
+	Summary      = "Delete a coupon"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+trash"
 	Date         = "05/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Custom Object Record"
 	Description  = "Send a record of one of your organisation's own Salesforce objects to the Recycle Bin. It stays recoverable there for 15 days, so this is not immediately permanent."
+	Summary      = "Delete a record from one of your own objects"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

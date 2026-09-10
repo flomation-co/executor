@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "HTTP Request"
 	Description  = "Send an HTTP request and capture the response"
+	Summary      = "Call any web address and use what comes back"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+paper-plane"
 	Date         = "23/03/2026"

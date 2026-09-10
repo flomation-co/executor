@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Calendar Read"
 	Description  = "Read events, check availability, or find free slots across all connected Google calendars"
+	Summary      = "Look up events, or find when someone is free"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+eye"
 	Date         = "08/04/2026"

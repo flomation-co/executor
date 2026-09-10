@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Campaign"
 	Description  = "Look up one Salesforce campaign and everything it has recorded — its dates, budget and the running totals of how many leads, contacts, responses and opportunities it has produced."
+	Summary      = "Look up one campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

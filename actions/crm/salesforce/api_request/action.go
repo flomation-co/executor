@@ -38,6 +38,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Custom API Call"
 	Description  = "Advanced: call any part of the Salesforce API with your existing connection. For anything the other Salesforce actions do not cover yet, including your org's own Apex REST endpoints."
+	Summary      = "Call any Salesforce endpoint yourself"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+bolt"
 	Date         = "25/07/2026"

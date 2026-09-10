@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment: Create"
 	Description  = "Apply a payment to a Xero invoice from an account. Returns the payment ID and object."
+	Summary      = "Add a payment in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

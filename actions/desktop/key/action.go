@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Press Key"
 	Description  = "Press a key or chord on a desktop VM (e.g. Return, ctrl+c / ^c)."
+	Summary      = "Press a key or keyboard shortcut"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor"
 	Date         = "12/08/2026"

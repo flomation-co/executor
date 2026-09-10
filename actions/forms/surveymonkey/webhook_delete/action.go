@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Webhook"
 	Description  = "Delete a SurveyMonkey webhook by its webhook ID."
+	Summary      = "Remove a SurveyMonkey webhook"
 	Website      = "https://www.flomation.co"
 	Icon         = "surveymonkey+trash"
 	Date         = "11/07/2026"

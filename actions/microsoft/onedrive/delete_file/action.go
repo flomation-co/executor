@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete File"
 	Description  = "Delete a file or folder from OneDrive"
+	Summary      = "Delete a file from OneDrive"
 	Website      = "https://www.flomation.co"
 	Icon         = "onedrive+trash"
 	Date         = "04/06/2026"

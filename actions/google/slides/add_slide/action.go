@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Slide"
 	Description  = "Add a new slide to a Google Slides presentation"
+	Summary      = "Add a slide to a presentation"
 	Website      = "https://www.flomation.co"
 	Icon         = "googleslides+plus"
 	Date         = "01/06/2026"

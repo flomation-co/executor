@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Create Pull Request"
 	Description  = "Open a pull request. Branch names can be given plainly (\"main\") — the full ref Azure DevOps insists on is filled in for you. Reviewers are given as identity IDs; Work Item IDs link the PR to the work it delivers."
+	Summary      = "Open a pull request"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+plus"
 	Date         = "17/07/2026"

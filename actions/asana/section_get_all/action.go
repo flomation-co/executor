@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Sections"
 	Description  = "List the sections (columns) of an Asana project."
+	Summary      = "List sections in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+list"
 	Date         = "07/07/2026"

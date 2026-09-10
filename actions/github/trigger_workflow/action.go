@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Trigger Workflow"
 	Description  = "Trigger a GitHub Actions workflow dispatch event"
+	Summary      = "Start a workflow on a branch"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+play"
 	Date         = "26/04/2026"

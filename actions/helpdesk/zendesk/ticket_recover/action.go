@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Recover Suspended Ticket"
 	Description  = "Recover a ticket from the suspended queue, turning it into a regular ticket."
+	Summary      = "Recover a ticket held as suspected spam"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+rotate-right"
 	Date         = "03/07/2026"

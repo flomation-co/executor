@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member Tag: Remove"
 	Description  = "Remove one or more tags from a Mailchimp audience member. Tags are matched by name and marked inactive."
+	Summary      = "Remove a member tag in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+minus"
 	Date         = "01/07/2026"

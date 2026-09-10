@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Screenshot"
 	Description  = "Capture the screen of a desktop VM over SSH and return the image."
+	Summary      = "Take a picture of the screen"
 	Website      = "https://www.flomation.co"
 	Icon         = "image"
 	Date         = "12/08/2026"

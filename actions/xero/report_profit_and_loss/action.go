@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Report: Profit and Loss"
 	Description  = "Run the Xero Profit and Loss report for an optional date range. Returns the full report."
+	Summary      = "Get a profit and loss statement"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+chart-line"
 	Date         = "05/07/2026"

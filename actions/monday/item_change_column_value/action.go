@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Change Column Value"
 	Description  = "Set a single column's value on a Monday.com item. The value is column-type-specific JSON."
+	Summary      = "Set one column on an item"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+pen"
 	Date         = "07/07/2026"

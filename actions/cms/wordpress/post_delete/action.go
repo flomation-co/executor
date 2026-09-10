@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Delete Post"
 	Description  = "Delete a post from your WordPress site. Moves it to the Trash by default; enable Permanently Delete to remove it for good."
+	Summary      = "Delete a WordPress post"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+trash"
 	Date         = "05/07/2026"

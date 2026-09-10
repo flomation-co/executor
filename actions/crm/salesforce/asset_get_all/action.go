@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Assets"
 	Description  = "List what customers own - everything on one account when they ring up, every unit of one product, everything whose warranty runs out in the next month. Turn on Return All to fetch every match instead of one page."
+	Summary      = "List the products customers own"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "26/07/2026"

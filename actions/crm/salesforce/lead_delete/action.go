@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Lead"
 	Description  = "Delete a lead. It goes to your Salesforce Recycle Bin and can be restored there for 15 days."
+	Summary      = "Delete a lead"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "25/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remove Tag from Task"
 	Description  = "Remove a tag from an Asana task."
+	Summary      = "Remove a tag from a task in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+xmark"
 	Date         = "07/07/2026"

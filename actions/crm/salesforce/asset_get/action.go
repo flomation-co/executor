@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Asset"
 	Description  = "Look up one asset by its Salesforce ID and return everything on it - which product it is, its serial number, install and purchase dates, when the warranty ends and every custom field."
+	Summary      = "Look up one owned product"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "26/07/2026"

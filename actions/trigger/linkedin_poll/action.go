@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "LinkedIn Activity Trigger"
 	Description  = "Triggers a flow on new comments or reactions on LinkedIn posts"
+	Summary      = "Start when someone comments on or reacts to your LinkedIn post"
 	Website      = "https://www.flomation.co"
 	Icon         = "linkedin"
 	Date         = "24/05/2026"

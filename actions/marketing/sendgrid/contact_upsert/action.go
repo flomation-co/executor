@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Create or Update Contact"
 	Description  = "Add a marketing contact to SendGrid, or update them if the email address already exists. SendGrid applies the change asynchronously and returns a job ID — the contact will not be visible immediately; poll \"SendGrid: Get Import Status\" with the job ID to see when it completes."
+	Summary      = "Add a contact, or update them if they exist"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+plus"
 	Date         = "09/07/2026"

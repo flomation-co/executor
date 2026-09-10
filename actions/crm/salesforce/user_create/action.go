@@ -37,6 +37,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create User"
 	Description  = "Set up a new starter's Salesforce login from an HR record — name, email, profile, role and manager. Needs the Manage Users permission and a spare user licence."
+	Summary      = "Add a Salesforce user"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

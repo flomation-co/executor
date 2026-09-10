@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Task"
 	Description  = "Create a task, or update the existing one that carries the same reference from your other system. Re-running the flow — or a webhook that fires twice — updates the same follow-up instead of piling up duplicates."
+	Summary      = "Create a task, or update it if it exists"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+rotate"
 	Date         = "25/07/2026"

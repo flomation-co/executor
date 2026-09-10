@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Persons with Significant Control"
 	Description  = "List a UK company's beneficial owners / persons with significant control (Companies House)"
+	Summary      = "See who really owns and controls a UK company"
 	Website      = "https://www.flomation.co"
 	Icon         = "user-group"
 	Date         = "05/07/2026"

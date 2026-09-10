@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Task: Update"
 	Description  = "Update an existing Freshsales task."
+	Summary      = "Change a task in Freshsales"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+pencil"
 	Date         = "04/09/2026"

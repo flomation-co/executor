@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Sites"
 	Description  = "Search and list SharePoint sites"
+	Summary      = "Find your SharePoint sites"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+list"
 	Date         = "04/06/2026"

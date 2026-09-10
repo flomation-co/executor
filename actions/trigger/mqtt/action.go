@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "MQTT Trigger"
 	Description  = "Start a flow whenever a message arrives on an MQTT topic. Flomation holds a subscription open to your broker and runs the flow the moment a message is published. Wildcards are supported: + matches one level, # matches the rest."
+	Summary      = "Start when a message arrives on an MQTT topic"
 	Website      = "https://www.flomation.co"
 	Icon         = "tower-broadcast"
 	Date         = "12/07/2026"

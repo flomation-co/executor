@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Merge Duplicate Records"
 	Description  = "Merge duplicate accounts, contacts, leads or cases into one surviving record. Activities, notes and related items move across to the record you keep; the duplicates go to the Recycle Bin."
+	Summary      = "Merge duplicate records into one"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+link"
 	Date         = "25/07/2026"

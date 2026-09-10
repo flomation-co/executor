@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Transitions"
 	Description  = "List the status transitions currently available for a Jira issue — the moves it can make from its current status. Use a transition's ID with Update Issue to change the status."
+	Summary      = "List transitions in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+arrow-right-arrow-left"
 	Date         = "06/07/2026"

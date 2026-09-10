@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Board Members"
 	Description  = "List the members of a Trello board. Leave Return All on (the default behaviour when no Limit is set) to get every member; set a Limit and turn Return All off to cap how many are returned."
+	Summary      = "List board members in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+user"
 	Date         = "07/07/2026"

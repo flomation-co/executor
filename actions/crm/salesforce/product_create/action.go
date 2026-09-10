@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create Product"
 	Description  = "Add a product to your Salesforce catalogue so it can be priced, quoted and put on deals. New products are created ready to sell unless you turn that off."
+	Summary      = "Add a product to the catalogue"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+plus"
 	Date         = "26/07/2026"

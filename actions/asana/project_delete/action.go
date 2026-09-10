@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Project"
 	Description  = "Delete an Asana project by its ID."
+	Summary      = "Delete a project in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+trash"
 	Date         = "07/07/2026"

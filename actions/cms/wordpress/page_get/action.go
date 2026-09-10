@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Get Page"
 	Description  = "Retrieve a single page from your WordPress site by ID."
+	Summary      = "Look up a WordPress page"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+eye"
 	Date         = "05/07/2026"

@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Contacts"
 	Description  = "Delete marketing contacts from SendGrid, either by a list of contact IDs or every contact in the account. SendGrid deletes asynchronously and returns a job ID — poll \"SendGrid: Get Import Status\" with the job ID to see when it completes."
+	Summary      = "Delete contacts"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

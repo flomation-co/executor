@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Campaign: Replicate"
 	Description  = "Create a copy of an existing Mailchimp campaign. Returns the newly created campaign."
+	Summary      = "Copy a campaign to edit and send again"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+copy"
 	Date         = "01/07/2026"

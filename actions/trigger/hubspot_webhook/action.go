@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "HubSpot Webhook Trigger"
 	Description  = "Triggers a flow when a HubSpot webhook event is received (contact/company/deal/ticket creation, deletion, or property change)."
+	Summary      = "Start when a HubSpot contact, company or deal changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot"
 	Date         = "30/06/2026"

@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get List Items"
 	Description  = "Retrieve items from a SharePoint list"
+	Summary      = "Read the items in a SharePoint list"
 	Website      = "https://www.flomation.co"
 	Icon         = "globe+eye"
 	Date         = "04/06/2026"

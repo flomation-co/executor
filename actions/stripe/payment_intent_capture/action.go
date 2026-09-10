@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Intent: Capture"
 	Description  = "Capture the funds of an authorised Stripe PaymentIntent."
+	Summary      = "Take a payment that was only authorised"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

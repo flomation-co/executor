@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Worklog"
 	Description  = "Remove a worklog entry from a Jira issue by its issue key and worklog ID. This permanently deletes the logged time and cannot be undone."
+	Summary      = "Delete a worklog in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+trash"
 	Date         = "06/07/2026"

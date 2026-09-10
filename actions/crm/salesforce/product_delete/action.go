@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Product"
 	Description  = "Send a product to the Salesforce Recycle Bin, where it can be restored for 15 days. Its prices go with it. Salesforce will refuse if the product is already on a deal - retire it with Update Product instead."
+	Summary      = "Delete a product"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "26/07/2026"

@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Set Variable"
 	Description  = "Set a flow-wide variable accessible via ${var.name}"
+	Summary      = "Save a value to reuse anywhere later in the flow"
 	Website      = "https://www.flomation.co"
 	Icon         = "code"
 	Date         = "25/03/2026"

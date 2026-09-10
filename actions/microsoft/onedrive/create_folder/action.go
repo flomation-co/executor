@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Folder"
 	Description  = "Create a new folder in OneDrive"
+	Summary      = "Create a folder in OneDrive"
 	Website      = "https://www.flomation.co"
 	Icon         = "onedrive+plus"
 	Date         = "04/06/2026"

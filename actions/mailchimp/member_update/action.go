@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Member: Update"
 	Description  = "Update a member (subscriber) in a Mailchimp audience, creating it if it does not exist (upsert). Set status, merge fields, interests, location, and more. Returns the member."
+	Summary      = "Change a member in Mailchimp"
 	Website      = "https://www.flomation.co"
 	Icon         = "mailchimp+pencil"
 	Date         = "01/07/2026"

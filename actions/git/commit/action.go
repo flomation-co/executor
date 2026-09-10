@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Git Commit"
 	Description  = "Create a Git commit with staged changes"
+	Summary      = "Save your staged changes with a message"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch+check"
 	Date         = "06/03/2026"

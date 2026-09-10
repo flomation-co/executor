@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitLab List Merge Requests"
 	Description  = "List merge requests in a GitLab project with optional filters"
+	Summary      = "List merge requests in a project"
 	Website      = "https://www.flomation.co"
 	Icon         = "gitlab+list"
 	Date         = "26/04/2026"

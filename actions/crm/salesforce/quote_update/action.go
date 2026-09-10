@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Quote"
 	Description  = "Change a quote in Salesforce - mark it Presented or Accepted, push the expiry out, correct the tax or the delivery address. Anything you leave blank is left exactly as it was."
+	Summary      = "Change a quote's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "26/07/2026"

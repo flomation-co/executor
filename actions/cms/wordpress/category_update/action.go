@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Update Category"
 	Description  = "Update an existing category on your WordPress site. Only the fields you set are changed; add any other field via Additional Fields."
+	Summary      = "Rename or edit a WordPress category"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+pencil"
 	Date         = "05/07/2026"

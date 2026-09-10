@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Issue"
 	Description  = "Fetch a single Jira issue by its key. Optionally narrow the returned data to specific fields, or expand extra sections such as the changelog or rendered fields."
+	Summary      = "Look up an issue in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira"
 	Date         = "06/07/2026"

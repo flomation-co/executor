@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Convert Image Format"
 	Description  = "Convert an image to PNG, JPEG, WebP, GIF, TIFF or AVIF"
+	Summary      = "Save a picture in a different format"
 	Website      = "https://www.flomation.co"
 	Icon         = "arrow-right-arrow-left"
 	Date         = "15/07/2026"

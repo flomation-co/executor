@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Get Spam Report"
 	Description  = "Look up a single email address on your SendGrid spam report list. If the address has not reported your email as spam, the action reports that no spam report was found."
+	Summary      = "See a spam report for one address"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+eye"
 	Date         = "09/07/2026"

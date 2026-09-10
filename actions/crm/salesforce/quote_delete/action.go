@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Quote"
 	Description  = "Send a quote and its product lines to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Use it to clear out superseded drafts."
+	Summary      = "Delete a quote"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "26/07/2026"

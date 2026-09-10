@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Form"
 	Description  = "Retrieve a Google Form's definition, items and metadata by form ID."
+	Summary      = "Look up a Google Form and its questions"
 	Website      = "https://www.flomation.co"
 	Icon         = "googleforms+eye"
 	Date         = "11/07/2026"

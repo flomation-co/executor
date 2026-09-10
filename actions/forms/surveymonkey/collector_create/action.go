@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Collector"
 	Description  = "Create a collector (e.g. weblink) that distributes a SurveyMonkey survey."
+	Summary      = "Create a link for sharing a survey"
 	Website      = "https://www.flomation.co"
 	Icon         = "surveymonkey+plus"
 	Date         = "11/07/2026"

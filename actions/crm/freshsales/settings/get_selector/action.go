@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Settings: Get Selector"
 	Description  = "Read a Freshsales configuration list — owners, deal stages, currencies, sources and more."
+	Summary      = "Look up owners, stages, currencies and other settings"
 	Website      = "https://www.flomation.co"
 	Icon         = "freshworks+bolt"
 	Date         = "04/09/2026"

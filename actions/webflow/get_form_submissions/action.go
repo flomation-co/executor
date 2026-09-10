@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Form Submissions"
 	Description  = "Get submissions for a Webflow form with pagination"
+	Summary      = "Read what people submitted through a Webflow form"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+file-lines"
 	Date         = "29/05/2026"

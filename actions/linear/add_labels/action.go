@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Add Labels"
 	Description  = "Add labels (by name or UUID) to an issue without removing existing labels."
+	Summary      = "Add a label in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+tag"
 	Date         = "03/08/2026"
@@ -59,7 +60,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Fetch the issue (id accepts a UUID or an identifier) with its current labels.
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
-		Query: `query($id: String!) { issue(id: $id) { id identifier labels { nodes { id name } } } }`,
+		Query:     `query($id: String!) { issue(id: $id) { id identifier labels { nodes { id name } } } }`,
 		Variables: map[string]interface{}{"id": issueRef},
 	})
 	if err != nil {

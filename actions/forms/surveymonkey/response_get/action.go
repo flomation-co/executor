@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Response"
 	Description  = "Retrieve a single SurveyMonkey survey response by its response ID."
+	Summary      = "Read one person's answers to a survey"
 	Website      = "https://www.flomation.co"
 	Icon         = "surveymonkey+eye"
 	Date         = "11/07/2026"

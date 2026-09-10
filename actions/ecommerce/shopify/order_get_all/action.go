@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Shopify: Get Many Orders"
 	Description  = "List orders from your Shopify store, with optional filters. Enable Return All to auto-paginate every matching order."
+	Summary      = "List orders"
 	Website      = "https://www.flomation.co"
 	Icon         = "shopify+list"
 	Date         = "02/07/2026"

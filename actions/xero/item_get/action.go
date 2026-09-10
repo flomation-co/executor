@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Item: Get"
 	Description  = "Fetch a single Xero item by its ID. Returns the item object."
+	Summary      = "Look up an item in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

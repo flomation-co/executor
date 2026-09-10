@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Invoice: Void"
 	Description  = "Void a Xero invoice by ID (sets its status to VOIDED). Returns the voided invoice."
+	Summary      = "Void an invoice, keeping it on record"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+ban"
 	Date         = "05/07/2026"

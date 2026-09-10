@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Subscription: Get"
 	Description  = "Retrieve a Stripe subscription by ID."
+	Summary      = "Look up a subscription in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+search"
 	Date         = "05/07/2026"

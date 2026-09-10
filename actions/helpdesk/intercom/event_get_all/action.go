@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Events"
 	Description  = "List the events recorded for one contact, newest first. Intercom keeps events queryable for around 90 days. Enable Summary Only for one row per event type with counts."
+	Summary      = "List the events recorded for a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

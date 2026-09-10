@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Orders"
 	Description  = "List orders from Salesforce, optionally filtered - everything still in draft, every order on one account, everything activated this week. Turn on Return All to fetch every match."
+	Summary      = "List orders"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "26/07/2026"

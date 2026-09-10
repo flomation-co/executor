@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "QuickBooks Webhook Trigger"
 	Description  = "Triggers a flow when a QuickBooks Online entity changes (customer, invoice, payment…)"
+	Summary      = "Start when something changes in QuickBooks"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks"
 	Date         = "10/07/2026"

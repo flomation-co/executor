@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remove Label from Card"
 	Description  = "Remove a label from a Trello card."
+	Summary      = "Remove a label from a card in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+xmark"
 	Date         = "07/07/2026"

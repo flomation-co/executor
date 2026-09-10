@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Files On A Record"
 	Description  = "List the files attached to any Salesforce record, with their names, sizes and IDs — ready to download or forward in a later step."
+	Summary      = "List the files attached to a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

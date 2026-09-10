@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Flood Areas"
 	Description  = "List UK flood warning/alert areas near a latitude/longitude (Environment Agency)"
+	Summary      = "Find the flood warning areas near a place"
 	Website      = "https://www.flomation.co"
 	Icon         = "leaf+map"
 	Date         = "05/07/2026"

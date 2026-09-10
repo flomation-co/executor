@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Optimize Image"
 	Description  = "Strip metadata and recompress an image to reduce its file size"
+	Summary      = "Make a picture's file smaller"
 	Website      = "https://www.flomation.co"
 	Icon         = "compress"
 	Date         = "15/07/2026"

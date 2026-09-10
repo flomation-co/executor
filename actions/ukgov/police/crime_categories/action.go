@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Crime Categories"
 	Description  = "List UK crime categories valid for a given month (Police UK)"
+	Summary      = "List the crime types you can search for"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-halved+hashtag"
 	Date         = "05/07/2026"

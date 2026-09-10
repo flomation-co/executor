@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get List"
 	Description  = "Fetch a single Trello list by its ID. Optionally narrow the returned data with a comma-separated Fields list."
+	Summary      = "Look up a list in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+magnifying-glass"
 	Date         = "07/07/2026"

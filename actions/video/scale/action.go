@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Scale Video"
 	Description  = "Resize a video to a standard resolution, keeping the aspect ratio"
+	Summary      = "Change a video's resolution"
 	Website      = "https://www.flomation.co"
 	Icon         = "expand"
 	Date         = "15/07/2026"

@@ -32,6 +32,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Recall Memories"
 	Description  = "Fetch an agent's memories about a specific user"
+	Summary      = "Recall what your agent knows about a person"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+magnifying-glass"
 	Date         = "05/04/2026"

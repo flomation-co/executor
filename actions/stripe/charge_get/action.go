@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Charge: Get"
 	Description  = "Retrieve a Stripe charge by ID."
+	Summary      = "Look up a charge in Stripe"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe+search"
 	Date         = "05/07/2026"

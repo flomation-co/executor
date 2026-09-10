@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Write Range"
 	Description  = "Write values to a cell range in a Microsoft Excel Online workbook"
+	Summary      = "Write values into an Excel workbook"
 	Website      = "https://www.flomation.co"
 	Icon         = "msexcel+pencil"
 	Date         = "04/06/2026"

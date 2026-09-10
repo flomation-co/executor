@@ -24,6 +24,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Case Comments"
 	Description  = "Read the comments on a Salesforce case, newest first. Set Limit to 1 to grab just the latest reply — the usual way to push an agent's update into Slack or Teams."
+	Summary      = "List the comments on a case"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comments"
 	Date         = "25/07/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Video to GIF"
 	Description  = "Convert a video, or a portion of it, into an animated GIF"
+	Summary      = "Turn a video, or part of one, into a GIF"
 	Website      = "https://www.flomation.co"
 	Icon         = "film"
 	Date         = "15/07/2026"

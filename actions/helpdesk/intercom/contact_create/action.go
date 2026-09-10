@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Create Contact"
 	Description  = "Create a person in Intercom as a user or a lead. Provide at least an Email or an External ID so Intercom can identify them; everything else is optional."
+	Summary      = "Add a new contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+plus"
 	Date         = "08/07/2026"

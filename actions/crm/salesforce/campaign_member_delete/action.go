@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Remove Campaign Member"
 	Description  = "Take someone off a Salesforce campaign when they cancel. Give the campaign member's ID, or just the campaign plus the lead or contact and they will be found for you. The lead or contact itself is untouched."
+	Summary      = "Take someone off a campaign"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-minus"
 	Date         = "25/07/2026"

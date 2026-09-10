@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Ad Accounts: List"
 	Description  = "List the Meta ad accounts this access token can manage, or those a business owns."
+	Summary      = "List ad accounts in Meta Ads"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+list"
 	Date         = "17/08/2026"

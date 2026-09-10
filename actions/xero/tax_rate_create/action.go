@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Tax Rate: Create"
 	Description  = "Create a Xero tax rate with its tax components. Returns the tax rate object."
+	Summary      = "Add a tax rate in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+calculator"
 	Date         = "05/07/2026"

@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Contacts"
 	Description  = "List contacts, optionally filtered and sorted. Turn on Return All to fetch every match, or set a limit for a single page. No query writing needed."
+	Summary      = "List contacts"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

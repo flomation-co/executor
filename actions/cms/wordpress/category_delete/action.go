@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Delete Category"
 	Description  = "Delete a category from your WordPress site. Taxonomy terms cannot be trashed, so this always deletes the category permanently."
+	Summary      = "Delete a WordPress category"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+trash"
 	Date         = "05/07/2026"

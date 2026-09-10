@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Workbook Metadata"
 	Description  = "Retrieve metadata for a Microsoft Excel Online workbook"
+	Summary      = "Look up the details of an Excel workbook"
 	Website      = "https://www.flomation.co"
 	Icon         = "msexcel+eye"
 	Date         = "04/06/2026"

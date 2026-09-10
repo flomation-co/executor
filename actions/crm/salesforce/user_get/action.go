@@ -22,6 +22,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get User"
 	Description  = "Look up one Salesforce user by their record ID — their name, email, job title, profile and whether their login is still active."
+	Summary      = "Look up one user"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

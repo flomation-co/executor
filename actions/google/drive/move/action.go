@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Move Drive File"
 	Description  = "Move a file to a different folder in Google Drive"
+	Summary      = "Move a file into another Drive folder"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledrive+arrow-right"
 	Date         = "01/06/2026"

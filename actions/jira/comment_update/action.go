@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Update Comment"
 	Description  = "Change the text of an existing comment on a Jira issue. Enter the issue key (e.g. SCRUM-1), the comment ID, and the new comment text."
+	Summary      = "Change a comment in Jira"
 	Website      = "https://www.flomation.co"
 	Icon         = "jira+pen"
 	Date         = "06/07/2026"

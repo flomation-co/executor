@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Delete Asset"
 	Description  = "Send an asset to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. If a unit has simply been retired rather than recorded by mistake, set its status to Obsolete instead so the customer's history is kept. Deleting an asset that other assets sit under empties their Part Of link without warning."
+	Summary      = "Delete an owned-product record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+trash"
 	Date         = "26/07/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Account: Query"
 	Description  = "Query QuickBooks Online accounts with SQL-like syntax. Returns matching account rows."
+	Summary      = "Search your chart of accounts"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

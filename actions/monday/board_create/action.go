@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Board"
 	Description  = "Create a new Monday.com board. Choose its name and kind (public, private, or shareable), optionally in a workspace or from a template."
+	Summary      = "Add a board in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+plus"
 	Date         = "07/07/2026"

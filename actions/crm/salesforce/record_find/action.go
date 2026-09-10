@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Find Record by Field"
 	Description  = "Look up a single record by one of its values — an email address, an order number, a reference from another system. If nothing matches, the action still succeeds with an empty Record ID, so your flow can go on to create the record instead."
+	Summary      = "Find a record by any field's value"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+key"
 	Date         = "25/07/2026"

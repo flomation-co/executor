@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: Get"
 	Description  = "Fetch a single Xero purchase order by its ID. Returns the purchase order object."
+	Summary      = "Look up a purchase order in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+eye"
 	Date         = "05/07/2026"

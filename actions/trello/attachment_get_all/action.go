@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Attachments"
 	Description  = "List the attachments on a Trello card."
+	Summary      = "List attachments in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+list"
 	Date         = "07/07/2026"

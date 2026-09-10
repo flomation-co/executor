@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Remove Board Member"
 	Description  = "Remove a member from a Trello board."
+	Summary      = "Remove a board member in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+user-minus"
 	Date         = "07/07/2026"

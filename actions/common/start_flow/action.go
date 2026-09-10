@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Start Flow"
 	Description  = "Trigger another flow, optionally waiting for completion"
+	Summary      = "Run another one of your flows"
 	Website      = "https://www.flomation.co"
 	Icon         = "share-from-square"
 	Date         = "25/03/2026"

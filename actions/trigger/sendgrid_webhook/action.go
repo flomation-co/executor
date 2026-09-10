@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid Webhook Trigger"
 	Description  = "Triggers a flow when SendGrid reports an email event — delivered, bounced, opened, clicked, marked as spam, unsubscribed, and more. The event webhook is registered with SendGrid automatically and signed-event verification is enabled."
+	Summary      = "Start when an email is delivered, opened or bounces"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+bolt"
 	Date         = "09/07/2026"

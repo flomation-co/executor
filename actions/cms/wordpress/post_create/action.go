@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WordPress: Create Post"
 	Description  = "Create a post on your WordPress site. Set common fields directly (title, content, status, categories, tags) or add any other post field via Additional Fields."
+	Summary      = "Publish a post on your WordPress site"
 	Website      = "https://www.flomation.co"
 	Icon         = "wordpress+plus"
 	Date         = "05/07/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Manage Google Connections"
 	Description  = "Manage the user's Google account connections for calendar, email read, and email send. Lists which accounts are connected and for which purposes (calendar, email read, email send), provides OAuth links to connect new permissions, and can disconnect specific accounts/purposes. Use this when the user wants to connect or manage their Google accounts."
+	Summary      = "Connect or manage your Google accounts"
 	Website      = "https://www.flomation.co"
 	Icon         = "link"
 	Date         = "08/04/2026"

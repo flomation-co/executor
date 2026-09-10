@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: Get Pipeline Artifact"
 	Description  = "Get a named artifact from a pipeline run, with a time-limited download URL. Artifacts are how a pipeline hands its output to the rest of a flow. The URL is returned rather than the bytes — build artifacts are routinely gigabytes."
+	Summary      = "Download a file a pipeline produced"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+box-archive"
 	Date         = "17/07/2026"

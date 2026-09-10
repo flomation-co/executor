@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "SendGrid: Delete Group Suppression"
 	Description  = "Remove an email address from a SendGrid unsubscribe (ASM) group so it resumes receiving email assigned to that group."
+	Summary      = "Resubscribe an address to a group"
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+trash"
 	Date         = "09/07/2026"

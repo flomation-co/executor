@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Cancel Event Series"
 	Description  = "Cancel a repeating Salesforce appointment from one occurrence onwards — the standing weekly check-in that stops when a customer leaves. Earlier occurrences stay in the calendar as a record of what happened."
+	Summary      = "Cancel a whole repeating meeting"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+xmark"
 	Date         = "25/07/2026"

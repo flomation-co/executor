@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Update Campaign"
 	Description  = "Change a Salesforce campaign after the event — mark it Completed, move its dates, or record what it actually cost. Boxes you leave blank are left exactly as they are, so you can change one thing without disturbing the rest."
+	Summary      = "Change a campaign's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+pen"
 	Date         = "25/07/2026"

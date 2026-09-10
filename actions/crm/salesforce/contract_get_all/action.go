@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Contracts"
 	Description  = "List contracts from Salesforce - everything ending in the next 60 days, every contract on one account, everything still in Draft. Pair it with a schedule and an email step and you have a renewals reminder. Turn on Return All to fetch every match instead of one page."
+	Summary      = "List contracts"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "26/07/2026"

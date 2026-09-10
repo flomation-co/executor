@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Street-Level Crimes"
 	Description  = "List UK street-level crimes near a latitude/longitude for a given month (Police UK)"
+	Summary      = "See crimes reported near a place, month by month"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-halved+map"
 	Date         = "05/07/2026"

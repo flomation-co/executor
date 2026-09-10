@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Purchase Order: Update"
 	Description  = "Update an existing Xero purchase order by its ID. Returns the updated object."
+	Summary      = "Change a purchase order in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+pencil"
 	Date         = "05/07/2026"

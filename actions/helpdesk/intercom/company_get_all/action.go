@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Companies"
 	Description  = "List the companies in your Intercom workspace, optionally only those with a given tag or in a segment. Enable Return All to auto-paginate every company."
+	Summary      = "List companies"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

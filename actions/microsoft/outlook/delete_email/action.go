@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Delete Email"
 	Description  = "Delete an Outlook email message"
+	Summary      = "Delete an Outlook email"
 	Website      = "https://www.flomation.co"
 	Icon         = "trash"
 	Date         = "03/06/2026"

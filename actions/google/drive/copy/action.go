@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Copy Drive File"
 	Description  = "Copy a file in Google Drive"
+	Summary      = "Make a copy of a file in Google Drive"
 	Website      = "https://www.flomation.co"
 	Icon         = "googledrive+file-export"
 	Date         = "01/06/2026"

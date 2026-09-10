@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Create Issue"
 	Description  = "Create a new Linear issue. Requires team_id (use List Teams to find it). Returns identifier and URL."
+	Summary      = "Add an issue in Linear"
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+plus"
 	Date         = "15/04/2026"

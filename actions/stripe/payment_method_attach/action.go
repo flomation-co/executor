@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Payment Method: Attach"
 	Description  = "Attach a Stripe payment method to a customer."
+	Summary      = "Save a card against a customer"
 	Website      = "https://www.flomation.co"
 	Icon         = "stripe"
 	Date         = "05/07/2026"

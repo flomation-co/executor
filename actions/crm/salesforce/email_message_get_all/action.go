@@ -28,6 +28,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Emails"
 	Description  = "Read the emails logged against a Case or another Salesforce record, newest first. Enable Return All to fetch every message in the thread."
+	Summary      = "List emails logged against records"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comments"
 	Date         = "25/07/2026"

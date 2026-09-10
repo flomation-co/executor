@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Customer: Query"
 	Description  = "Query QuickBooks Online customers with SQL-like syntax. Returns matching rows."
+	Summary      = "Search customers"
 	Website      = "https://www.flomation.co"
 	Icon         = "quickbooks+magnifying-glass"
 	Date         = "05/07/2026"

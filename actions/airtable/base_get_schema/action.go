@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Base: Get Schema"
 	Description  = "Get the schema of a base — its tables, and each table's fields (name, type, options) and views. Requires the schema.bases:read scope. Returns the tables array."
+	Summary      = "See the tables and fields in an Airtable base"
 	Website      = "https://www.flomation.co"
 	Icon         = "airtable+table"
 	Date         = "01/07/2026"

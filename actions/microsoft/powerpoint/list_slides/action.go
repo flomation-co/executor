@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Preview Presentation"
 	Description  = "Get a preview URL and metadata for a PowerPoint presentation"
+	Summary      = "Get a preview link for a presentation"
 	Website      = "https://www.flomation.co"
 	Icon         = "mspowerpoint+list"
 	Date         = "04/06/2026"

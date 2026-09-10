@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Board"
 	Description  = "Fetch a single Monday.com board by its ID."
+	Summary      = "Look up a board in Monday.com"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+magnifying-glass"
 	Date         = "07/07/2026"

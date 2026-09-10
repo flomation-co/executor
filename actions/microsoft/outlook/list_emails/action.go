@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Emails"
 	Description  = "List emails from an Outlook mailbox or folder"
+	Summary      = "List emails from an Outlook mailbox or folder"
 	Website      = "https://www.flomation.co"
 	Icon         = "envelopes-bulk"
 	Date         = "03/06/2026"

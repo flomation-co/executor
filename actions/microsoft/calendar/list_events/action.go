@@ -15,6 +15,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Events"
 	Description  = "List calendar events from a Microsoft Outlook calendar"
+	Summary      = "List events from an Outlook calendar"
 	Website      = "https://www.flomation.co"
 	Icon         = "calendar+list"
 	Date         = "04/06/2026"

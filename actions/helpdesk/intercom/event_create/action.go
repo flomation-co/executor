@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Track Event"
 	Description  = "Record a custom event on a contact's timeline in Intercom (e.g. ordered-item or plan-upgraded). Identify the person by Contact ID, External ID, or Email."
+	Summary      = "Record something a customer did"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+bolt"
 	Date         = "08/07/2026"

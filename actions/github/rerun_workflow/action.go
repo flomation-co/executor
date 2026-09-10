@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "GitHub Re-run Workflow"
 	Description  = "Re-run a GitHub Actions workflow run"
+	Summary      = "Run a failed workflow again"
 	Website      = "https://www.flomation.co"
 	Icon         = "github+refresh"
 	Date         = "26/04/2026"

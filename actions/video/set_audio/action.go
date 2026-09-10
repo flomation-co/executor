@@ -17,6 +17,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Set Video Audio"
 	Description  = "Replace a video's audio track with a supplied audio file"
+	Summary      = "Swap a video's soundtrack for another"
 	Website      = "https://www.flomation.co"
 	Icon         = "microphone+plus"
 	Date         = "15/07/2026"

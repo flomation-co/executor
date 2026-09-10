@@ -30,6 +30,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: List Objects"
 	Description  = "List every object in your Salesforce org — the standard ones and your own custom ones — so a flow can work with whatever this org is actually set up for."
+	Summary      = "List every object in your Salesforce"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

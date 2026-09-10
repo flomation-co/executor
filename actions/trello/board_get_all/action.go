@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Boards"
 	Description  = "List the Trello boards you can access. Optionally filter (e.g. open, closed, starred) and narrow the returned Fields."
+	Summary      = "List boards in Trello"
 	Website      = "https://www.flomation.co"
 	Icon         = "trello+list"
 	Date         = "07/07/2026"

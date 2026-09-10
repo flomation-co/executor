@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Deal: Create"
 	Description  = "Create a new deal in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the deal ID."
+	Summary      = "Add a deal in HubSpot"
 	Website      = "https://www.flomation.co"
 	Icon         = "hubspot+plus"
 	Date         = "30/06/2026"

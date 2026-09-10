@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Add Contact to Opportunity"
 	Description  = "Link a contact to a deal and say what part they play in it - decision maker, influencer, technical buyer. This is how a deal stays reportable and how anyone knows who to ring."
+	Summary      = "Add a contact to a deal"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-plus"
 	Date         = "25/07/2026"

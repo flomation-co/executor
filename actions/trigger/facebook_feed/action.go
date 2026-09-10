@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Facebook Page Feed Trigger"
 	Description  = "Triggers a flow on comments, reactions or posts on a Facebook Page"
+	Summary      = "Start on comments, reactions or posts on your Facebook Page"
 	Website      = "https://www.flomation.co"
 	Icon         = "facebook+bolt"
 	Date         = "24/05/2026"

@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "WooCommerce: Update Customer"
 	Description  = "Update an existing customer in your WooCommerce store. Only the fields you set are changed; add any other customer field via Additional Fields."
+	Summary      = "Change a customer's details"
 	Website      = "https://www.flomation.co"
 	Icon         = "woocommerce+pencil"
 	Date         = "05/07/2026"

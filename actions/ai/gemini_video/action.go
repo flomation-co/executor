@@ -38,6 +38,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Gemini Video"
 	Description  = "Generate a short video clip from a text prompt using Google's Veo 2 or Veo 3"
+	Summary      = "Create a short video clip from a written description"
 	Website      = "https://www.flomation.co"
 	Icon         = "brain+video"
 	Date         = "27/06/2026"
@@ -464,19 +465,19 @@ pollLoop:
 	// without ever surfacing base64 bytes — checkContainsKey returns
 	// whether a key appears anywhere in the response JSON.
 	log.WithFields(log.Fields{
-		"model":             model,
-		"operation":         operationName,
-		"response_bytes":    len(doneBody),
-		"samples_count":     len(done.Response.GenerateVideoResponse.GeneratedSamples),
-		"videos_count":      len(done.Response.GenerateVideoResponse.GeneratedVideos),
-		"has_video_key":     bytes.Contains(doneBody, []byte(`"video"`)),
-		"has_audio_key":     bytes.Contains(doneBody, []byte(`"audio"`)),
-		"has_uri_key":       bytes.Contains(doneBody, []byte(`"uri"`)),
-		"has_bytes_key":     bytes.Contains(doneBody, []byte(`"bytesBase64Encoded"`)),
-		"has_mime_key":      bytes.Contains(doneBody, []byte(`"mimeType"`)),
-		"has_videos_key":    bytes.Contains(doneBody, []byte(`"generatedVideos"`)),
-		"has_samples_key":   bytes.Contains(doneBody, []byte(`"generatedSamples"`)),
-		"has_response_key":  bytes.Contains(doneBody, []byte(`"response"`)),
+		"model":            model,
+		"operation":        operationName,
+		"response_bytes":   len(doneBody),
+		"samples_count":    len(done.Response.GenerateVideoResponse.GeneratedSamples),
+		"videos_count":     len(done.Response.GenerateVideoResponse.GeneratedVideos),
+		"has_video_key":    bytes.Contains(doneBody, []byte(`"video"`)),
+		"has_audio_key":    bytes.Contains(doneBody, []byte(`"audio"`)),
+		"has_uri_key":      bytes.Contains(doneBody, []byte(`"uri"`)),
+		"has_bytes_key":    bytes.Contains(doneBody, []byte(`"bytesBase64Encoded"`)),
+		"has_mime_key":     bytes.Contains(doneBody, []byte(`"mimeType"`)),
+		"has_videos_key":   bytes.Contains(doneBody, []byte(`"generatedVideos"`)),
+		"has_samples_key":  bytes.Contains(doneBody, []byte(`"generatedSamples"`)),
+		"has_response_key": bytes.Contains(doneBody, []byte(`"response"`)),
 	}).Info("[gemini_video] LRO completed — response shape inspection")
 
 	var videoURI, videoB64, videoMime string

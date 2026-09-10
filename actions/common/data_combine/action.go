@@ -10,6 +10,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Data Combine"
 	Description  = "Combine all parent outputs into a single object"
+	Summary      = "Merge everything from the steps above into one bundle"
 	Website      = "https://www.flomation.co"
 	Icon         = "object-group"
 	Date         = "20/03/2026"

@@ -18,6 +18,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Lead"
 	Description  = "Look up one lead by its Salesforce record ID and return everything the connected user is allowed to see."
+	Summary      = "Look up one lead"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

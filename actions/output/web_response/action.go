@@ -9,6 +9,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Web Response"
 	Description  = "Set the HTTP response (body, status code, content type, headers) returned by a Web Trigger flow"
+	Summary      = "Reply to the web request that started this flow"
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "13/07/2026"

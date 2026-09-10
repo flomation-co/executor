@@ -25,6 +25,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Attach File To Record"
 	Description  = "Share a file that is already in Salesforce onto another record, so it appears in that record's Files list too. The file itself is not duplicated."
+	Summary      = "Attach an existing file to a record"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+link"
 	Date         = "25/07/2026"

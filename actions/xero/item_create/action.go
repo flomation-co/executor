@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Item: Create"
 	Description  = "Create a Xero inventory or service item. Returns the item ID and object."
+	Summary      = "Add an item in Xero"
 	Website      = "https://www.flomation.co"
 	Icon         = "xero+plus"
 	Date         = "05/07/2026"

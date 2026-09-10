@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Create or Update Custom Object Record"
 	Description  = "Find a record on one of your organisation's own Salesforce objects by an External ID field and update it, or create it if nothing matches. This is how you keep Salesforce in step with another system without ever creating duplicates."
+	Summary      = "Add or update a record in your own object"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+arrow-right-arrow-left"
 	Date         = "25/07/2026"

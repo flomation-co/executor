@@ -19,6 +19,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Image Colour Palette"
 	Description  = "Extract an image's dominant colours as hex codes"
+	Summary      = "Pull the main colours out of a picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "chart-pie"
 	Date         = "15/07/2026"

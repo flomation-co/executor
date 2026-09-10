@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Contact"
 	Description  = "Fetch a single contact by its Salesforce record ID, with every field the connected user can see. Narrow it to specific fields if you only need a few."
+	Summary      = "Look up one contact"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "25/07/2026"

@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Many Campaigns"
 	Description  = "List your Salesforce campaigns — all of them, or just the ones you care about, such as active campaigns or everything with a status of In Progress. Turn on Return All to fetch every match instead of one page."
+	Summary      = "List campaigns"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+list"
 	Date         = "25/07/2026"

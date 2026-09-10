@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Items by Column Value"
 	Description  = "Find Monday.com items on a board whose column matches a value."
+	Summary      = "Find items by what is in a column"
 	Website      = "https://www.flomation.co"
 	Icon         = "monday+magnifying-glass"
 	Date         = "07/07/2026"

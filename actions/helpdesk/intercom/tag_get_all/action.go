@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Tags"
 	Description  = "List the tags in your Intercom workspace — the labels you apply to contacts, companies, and conversations."
+	Summary      = "List every tag in the workspace"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

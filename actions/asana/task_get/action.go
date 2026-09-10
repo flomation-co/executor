@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Task"
 	Description  = "Fetch a single Asana task by its ID."
+	Summary      = "Look up a task in Asana"
 	Website      = "https://www.flomation.co"
 	Icon         = "asana+magnifying-glass"
 	Date         = "07/07/2026"

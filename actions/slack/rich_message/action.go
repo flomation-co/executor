@@ -28,6 +28,7 @@ const (
 		"use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`). " +
 		"IMPORTANT: bot_token, channel_id, and thread_ts are pre-configured — do NOT provide them and do NOT ask the user for them. " +
 		"You only need to provide: text (fallback) and blocks (the Block Kit JSON array)."
+	Summary = "Post a Slack message with buttons, sections and images"
 	Website = "https://www.flomation.co"
 	Icon    = "slack+file-lines"
 	Date    = "15/04/2026"
@@ -44,7 +45,7 @@ var Inputs = [...]core.Connection{
 		Placeholder: "xoxb-...",
 	},
 	{
-		Name:        "channel_id",
+		Name: "channel_id",
 		// Not a secret: a channel ID is in every Slack URL, and the four other
 		// Slack actions already type it as a string. Typed as a secret it was
 		// masked in the execution view, hiding the one value you need to see

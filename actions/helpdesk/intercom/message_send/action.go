@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Send Message"
 	Description  = "Send an outbound in-app or email message from an admin to a contact. Emails also need a Subject; in-app messages just need a Body."
+	Summary      = "Send a customer a message from your team"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+paper-plane"
 	Date         = "08/07/2026"

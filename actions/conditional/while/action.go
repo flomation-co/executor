@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "While"
 	Description  = "Loop while a condition is true"
+	Summary      = "Keep repeating the steps below while something stays true"
 	Website      = "https://www.flomation.co"
 	Icon         = "repeat"
 	Date         = "25/03/2026"

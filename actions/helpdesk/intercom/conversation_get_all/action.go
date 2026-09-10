@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Intercom: Get Many Conversations"
 	Description  = "List conversations in your Intercom workspace, newest first. Enable Return All to page through every conversation."
+	Summary      = "List conversations"
 	Website      = "https://www.flomation.co"
 	Icon         = "intercom+list"
 	Date         = "08/07/2026"

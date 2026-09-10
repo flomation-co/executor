@@ -11,6 +11,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Desktop Type Text"
 	Description  = "Type literal text into the focused window on a desktop VM."
+	Summary      = "Type text as if at the keyboard"
 	Website      = "https://www.flomation.co"
 	Icon         = "i-cursor"
 	Date         = "12/08/2026"

@@ -16,6 +16,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Azure DevOps: List Branches"
 	Description  = "List a repository's branches, with each one's latest commit. Filter narrows by name prefix — \"release/\" returns only the release branches."
+	Summary      = "List the branches in a repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+code-branch"
 	Date         = "17/07/2026"

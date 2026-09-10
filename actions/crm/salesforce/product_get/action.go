@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Get Product"
 	Description  = "Look up one product in your Salesforce catalogue by its record ID and return its details. Leave Fields blank to get everything the connected Salesforce user is allowed to see."
+	Summary      = "Look up one product"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+magnifying-glass"
 	Date         = "26/07/2026"

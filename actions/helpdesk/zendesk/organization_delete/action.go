@@ -13,6 +13,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Zendesk: Delete Organization"
 	Description  = "Permanently delete a Zendesk organization by its ID."
+	Summary      = "Delete an organisation"
 	Website      = "https://www.flomation.co"
 	Icon         = "zendesk+trash"
 	Date         = "03/07/2026"

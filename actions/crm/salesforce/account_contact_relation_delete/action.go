@@ -12,6 +12,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Salesforce: Remove Contact from Account"
 	Description  = "Remove the link between a contact and one of the other companies they work with. The contact and both companies are untouched — only the relationship is removed."
+	Summary      = "Unlink a contact from a company"
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+user-minus"
 	Date         = "25/07/2026"

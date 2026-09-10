@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Get Presentation"
 	Description  = "Retrieve metadata for a PowerPoint presentation in OneDrive"
+	Summary      = "Look up the details of a presentation"
 	Website      = "https://www.flomation.co"
 	Icon         = "mspowerpoint+eye"
 	Date         = "04/06/2026"

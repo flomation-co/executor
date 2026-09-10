@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Extract PSD Layers"
 	Description  = "Export individual PSD layers as separate PNG images"
+	Summary      = "Save each Photoshop layer as its own picture"
 	Website      = "https://www.flomation.co"
 	Icon         = "object-group"
 	Date         = "15/07/2026"

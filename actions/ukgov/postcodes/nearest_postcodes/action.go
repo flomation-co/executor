@@ -20,6 +20,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "Nearest Postcodes"
 	Description  = "List UK postcodes geographically nearest to a given postcode (postcodes.io)"
+	Summary      = "Find postcodes near another postcode"
 	Website      = "https://www.flomation.co"
 	Icon         = "map+list"
 	Date         = "05/07/2026"

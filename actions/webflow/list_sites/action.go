@@ -14,6 +14,7 @@ const (
 	Organisation = "Flomation"
 	Name         = "List Sites"
 	Description  = "List all Webflow sites accessible with the provided API token"
+	Summary      = "List your Webflow sites"
 	Website      = "https://www.flomation.co"
 	Icon         = "webflow+list"
 	Date         = "29/05/2026"
