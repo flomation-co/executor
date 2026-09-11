@@ -237219,7 +237219,7 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "22a759fdffd0d427f1c5173323d96d93f14c8a95501ec8ba30d13e59df5a5625",
+    "hash": "4bad8e449765876564ad56124bec9ba75ece503a4e34a071f4db07f2359ac956",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
@@ -237245,10 +237245,10 @@
       },
       {
         "name": "audio_base64",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Audio data (base64-encoded). Provide this OR audio_url.",
-        "placeholder": "base64 audio data"
+        "placeholder": "${voice_audio_base64}"
       },
       {
         "name": "audio_url",

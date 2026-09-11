@@ -37,10 +37,16 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
+		// String, not Secret. Audio is data, not a credential, and it
+		// almost always arrives from an upstream node — a voice session's
+		// captured speech, a downloaded file. The editor renders a Secret
+		// as a secrets/credentials picker with no way to reference a
+		// parent output, so typing it Secret made the only normal wiring
+		// for this action impossible to express.
 		Name:        "audio_base64",
-		Type:        core.ConnectionTypeSecret,
+		Type:        core.ConnectionTypeString,
 		Label:       "Audio data (base64-encoded). Provide this OR audio_url.",
-		Placeholder: "base64 audio data",
+		Placeholder: "${voice_audio_base64}",
 	},
 	{
 		Name:        "audio_url",
