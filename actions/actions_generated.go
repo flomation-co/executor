@@ -20,6 +20,7 @@ import (
 	agent_remember "flomation.app/automate/executor/actions/agent/remember"
 	agent_search_conversation "flomation.app/automate/executor/actions/agent/search_conversation"
 	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
+	agent_set_reminder "flomation.app/automate/executor/actions/agent/set_reminder"
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
 	ai_azure_openai "flomation.app/automate/executor/actions/ai/azure_openai"
@@ -3683,6 +3684,7 @@ var Actions = map[string]core.Action{
 	"agent/remember":                   agent_remember.Execute,
 	"agent/search_conversation":        agent_search_conversation.Execute,
 	"agent/send_message":               agent_send_message.Execute,
+	"agent/set_reminder":               agent_set_reminder.Execute,
 	"agent/write_state":                agent_write_state.Execute,
 	"ai/anthropic":                     ai_anthropic.Execute,
 	"ai/azure_openai":                  ai_azure_openai.Execute,

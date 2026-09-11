@@ -695,7 +695,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "f2f899c209fa8d599686f87d804406c693e767c246e018dcbea26d957bcb1971",
+    "hash": "c32727c03bd6de808a530fbf8368eaf56ba9dbbb51e9309db72c66490e9ec800",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -1234,6 +1234,154 @@
         "type": "boolean",
         "value": null,
         "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/set_reminder": {
+    "hash": "24cfb7c3cae48baebe36d013bd1d048e8b4a8e078816d6315c27d4d856637643",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Set Reminder",
+    "description": "Schedule a follow-up. The platform resolves the timing and returns the exact date it stored.",
+    "summary": "Let your agent set a reminder and get the real date back",
+    "website": "https://www.flomation.co",
+    "icon": "bell+plus",
+    "date": "10/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "when",
+        "type": "string",
+        "value": null,
+        "label": "When to fire, in plain English: a duration (\"in 72 hours\", \"in 30 minutes\"), a relative day (\"tomorrow at 9am\", \"next Monday\"), or a date (\"1 October\", \"25 December at 09:00\"). Never work the calendar date out yourself — pass what was asked for and use the date this returns.",
+        "placeholder": "in 72 hours",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "What to remind about, written so it still makes sense on its own days later",
+        "placeholder": "Pull the updated campaign numbers and compare the click-to-view ratio",
+        "required": true
+      },
+      {
+        "name": "kind",
+        "type": "string",
+        "value": "reminder",
+        "label": "What sort of follow-up this is",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Reminder",
+            "value": "reminder"
+          },
+          {
+            "name": "Follow-up",
+            "value": "followup"
+          },
+          {
+            "name": "Monitor",
+            "value": "monitor"
+          },
+          {
+            "name": "Chase",
+            "value": "chase"
+          }
+        ]
+      },
+      {
+        "name": "recurrence",
+        "type": "string",
+        "value": null,
+        "label": "Leave empty for a one-off. Set it only when the follow-up was asked for repeatedly",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "One-off",
+            "value": ""
+          },
+          {
+            "name": "Daily",
+            "value": "daily"
+          },
+          {
+            "name": "Weekdays",
+            "value": "weekdays"
+          },
+          {
+            "name": "Weekly",
+            "value": "weekly"
+          },
+          {
+            "name": "Monthly",
+            "value": "monthly"
+          }
+        ]
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": "${flow.agent_id}",
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": "${flow.agent_user_id}",
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}"
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": "${flow.conversation_id}",
+        "label": "Conversation ID",
+        "placeholder": "${flow.conversation_id}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Tool result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "commitment_id",
+        "type": "string",
+        "value": null,
+        "label": "Commitment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "due_at",
+        "type": "string",
+        "value": null,
+        "label": "Due at (ISO-8601)",
+        "placeholder": ""
+      },
+      {
+        "name": "due_at_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Due at, spelled out",
         "placeholder": ""
       }
     ]
