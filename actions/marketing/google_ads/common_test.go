@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	core "flomation.app/automate/executor"
@@ -537,6 +538,36 @@ func TestSearch_FollowsPagination(t *testing.T) {
 
 	// pageSize must never be sent: the API returns PAGE_SIZE_NOT_SUPPORTED.
 	Expect(bodies[0]).ToNot(HaveKey("pageSize"))
+}
+
+// Without a bound, one unfiltered query against a large account could
+// accumulate gigabytes in the executor before anything downstream sees a row.
+// The partial rows come back with the error so a caller can still see what it
+// was collecting.
+func TestSearch_StopsAtTheRowCap(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Each page returns a chunk and always offers another, so the only thing
+	// that can end this is the cap.
+	page := `{"results":[` + strings.Repeat(`{"campaign":{"id":"1"}},`, 9999) + `{"campaign":{"id":"1"}}],"nextPageToken":"more"}`
+	calls := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls++
+		fmt.Fprint(w, page)
+	}))
+	defer server.Close()
+
+	original := BaseURL
+	BaseURL = server.URL
+	defer func() { BaseURL = original }()
+
+	rows, err := NewClient("tok", "").Search(nil, "1234567890", "SELECT campaign.id FROM campaign")
+
+	Expect(err).ToNot(BeNil())
+	Expect(err.Error()).To(ContainSubstring("LIMIT"), "the message must name the fix")
+	Expect(len(rows)).To(BeNumerically(">", maxSearchRows))
+	// It must stop on the ROW cap, well before exhausting the page cap.
+	Expect(calls).To(BeNumerically("<", maxSearchPages))
 }
 
 // Developer tokens were sunset on 9 September 2026 and Google promises to start

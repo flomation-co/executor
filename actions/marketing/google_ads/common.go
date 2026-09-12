@@ -59,10 +59,18 @@ const (
 	// tens of megabytes.
 	maxResponse = 32 << 20
 
-	// A guard, not a feature. Search pages are 10,000 rows, so 50 pages is
-	// half a million rows: far past the point where a flow should be paging
-	// through a report in memory rather than adding a LIMIT or a filter.
-	maxSearchPages = 50
+	// Guards, not features. A search page is a fixed 10,000 rows and each
+	// response is capped at maxResponse, so without a bound a single
+	// unfiltered query — SELECT ... FROM search_term_view DURING LAST_30_DAYS
+	// on a large account will do it — could accumulate gigabytes in the
+	// executor before anything downstream sees a row.
+	//
+	// Both bounds exist because they fail differently: the page cap stops a
+	// query that keeps paginating, and the row cap stops one whose pages are
+	// individually enormous. Either way the fix is the same and the message
+	// says so: add a LIMIT, or narrow the date range.
+	maxSearchPages = 20
+	maxSearchRows  = 50000
 )
 
 // AuthInputs documents the credential trio every Google Ads action starts with.
@@ -212,6 +220,9 @@ func (c *Client) Search(flow *core.Flow, customerID, query string) ([]map[string
 			if m, ok := r.(map[string]interface{}); ok {
 				rows = append(rows, m)
 			}
+		}
+		if len(rows) > maxSearchRows {
+			return rows, fmt.Errorf("the query returned more than %d rows — add a LIMIT clause, narrow the date range, or filter to one campaign", maxSearchRows)
 		}
 
 		token, _ = resp["nextPageToken"].(string)
