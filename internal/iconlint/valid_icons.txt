@@ -116,6 +116,7 @@ gitlab
 globe
 gmail
 google
+googleads
 googledocs
 googledrive
 googleforms
@@ -129,6 +130,7 @@ hard-drive
 hashtag
 headset
 helm
+heygen
 hourglass-start
 house
 hubspot
