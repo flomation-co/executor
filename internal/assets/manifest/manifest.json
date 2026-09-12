@@ -310424,7 +310424,7 @@
     ]
   },
   "marketing/google_ads/keywords/keyword_list": {
-    "hash": "2f54ad07195f190b511ca6a3bf56ceea84d1eaf703bf5d3842a4305ab483fd4e",
+    "hash": "0701c6abb68bef3365d0fb20e8926a678629138e1899a72fe9d7ec0fa688482c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Keywords: List",
@@ -311353,7 +311353,7 @@
     ]
   },
   "marketing/google_ads/reporting/report_performance": {
-    "hash": "dec92c785a89e48b818f598019a1d10ad18b4877926aa9f0aa5d169fb1f5c6ea",
+    "hash": "a3d3d46660cb6daa3ff569b886e022b4dbf894e9adcc8ad698bb66def1f057e3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report: Performance",
@@ -311619,8 +311619,12 @@
             "value": "metrics.absolute_top_impression_percentage"
           },
           {
-            "name": "Video views",
-            "value": "metrics.video_views"
+            "name": "Budget lost impression share",
+            "value": "metrics.search_budget_lost_impression_share"
+          },
+          {
+            "name": "All conversions",
+            "value": "metrics.all_conversions"
           }
         ]
       },

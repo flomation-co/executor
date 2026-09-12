@@ -3,6 +3,7 @@ package keyword_list
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	gads "flomation.app/automate/executor/actions/marketing/google_ads"
@@ -93,7 +94,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return gads.ErrorResult(err.Error()), nil
 		}
 		conditions = append(conditions, clause)
-	} else if orderBy != "" && len(orderBy) > 8 && orderBy[:8] == "metrics." {
+	} else if strings.HasPrefix(orderBy, "metrics.") {
 		// Sorting by a metric that was never selected is a query error rather
 		// than an empty result, so catch it here where the fix is obvious.
 		return gads.ErrorResult("sorting by a metric needs \"Include performance metrics\" switched on"), nil
