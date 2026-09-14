@@ -37,9 +37,9 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:  "when",
-		Type:  core.ConnectionTypeString,
-		Label: "When to fire, in plain English: a duration (\"in 72 hours\", \"in 30 minutes\"), a relative day (\"tomorrow at 9am\", \"next Monday\"), or a date (\"1 October\", \"25 December at 09:00\"). Never work the calendar date out yourself — pass what was asked for and use the date this returns.",
+		Name:        "when",
+		Type:        core.ConnectionTypeString,
+		Label:       "When to fire, in plain English: a duration (\"in 72 hours\", \"in 30 minutes\"), a relative day (\"tomorrow at 9am\", \"next Monday\"), or a date (\"1 October\", \"25 December at 09:00\"). Never work the calendar date out yourself — pass what was asked for and use the date this returns.",
 		Placeholder: "in 72 hours",
 		Required:    true,
 	},

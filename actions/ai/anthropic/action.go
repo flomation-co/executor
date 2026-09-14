@@ -282,40 +282,41 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	} else {
 		// First invocation — build messages from history + prompt
+		// History comes from the input when the flow supplies one, and is
+		// fetched automatically otherwise — see actions/ai/history.go. Storing
+		// the conversation was always transparent; reading it back was not.
 		historyConn := core.FindConnection("conversation_history", inputs)
-		if historyConn != nil {
-			history := ai_common.ParseConversationHistory(historyConn.Value)
-			if len(history) > 0 {
-				history = ai_common.TruncateHistoryForBudget(
-					history, systemPromptStr, prompt,
-					int(maxTokens), ai_common.ModelContextWindow(model),
-				)
-				for i, m := range history {
-					if m.Role == "" || m.Content == "" {
-						continue
-					}
-					if m.Role != "user" && m.Role != "assistant" {
-						continue
-					}
-					msg := map[string]interface{}{
-						"role": m.Role,
-					}
-					// Mark the last history message with cache_control
-					// so the entire history prefix is cached. The new
-					// user prompt (appended below) is the only uncached part.
-					if i == len(history)-1 {
-						msg["content"] = []map[string]interface{}{
-							{
-								"type":          "text",
-								"text":          m.Content,
-								"cache_control": map[string]string{"type": "ephemeral"},
-							},
-						}
-					} else {
-						msg["content"] = m.Content
-					}
-					messages = append(messages, msg)
+		history := ai_common.ConversationHistoryFor(flow, historyConn)
+		if len(history) > 0 {
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(maxTokens), ai_common.ModelContextWindow(model),
+			)
+			for i, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
 				}
+				if m.Role != "user" && m.Role != "assistant" {
+					continue
+				}
+				msg := map[string]interface{}{
+					"role": m.Role,
+				}
+				// Mark the last history message with cache_control
+				// so the entire history prefix is cached. The new
+				// user prompt (appended below) is the only uncached part.
+				if i == len(history)-1 {
+					msg["content"] = []map[string]interface{}{
+						{
+							"type":          "text",
+							"text":          m.Content,
+							"cache_control": map[string]string{"type": "ephemeral"},
+						},
+					}
+				} else {
+					msg["content"] = m.Content
+				}
+				messages = append(messages, msg)
 			}
 		}
 		// Vision-block promotion: if the prompt carries [attached: ...]

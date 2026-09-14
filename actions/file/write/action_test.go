@@ -20,6 +20,13 @@ func strConn(name, value string) *core.Connection {
 	return &core.Connection{Name: name, Type: core.ConnectionTypeString, Value: value}
 }
 
+// enter moves into a throwaway workspace for the duration of a test.
+//
+// Every test here MUST use it. An absolute path is neutralised into a
+// workspace-relative one, and the workspace is whatever the process working
+// directory happens to be — so a test that forgets to chdir writes its
+// artefacts into the source tree. That is exactly how actions/file/write/etc
+// and actions/file/write/var/folders/... briefly reached main.
 func enter(t *testing.T) string {
 	t.Helper()
 	ws := t.TempDir()

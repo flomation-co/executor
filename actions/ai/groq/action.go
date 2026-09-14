@@ -241,23 +241,24 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			})
 		}
 
+		// History comes from the input when the flow supplies one, and is
+		// fetched automatically otherwise — see actions/ai/history.go. Storing
+		// the conversation was always transparent; reading it back was not.
 		historyConn := core.FindConnection("conversation_history", inputs)
-		if historyConn != nil {
-			history := ai_common.ParseConversationHistory(historyConn.Value)
-			if len(history) > 0 {
-				history = ai_common.TruncateHistoryForBudget(
-					history, systemPromptStr, prompt,
-					int(maxTokens), ai_common.ModelContextWindow(model),
-				)
-				for _, m := range history {
-					if m.Role == "" || m.Content == "" {
-						continue
-					}
-					messages = append(messages, map[string]interface{}{
-						"role":    m.Role,
-						"content": m.Content,
-					})
+		history := ai_common.ConversationHistoryFor(flow, historyConn)
+		if len(history) > 0 {
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(maxTokens), ai_common.ModelContextWindow(model),
+			)
+			for _, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
 				}
+				messages = append(messages, map[string]interface{}{
+					"role":    m.Role,
+					"content": m.Content,
+				})
 			}
 		}
 

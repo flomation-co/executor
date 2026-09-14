@@ -271,26 +271,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		// (systemInstruction at the top level), so contents starts with
 		// the prior conversation history followed by this turn's user
 		// message.
-		if c := core.FindConnection("conversation_history", inputs); c != nil {
-			history := ai_common.ParseConversationHistory(c.Value)
-			if len(history) > 0 {
-				history = ai_common.TruncateHistoryForBudget(
-					history, systemPromptStr, prompt,
-					int(maxTokens), ai_common.ModelContextWindow(model),
-				)
-				for _, m := range history {
-					if m.Role == "" || m.Content == "" {
-						continue
-					}
-					role := m.Role
-					if role == "assistant" {
-						role = "model"
-					}
-					contents = append(contents, geminiContent{
-						Role:  role,
-						Parts: []geminiPart{{Text: m.Content}},
-					})
+		// History comes from the input when the flow supplies one, and is
+		// fetched automatically otherwise — see actions/ai/history.go.
+		history := ai_common.ConversationHistoryFor(flow, core.FindConnection("conversation_history", inputs))
+		if len(history) > 0 {
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(maxTokens), ai_common.ModelContextWindow(model),
+			)
+			for _, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
 				}
+				role := m.Role
+				if role == "assistant" {
+					role = "model"
+				}
+				contents = append(contents, geminiContent{
+					Role:  role,
+					Parts: []geminiPart{{Text: m.Content}},
+				})
 			}
 		}
 
