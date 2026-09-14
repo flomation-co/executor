@@ -1468,6 +1468,12 @@ import (
 	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
 	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
 	error_on_error "flomation.app/automate/executor/actions/error/on_error"
+	file_copy "flomation.app/automate/executor/actions/file/copy"
+	file_create_directory "flomation.app/automate/executor/actions/file/create_directory"
+	file_delete "flomation.app/automate/executor/actions/file/delete"
+	file_info "flomation.app/automate/executor/actions/file/info"
+	file_list "flomation.app/automate/executor/actions/file/list"
+	file_move "flomation.app/automate/executor/actions/file/move"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
@@ -5156,6 +5162,12 @@ var Actions = map[string]core.Action{
 	"elevenlabs/speech_to_text":                                                       elevenlabs_speech_to_text.Execute,
 	"elevenlabs/text_to_speech":                                                       elevenlabs_text_to_speech.Execute,
 	"error/on_error":                                                                  error_on_error.Execute,
+	"file/copy":                                                                       file_copy.Execute,
+	"file/create_directory":                                                           file_create_directory.Execute,
+	"file/delete":                                                                     file_delete.Execute,
+	"file/info":                                                                       file_info.Execute,
+	"file/list":                                                                       file_list.Execute,
+	"file/move":                                                                       file_move.Execute,
 	"file/read":                                                                       file_read.Execute,
 	"file/write":                                                                      file_write.Execute,
 	"filetransfer/upload":                                                             filetransfer_upload.Execute,

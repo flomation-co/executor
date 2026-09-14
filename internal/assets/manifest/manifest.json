@@ -237559,16 +237559,513 @@
       }
     ]
   },
+  "file/copy": {
+    "hash": "8f1b56dbfc5ace5eb805250916e7ebe1abe20b2451c79f5979a2cdc77e5fc35b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Copy File",
+    "description": "Copy a file to another path within the flow's workspace.",
+    "summary": "Copy a file",
+    "website": "https://www.flomation.co",
+    "icon": "file+copy",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "File to copy, relative to the flow's workspace",
+        "placeholder": "reports/summary.txt",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Where to copy it to, relative to the flow's workspace",
+        "placeholder": "archive/summary.txt",
+        "required": true
+      },
+      {
+        "name": "overwrite",
+        "type": "boolean",
+        "value": null,
+        "label": "Replace the destination if it already exists",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "Source",
+        "placeholder": ""
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination",
+        "placeholder": ""
+      },
+      {
+        "name": "bytes_copied",
+        "type": "integer",
+        "value": null,
+        "label": "Bytes Copied",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/create_directory": {
+    "hash": "549b89e9bfa79d129b9d746acac1c202fb92dcc7a7a25b13a532a4f5ad25f396",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Directory",
+    "description": "Create a folder in the flow's workspace, including any missing parents.",
+    "summary": "Create a folder",
+    "website": "https://www.flomation.co",
+    "icon": "folder+plus",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "directory",
+        "type": "string",
+        "value": null,
+        "label": "Folder to create, relative to the flow's workspace (for example reports/2026)",
+        "placeholder": "reports/2026",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "directory",
+        "type": "string",
+        "value": null,
+        "label": "Folder",
+        "placeholder": ""
+      },
+      {
+        "name": "created",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Newly Created",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/delete": {
+    "hash": "366667c4b05b1733d486d77233709bd7441b4add82c4d0e7e406dcc732b0fb50",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete File",
+    "description": "Delete a file or folder from the flow's workspace. Folders need the recursive option.",
+    "summary": "Delete a file or folder",
+    "website": "https://www.flomation.co",
+    "icon": "file+trash",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "File or folder to delete, relative to the flow's workspace",
+        "placeholder": "reports/old.csv",
+        "required": true
+      },
+      {
+        "name": "recursive",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete a folder and everything inside it (required to delete a non-empty folder)",
+        "placeholder": ""
+      },
+      {
+        "name": "ignore_missing",
+        "type": "boolean",
+        "value": null,
+        "label": "Succeed quietly if it is not there",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Path",
+        "placeholder": ""
+      },
+      {
+        "name": "deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Something Was Deleted",
+        "placeholder": ""
+      },
+      {
+        "name": "was_directory",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Folder",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/info": {
+    "hash": "cfc1d2d517ea398cd5acd70419c12368517e7d851704e02046c1812366b594bc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "File Info",
+    "description": "Check whether a file or folder exists in the flow's workspace, and read its size and date.",
+    "summary": "Check a file exists",
+    "website": "https://www.flomation.co",
+    "icon": "file+circle-info",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "File or folder to check, relative to the flow's workspace",
+        "placeholder": "reports/summary.txt",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "exists",
+        "type": "boolean",
+        "value": null,
+        "label": "Exists",
+        "placeholder": ""
+      },
+      {
+        "name": "is_directory",
+        "type": "boolean",
+        "value": null,
+        "label": "Is a Folder",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "modified",
+        "type": "string",
+        "value": null,
+        "label": "Last Modified (UTC)",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/list": {
+    "hash": "d6cecc0a32913829c94fa682b22a1d78f65d1095b0e4261e0e8f6e6cb7377f11",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Files",
+    "description": "List the files and folders in the flow's workspace, optionally filtered or recursive.",
+    "summary": "List files in the workspace",
+    "website": "https://www.flomation.co",
+    "icon": "file+list",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "directory",
+        "type": "string",
+        "value": null,
+        "label": "Folder to list, relative to the flow's workspace. Leave blank for the workspace itself.",
+        "placeholder": "reports"
+      },
+      {
+        "name": "pattern",
+        "type": "string",
+        "value": null,
+        "label": "Only include names matching this pattern (for example *.csv)",
+        "placeholder": "*.csv"
+      },
+      {
+        "name": "recursive",
+        "type": "boolean",
+        "value": null,
+        "label": "Include everything in sub-folders too",
+        "placeholder": ""
+      },
+      {
+        "name": "include_directories",
+        "type": "boolean",
+        "value": null,
+        "label": "Include folders in the results as well as files",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "entries",
+        "type": "object",
+        "value": null,
+        "label": "Entries",
+        "placeholder": ""
+      },
+      {
+        "name": "paths",
+        "type": "object",
+        "value": null,
+        "label": "Paths only",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Result Was Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/move": {
+    "hash": "42ae8f71c8ac2fd7e1858c1d1d55cb2c7bd884a42f8e10b74ba85f3c0664e61c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Move File",
+    "description": "Move or rename a file or folder within the flow's workspace.",
+    "summary": "Move or rename a file",
+    "website": "https://www.flomation.co",
+    "icon": "file+arrow-right",
+    "date": "14/09/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "File or folder to move, relative to the flow's workspace",
+        "placeholder": "incoming/report.csv",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "New path, relative to the flow's workspace",
+        "placeholder": "processed/report.csv",
+        "required": true
+      },
+      {
+        "name": "overwrite",
+        "type": "boolean",
+        "value": null,
+        "label": "Replace the destination if it already exists",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "Source",
+        "placeholder": ""
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "file/read": {
-    "hash": "feb7517d9bd4fe06612740343fe1ea79ee0d532a734b65347488362364780551",
+    "hash": "e81efff598a1ca78278660f343f9f7ebab2a74d847410270fb492e1feff37479",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read File",
-    "description": "Read the contents of a file",
-    "summary": "Read what is inside a file",
+    "description": "Read a text file from the flow's workspace.",
+    "summary": "Read a file",
     "website": "https://www.flomation.co",
-    "icon": "file-lines",
-    "date": "23/03/2026",
+    "icon": "file+arrow-up",
+    "date": "06/03/2026",
     "type": 2,
     "category": {
       "name": "File",
@@ -237580,8 +238077,8 @@
         "name": "file_path",
         "type": "string",
         "value": null,
-        "label": "File Path",
-        "placeholder": "/path/to/file.txt",
+        "label": "File path, relative to the flow's workspace (for example reports/summary.txt)",
+        "placeholder": "reports/summary.txt",
         "required": true
       }
     ],
@@ -237597,42 +238094,49 @@
         "name": "content",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "File Contents",
         "placeholder": ""
       },
       {
         "name": "file_name",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "File Name",
         "placeholder": ""
       },
       {
         "name": "file_size",
         "type": "integer",
         "value": null,
-        "label": "",
+        "label": "Size (bytes)",
         "placeholder": ""
       },
       {
         "name": "success",
         "type": "boolean",
         "value": null,
-        "label": "",
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
   },
   "file/write": {
-    "hash": "59d11eba48228a26bbba3d21951cae95a19d027bea6a6364a77ec64b007bd786",
+    "hash": "434da77d815bff56a2aeaeb7f25f6a3d19cab001e0e8192fb3cc9dc47fe56a00",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write File",
-    "description": "Write content to a file",
-    "summary": "Save something to a file",
+    "description": "Write or append a text file in the flow's workspace.",
+    "summary": "Write a file",
     "website": "https://www.flomation.co",
-    "icon": "file-pen",
-    "date": "23/03/2026",
+    "icon": "file+arrow-down",
+    "date": "06/03/2026",
     "type": 2,
     "category": {
       "name": "File",
@@ -237644,8 +238148,8 @@
         "name": "file_path",
         "type": "string",
         "value": null,
-        "label": "File Path",
-        "placeholder": "/path/to/output.txt",
+        "label": "File path, relative to the flow's workspace (for example reports/summary.txt)",
+        "placeholder": "reports/summary.txt",
         "required": true
       },
       {
@@ -237660,7 +238164,7 @@
         "name": "append",
         "type": "boolean",
         "value": null,
-        "label": "Append to File",
+        "label": "Append to the file instead of replacing it",
         "placeholder": ""
       }
     ],
@@ -237676,21 +238180,28 @@
         "name": "file_path",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "File Path",
         "placeholder": ""
       },
       {
         "name": "bytes_written",
         "type": "integer",
         "value": null,
-        "label": "",
+        "label": "Bytes Written",
         "placeholder": ""
       },
       {
         "name": "success",
         "type": "boolean",
         "value": null,
-        "label": "",
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
