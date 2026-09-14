@@ -12,6 +12,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -95,8 +96,41 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	sender := optStr("sender", inputs)
 	historyLimit := optStr("history_limit", inputs)
 
-	if conversationID == "" || agentID == "" {
-		return errResult("conversation_id and agent_id are required")
+	// The conversation id must be the PLATFORM's id for the conversation, not
+	// the channel's. A Slack thread id or Telegram chat id passed straight
+	// through from trigger data reaches the API as a malformed UUID and the
+	// history request fails — which on live produced a stream of
+	// "invalid input syntax for type uuid" against ids like "VijsyshjBd",
+	// silently costing those flows their history.
+	//
+	// The execution context already carries the resolved id and the write path
+	// in ai/record.go uses it, so fall back to that rather than failing: a flow
+	// wired with ${conversation_id} from a trigger keeps working, and the id it
+	// meant is the one it gets.
+	ctx := flow.GetContext()
+	if !isUUID(conversationID) {
+		resolved := ""
+		if ctx != nil {
+			resolved = ctx.ConversationID
+		}
+		if resolved == "" {
+			if conversationID == "" {
+				return errResult("conversation_id is required — use ${flow.conversation_id}")
+			}
+			return errResult(fmt.Sprintf(
+				"%q is not a Flomation conversation ID — it looks like an id from the channel (a Slack thread or Telegram chat). Use ${flow.conversation_id}, which is the platform's own id for this conversation", conversationID))
+		}
+		if conversationID != "" {
+			log.WithFields(log.Fields{
+				"supplied": conversationID,
+				"resolved": resolved,
+			}).Warn("add_to_conversation was given a non-UUID conversation id; using the execution context's id instead")
+		}
+		conversationID = resolved
+	}
+
+	if agentID == "" {
+		return errResult("agent_id is required")
 	}
 	if content == "" {
 		// Empty content — nothing to store, but still return history
@@ -106,7 +140,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		role = "inbound"
 	}
 
-	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return errResult("API URL not available")
 	}
@@ -288,4 +321,29 @@ func parseAndTransformHistory(body []byte) ([]map[string]string, []interface{}) 
 	}
 
 	return aiHistory, rawHistory
+}
+
+// isUUID reports whether s is a canonical 8-4-4-4-12 hex UUID.
+//
+// Deliberately a shape check rather than a full parse: the only thing that
+// matters here is telling a platform conversation id apart from a channel's
+// own identifier before the API rejects it with a database error.
+func isUUID(s string) bool {
+	if len(s) != 36 {
+		return false
+	}
+	for i, r := range s {
+		switch i {
+		case 8, 13, 18, 23:
+			if r != '-' {
+				return false
+			}
+		default:
+			isHex := (r >= '0' && r <= '9') || (r >= 'a' && r <= 'f') || (r >= 'A' && r <= 'F')
+			if !isHex {
+				return false
+			}
+		}
+	}
+	return true
 }

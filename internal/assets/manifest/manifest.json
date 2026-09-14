@@ -1,6 +1,6 @@
 {
   "agent/add_to_conversation": {
-    "hash": "d0cff3ce8512115c30fcd74370f0c11bb4207e725c4ce5ef1291e3e0b8d99c78",
+    "hash": "68d768c457f324523e163d1ecefd44eaeb58522db50de9bb22c49a43a0c5f289",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add to Conversation",
@@ -1239,7 +1239,7 @@
     ]
   },
   "agent/set_reminder": {
-    "hash": "24cfb7c3cae48baebe36d013bd1d048e8b4a8e078816d6315c27d4d856637643",
+    "hash": "ccc54b71334276b4215ac53ab5b928229dbcd1386e36a662d27d17e95d7abf44",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Reminder",
@@ -1439,7 +1439,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "b17721f82226c97f99f2dcafdfc28fe81a9ca6512a2bb873c291127b60916d1e",
+    "hash": "e6a3f63e27a4aeb9f3f02a1ad41f9321b1fe980623d8012fa61aaba1dd3a185c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1617,7 +1617,7 @@
     ]
   },
   "ai/azure_openai": {
-    "hash": "661ea732da23e5ddd0a8fb46e31f1adafcc6e0324f920fc700d551b6690c4f89",
+    "hash": "481dfdcb58d47a550d7da1225a0e32477e690c1161b935e118fd2999c4aaffc3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure OpenAI Prompt",
@@ -2098,7 +2098,7 @@
     ]
   },
   "ai/gemini": {
-    "hash": "5c3a171a2144a4372c24f92bb6b7a51daf8fb22f72a7e223fb0eac330e333ecc",
+    "hash": "b1f06fc5e099bd36548562d1fb244726a25ebd004d9bd171c02702b3bbea4583",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Prompt",
@@ -2715,7 +2715,7 @@
     ]
   },
   "ai/groq": {
-    "hash": "c279492beed7f40754d991612aa3c2433cf7bc895be9a7a006375e07eb0d2a9a",
+    "hash": "81f95ff090f317618920d7251626a894a1ef899c169753ee4eec1fb5572da1af",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Groq Prompt",
@@ -2898,7 +2898,7 @@
     ]
   },
   "ai/ollama": {
-    "hash": "5d7ca4afee81c2fa3cd2a7b28b0933d8c74da0528654fb1cefe2e2ce9a16b2c8",
+    "hash": "c8a50ca888aa35bef5104a1e7eb3918e2e2da6b08724be0c59290d54b2b409c6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Ollama Prompt",
@@ -3418,7 +3418,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "f4760179aa2b41aa49431be09493b4092ce58b36e65456897437856edf0d6ea4",
+    "hash": "1e55603e0ea8458c935a26fb656ef92dcc470484242348fd44a29a2e34147078",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3609,7 +3609,7 @@
     ]
   },
   "ai/openrouter": {
-    "hash": "8255a5ecb7b54b1f2daa43ad201d31860ad40f22d85b2a33b68a7cf48b98e1f9",
+    "hash": "a4de8573e836730ba20637ab7c3dc3740533162519b09804e7e5ce7971044e47",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OpenRouter Prompt",
@@ -3860,7 +3860,7 @@
     ]
   },
   "ai/openwebui": {
-    "hash": "43c54226908d249796241632ff7dc52435c7187a4a772bc692ff62597e1548f8",
+    "hash": "7fe7167e19caf7407660d1ee8a8da46dead77a9e4319861395096fa1d0b0986c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",

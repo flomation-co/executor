@@ -544,33 +544,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			})
 		}
 
-		if historyConn := core.FindConnection("conversation_history", inputs); historyConn != nil {
-			history := ai_common.ParseConversationHistory(historyConn.Value)
-			if len(history) > 0 {
-				budgetMaxTokens := int64(defaultMaxTokens)
-				if maxTokens != nil && *maxTokens > 0 {
-					budgetMaxTokens = *maxTokens
+		// History comes from the input when the flow supplies one, and is
+		// fetched automatically otherwise — see actions/ai/history.go.
+		history := ai_common.ConversationHistoryFor(flow, core.FindConnection("conversation_history", inputs))
+		if len(history) > 0 {
+			budgetMaxTokens := int64(defaultMaxTokens)
+			if maxTokens != nil && *maxTokens > 0 {
+				budgetMaxTokens = *maxTokens
+			}
+			// The real context window is whatever num_ctx the server
+			// loads the model with; an explicit num_ctx input is a
+			// better truncation budget than the model-name heuristic.
+			contextWindow := ai_common.ModelContextWindow(model)
+			if numCtx != nil && *numCtx > 0 {
+				contextWindow = int(*numCtx)
+			}
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(budgetMaxTokens), contextWindow,
+			)
+			for _, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
 				}
-				// The real context window is whatever num_ctx the server
-				// loads the model with; an explicit num_ctx input is a
-				// better truncation budget than the model-name heuristic.
-				contextWindow := ai_common.ModelContextWindow(model)
-				if numCtx != nil && *numCtx > 0 {
-					contextWindow = int(*numCtx)
-				}
-				history = ai_common.TruncateHistoryForBudget(
-					history, systemPromptStr, prompt,
-					int(budgetMaxTokens), contextWindow,
-				)
-				for _, m := range history {
-					if m.Role == "" || m.Content == "" {
-						continue
-					}
-					messages = append(messages, map[string]interface{}{
-						"role":    m.Role,
-						"content": m.Content,
-					})
-				}
+				messages = append(messages, map[string]interface{}{
+					"role":    m.Role,
+					"content": m.Content,
+				})
 			}
 		}
 
