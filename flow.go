@@ -973,7 +973,7 @@ type Flow struct {
 	// (StreamFullTextKey, etc.) via FinalizeStream while the executor's
 	// drainStreamingChannel concurrently reads them — the lock makes that
 	// hand-off race-free.
-	variablesMu sync.Mutex
+	variablesMu          sync.Mutex
 	entryNodeID          string
 	reachableNodes       map[string]bool
 	inErrorChain         bool
@@ -2831,6 +2831,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						delete(f.nodeResults, matchedTool.ID)
 
 						for _, inp := range matchedTool.Data.Config.Inputs {
+							// Credentials and identity are never the model's to
+							// set, whatever the node has configured. Refusing
+							// only a NON-EMPTY value left a hole: an input the
+							// author had not filled in was published in the tool
+							// schema and accepted back, so a model could choose
+							// its own agent_user_id — and that is what scopes an
+							// agent's conversation search to one person.
+							if nonOverridableInputs[inp.Name] {
+								if _, supplied := req.Input[inp.Name]; supplied {
+									log.WithFields(log.Fields{
+										"tool":  req.Name,
+										"input": inp.Name,
+									}).Warn("refused an AI-supplied value for a credential or identity input")
+								}
+								continue
+							}
 							// Never allow the AI to override pre-configured
 							// input values set by the flow author. These are
 							// filtered out of the tool schema entirely, so
@@ -2857,8 +2873,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 							}
 						}
 						// Also add any inputs that don't have a matching
-						// connection definition
+						// connection definition.
+						//
+						// The same rule applies here as above, and it has to:
+						// this path appends whatever the model sent as a brand
+						// new input, so without the check a credential or
+						// identity name the node never declared would arrive
+						// anyway — the guard above would have nothing to match
+						// against and would never run.
 						for k, v := range req.Input {
+							if nonOverridableInputs[k] {
+								log.WithFields(log.Fields{
+									"tool":  req.Name,
+									"input": k,
+								}).Warn("refused an undeclared credential or identity input from the AI")
+								continue
+							}
 							found := false
 							for _, inp := range matchedTool.Data.Config.Inputs {
 								if inp.Name == k {
@@ -3584,22 +3614,42 @@ func (f *Flow) sendTypingIndicator() {
 	}()
 }
 
+// nonOverridableInputs are input names an AI tool call may never set, whatever
+// the flow author has or has not configured on the node.
+//
+// Two distinct reasons, both ending in the same rule:
+//
+//   - Credentials. An api_key or bot_token belongs to the node, not to the
+//     model's imagination.
+//   - IDENTITY. agent_id and agent_user_id are what scopes an agent's data to
+//     one agent and one person. agent_search_conversation, for instance,
+//     returns everything that user has ever said to that agent — so a model
+//     free to choose agent_user_id is a model that can read somebody else's
+//     conversation. That is not hypothetical: an agent processes untrusted
+//     input, so it only takes a message telling it to search as another user.
+//
+// This list used to gate the tool SCHEMA only, which hid these inputs from the
+// model but still accepted them if a model passed one anyway — and models do.
+// The injection path now consults it too, so "hidden" and "refused" are the
+// same thing. agent_user_id was also simply missing, which is how a live tool
+// call arrived carrying agent_user_id="andy", a display name the model
+// inferred from the conversation.
+var nonOverridableInputs = map[string]bool{
+	// Credentials and secrets.
+	"api_key": true, "bot_token": true, "signing_secret": true,
+	"token": true, "password": true, "secret": true,
+	"secret_key": true, "access_key": true, "user_token": true,
+
+	// Identity and scoping — the platform decides these, never the model.
+	"agent_id": true, "agent_user_id": true, "channel_type": true,
+}
+
 // injectToolDefinitions auto-generates Anthropic/OpenAI tool definitions
 // from the nodes wired to the AI node's Tools handle. Each tool child
 // becomes a tool definition with its name, description, and input schema
 // derived from the node's configured inputs. This replaces the manual
 // JSON tool_definitions input.
 func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions map[string]Action) {
-	// Credential input names to exclude from the tool's input schema —
-	// these are configured on the node, not provided by the AI.
-	credentialInputs := map[string]bool{
-		"api_key": true, "bot_token": true, "signing_secret": true,
-		"token": true, "password": true, "secret": true,
-		"secret_key": true, "access_key": true,
-		"agent_id": true, "channel_type": true,
-		"user_token": true,
-	}
-
 	// Map Flomation connection types to JSON Schema types
 	typeMap := map[string]string{
 		ConnectionTypeString:      "string",
@@ -3692,7 +3742,7 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		properties := make(map[string]interface{})
 		var required []string
 		for _, inp := range toolNode.Data.Config.Inputs {
-			if credentialInputs[inp.Name] {
+			if nonOverridableInputs[inp.Name] {
 				continue
 			}
 			// Skip inputs that have a value already set (configured
