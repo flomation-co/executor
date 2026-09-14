@@ -68,7 +68,21 @@ func GetAuthFromInputs(inputs []*core.Connection) (transport.AuthMethod, error) 
 		if sshKey == nil || sshKey.String() == nil || *sshKey.String() == "" {
 			return nil, fmt.Errorf("SSH private key is required for SSH authentication")
 		}
-		return ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
+		auth, err := ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
+		if err != nil {
+			return nil, err
+		}
+		// go-git reads a nil HostKeyCallback as "verify against known_hosts",
+		// so leaving it nil keeps the secure default and only an explicit
+		// input changes it. See hostkey.go.
+		callback, _, err := HostKeyCallbackFromInputs(inputs)
+		if err != nil {
+			return nil, err
+		}
+		if callback != nil {
+			auth.HostKeyCallback = callback
+		}
+		return auth, nil
 
 	case "http":
 		user := core.FindConnection("username", inputs)
@@ -140,4 +154,28 @@ func GetWorktree(repositoryPath string) (*git.Worktree, error) {
 
 func GetSSHAuth(sshKey string) (transport.AuthMethod, error) {
 	return ssh.NewPublicKeys("git", []byte(sshKey), "")
+}
+
+// AuthModeFromInputs reports which authentication method an action resolved,
+// for use in result summaries.
+func AuthModeFromInputs(inputs []*core.Connection) string {
+	if mc := core.FindConnection("auth_method", inputs); mc != nil && mc.String() != nil && *mc.String() != "" {
+		return strings.TrimSpace(*mc.String())
+	}
+	return "anonymous"
+}
+
+// HostKeyModeFromInputs reports how the server's host key will be verified, so
+// an action can put it on its output. Host key verification only applies to
+// SSH, so every other auth method reports not_applicable rather than implying a
+// check that never happens.
+func HostKeyModeFromInputs(inputs []*core.Connection) string {
+	if AuthModeFromInputs(inputs) != "ssh" {
+		return HostKeyModeNotApplicable
+	}
+	_, mode, err := HostKeyCallbackFromInputs(inputs)
+	if err != nil {
+		return HostKeyModeSupplied
+	}
+	return mode
 }

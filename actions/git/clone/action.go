@@ -49,6 +49,18 @@ var Inputs = [...]core.Connection{
 		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
 	},
 	{
+		Name:    "host_key",
+		Type:    core.ConnectionTypeText,
+		Label:   "Server Host Key — paste the output of `ssh-keyscan <host>`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:    "skip_host_key_verification",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
 		Name:     "username",
 		Type:     core.ConnectionTypeSecret,
 		Label:    "Username",
@@ -76,6 +88,11 @@ var Outputs = [...]core.Connection{
 		Type:  core.ConnectionTypeString,
 		Label: "Branch",
 	},
+	{
+		Name:  "host_key_verification",
+		Type:  core.ConnectionTypeString,
+		Label: "How the server's host key was checked",
+	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
@@ -100,7 +117,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	repo, err := git.PlainClone(tmpDir, cloneOpts)
 	if err != nil {
-		return nil, err
+		// go-git's host key failures name neither the problem nor the fix, and
+		// a flow author has no way to resolve one from the editor without this.
+		return nil, git_common.DescribeHostKeyError(err, *repository.String())
 	}
 
 	branch := ""
@@ -137,7 +156,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": cwd,
-		"branch":          branch,
+		"repository_path":       cwd,
+		"branch":                branch,
+		"host_key_verification": git_common.HostKeyModeFromInputs(inputs),
 	}, nil
 }
