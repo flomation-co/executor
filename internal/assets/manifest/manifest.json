@@ -565680,7 +565680,7 @@
     ]
   },
   "trigger/git_poll": {
-    "hash": "1ae7de10b5bb6e1156584cac9c97640517859cf9f8ca01c0e50939fdc2dc2bd5",
+    "hash": "30ace9c1cc38fa92d6ea5be9eb7fb1e07c538753f33f221489c7a2362f66f2cb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Poll Trigger",
