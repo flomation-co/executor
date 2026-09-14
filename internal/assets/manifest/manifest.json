@@ -307532,6 +307532,4309 @@
       }
     ]
   },
+  "marketing/google_ads/accounts/account_get": {
+    "hash": "9ecabeb045ffeb6be5dc12051aaf37151c5d33b5b976a11f90cf636a7a320bd8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Get",
+    "description": "Read a Google Ads account's name, currency, timezone and status.",
+    "summary": "Read a Google Ads account",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+magnifying-glass",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Accounts",
+      "icon": "googleads",
+      "description": "Ad accounts reachable by the connected Google Ads login, and the manager hierarchy above them"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Account",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Account (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "currency_code",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/accounts/account_hierarchy": {
+    "hash": "c1a758e3ac5bac296c7259596ff53bafe665e08b3e52f1abf22ef1600cb5289a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Accounts: Hierarchy",
+    "description": "List the client accounts beneath a Google Ads manager (MCC) account.",
+    "summary": "List accounts under a manager account",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+folder-tree",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Accounts",
+      "icon": "googleads",
+      "description": "Ad accounts reachable by the connected Google Ads login, and the manager hierarchy above them"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID to list beneath",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "include_manager",
+        "type": "boolean",
+        "value": null,
+        "label": "Include the manager account itself, and any managers below it",
+        "placeholder": ""
+      },
+      {
+        "name": "include_hidden",
+        "type": "boolean",
+        "value": null,
+        "label": "Include cancelled and suspended accounts",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum accounts to return",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Client Accounts",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Client Accounts (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/accounts/account_list": {
+    "hash": "dc0bbb779a0e8c81998f06b6937972b84ec3f64085629310c790d075fd81aa22",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Accounts: List",
+    "description": "List the Google Ads accounts this connection can reach, with name, currency and timezone.",
+    "summary": "List reachable Google Ads accounts",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+list",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Accounts",
+      "icon": "googleads",
+      "description": "Ad accounts reachable by the connected Google Ads login, and the manager hierarchy above them"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Accounts",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Accounts (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_ids",
+        "type": "object",
+        "value": null,
+        "label": "Customer IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/adgroups/adgroup_create": {
+    "hash": "4f0fde8954160805994695c510ce3e992c8015d96be4aa6283ebdb7cdb153777",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Group: Create",
+    "description": "Create a Google Ads ad group inside a campaign, with an optional maximum CPC bid.",
+    "summary": "Create a Google Ads ad group",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+plus",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Groups",
+      "icon": "googleads",
+      "description": "Ad groups, their bids and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Name (must be unique in the campaign)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Search (standard)",
+            "value": "SEARCH_STANDARD"
+          },
+          {
+            "name": "Display (standard)",
+            "value": "DISPLAY_STANDARD"
+          }
+        ]
+      },
+      {
+        "name": "max_cpc",
+        "type": "money",
+        "value": null,
+        "label": "Maximum CPC Bid (Manual CPC campaigns only)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status on creation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without creating anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Created Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/adgroups/adgroup_list": {
+    "hash": "3eee5b7e428593de70be530375e68712649cb8be0854ee500675a0d8f8080908",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Groups: List",
+    "description": "List Google Ads ad groups, optionally within one campaign, with optional performance metrics.",
+    "summary": "List ad groups in Google Ads",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+layer-group",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Groups",
+      "icon": "googleads",
+      "description": "Ad groups, their bids and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any (excluding removed)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Removed",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "name_contains",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Name contains",
+        "placeholder": ""
+      },
+      {
+        "name": "include_metrics",
+        "type": "boolean",
+        "value": null,
+        "label": "Include performance metrics (needs a date range)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range (for metrics)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum ad groups to return",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Ad Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Ad Groups (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/adgroups/adgroup_status_set": {
+    "hash": "ebdb41da5c77f82a9dda27b0711ef7835bcc2bb33070b41344c0097f21cc785a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Group: Set Status",
+    "description": "Enable, pause or remove a Google Ads ad group. Removing is permanent.",
+    "summary": "Pause or enable a Google Ads ad group",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pause",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Groups",
+      "icon": "googleads",
+      "description": "Ad groups, their bids and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Pause",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Enable",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Remove (permanent)",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/adgroups/adgroup_update": {
+    "hash": "9280b711b9695554e576900697f0ee15d70d9a0934d67249bfa49264d6e7804f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad Group: Update",
+    "description": "Change a Google Ads ad group's name, status or bids.",
+    "summary": "Update a Google Ads ad group",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pencil",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ad Groups",
+      "icon": "googleads",
+      "description": "Ad groups, their bids and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Ad Group Name",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          }
+        ]
+      },
+      {
+        "name": "max_cpc",
+        "type": "money",
+        "value": null,
+        "label": "Maximum CPC Bid",
+        "placeholder": ""
+      },
+      {
+        "name": "target_cpa",
+        "type": "money",
+        "value": null,
+        "label": "Target CPA",
+        "placeholder": ""
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields Changed",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/ads/ad_create_responsive_search": {
+    "hash": "c5b443a926d532c4fb585d40a0d5e2c3f309600b4125f2dc66c59c4067693645",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad: Create Responsive Search Ad",
+    "description": "Create a responsive search ad from headlines and descriptions, one per line.",
+    "summary": "Create a responsive search ad",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+plus",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "googleads",
+      "description": "Individual ads, their headlines and descriptions, and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "final_url",
+        "type": "string",
+        "value": null,
+        "label": "Landing Page URL",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "headlines",
+        "type": "text",
+        "value": null,
+        "label": "Headlines, one per line (3 to 15, each up to 30 characters)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "descriptions",
+        "type": "text",
+        "value": null,
+        "label": "Descriptions, one per line (2 to 4, each up to 90 characters)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "path1",
+        "type": "string",
+        "value": null,
+        "label": "Display Path 1 (up to 15 characters, shown after the domain)",
+        "placeholder": ""
+      },
+      {
+        "name": "path2",
+        "type": "string",
+        "value": null,
+        "label": "Display Path 2 (up to 15 characters)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status on creation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without creating anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Ad ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Created Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "headline_count",
+        "type": "integer",
+        "value": null,
+        "label": "Headlines Used",
+        "placeholder": ""
+      },
+      {
+        "name": "description_count",
+        "type": "integer",
+        "value": null,
+        "label": "Descriptions Used",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/ads/ad_list": {
+    "hash": "e653ab1e164518638e519b19968197696602da4e08f2db9ea2168966b67c81a6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ads: List",
+    "description": "List Google Ads ads with their headlines, final URLs and policy approval status.",
+    "summary": "List ads in Google Ads",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+list",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "googleads",
+      "description": "Individual ads, their headlines and descriptions, and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any (excluding removed)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Removed",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "disapproved_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only show ads Google has disapproved",
+        "placeholder": ""
+      },
+      {
+        "name": "include_metrics",
+        "type": "boolean",
+        "value": null,
+        "label": "Include performance metrics (needs a date range)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range (for metrics)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum ads to return",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Ads",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Ads (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/ads/ad_status_set": {
+    "hash": "ddd123c99b09c431ad0e263d810d51276e68936304d545f9d3d5fec1a02862cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ad: Set Status",
+    "description": "Enable, pause or remove one Google Ads ad. Removing is permanent.",
+    "summary": "Pause or enable a Google Ads ad",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pause",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Ads",
+      "icon": "googleads",
+      "description": "Individual ads, their headlines and descriptions, and their state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "ad_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Pause",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Enable",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Remove (permanent)",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group Ad ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Ad Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_budget_set": {
+    "hash": "c9f476e4dddee7c848632109dd043a1e421417f2f7b66aedc8a220d68a3aa1de",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaign: Set Budget",
+    "description": "Change a Google Ads campaign's daily budget, by campaign ID or budget ID.",
+    "summary": "Change a Google Ads campaign budget",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+gauge",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (its budget is looked up for you)",
+        "placeholder": ""
+      },
+      {
+        "name": "budget_id",
+        "type": "string",
+        "value": null,
+        "label": "Budget ID (use instead of a Campaign ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "New Daily Budget (in the account's currency)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Budget ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Budget Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "shared_with_campaigns",
+        "type": "integer",
+        "value": null,
+        "label": "Campaigns Sharing This Budget",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_create": {
+    "hash": "d713029bd5708dce45de29790184310bfb8d88fad5f231efed9bee0e1af3e65b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaign: Create",
+    "description": "Create a Google Ads campaign and its daily budget in one atomic request. Starts paused.",
+    "summary": "Create a Google Ads campaign",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+plus",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Name (must be unique in the account)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Search",
+            "value": "SEARCH"
+          },
+          {
+            "name": "Display",
+            "value": "DISPLAY"
+          }
+        ]
+      },
+      {
+        "name": "daily_budget",
+        "type": "money",
+        "value": null,
+        "label": "Daily Budget (in the account's currency)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "bidding_strategy",
+        "type": "string",
+        "value": null,
+        "label": "Bidding Strategy",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Maximise clicks",
+            "value": "TARGET_SPEND"
+          },
+          {
+            "name": "Manual CPC",
+            "value": "MANUAL_CPC"
+          },
+          {
+            "name": "Maximise conversions",
+            "value": "MAXIMIZE_CONVERSIONS"
+          },
+          {
+            "name": "Maximise conversion value",
+            "value": "MAXIMIZE_CONVERSION_VALUE"
+          },
+          {
+            "name": "Target CPA",
+            "value": "TARGET_CPA"
+          },
+          {
+            "name": "Target ROAS",
+            "value": "TARGET_ROAS"
+          }
+        ]
+      },
+      {
+        "name": "target_cpa",
+        "type": "money",
+        "value": null,
+        "label": "Target CPA (Target CPA and Maximise conversions only)",
+        "placeholder": ""
+      },
+      {
+        "name": "target_roas",
+        "type": "string",
+        "value": null,
+        "label": "Target ROAS (e.g. 4 for a 400% return)",
+        "placeholder": ""
+      },
+      {
+        "name": "enhanced_cpc",
+        "type": "boolean",
+        "value": null,
+        "label": "Enhanced CPC (Manual CPC only)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status on creation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Paused (recommended)",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Enabled — starts spending immediately",
+            "value": "ENABLED"
+          }
+        ]
+      },
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (YYYY-MM-DD, account's timezone)",
+        "placeholder": ""
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date (YYYY-MM-DD, account's timezone)",
+        "placeholder": ""
+      },
+      {
+        "name": "target_search_network",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Google search partners (Search campaigns)",
+        "placeholder": ""
+      },
+      {
+        "name": "target_content_network",
+        "type": "boolean",
+        "value": null,
+        "label": "Include the Display Network (Search campaigns)",
+        "placeholder": ""
+      },
+      {
+        "name": "budget_name",
+        "type": "string",
+        "value": null,
+        "label": "Budget Name (defaults to the campaign name)",
+        "placeholder": ""
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without creating anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "budget_resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Budget Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "All Created Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_get": {
+    "hash": "c5e211bfc8848fc935ba22dece31c0ace29c2ac2f15e79d1e8d4dc0ebb2254a3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaign: Get",
+    "description": "Read one Google Ads campaign's settings, budget and bidding strategy by ID.",
+    "summary": "Read a Google Ads campaign",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+magnifying-glass",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Campaign",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Campaign (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_list": {
+    "hash": "6e94db06fb375914cb5774159d2dc87344a4098857010280d314c52cae3245a6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaigns: List",
+    "description": "List Google Ads campaigns with status, budget, bidding and optional performance metrics.",
+    "summary": "List campaigns in Google Ads",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+list",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any (excluding removed)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Removed",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "name_contains",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Name contains",
+        "placeholder": ""
+      },
+      {
+        "name": "include_metrics",
+        "type": "boolean",
+        "value": null,
+        "label": "Include performance metrics (needs a date range)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range (for metrics)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "Today",
+            "value": "TODAY"
+          },
+          {
+            "name": "Yesterday",
+            "value": "YESTERDAY"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum campaigns to return",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Campaigns",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Campaigns (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_status_set": {
+    "hash": "1acbd2e71d5fb5720b8aadcc0c5102592ec3e5fa4652d6a10782dc9cef55740f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaign: Set Status",
+    "description": "Enable, pause or remove a Google Ads campaign. Removing is permanent.",
+    "summary": "Pause or enable a Google Ads campaign",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pause",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Pause",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Enable",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Remove (permanent)",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/campaigns/campaign_update": {
+    "hash": "fa4484765073a636998fb8568b9f4ddf1eb6ca61076de3912d73199db1473e14",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Campaign: Update",
+    "description": "Change a Google Ads campaign's name, dates, bidding strategy or tracking settings.",
+    "summary": "Update a Google Ads campaign",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pencil",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Campaigns",
+      "icon": "googleads",
+      "description": "Campaign budgets, bidding, channel type and state"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Campaign Name",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          }
+        ]
+      },
+      {
+        "name": "bidding_strategy",
+        "type": "string",
+        "value": null,
+        "label": "Bidding Strategy",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Maximise clicks",
+            "value": "TARGET_SPEND"
+          },
+          {
+            "name": "Manual CPC",
+            "value": "MANUAL_CPC"
+          },
+          {
+            "name": "Maximise conversions",
+            "value": "MAXIMIZE_CONVERSIONS"
+          },
+          {
+            "name": "Maximise conversion value",
+            "value": "MAXIMIZE_CONVERSION_VALUE"
+          },
+          {
+            "name": "Target CPA",
+            "value": "TARGET_CPA"
+          },
+          {
+            "name": "Target ROAS",
+            "value": "TARGET_ROAS"
+          }
+        ]
+      },
+      {
+        "name": "target_cpa",
+        "type": "money",
+        "value": null,
+        "label": "Target CPA (Target CPA and Maximise conversions only)",
+        "placeholder": ""
+      },
+      {
+        "name": "target_roas",
+        "type": "string",
+        "value": null,
+        "label": "Target ROAS (e.g. 4 for a 400% return)",
+        "placeholder": ""
+      },
+      {
+        "name": "enhanced_cpc",
+        "type": "boolean",
+        "value": null,
+        "label": "Enhanced CPC (Manual CPC only)",
+        "placeholder": ""
+      },
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (YYYY-MM-DD, account's timezone)",
+        "placeholder": ""
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date (YYYY-MM-DD, account's timezone)",
+        "placeholder": ""
+      },
+      {
+        "name": "tracking_url_template",
+        "type": "string",
+        "value": null,
+        "label": "Tracking URL Template",
+        "placeholder": ""
+      },
+      {
+        "name": "final_url_suffix",
+        "type": "string",
+        "value": null,
+        "label": "Final URL Suffix",
+        "placeholder": ""
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Campaign Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields Changed",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/keywords/keyword_add": {
+    "hash": "7145f5735ea37f71b21c9fcdd28f0f55f201f5da194f802d5ff8e2279d617f6a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Keywords: Add",
+    "description": "Add keywords to a Google Ads ad group, one per line, with a match type.",
+    "summary": "Add keywords to an ad group",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+key",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Keywords",
+      "icon": "googleads",
+      "description": "Keywords, negative keywords and the search terms they actually matched"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "keywords",
+        "type": "text",
+        "value": null,
+        "label": "Keywords, one per line",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "match_type",
+        "type": "string",
+        "value": null,
+        "label": "Match Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Exact — only this search, or a close variant",
+            "value": "EXACT"
+          },
+          {
+            "name": "Phrase — searches that include this meaning",
+            "value": "PHRASE"
+          },
+          {
+            "name": "Broad — anything related",
+            "value": "BROAD"
+          }
+        ]
+      },
+      {
+        "name": "max_cpc",
+        "type": "money",
+        "value": null,
+        "label": "Maximum CPC Bid for these keywords",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status on creation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          }
+        ]
+      },
+      {
+        "name": "final_url",
+        "type": "string",
+        "value": null,
+        "label": "Landing Page URL for these keywords (optional override)",
+        "placeholder": ""
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without adding anything",
+        "placeholder": ""
+      },
+      {
+        "name": "partial_failure",
+        "type": "boolean",
+        "value": null,
+        "label": "Add the keywords that are valid even if some fail (on by default)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Created Keyword Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "First Keyword Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "First Keyword ID",
+        "placeholder": ""
+      },
+      {
+        "name": "requested",
+        "type": "integer",
+        "value": null,
+        "label": "Keywords Requested",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/keywords/keyword_list": {
+    "hash": "0701c6abb68bef3365d0fb20e8926a678629138e1899a72fe9d7ec0fa688482c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Keywords: List",
+    "description": "List Google Ads keywords with match type, bid, quality score and performance.",
+    "summary": "List keywords in Google Ads",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+key",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Keywords",
+      "icon": "googleads",
+      "description": "Keywords, negative keywords and the search terms they actually matched"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any (excluding removed)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Removed",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "text_contains",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Keyword text contains",
+        "placeholder": ""
+      },
+      {
+        "name": "include_metrics",
+        "type": "boolean",
+        "value": null,
+        "label": "Include performance metrics (needs a date range)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range (for metrics)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort by",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Keyword text",
+            "value": "ad_group_criterion.keyword.text"
+          },
+          {
+            "name": "Cost (highest first)",
+            "value": "metrics.cost_micros DESC"
+          },
+          {
+            "name": "Clicks (highest first)",
+            "value": "metrics.clicks DESC"
+          },
+          {
+            "name": "Conversions (highest first)",
+            "value": "metrics.conversions DESC"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum keywords to return",
+        "placeholder": "500"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Keywords",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Keywords (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/keywords/keyword_update": {
+    "hash": "1fd6fa186a159a81aed5141d865c7b04b12fc2c217a2c6dc4b7bd0ad9b9340eb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Keyword: Update",
+    "description": "Change a Google Ads keyword's bid or status. Match type cannot be changed.",
+    "summary": "Change a keyword's bid or status",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+pencil",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Keywords",
+      "icon": "googleads",
+      "description": "Keywords, negative keywords and the search terms they actually matched"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "criterion_id",
+        "type": "string",
+        "value": null,
+        "label": "Keyword (Criterion) ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "max_cpc",
+        "type": "money",
+        "value": null,
+        "label": "New Maximum CPC Bid",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Paused",
+            "value": "PAUSED"
+          },
+          {
+            "name": "Removed (permanent)",
+            "value": "REMOVED"
+          }
+        ]
+      },
+      {
+        "name": "final_url",
+        "type": "string",
+        "value": null,
+        "label": "Landing Page URL override",
+        "placeholder": ""
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without changing anything",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Criterion ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "Keyword Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Changed Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields Changed",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/keywords/negative_keyword_add": {
+    "hash": "19ebf62108fb4b9657b54cb71ecca789ac88c56c0c3bcdc88b15ecdcf0abb662",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Negative Keywords: Add",
+    "description": "Stop ads showing for these search terms, at campaign or ad group level.",
+    "summary": "Add negative keywords",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+ban",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Keywords",
+      "icon": "googleads",
+      "description": "Keywords, negative keywords and the search terms they actually matched"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "level",
+        "type": "string",
+        "value": null,
+        "label": "Apply to",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Campaign — blocks the whole campaign",
+            "value": "CAMPAIGN"
+          },
+          {
+            "name": "Ad group — blocks one ad group only",
+            "value": "AD_GROUP"
+          }
+        ]
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (for campaign level)",
+        "placeholder": ""
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID (for ad group level)",
+        "placeholder": ""
+      },
+      {
+        "name": "keywords",
+        "type": "text",
+        "value": null,
+        "label": "Search terms to exclude, one per line",
+        "placeholder": "${search_terms}",
+        "required": true
+      },
+      {
+        "name": "match_type",
+        "type": "string",
+        "value": null,
+        "label": "Match Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Exact — block only this exact search",
+            "value": "EXACT"
+          },
+          {
+            "name": "Phrase — block searches containing this phrase",
+            "value": "PHRASE"
+          },
+          {
+            "name": "Broad — block searches containing all these words",
+            "value": "BROAD"
+          }
+        ]
+      },
+      {
+        "name": "validate_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry run — validate without adding anything",
+        "placeholder": ""
+      },
+      {
+        "name": "partial_failure",
+        "type": "boolean",
+        "value": null,
+        "label": "Add the terms that are valid even if some fail (on by default)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_names",
+        "type": "object",
+        "value": null,
+        "label": "Created Negative Keyword Resource Names",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_name",
+        "type": "string",
+        "value": null,
+        "label": "First Resource Name",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "First Criterion ID",
+        "placeholder": ""
+      },
+      {
+        "name": "requested",
+        "type": "integer",
+        "value": null,
+        "label": "Terms Requested",
+        "placeholder": ""
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Was a Dry Run",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/keywords/search_term_list": {
+    "hash": "13044986650bbd37ca065c025648848917de7cbafba6608399a11974285b06e4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Terms: List",
+    "description": "List the real search terms that triggered your ads, with cost and conversions.",
+    "summary": "See what people actually searched for",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+magnifying-glass",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Keywords",
+      "icon": "googleads",
+      "description": "Keywords, negative keywords and the search terms they actually matched"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Ad Group ID (leave blank for the whole account)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "min_clicks",
+        "type": "integer",
+        "value": null,
+        "label": "Only terms with at least this many clicks",
+        "placeholder": ""
+      },
+      {
+        "name": "zero_conversions_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only terms that cost money and converted nothing",
+        "placeholder": ""
+      },
+      {
+        "name": "exclude_already_negative",
+        "type": "boolean",
+        "value": null,
+        "label": "Hide terms already excluded as negatives",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum search terms to return",
+        "placeholder": "500"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Search Terms",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Search Terms (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "search_terms",
+        "type": "object",
+        "value": null,
+        "label": "Search Terms (text only, ready to add as negatives)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/reporting/report_fields": {
+    "hash": "f0b387e382d7a58ce4e12be21d32ddee339c861e74befbdc52b7fc12b8d23bbb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: List Fields",
+    "description": "Look up which Google Ads fields exist and whether they can be selected, filtered or sorted.",
+    "summary": "Discover available GAQL fields",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+book",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Reporting",
+      "icon": "googleads",
+      "description": "Performance reporting at any level, plus raw GAQL and the field catalogue"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "contains",
+        "type": "string",
+        "value": null,
+        "label": "Find fields whose name contains",
+        "placeholder": "conversion"
+      },
+      {
+        "name": "resource",
+        "type": "string",
+        "value": null,
+        "label": "Or list every field on one resource",
+        "placeholder": "campaign"
+      },
+      {
+        "name": "selectable_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only fields that can be selected",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum fields to return",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Fields (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "field_names",
+        "type": "object",
+        "value": null,
+        "label": "Field Names",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/reporting/report_performance": {
+    "hash": "a3d3d46660cb6daa3ff569b886e022b4dbf894e9adcc8ad698bb66def1f057e3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Performance",
+    "description": "Report Google Ads performance at account, campaign, ad group, ad or keyword level.",
+    "summary": "Report on Google Ads performance",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+chart-line",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Reporting",
+      "icon": "googleads",
+      "description": "Performance reporting at any level, plus raw GAQL and the field catalogue"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "level",
+        "type": "string",
+        "value": null,
+        "label": "Report On",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Whole account",
+            "value": "ACCOUNT"
+          },
+          {
+            "name": "Campaigns",
+            "value": "CAMPAIGN"
+          },
+          {
+            "name": "Ad groups",
+            "value": "AD_GROUP"
+          },
+          {
+            "name": "Ads",
+            "value": "AD"
+          },
+          {
+            "name": "Keywords",
+            "value": "KEYWORD"
+          },
+          {
+            "name": "Devices",
+            "value": "DEVICE"
+          },
+          {
+            "name": "Locations",
+            "value": "GEO"
+          }
+        ]
+      },
+      {
+        "name": "date_range",
+        "type": "string",
+        "value": null,
+        "label": "Date Range",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Today",
+            "value": "TODAY"
+          },
+          {
+            "name": "Yesterday",
+            "value": "YESTERDAY"
+          },
+          {
+            "name": "Last 7 days",
+            "value": "LAST_7_DAYS"
+          },
+          {
+            "name": "Last 14 days",
+            "value": "LAST_14_DAYS"
+          },
+          {
+            "name": "Last 30 days",
+            "value": "LAST_30_DAYS"
+          },
+          {
+            "name": "This week",
+            "value": "THIS_WEEK_MON_TODAY"
+          },
+          {
+            "name": "Last week",
+            "value": "LAST_WEEK_MON_SUN"
+          },
+          {
+            "name": "This month",
+            "value": "THIS_MONTH"
+          },
+          {
+            "name": "Last month",
+            "value": "LAST_MONTH"
+          },
+          {
+            "name": "This quarter",
+            "value": "THIS_QUARTER"
+          },
+          {
+            "name": "Last quarter",
+            "value": "LAST_QUARTER"
+          },
+          {
+            "name": "This year",
+            "value": "THIS_YEAR"
+          },
+          {
+            "name": "Last year",
+            "value": "LAST_YEAR"
+          },
+          {
+            "name": "Custom",
+            "value": "CUSTOM"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (custom range, YYYY-MM-DD)",
+        "placeholder": ""
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Limit to one Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "ad_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Limit to one Ad Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "break_down_by",
+        "type": "multi_select",
+        "value": null,
+        "label": "Break the numbers down by",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Day",
+            "value": "segments.date"
+          },
+          {
+            "name": "Week",
+            "value": "segments.week"
+          },
+          {
+            "name": "Month",
+            "value": "segments.month"
+          },
+          {
+            "name": "Device",
+            "value": "segments.device"
+          },
+          {
+            "name": "Network",
+            "value": "segments.ad_network_type"
+          },
+          {
+            "name": "Conversion action",
+            "value": "segments.conversion_action_name"
+          }
+        ]
+      },
+      {
+        "name": "metrics",
+        "type": "multi_select",
+        "value": null,
+        "label": "Metrics (leave blank for the usual set)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Impressions",
+            "value": "metrics.impressions"
+          },
+          {
+            "name": "Clicks",
+            "value": "metrics.clicks"
+          },
+          {
+            "name": "Cost",
+            "value": "metrics.cost_micros"
+          },
+          {
+            "name": "Conversions",
+            "value": "metrics.conversions"
+          },
+          {
+            "name": "Conversion value",
+            "value": "metrics.conversions_value"
+          },
+          {
+            "name": "Click-through rate",
+            "value": "metrics.ctr"
+          },
+          {
+            "name": "Average CPC",
+            "value": "metrics.average_cpc"
+          },
+          {
+            "name": "Cost per conversion",
+            "value": "metrics.cost_per_conversion"
+          },
+          {
+            "name": "Conversion rate",
+            "value": "metrics.conversions_from_interactions_rate"
+          },
+          {
+            "name": "Search impression share",
+            "value": "metrics.search_impression_share"
+          },
+          {
+            "name": "Absolute top impression share",
+            "value": "metrics.absolute_top_impression_percentage"
+          },
+          {
+            "name": "Budget lost impression share",
+            "value": "metrics.search_budget_lost_impression_share"
+          },
+          {
+            "name": "All conversions",
+            "value": "metrics.all_conversions"
+          }
+        ]
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort by",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Default for this level",
+            "value": ""
+          },
+          {
+            "name": "Cost (highest first)",
+            "value": "metrics.cost_micros DESC"
+          },
+          {
+            "name": "Clicks (highest first)",
+            "value": "metrics.clicks DESC"
+          },
+          {
+            "name": "Impressions (highest first)",
+            "value": "metrics.impressions DESC"
+          },
+          {
+            "name": "Conversions (highest first)",
+            "value": "metrics.conversions DESC"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum rows to return",
+        "placeholder": "500"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Report Rows",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Report Rows (flattened, money converted)",
+        "placeholder": ""
+      },
+      {
+        "name": "totals",
+        "type": "object",
+        "value": null,
+        "label": "Totals",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/google_ads/reporting/report_query": {
+    "hash": "bb10848bcb95646d8bb22506c1e46471c3335b16f2472056ebd4728c69ba4e72",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Run GAQL Query",
+    "description": "Run any Google Ads Query Language (GAQL) query and return the rows.",
+    "summary": "Run a raw GAQL query",
+    "website": "https://www.flomation.co",
+    "icon": "googleads+code",
+    "date": "12/09/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "Google Ads",
+      "icon": "googleads",
+      "description": "Build, adjust and report on Google advertising via the Google Ads API"
+    },
+    "sub_sub_category": {
+      "name": "Reporting",
+      "icon": "googleads",
+      "description": "Performance reporting at any level, plus raw GAQL and the field catalogue"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google Ads Connection",
+        "placeholder": "${credentials.MyGoogleAds}",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID (the ad account, e.g. 123-456-7890)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "login_customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Manager Account ID (only when acting through an MCC)",
+        "placeholder": "${credentials.MyGoogleAds.login_customer_id}"
+      },
+      {
+        "name": "query",
+        "type": "code",
+        "value": null,
+        "label": "GAQL Query",
+        "placeholder": "SELECT campaign.name, metrics.clicks FROM campaign WHERE segments.date DURING LAST_30_DAYS",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "object",
+        "value": null,
+        "label": "Rows",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "object",
+        "value": null,
+        "label": "Rows (flattened)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "GAQL Query Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "marketing/meta_ads/accounts/account_list": {
     "hash": "a20a09703862000fe0885965c490697bdbf2ce3ce9efeb17e1656cac257cffa9",
     "author": "Andy Esser",
