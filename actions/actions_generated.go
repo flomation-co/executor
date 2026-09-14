@@ -1969,6 +1969,30 @@ import (
 	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
 	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
+	marketing_google_ads_accounts_account_get "flomation.app/automate/executor/actions/marketing/google_ads/accounts/account_get"
+	marketing_google_ads_accounts_account_hierarchy "flomation.app/automate/executor/actions/marketing/google_ads/accounts/account_hierarchy"
+	marketing_google_ads_accounts_account_list "flomation.app/automate/executor/actions/marketing/google_ads/accounts/account_list"
+	marketing_google_ads_adgroups_adgroup_create "flomation.app/automate/executor/actions/marketing/google_ads/adgroups/adgroup_create"
+	marketing_google_ads_adgroups_adgroup_list "flomation.app/automate/executor/actions/marketing/google_ads/adgroups/adgroup_list"
+	marketing_google_ads_adgroups_adgroup_status_set "flomation.app/automate/executor/actions/marketing/google_ads/adgroups/adgroup_status_set"
+	marketing_google_ads_adgroups_adgroup_update "flomation.app/automate/executor/actions/marketing/google_ads/adgroups/adgroup_update"
+	marketing_google_ads_ads_ad_create_responsive_search "flomation.app/automate/executor/actions/marketing/google_ads/ads/ad_create_responsive_search"
+	marketing_google_ads_ads_ad_list "flomation.app/automate/executor/actions/marketing/google_ads/ads/ad_list"
+	marketing_google_ads_ads_ad_status_set "flomation.app/automate/executor/actions/marketing/google_ads/ads/ad_status_set"
+	marketing_google_ads_campaigns_campaign_budget_set "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_budget_set"
+	marketing_google_ads_campaigns_campaign_create "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_create"
+	marketing_google_ads_campaigns_campaign_get "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_get"
+	marketing_google_ads_campaigns_campaign_list "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_list"
+	marketing_google_ads_campaigns_campaign_status_set "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_status_set"
+	marketing_google_ads_campaigns_campaign_update "flomation.app/automate/executor/actions/marketing/google_ads/campaigns/campaign_update"
+	marketing_google_ads_keywords_keyword_add "flomation.app/automate/executor/actions/marketing/google_ads/keywords/keyword_add"
+	marketing_google_ads_keywords_keyword_list "flomation.app/automate/executor/actions/marketing/google_ads/keywords/keyword_list"
+	marketing_google_ads_keywords_keyword_update "flomation.app/automate/executor/actions/marketing/google_ads/keywords/keyword_update"
+	marketing_google_ads_keywords_negative_keyword_add "flomation.app/automate/executor/actions/marketing/google_ads/keywords/negative_keyword_add"
+	marketing_google_ads_keywords_search_term_list "flomation.app/automate/executor/actions/marketing/google_ads/keywords/search_term_list"
+	marketing_google_ads_reporting_report_fields "flomation.app/automate/executor/actions/marketing/google_ads/reporting/report_fields"
+	marketing_google_ads_reporting_report_performance "flomation.app/automate/executor/actions/marketing/google_ads/reporting/report_performance"
+	marketing_google_ads_reporting_report_query "flomation.app/automate/executor/actions/marketing/google_ads/reporting/report_query"
 	marketing_meta_ads_accounts_account_list "flomation.app/automate/executor/actions/marketing/meta_ads/accounts/account_list"
 	marketing_meta_ads_ads_ad_create "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_create"
 	marketing_meta_ads_ads_ad_get "flomation.app/automate/executor/actions/marketing/meta_ads/ads/ad_get"
@@ -5633,6 +5657,30 @@ var Actions = map[string]core.Action{
 	"makefile/list_targets":                                                           makefile_list_targets.Execute,
 	"makefile/run_target":                                                             makefile_run_target.Execute,
 	"makefile/validate":                                                               makefile_validate.Execute,
+	"marketing/google_ads/accounts/account_get":                                       marketing_google_ads_accounts_account_get.Execute,
+	"marketing/google_ads/accounts/account_hierarchy":                                 marketing_google_ads_accounts_account_hierarchy.Execute,
+	"marketing/google_ads/accounts/account_list":                                      marketing_google_ads_accounts_account_list.Execute,
+	"marketing/google_ads/adgroups/adgroup_create":                                    marketing_google_ads_adgroups_adgroup_create.Execute,
+	"marketing/google_ads/adgroups/adgroup_list":                                      marketing_google_ads_adgroups_adgroup_list.Execute,
+	"marketing/google_ads/adgroups/adgroup_status_set":                                marketing_google_ads_adgroups_adgroup_status_set.Execute,
+	"marketing/google_ads/adgroups/adgroup_update":                                    marketing_google_ads_adgroups_adgroup_update.Execute,
+	"marketing/google_ads/ads/ad_create_responsive_search":                            marketing_google_ads_ads_ad_create_responsive_search.Execute,
+	"marketing/google_ads/ads/ad_list":                                                marketing_google_ads_ads_ad_list.Execute,
+	"marketing/google_ads/ads/ad_status_set":                                          marketing_google_ads_ads_ad_status_set.Execute,
+	"marketing/google_ads/campaigns/campaign_budget_set":                              marketing_google_ads_campaigns_campaign_budget_set.Execute,
+	"marketing/google_ads/campaigns/campaign_create":                                  marketing_google_ads_campaigns_campaign_create.Execute,
+	"marketing/google_ads/campaigns/campaign_get":                                     marketing_google_ads_campaigns_campaign_get.Execute,
+	"marketing/google_ads/campaigns/campaign_list":                                    marketing_google_ads_campaigns_campaign_list.Execute,
+	"marketing/google_ads/campaigns/campaign_status_set":                              marketing_google_ads_campaigns_campaign_status_set.Execute,
+	"marketing/google_ads/campaigns/campaign_update":                                  marketing_google_ads_campaigns_campaign_update.Execute,
+	"marketing/google_ads/keywords/keyword_add":                                       marketing_google_ads_keywords_keyword_add.Execute,
+	"marketing/google_ads/keywords/keyword_list":                                      marketing_google_ads_keywords_keyword_list.Execute,
+	"marketing/google_ads/keywords/keyword_update":                                    marketing_google_ads_keywords_keyword_update.Execute,
+	"marketing/google_ads/keywords/negative_keyword_add":                              marketing_google_ads_keywords_negative_keyword_add.Execute,
+	"marketing/google_ads/keywords/search_term_list":                                  marketing_google_ads_keywords_search_term_list.Execute,
+	"marketing/google_ads/reporting/report_fields":                                    marketing_google_ads_reporting_report_fields.Execute,
+	"marketing/google_ads/reporting/report_performance":                               marketing_google_ads_reporting_report_performance.Execute,
+	"marketing/google_ads/reporting/report_query":                                     marketing_google_ads_reporting_report_query.Execute,
 	"marketing/meta_ads/accounts/account_list":                                        marketing_meta_ads_accounts_account_list.Execute,
 	"marketing/meta_ads/ads/ad_create":                                                marketing_meta_ads_ads_ad_create.Execute,
 	"marketing/meta_ads/ads/ad_get":                                                   marketing_meta_ads_ads_ad_get.Execute,
