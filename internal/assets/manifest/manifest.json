@@ -241211,7 +241211,7 @@
     ]
   },
   "git/clone": {
-    "hash": "2d19eadb5c22c661e5dc16b6a8db842405a1b2d1a3498b8b00da7938da320934",
+    "hash": "b230c13521c1e73feef3c756b50a60781db1e6a1a2cbb96d739993c9cc5cf7f6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -241275,6 +241275,32 @@
         }
       },
       {
+        "name": "host_key",
+        "type": "text",
+        "value": null,
+        "label": "Server Host Key — paste the output of `ssh-keyscan \u003chost\u003e`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "skip_host_key_verification",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
         "name": "username",
         "type": "secret",
         "value": null,
@@ -241324,6 +241350,13 @@
         "type": "string",
         "value": null,
         "label": "Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "host_key_verification",
+        "type": "string",
+        "value": null,
+        "label": "How the server's host key was checked",
         "placeholder": ""
       }
     ]
@@ -241388,7 +241421,7 @@
     ]
   },
   "git/pull": {
-    "hash": "090cd44c4729612b6bd635244119e278bffaa0e167465470c6925534627e0d91",
+    "hash": "f0b86d4cd2b48762205da0d9d8d867d3144de35fffed6b9b0d6f0baf93dc8c89",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
@@ -241436,6 +241469,32 @@
         "label": "SSH Private Key",
         "placeholder": "",
         "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "host_key",
+        "type": "text",
+        "value": null,
+        "label": "Server Host Key — paste the output of `ssh-keyscan \u003chost\u003e`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "skip_host_key_verification",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+        "placeholder": "",
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -241501,11 +241560,18 @@
         "value": null,
         "label": "Success",
         "placeholder": ""
+      },
+      {
+        "name": "host_key_verification",
+        "type": "string",
+        "value": null,
+        "label": "How the server's host key was checked",
+        "placeholder": ""
       }
     ]
   },
   "git/push": {
-    "hash": "4c725e0c8f7794deae4150c137c097f6d1e68ab3593fa8070e6abdd453f4b410",
+    "hash": "00d2d46143d2440ae4e11a4569669003b6bb4228b3ca7f8f309885b49b61d55c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -241553,6 +241619,32 @@
         "label": "SSH Private Key",
         "placeholder": "",
         "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "host_key",
+        "type": "text",
+        "value": null,
+        "label": "Server Host Key — paste the output of `ssh-keyscan \u003chost\u003e`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "skip_host_key_verification",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+        "placeholder": "",
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -241610,6 +241702,13 @@
         "type": "boolean",
         "value": null,
         "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "host_key_verification",
+        "type": "string",
+        "value": null,
+        "label": "How the server's host key was checked",
         "placeholder": ""
       }
     ]
@@ -561278,7 +561377,7 @@
     ]
   },
   "trigger/git_poll": {
-    "hash": "4947a360e8310cff196319a6899cb5b1a3197b6b89ec6f01cd0b091ad5b1e13f",
+    "hash": "1ae7de10b5bb6e1156584cac9c97640517859cf9f8ca01c0e50939fdc2dc2bd5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Poll Trigger",
@@ -561308,6 +561407,20 @@
         "value": null,
         "label": "SSH Private Key",
         "placeholder": "Optional SSH key for authentication"
+      },
+      {
+        "name": "host_key",
+        "type": "text",
+        "value": null,
+        "label": "Server Host Key — paste the output of `ssh-keyscan \u003chost\u003e`, or a SHA256:... fingerprint. Leave blank to use the Launch service's known_hosts.",
+        "placeholder": ""
+      },
+      {
+        "name": "skip_host_key_verification",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip host key verification (INSECURE — an intercepted connection could report false commits)",
+        "placeholder": ""
       },
       {
         "name": "branch_regex",

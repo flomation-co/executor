@@ -38,6 +38,18 @@ var Inputs = [...]core.Connection{
 		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
 	},
 	{
+		Name:    "host_key",
+		Type:    core.ConnectionTypeText,
+		Label:   "Server Host Key — paste the output of `ssh-keyscan <host>`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:    "skip_host_key_verification",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
 		Name:     "username",
 		Type:     core.ConnectionTypeSecret,
 		Label:    "Username",
@@ -65,6 +77,11 @@ var Outputs = [...]core.Connection{
 		Name:  "success",
 		Type:  core.ConnectionTypeBoolean,
 		Label: "Success",
+	},
+	{
+		Name:  "host_key_verification",
+		Type:  core.ConnectionTypeString,
+		Label: "How the server's host key was checked",
 	},
 }
 
@@ -95,8 +112,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	err = r.Push(pushOpts)
 	if err != nil && err != git.NoErrAlreadyUpToDate {
-		return nil, err
+		return nil, git_common.DescribeHostKeyError(err, git_common.RemoteURL(r, pushOpts.RemoteName))
 	}
 
-	return map[string]interface{}{"success": true}, nil
+	return map[string]interface{}{
+		"success":               true,
+		"host_key_verification": git_common.HostKeyModeFromInputs(inputs),
+	}, nil
 }

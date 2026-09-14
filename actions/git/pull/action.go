@@ -39,6 +39,18 @@ var Inputs = [...]core.Connection{
 		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
 	},
 	{
+		Name:    "host_key",
+		Type:    core.ConnectionTypeText,
+		Label:   "Server Host Key — paste the output of `ssh-keyscan <host>`, or a SHA256:... fingerprint. Leave blank to use the runner's known_hosts.",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:    "skip_host_key_verification",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Skip host key verification (INSECURE — an intercepted connection could serve a malicious repository)",
+		Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
 		Name:     "username",
 		Type:     core.ConnectionTypeSecret,
 		Label:    "Username",
@@ -73,6 +85,11 @@ var Outputs = [...]core.Connection{
 		Type:  core.ConnectionTypeBoolean,
 		Label: "Success",
 	},
+	{
+		Name:  "host_key_verification",
+		Type:  core.ConnectionTypeString,
+		Label: "How the server's host key was checked",
+	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
@@ -88,7 +105,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	_, w, err := git_common.GetRepositoryAndWorktree(repoPath)
+	repo, w, err := git_common.GetRepositoryAndWorktree(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +124,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	err = w.Pull(pullOpts)
 	if err != nil && err != git.NoErrAlreadyUpToDate {
-		return nil, err
+		// Pull takes a local path rather than a URL, so the remote is read back
+		// off the repository to name the host in a host key error.
+		return nil, git_common.DescribeHostKeyError(err, git_common.RemoteURL(repo, pullOpts.RemoteName))
 	}
 
-	return map[string]interface{}{"success": true}, nil
+	return map[string]interface{}{
+		"success":               true,
+		"host_key_verification": git_common.HostKeyModeFromInputs(inputs),
+	}, nil
 }

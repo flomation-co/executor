@@ -33,6 +33,16 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Optional SSH key for authentication",
 	},
 	{
+		Name:  "host_key",
+		Type:  core.ConnectionTypeText,
+		Label: "Server Host Key — paste the output of `ssh-keyscan <host>`, or a SHA256:... fingerprint. Leave blank to use the Launch service's known_hosts.",
+	},
+	{
+		Name:  "skip_host_key_verification",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Skip host key verification (INSECURE — an intercepted connection could report false commits)",
+	},
+	{
 		Name:        "branch_regex",
 		Type:        core.ConnectionTypeSecret,
 		Label:       "Branch Regex",
